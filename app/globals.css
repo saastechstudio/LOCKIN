@@ -89,10 +89,10 @@
 }
 
 .dark {
-  /* ---- Brand palette (dark — secondary variant) ---- */
-  --brand-bg: #1d102b;
-  --brand-bg-deep: #150c1f;
-  --brand-card: #251638;
+  /* ---- Brand palette (dark — secondary variant, neutral black) ---- */
+  --brand-bg: #0a0a0a;
+  --brand-bg-deep: #050505;
+  --brand-card: #161616;
   --brand-border: rgba(255, 255, 255, 0.08);
   --brand-blue: #6d97ff;
   --brand-blue-soft: #9fbaff;
@@ -100,13 +100,13 @@
   --brand-coral: #ff8b64;
   --brand-coral-soft: #ffab8c;
   --brand-yellow: #ffd274;
-  --brand-dark: #0f0817;
+  --brand-dark: #000000;
 
   --shadow-color: 0, 0, 0;
   --glow-blue: 0 8px 24px -6px rgba(109, 151, 255, 0.45);
   --glow-coral: 0 8px 24px -6px rgba(255, 139, 100, 0.4);
 
-  --glass-bg: rgba(37, 22, 56, 0.75);
+  --glass-bg: rgba(22, 22, 22, 0.75);
   --glass-border: rgba(255, 255, 255, 0.08);
   --noise-bg: radial-gradient(circle at 20% 20%, rgba(109, 151, 255, 0.08), transparent 40%),
     radial-gradient(circle at 80% 0%, rgba(255, 139, 100, 0.06), transparent 45%);
@@ -124,15 +124,15 @@
   --popover-foreground: #f8f8f6;
 
   --primary: var(--brand-blue);
-  --primary-foreground: #1d102b;
+  --primary-foreground: #0a0a0a;
 
-  --secondary: #2c1a42;
+  --secondary: #1a1a1a;
   --secondary-foreground: #f8f8f6;
 
-  --muted: #2c1a42;
+  --muted: #1a1a1a;
   --muted-foreground: rgba(248, 248, 246, 0.6);
 
-  --accent: #33204c;
+  --accent: #202020;
   --accent-foreground: var(--brand-coral);
 
   --destructive: #e05a44;
@@ -146,7 +146,7 @@
   --chart-2: var(--brand-coral);
   --chart-3: var(--brand-yellow);
   --chart-4: #a0aec0;
-  --chart-5: #5a4a6f;
+  --chart-5: #52525b;
 }
 
 @theme inline {
