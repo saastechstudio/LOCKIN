@@ -9,7 +9,12 @@ on:
   schedule:
     - cron: "0 8 * * *"
     - cron: "0 9 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      force_run:
+        description: "Bypass the 10h-Paris check (manual test run)"
+        type: boolean
+        default: false
 
 jobs:
   trigger:
@@ -20,7 +25,7 @@ jobs:
         run: |
           hour=$(TZ="Europe/Paris" date +%H)
           echo "Paris local hour: $hour"
-          if [ "$hour" != "10" ]; then
+          if [ "$hour" != "10" ] && [ "${{ inputs.force_run }}" != "true" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -29,6 +34,7 @@ jobs:
         run: |
           curl --fail --silent --show-error \
             -X POST "https://lockin-production-f3ed.up.railway.app/api/cron/daily-motivation" \
-            -H "Authorization: Bearer ${CRON_SECRET}"
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            -w "\nHTTP_STATUS:%{http_code}\n"
         env:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
