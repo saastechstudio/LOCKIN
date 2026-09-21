@@ -14,15 +14,13 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2.5">
-          <span className="shadow-soft block size-8 overflow-hidden rounded-lg">
-            <Image
-              src="/logo-mark.jpg"
-              alt="Lock In"
-              width={32}
-              height={32}
-              className="size-full object-cover object-top"
-            />
-          </span>
+          <Image
+            src="/logo-mark.png"
+            alt="Lock In"
+            width={32}
+            height={38}
+            className="h-8 w-auto"
+          />
           <span className="font-display text-lg tracking-tight text-foreground lowercase">
             lock in
           </span>

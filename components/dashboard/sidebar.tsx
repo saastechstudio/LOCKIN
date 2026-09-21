@@ -20,15 +20,13 @@ export function DashboardSidebar() {
   return (
     <aside className="hidden w-60 shrink-0 flex-col border-r border-border/60 bg-card/40 md:flex">
       <div className="flex h-16 items-center gap-2.5 border-b border-border/60 px-6">
-        <span className="shadow-soft block size-7 overflow-hidden rounded-lg">
-          <Image
-            src="/logo-mark.jpg"
-            alt="Lock In"
-            width={28}
-            height={28}
-            className="size-full object-cover object-top"
-          />
-        </span>
+        <Image
+          src="/logo-mark.png"
+          alt="Lock In"
+          width={28}
+          height={33}
+          className="h-7 w-auto"
+        />
         <span className="font-display text-base tracking-tight text-foreground lowercase">
           lock in
         </span>
