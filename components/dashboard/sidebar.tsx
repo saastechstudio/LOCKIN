@@ -26,11 +26,11 @@ export function DashboardSidebar() {
             alt="Lock In"
             width={28}
             height={28}
-            className="size-full object-cover"
+            className="size-full object-cover object-top"
           />
         </span>
-        <span className="font-display text-base tracking-[0.1em] text-foreground">
-          LOCK IN
+        <span className="font-display text-base tracking-tight text-foreground lowercase">
+          lock in
         </span>
       </div>
 
