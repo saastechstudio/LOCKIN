@@ -1,0 +1,99 @@
+# Explicit, CI-driven Neon database branching for Vercel Preview
+# Deployments — an alternative/complement to simply connecting the "Neon"
+# integration from the Vercel Marketplace (Project → Storage → Connect
+# Database), which does the same branch-per-preview lifecycle from the
+# Vercel dashboard with zero YAML.
+#
+# Use THIS workflow instead of (or alongside) the dashboard integration
+# when you want the branch's lifecycle and migration run to be visible and
+# auditable in CI logs / PR comments, e.g. for teams that don't want Vercel
+# managing Neon branches implicitly, or that need the connection string
+# before Vercel's build (some checks run pre-deploy).
+#
+# Required repo secrets:
+#   NEON_API_KEY      — https://console.neon.tech/app/settings/api-keys
+#   NEON_PROJECT_ID   — Neon project → Settings → General
+# Optional (only if you also want this workflow, rather than the Vercel
+# dashboard integration, to push the branch's URL into Vercel's Preview
+# environment for this PR's git branch):
+#   VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+name: Neon preview branches
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+concurrency:
+  group: neon-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  create-and-migrate:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # Creates (or reuses, on subsequent pushes) a copy-on-write branch off
+      # the parent named for this PR, e.g. preview/pr-123. Cheap and fast —
+      # Neon branches share storage with the parent until data diverges.
+      - name: Create Neon branch for this PR
+        id: neon-branch
+        uses: neondatabase/create-branch-action@v6
+        with:
+          project_id: ${{ secrets.NEON_PROJECT_ID }}
+          branch_name: preview/pr-${{ github.event.pull_request.number }}
+          api_key: ${{ secrets.NEON_API_KEY }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Applies this PR's pending migrations to its own branch so the
+      # schema is verified — and the preview deployment works — before
+      # merge, without ever touching production data.
+      - name: Run pending migrations against the preview branch
+        env:
+          DATABASE_URL: ${{ steps.neon-branch.outputs.db_url }}
+        run: npm run db:migrate
+
+      - name: Sync branch URL to Vercel Preview env (optional)
+        if: ${{ secrets.VERCEL_TOKEN != '' }}
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          DATABASE_URL: ${{ steps.neon-branch.outputs.db_url }}
+          GIT_BRANCH: ${{ github.head_ref }}
+        run: |
+          npx vercel env rm DATABASE_URL preview --git-branch "$GIT_BRANCH" --yes --token "$VERCEL_TOKEN" 2>/dev/null || true
+          echo "$DATABASE_URL" | npx vercel env add DATABASE_URL preview --git-branch "$GIT_BRANCH" --token "$VERCEL_TOKEN"
+
+      - name: Comment on the PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branch = "preview/pr-" + context.issue.number;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `🗄️ Neon branch \`${branch}\` is ready and migrated for this PR's preview.`,
+            });
+
+  delete:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Neon branch for this PR
+        uses: neondatabase/delete-branch-action@v3
+        with:
+          project_id: ${{ secrets.NEON_PROJECT_ID }}
+          branch: preview/pr-${{ github.event.pull_request.number }}
+          api_key: ${{ secrets.NEON_API_KEY }}
