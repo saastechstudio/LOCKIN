@@ -8,9 +8,9 @@ export default function SignUpPage() {
           appearance={{
             elements: {
               card: "glass shadow-2xl",
-              headerTitle: "font-serif text-foreground",
+              headerTitle: "font-display text-foreground",
               formButtonPrimary:
-                "bg-gradient-to-b from-brand-gold-soft to-brand-gold text-black hover:brightness-110",
+                "bg-gradient-to-b from-brand-prune-soft to-brand-prune text-black hover:brightness-110",
             },
           }}
         />

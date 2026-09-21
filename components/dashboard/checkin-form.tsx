@@ -42,7 +42,7 @@ export function CheckinForm() {
                 className={cn(
                   "size-6 transition-colors",
                   n <= rating
-                    ? "fill-brand-gold text-brand-gold"
+                    ? "fill-brand-prune text-brand-prune"
                     : "text-muted-foreground/30",
                 )}
               />
@@ -81,7 +81,7 @@ export function CheckinForm() {
       </Button>
 
       {done && !isPending && (
-        <p className="text-center text-xs text-brand-gold-soft">
+        <p className="text-center text-xs text-brand-prune-soft">
           Check-in enregistré. À demain, verrouillé.
         </p>
       )}

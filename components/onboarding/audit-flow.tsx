@@ -112,10 +112,10 @@ export function AuditFlow() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="space-y-2 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-gold/25 bg-brand-gold/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-gold-soft uppercase">
+        <span className="inline-flex items-center gap-2 rounded-full border border-brand-prune/25 bg-brand-prune/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-prune-soft uppercase">
           Audit d&apos;entrée
         </span>
-        <h1 className="font-serif text-3xl text-foreground">
+        <h1 className="font-display text-3xl text-foreground">
           Construisons ton programme Lock In
         </h1>
         <p className="text-sm text-muted-foreground">
@@ -132,7 +132,7 @@ export function AuditFlow() {
 
       <Card className="glass">
         <CardHeader>
-          <CardTitle className="font-serif text-xl">
+          <CardTitle className="font-display text-xl">
             {step === 1 && "Profil personnel"}
             {step === 2 && "Profil professionnel"}
             {step === 3 && "Projet & horizon temporel"}
@@ -166,7 +166,7 @@ export function AuditFlow() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label>Niveau de discipline</Label>
-                  <span className="font-serif text-lg text-brand-cyan">
+                  <span className="font-display text-lg text-brand-rose">
                     {form.disciplineLevel}/10
                   </span>
                 </div>
@@ -177,7 +177,7 @@ export function AuditFlow() {
                   step={1}
                   value={form.disciplineLevel}
                   onChange={(e) => set("disciplineLevel", Number(e.target.value))}
-                  className="w-full accent-[var(--brand-cyan)]"
+                  className="w-full accent-[var(--brand-rose)]"
                 />
               </div>
             </>
@@ -240,7 +240,7 @@ export function AuditFlow() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label>Durée cible</Label>
-                  <span className="font-serif text-lg text-brand-gold">
+                  <span className="font-display text-lg text-brand-prune">
                     {form.durationMonths} mois
                   </span>
                 </div>
@@ -251,7 +251,7 @@ export function AuditFlow() {
                   step={1}
                   value={form.durationMonths}
                   onChange={(e) => set("durationMonths", Number(e.target.value))}
-                  className="w-full accent-[var(--brand-gold)]"
+                  className="w-full accent-[var(--brand-prune)]"
                 />
                 <p className="text-xs text-muted-foreground">
                   Durée recommandée : 6 mois (Plage possible : 3 à 36 mois selon la
@@ -323,18 +323,18 @@ function AuditResultView({
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="space-y-2 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-gold/25 bg-brand-gold/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-gold-soft uppercase">
+        <span className="inline-flex items-center gap-2 rounded-full border border-brand-prune/25 bg-brand-prune/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-prune-soft uppercase">
           Ton programme Lock In
         </span>
-        <h1 className="font-serif text-3xl text-foreground">
+        <h1 className="font-display text-3xl text-foreground">
           Feuille de route générée
         </h1>
       </div>
 
-      <Card className="border-brand-gold/30 bg-brand-gold/5">
+      <Card className="border-brand-prune/30 bg-brand-prune/5">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
-          <Lock className="size-4 text-brand-gold" />
-          <CardTitle className="font-serif text-lg">Ton Lock In Blocker</CardTitle>
+          <Lock className="size-4 text-brand-prune" />
+          <CardTitle className="font-display text-lg">Ton Lock In Blocker</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-foreground">{result.lockInBlocker}</p>
@@ -343,14 +343,14 @@ function AuditResultView({
 
       <Card className="glass">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
-          <Flame className="size-4 text-brand-cyan" />
-          <CardTitle className="font-serif text-lg">Feuille de route</CardTitle>
+          <Flame className="size-4 text-brand-rose" />
+          <CardTitle className="font-display text-lg">Feuille de route</CardTitle>
         </CardHeader>
         <CardContent>
           <ol className="space-y-4">
             {result.roadmap.map((phase, i) => (
               <li key={i} className="flex gap-4">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-cyan/40 bg-brand-cyan/10 font-serif text-sm text-brand-cyan">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-rose/40 bg-brand-rose/10 font-display text-sm text-brand-rose">
                   {i + 1}
                 </span>
                 <div>
@@ -370,7 +370,7 @@ function AuditResultView({
 
       <Card className="glass">
         <CardHeader>
-          <CardTitle className="font-serif text-lg">
+          <CardTitle className="font-display text-lg">
             Actions prioritaires — Semaine 1
           </CardTitle>
         </CardHeader>
@@ -378,7 +378,7 @@ function AuditResultView({
           <ul className="space-y-2.5">
             {result.firstWeekActions.map((action, i) => (
               <li key={i} className={cn("flex items-start gap-2.5 text-sm text-foreground")}>
-                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-brand-gold" />
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-brand-prune" />
                 {action}
               </li>
             ))}

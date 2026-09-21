@@ -21,7 +21,7 @@ export function DashboardSidebar() {
     <aside className="hidden w-60 shrink-0 flex-col border-r border-border/60 bg-card/40 md:flex">
       <div className="flex h-16 items-center gap-2.5 border-b border-border/60 px-6">
         <Image src="/logo-mark.svg" alt="Lock In" width={24} height={24} />
-        <span className="font-serif text-base tracking-[0.18em] text-foreground">
+        <span className="font-display text-base tracking-[0.18em] text-foreground">
           LOCK IN
         </span>
       </div>
@@ -39,7 +39,7 @@ export function DashboardSidebar() {
               className={cn(
                 "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm transition-colors",
                 active
-                  ? "bg-brand-gold/10 text-brand-gold-soft border border-brand-gold/20"
+                  ? "bg-brand-prune/10 text-brand-prune-soft border border-brand-prune/20"
                   : "text-muted-foreground hover:bg-accent hover:text-foreground",
               )}
             >

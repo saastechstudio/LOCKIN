@@ -48,14 +48,14 @@ export default async function DashboardPage() {
         <Card className="glass">
           <CardHeader className="flex-row items-center justify-between space-y-0">
             <div>
-              <CardTitle className="font-serif text-xl">
+              <CardTitle className="font-display text-xl">
                 Progression globale
               </CardTitle>
               <p className="mt-1 text-xs text-muted-foreground">
                 {userOkrs.length} objectif{userOkrs.length > 1 ? "s" : ""} en cours
               </p>
             </div>
-            <span className="font-serif text-2xl text-brand-cyan">
+            <span className="font-display text-2xl text-brand-rose">
               {globalProgress}%
             </span>
           </CardHeader>
@@ -67,7 +67,7 @@ export default async function DashboardPage() {
 
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-serif text-xl text-foreground">Mes OKRs</h2>
+          <h2 className="font-display text-xl text-foreground">Mes OKRs</h2>
           <NewOkrDialog />
         </div>
 
@@ -92,7 +92,7 @@ export default async function DashboardPage() {
 
         <Card className="glass">
           <CardHeader>
-            <CardTitle className="font-serif text-xl">
+            <CardTitle className="font-display text-xl">
               Historique de la semaine
             </CardTitle>
           </CardHeader>
@@ -105,7 +105,7 @@ export default async function DashboardPage() {
       <section>
         <Card className="glass">
           <CardHeader>
-            <CardTitle className="font-serif text-xl">
+            <CardTitle className="font-display text-xl">
               Réflexion du jour
             </CardTitle>
           </CardHeader>

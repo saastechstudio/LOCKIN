@@ -29,7 +29,7 @@ export function CheckinHistory({ checkins }: { checkins: DailyCheckin[] }) {
                   className={cn(
                     "size-3.5",
                     n <= c.rating
-                      ? "fill-brand-gold text-brand-gold"
+                      ? "fill-brand-prune text-brand-prune"
                       : "text-muted-foreground/25",
                   )}
                 />
@@ -38,12 +38,12 @@ export function CheckinHistory({ checkins }: { checkins: DailyCheckin[] }) {
           </div>
           {c.wins && (
             <p className="mt-1.5 text-xs text-muted-foreground">
-              <span className="text-brand-gold-soft">Victoire —</span> {c.wins}
+              <span className="text-brand-prune-soft">Victoire —</span> {c.wins}
             </p>
           )}
           {c.focusOfTomorrow && (
             <p className="mt-1 text-xs text-muted-foreground">
-              <span className="text-brand-gold-soft">Focus —</span>{" "}
+              <span className="text-brand-prune-soft">Focus —</span>{" "}
               {c.focusOfTomorrow}
             </p>
           )}

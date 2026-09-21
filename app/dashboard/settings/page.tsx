@@ -24,7 +24,7 @@ export default async function SettingsPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div>
-        <h1 className="font-serif text-2xl text-foreground">Paramètres</h1>
+        <h1 className="font-display text-2xl text-foreground">Paramètres</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Gérez votre profil et votre abonnement Lock In.
         </p>
@@ -32,7 +32,7 @@ export default async function SettingsPage() {
 
       <Card className="glass">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
-          <UserIcon className="size-4 text-brand-gold" />
+          <UserIcon className="size-4 text-brand-prune" />
           <CardTitle className="text-base">Profil membre</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -46,7 +46,7 @@ export default async function SettingsPage() {
 
       <Card className="glass">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
-          <CreditCard className="size-4 text-brand-gold" />
+          <CreditCard className="size-4 text-brand-prune" />
           <CardTitle className="text-base">Abonnement</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
