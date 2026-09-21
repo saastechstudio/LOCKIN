@@ -31,7 +31,7 @@ function DropdownMenuContent({
         data-slot="dropdown-menu-content"
         sideOffset={sideOffset}
         className={cn(
-          "glass text-popover-foreground z-50 min-w-[10rem] overflow-hidden rounded-md p-1 shadow-xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+          "surface text-popover-foreground z-50 min-w-[10rem] overflow-hidden rounded-md p-1 shadow-xl data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
           className,
         )}
         {...props}
@@ -87,7 +87,7 @@ function DropdownMenuCheckboxItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <CheckIcon className="size-4 text-brand-prune" />
+          <CheckIcon className="size-4 text-brand-blue" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -122,7 +122,7 @@ function DropdownMenuRadioItem({
     >
       <span className="pointer-events-none absolute left-2 flex size-3.5 items-center justify-center">
         <DropdownMenuPrimitive.ItemIndicator>
-          <CircleIcon className="size-2 fill-brand-prune text-brand-prune" />
+          <CircleIcon className="size-2 fill-brand-blue text-brand-blue" />
         </DropdownMenuPrimitive.ItemIndicator>
       </span>
       {children}
@@ -217,7 +217,7 @@ function DropdownMenuSubContent({
     <DropdownMenuPrimitive.SubContent
       data-slot="dropdown-menu-sub-content"
       className={cn(
-        "glass text-popover-foreground z-50 min-w-[8rem] overflow-hidden rounded-md p-1 shadow-xl data-[state=open]:animate-in data-[state=closed]:animate-out",
+        "surface text-popover-foreground z-50 min-w-[8rem] overflow-hidden rounded-md p-1 shadow-xl data-[state=open]:animate-in data-[state=closed]:animate-out",
         className,
       )}
       {...props}

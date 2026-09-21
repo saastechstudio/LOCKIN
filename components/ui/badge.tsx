@@ -9,8 +9,9 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-brand-prune/30 bg-brand-prune/10 text-brand-prune-deep dark:text-brand-prune-soft",
-        rose: "border-brand-rose/30 bg-brand-rose/10 text-brand-rose",
+        default: "border-brand-blue/30 bg-brand-blue/10 text-brand-blue-deep dark:text-brand-blue-soft",
+        coral: "border-brand-coral/30 bg-brand-coral/10 text-brand-coral",
+        yellow: "border-brand-yellow/40 bg-brand-yellow/15 text-[#8a6416] dark:text-brand-yellow",
         secondary: "border-border bg-secondary text-secondary-foreground",
         outline: "border-border text-foreground",
         destructive: "border-destructive/30 bg-destructive/10 text-destructive",

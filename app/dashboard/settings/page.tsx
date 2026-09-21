@@ -30,9 +30,9 @@ export default async function SettingsPage() {
         </p>
       </div>
 
-      <Card className="glass">
+      <Card className="surface">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
-          <UserIcon className="size-4 text-brand-prune" />
+          <UserIcon className="size-4 text-brand-blue" />
           <CardTitle className="text-base">Profil membre</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -44,9 +44,9 @@ export default async function SettingsPage() {
         </CardContent>
       </Card>
 
-      <Card className="glass">
+      <Card className="surface">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
-          <CreditCard className="size-4 text-brand-prune" />
+          <CreditCard className="size-4 text-brand-blue" />
           <CardTitle className="text-base">Abonnement</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">

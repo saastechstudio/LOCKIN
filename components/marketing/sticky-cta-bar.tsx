@@ -20,12 +20,12 @@ export function StickyCtaBar() {
   return (
     <div
       aria-hidden={!visible}
-      className={`glass fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 px-6 py-3 transition-transform duration-300 ${
+      className={`surface fixed inset-x-0 bottom-0 z-40 flex items-center justify-between gap-4 px-6 py-3 transition-transform duration-300 ${
         visible ? "translate-y-0" : "translate-y-full"
       }`}
     >
       <p className="hidden text-sm text-foreground sm:block">
-        <span className="font-display text-brand-rose">14 jours d&apos;essai gratuit</span>{" "}
+        <span className="font-display text-brand-coral">14 jours d&apos;essai gratuit</span>{" "}
         — dès 9,90&nbsp;€/mois
       </p>
       <Button asChild size="sm" className="w-full sm:w-auto">

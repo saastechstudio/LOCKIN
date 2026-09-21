@@ -17,13 +17,13 @@ export function SiteFooter() {
         </p>
 
         <div className="flex gap-6 text-xs text-muted-foreground">
-          <Link href="/legal/mentions" className="hover:text-brand-prune">
+          <Link href="/legal/mentions" className="hover:text-brand-blue">
             Mentions légales
           </Link>
-          <Link href="/legal/cgv" className="hover:text-brand-prune">
+          <Link href="/legal/cgv" className="hover:text-brand-blue">
             CGV
           </Link>
-          <Link href="/legal/confidentialite" className="hover:text-brand-prune">
+          <Link href="/legal/confidentialite" className="hover:text-brand-blue">
             Confidentialité
           </Link>
         </div>

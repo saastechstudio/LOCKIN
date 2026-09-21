@@ -3,10 +3,8 @@
 import { useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { Send, Sparkles } from "lucide-react";
+import { ArrowUp, Sparkles } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
 
@@ -42,12 +40,12 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
   };
 
   return (
-    <div className="flex h-[calc(100vh-8rem)] flex-col overflow-hidden rounded-xl border border-border bg-card/40">
+    <div className="bg-brand-card shadow-soft flex h-[calc(100vh-8rem)] flex-col overflow-hidden rounded-2xl border border-border">
       <ScrollArea className="flex-1 px-6 py-6">
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-4 py-16 text-center">
-            <div className="flex size-12 items-center justify-center rounded-full border border-brand-prune/25 bg-brand-prune/10">
-              <Sparkles className="size-5 text-brand-prune" />
+            <div className="flex size-12 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue/15 via-brand-coral/15 to-brand-yellow/15">
+              <Sparkles className="text-brand-blue size-5" />
             </div>
             <p className="max-w-sm text-sm text-muted-foreground">
               Pose ta question au Coach Lock In. Direct, exigeant, orienté
@@ -66,10 +64,10 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
               >
                 <div
                   className={cn(
-                    "max-w-[80%] rounded-xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap",
+                    "max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap",
                     message.role === "user"
-                      ? "bg-gradient-to-b from-brand-prune-soft to-brand-prune text-black"
-                      : "glass text-foreground",
+                      ? "bg-brand-blue shadow-blue-glow text-white"
+                      : "bg-secondary text-foreground",
                   )}
                 >
                   {messageText(message)}
@@ -78,7 +76,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="glass rounded-xl px-4 py-2.5 text-sm text-muted-foreground">
+                <div className="bg-secondary rounded-2xl px-4 py-2.5 text-sm text-muted-foreground">
                   Le coach réfléchit...
                 </div>
               </div>
@@ -94,7 +92,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
               key={prompt}
               onClick={() => submit(prompt)}
               disabled={isLoading}
-              className="rounded-full border border-brand-prune/20 bg-brand-prune/5 px-3 py-1 text-xs text-brand-prune-soft transition-colors hover:bg-brand-prune/10 disabled:opacity-50"
+              className="rounded-full border border-brand-blue/20 bg-brand-blue/5 px-3 py-1 text-xs text-brand-blue-deep transition-colors hover:bg-brand-blue/10 disabled:opacity-50"
             >
               {prompt}
             </button>
@@ -106,24 +104,22 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
             e.preventDefault();
             submit(input);
           }}
-          className="flex items-end gap-2"
+          className="shadow-soft flex items-center gap-2 rounded-full border border-border bg-gradient-to-r from-brand-blue/[0.06] via-brand-coral/[0.06] to-brand-yellow/[0.06] p-1.5 pl-5"
         >
-          <Textarea
+          <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                submit(input);
-              }
-            }}
-            placeholder="Écris ton message au coach..."
-            rows={1}
-            className="min-h-11 flex-1 resize-none"
+            placeholder="Demande n'importe quoi au coach..."
+            className="h-9 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
           />
-          <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>
-            <Send className="size-4" />
-          </Button>
+          <button
+            type="submit"
+            disabled={isLoading || !input.trim()}
+            aria-label="Envoyer"
+            className="bg-brand-blue shadow-blue-glow flex size-9 shrink-0 items-center justify-center rounded-full text-white transition-transform hover:scale-105 disabled:pointer-events-none disabled:opacity-40"
+          >
+            <ArrowUp className="size-4" />
+          </button>
         </form>
       </div>
     </div>

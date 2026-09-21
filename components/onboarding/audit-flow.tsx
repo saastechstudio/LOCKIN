@@ -112,7 +112,7 @@ export function AuditFlow() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="space-y-2 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-prune/25 bg-brand-prune/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-prune-soft uppercase">
+        <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-blue-deep uppercase">
           Audit d&apos;entrée
         </span>
         <h1 className="font-display text-3xl text-foreground">
@@ -130,7 +130,7 @@ export function AuditFlow() {
         </p>
       </div>
 
-      <Card className="glass">
+      <Card className="surface">
         <CardHeader>
           <CardTitle className="font-display text-xl">
             {step === 1 && "Profil personnel"}
@@ -166,7 +166,7 @@ export function AuditFlow() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label>Niveau de discipline</Label>
-                  <span className="font-display text-lg text-brand-rose">
+                  <span className="font-display text-lg text-brand-coral">
                     {form.disciplineLevel}/10
                   </span>
                 </div>
@@ -177,7 +177,7 @@ export function AuditFlow() {
                   step={1}
                   value={form.disciplineLevel}
                   onChange={(e) => set("disciplineLevel", Number(e.target.value))}
-                  className="w-full accent-[var(--brand-rose)]"
+                  className="w-full accent-[var(--brand-coral)]"
                 />
               </div>
             </>
@@ -240,7 +240,7 @@ export function AuditFlow() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <Label>Durée cible</Label>
-                  <span className="font-display text-lg text-brand-prune">
+                  <span className="font-display text-lg text-brand-blue">
                     {form.durationMonths} mois
                   </span>
                 </div>
@@ -251,7 +251,7 @@ export function AuditFlow() {
                   step={1}
                   value={form.durationMonths}
                   onChange={(e) => set("durationMonths", Number(e.target.value))}
-                  className="w-full accent-[var(--brand-prune)]"
+                  className="w-full accent-[var(--brand-blue)]"
                 />
                 <p className="text-xs text-muted-foreground">
                   Durée recommandée : 6 mois (Plage possible : 3 à 36 mois selon la
@@ -323,7 +323,7 @@ function AuditResultView({
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="space-y-2 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-prune/25 bg-brand-prune/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-prune-soft uppercase">
+        <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-blue-deep uppercase">
           Ton programme Lock In
         </span>
         <h1 className="font-display text-3xl text-foreground">
@@ -331,9 +331,9 @@ function AuditResultView({
         </h1>
       </div>
 
-      <Card className="border-brand-prune/30 bg-brand-prune/5">
+      <Card className="border-brand-blue/30 bg-brand-blue/5">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
-          <Lock className="size-4 text-brand-prune" />
+          <Lock className="size-4 text-brand-blue" />
           <CardTitle className="font-display text-lg">Ton Lock In Blocker</CardTitle>
         </CardHeader>
         <CardContent>
@@ -341,16 +341,16 @@ function AuditResultView({
         </CardContent>
       </Card>
 
-      <Card className="glass">
+      <Card className="surface">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
-          <Flame className="size-4 text-brand-rose" />
+          <Flame className="size-4 text-brand-coral" />
           <CardTitle className="font-display text-lg">Feuille de route</CardTitle>
         </CardHeader>
         <CardContent>
           <ol className="space-y-4">
             {result.roadmap.map((phase, i) => (
               <li key={i} className="flex gap-4">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-rose/40 bg-brand-rose/10 font-display text-sm text-brand-rose">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-coral/40 bg-brand-coral/10 font-display text-sm text-brand-coral">
                   {i + 1}
                 </span>
                 <div>
@@ -368,7 +368,7 @@ function AuditResultView({
         </CardContent>
       </Card>
 
-      <Card className="glass">
+      <Card className="surface">
         <CardHeader>
           <CardTitle className="font-display text-lg">
             Actions prioritaires — Semaine 1
@@ -378,7 +378,7 @@ function AuditResultView({
           <ul className="space-y-2.5">
             {result.firstWeekActions.map((action, i) => (
               <li key={i} className={cn("flex items-start gap-2.5 text-sm text-foreground")}>
-                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-brand-prune" />
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-brand-blue" />
                 {action}
               </li>
             ))}

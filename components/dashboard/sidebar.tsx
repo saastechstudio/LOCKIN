@@ -20,8 +20,16 @@ export function DashboardSidebar() {
   return (
     <aside className="hidden w-60 shrink-0 flex-col border-r border-border/60 bg-card/40 md:flex">
       <div className="flex h-16 items-center gap-2.5 border-b border-border/60 px-6">
-        <Image src="/logo-mark.svg" alt="Lock In" width={24} height={24} />
-        <span className="font-display text-base tracking-[0.18em] text-foreground">
+        <span className="shadow-soft block size-7 overflow-hidden rounded-lg">
+          <Image
+            src="/logo-mark.jpg"
+            alt="Lock In"
+            width={28}
+            height={28}
+            className="size-full object-cover"
+          />
+        </span>
+        <span className="font-display text-base tracking-[0.1em] text-foreground">
           LOCK IN
         </span>
       </div>
@@ -37,9 +45,9 @@ export function DashboardSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-md px-3 py-2.5 text-sm transition-colors",
+                "flex items-center gap-3 rounded-full px-3 py-2.5 text-sm transition-colors",
                 active
-                  ? "bg-brand-prune/10 text-brand-prune-soft border border-brand-prune/20"
+                  ? "bg-brand-blue/10 text-brand-blue-deep border border-brand-blue/20"
                   : "text-muted-foreground hover:bg-accent hover:text-foreground",
               )}
             >

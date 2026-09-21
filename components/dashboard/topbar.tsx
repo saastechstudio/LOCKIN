@@ -42,7 +42,7 @@ export function DashboardTopbar({ user }: { user: User }) {
         <ThemeToggle />
         <UserButton
           appearance={{
-            elements: { avatarBox: "size-9 ring-1 ring-brand-prune/30 rounded-full" },
+            elements: { avatarBox: "size-9 ring-1 ring-brand-blue/30 rounded-full" },
           }}
         />
       </div>

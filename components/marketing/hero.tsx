@@ -7,21 +7,25 @@ export function Hero() {
     <section className="relative overflow-hidden px-6 pt-28 pb-32 text-center">
       <div
         aria-hidden
-        className="animate-aurora pointer-events-none absolute -top-40 left-1/2 -z-10 h-[520px] w-[720px] -translate-x-[62%] rounded-full bg-[radial-gradient(closest-side,_rgba(146,74,98,0.35),_transparent_75%)] blur-3xl"
+        className="animate-aurora pointer-events-none absolute -top-40 left-1/2 -z-10 h-[520px] w-[720px] -translate-x-[62%] rounded-full bg-[radial-gradient(closest-side,_rgba(74,127,248,0.22),_transparent_75%)] blur-3xl"
       />
       <div
         aria-hidden
-        className="animate-aurora-slow pointer-events-none absolute -top-32 left-1/2 -z-10 h-[480px] w-[640px] -translate-x-[38%] rounded-full bg-[radial-gradient(closest-side,_rgba(222,143,169,0.28),_transparent_75%)] blur-3xl"
+        className="animate-aurora-slow pointer-events-none absolute -top-32 left-1/2 -z-10 h-[480px] w-[640px] -translate-x-[38%] rounded-full bg-[radial-gradient(closest-side,_rgba(255,118,72,0.18),_transparent_75%)] blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-10 left-1/2 -z-10 h-[360px] w-[480px] -translate-x-[10%] rounded-full bg-[radial-gradient(closest-side,_rgba(255,199,87,0.16),_transparent_75%)] blur-3xl"
       />
 
-      <span className="inline-flex items-center gap-2 rounded-full border border-brand-rose/25 bg-brand-prune/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-rose uppercase">
+      <span className="inline-flex items-center gap-2 rounded-full border border-brand-coral/25 bg-white px-4 py-1.5 text-xs tracking-[0.2em] text-brand-coral uppercase shadow-soft">
         <Sparkle className="size-3.5" />
         Club privé d&apos;entrepreneurs
       </span>
 
-      <h1 className="font-display mx-auto mt-8 max-w-4xl text-6xl leading-[1.05] font-thin text-foreground sm:text-7xl">
+      <h1 className="font-display mx-auto mt-8 max-w-4xl text-5xl leading-[1.08] text-foreground sm:text-6xl">
         Le Club d&apos;Entrepreneurs{" "}
-        <span className="text-gradient-prune font-normal">d&apos;Excellence</span>
+        <span className="text-gradient-blue">d&apos;Excellence</span>
       </h1>
 
       <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
