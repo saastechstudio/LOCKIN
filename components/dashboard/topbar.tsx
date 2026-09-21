@@ -2,6 +2,7 @@ import { UserButton } from "@clerk/nextjs";
 
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { MobileNav } from "@/components/dashboard/mobile-nav";
 import type { User } from "@/lib/db/schema";
 
 function greeting() {
@@ -25,18 +26,21 @@ export function DashboardTopbar({ user }: { user: User }) {
     : null;
 
   return (
-    <header className="flex h-16 items-center justify-between border-b border-border/60 bg-background/70 px-6 backdrop-blur-md">
-      <div>
-        <p className="font-display text-lg text-foreground">
-          {greeting()}, {firstName}
-        </p>
-        <p className="text-xs text-muted-foreground">
-          Verrouille ton focus. Exécute avec excellence.
-        </p>
+    <header className="flex h-16 items-center justify-between gap-3 border-b border-border/60 bg-background/70 px-4 backdrop-blur-md sm:px-6">
+      <div className="flex min-w-0 items-center gap-3">
+        <MobileNav />
+        <div className="min-w-0">
+          <p className="font-display truncate text-base text-foreground sm:text-lg">
+            {greeting()}, {firstName}
+          </p>
+          <p className="hidden text-xs text-muted-foreground sm:block">
+            Verrouille ton focus. Exécute avec excellence.
+          </p>
+        </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <Badge variant={status?.variant ?? "outline"}>
+      <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+        <Badge variant={status?.variant ?? "outline"} className="hidden sm:inline-flex">
           {status?.label ?? "Aucun abonnement"}
         </Badge>
         <ThemeToggle />
