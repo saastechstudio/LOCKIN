@@ -14,7 +14,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2.5">
           <Image src="/logo-mark.svg" alt="Lock In" width={28} height={28} />
-          <span className="font-serif text-lg tracking-[0.18em] text-foreground">
+          <span className="font-display text-lg tracking-[0.18em] text-foreground">
             LOCK IN
           </span>
         </Link>
@@ -24,7 +24,7 @@ export function SiteHeader() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-brand-gold"
+              className="text-sm text-muted-foreground transition-colors hover:text-brand-prune"
             >
               {link.label}
             </a>

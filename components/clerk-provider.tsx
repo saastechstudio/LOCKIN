@@ -5,21 +5,21 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { useMounted } from "@/lib/hooks/use-mounted";
 
 const DARK_VARIABLES = {
-  colorPrimary: "#D4AF37",
-  colorBackground: "#12141D",
-  colorForeground: "#f1f5f9",
-  colorInput: "#17171b",
-  colorInputForeground: "#f1f5f9",
-  colorNeutral: "#f1f5f9",
+  colorPrimary: "#924A62",
+  colorBackground: "#0d0509",
+  colorForeground: "#fff8f2",
+  colorInput: "#140a0e",
+  colorInputForeground: "#fff8f2",
+  colorNeutral: "#fff8f2",
 };
 
 const LIGHT_VARIABLES = {
-  colorPrimary: "#D4AF37",
+  colorPrimary: "#924A62",
   colorBackground: "#ffffff",
-  colorForeground: "#0f172a",
-  colorInput: "#eef0f5",
-  colorInputForeground: "#0f172a",
-  colorNeutral: "#0f172a",
+  colorForeground: "#1a0810",
+  colorInput: "#f3e6dd",
+  colorInputForeground: "#1a0810",
+  colorNeutral: "#1a0810",
 };
 
 /** Keeps Clerk's own widgets (sign-in, sign-up, user menu) in sync with our

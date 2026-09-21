@@ -21,7 +21,7 @@ export function ThemeToggle() {
       size="icon"
       aria-label={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="text-muted-foreground hover:text-brand-gold"
+      className="text-muted-foreground hover:text-brand-prune"
     >
       {mounted ? (
         isDark ? (

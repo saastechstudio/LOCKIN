@@ -46,8 +46,8 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
       <ScrollArea className="flex-1 px-6 py-6">
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-4 py-16 text-center">
-            <div className="flex size-12 items-center justify-center rounded-full border border-brand-gold/25 bg-brand-gold/10">
-              <Sparkles className="size-5 text-brand-gold" />
+            <div className="flex size-12 items-center justify-center rounded-full border border-brand-prune/25 bg-brand-prune/10">
+              <Sparkles className="size-5 text-brand-prune" />
             </div>
             <p className="max-w-sm text-sm text-muted-foreground">
               Pose ta question au Coach Lock In. Direct, exigeant, orienté
@@ -68,7 +68,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
                   className={cn(
                     "max-w-[80%] rounded-xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap",
                     message.role === "user"
-                      ? "bg-gradient-to-b from-brand-gold-soft to-brand-gold text-black"
+                      ? "bg-gradient-to-b from-brand-prune-soft to-brand-prune text-black"
                       : "glass text-foreground",
                   )}
                 >
@@ -94,7 +94,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
               key={prompt}
               onClick={() => submit(prompt)}
               disabled={isLoading}
-              className="rounded-full border border-brand-gold/20 bg-brand-gold/5 px-3 py-1 text-xs text-brand-gold-soft transition-colors hover:bg-brand-gold/10 disabled:opacity-50"
+              className="rounded-full border border-brand-prune/20 bg-brand-prune/5 px-3 py-1 text-xs text-brand-prune-soft transition-colors hover:bg-brand-prune/10 disabled:opacity-50"
             >
               {prompt}
             </button>

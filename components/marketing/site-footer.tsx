@@ -7,7 +7,7 @@ export function SiteFooter() {
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">
         <div className="flex items-center gap-2.5">
           <Image src="/logo-mark.svg" alt="Lock In" width={22} height={22} />
-          <span className="font-serif text-sm tracking-[0.18em] text-foreground">
+          <span className="font-display text-sm tracking-[0.18em] text-foreground">
             LOCK IN
           </span>
         </div>
@@ -17,13 +17,13 @@ export function SiteFooter() {
         </p>
 
         <div className="flex gap-6 text-xs text-muted-foreground">
-          <Link href="/legal/mentions" className="hover:text-brand-gold">
+          <Link href="/legal/mentions" className="hover:text-brand-prune">
             Mentions légales
           </Link>
-          <Link href="/legal/cgv" className="hover:text-brand-gold">
+          <Link href="/legal/cgv" className="hover:text-brand-prune">
             CGV
           </Link>
-          <Link href="/legal/confidentialite" className="hover:text-brand-gold">
+          <Link href="/legal/confidentialite" className="hover:text-brand-prune">
             Confidentialité
           </Link>
         </div>

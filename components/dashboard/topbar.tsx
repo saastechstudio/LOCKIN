@@ -27,7 +27,7 @@ export function DashboardTopbar({ user }: { user: User }) {
   return (
     <header className="flex h-16 items-center justify-between border-b border-border/60 bg-background/70 px-6 backdrop-blur-md">
       <div>
-        <p className="font-serif text-lg text-foreground">
+        <p className="font-display text-lg text-foreground">
           {greeting()}, {firstName}
         </p>
         <p className="text-xs text-muted-foreground">
@@ -42,7 +42,7 @@ export function DashboardTopbar({ user }: { user: User }) {
         <ThemeToggle />
         <UserButton
           appearance={{
-            elements: { avatarBox: "size-9 ring-1 ring-brand-gold/30 rounded-full" },
+            elements: { avatarBox: "size-9 ring-1 ring-brand-prune/30 rounded-full" },
           }}
         />
       </div>

@@ -4,135 +4,143 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Lock In design tokens — brand palette + light/dark.
+ * Lock In design tokens — official brand palette (Charte Graphique V1.0):
+ * Noir Absolu #030001 (fond), Prune Noble #924A62 (accents/CTA), Rose
+ * Mâtin #DE8FA9 (lignes/icônes), Blanc Soie #FFF8F2 (titres/textes).
  *
  * Two layers:
  *  1. Runtime CSS variables below (`:root` = light, `.dark` = dark) —
  *     these are what actually change when the theme toggles.
  *  2. The `@theme inline` block maps each one to a Tailwind utility, so
  *     `bg-brand-bg`, `bg-brand-card`, `border-brand-border`,
- *     `text-brand-gold`, `bg-brand-gold`, `text-brand-cyan`,
- *     `shadow-gold-glow` and `shadow-cyan-glow` are real, theme-aware
+ *     `text-brand-prune`, `bg-brand-prune`, `text-brand-rose`,
+ *     `shadow-prune-glow` and `shadow-rose-glow` are real, theme-aware
  *     utility classes usable anywhere in the app.
  *
  * shadcn-style semantic tokens (background/card/border/primary/...) are
  * wired to the same brand variables, so every primitive in
  * components/ui/* already renders in the brand palette without being
  * touched individually.
+ *
+ * Rule from the charte (§5): no heavy or blurry drop-shadows on UI
+ * blocks — fine 1px borders instead, and crisp (zero-blur) rings for
+ * the "glow" utilities rather than soft glows.
  */
 
 :root {
   --radius: 0.65rem;
 
   /* ---- Brand palette (light) ---- */
-  --brand-bg: #f6f7fb;
+  --brand-bg: #fff8f2;
+  --brand-bg-deep: #f3e6dd;
   --brand-card: #ffffff;
-  --brand-border: rgba(9, 10, 15, 0.1);
-  --brand-gold: #d4af37;
-  --brand-gold-soft: #e8c874;
-  --brand-gold-deep: #9c7a22;
-  --brand-cyan: #0e7490;
+  --brand-border: rgba(146, 74, 98, 0.16);
+  --brand-prune: #924a62;
+  --brand-prune-soft: #b06e86;
+  --brand-prune-deep: #6e384c;
+  --brand-rose: #c96f8d;
 
-  --glow-gold: 0 0 0 1px rgba(212, 175, 55, 0.35), 0 8px 28px -8px rgba(212, 175, 55, 0.45);
-  --glow-cyan: 0 0 0 1px rgba(14, 116, 144, 0.3), 0 8px 28px -8px rgba(14, 116, 144, 0.35);
+  --glow-prune: 0 0 0 1px rgba(146, 74, 98, 0.45);
+  --glow-rose: 0 0 0 1px rgba(201, 111, 141, 0.4);
 
-  --glass-bg: rgba(255, 255, 255, 0.65);
-  --glass-border: rgba(9, 10, 15, 0.08);
-  --noise-bg: radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.08), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(14, 116, 144, 0.06), transparent 45%);
-  --scrollbar-thumb: rgba(9, 10, 15, 0.18);
-  --selection-bg: rgba(212, 175, 55, 0.3);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(146, 74, 98, 0.14);
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(146, 74, 98, 0.07), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(222, 143, 169, 0.08), transparent 45%);
+  --scrollbar-thumb: rgba(146, 74, 98, 0.22);
+  --selection-bg: rgba(146, 74, 98, 0.25);
 
   /* ---- shadcn-style semantic tokens ---- */
   --background: var(--brand-bg);
-  --foreground: #0f172a; /* slate-900 */
+  --foreground: #1a0810;
 
   --card: var(--brand-card);
-  --card-foreground: #0f172a;
+  --card-foreground: #1a0810;
 
   --popover: var(--brand-card);
-  --popover-foreground: #0f172a;
+  --popover-foreground: #1a0810;
 
-  --primary: var(--brand-gold);
-  --primary-foreground: #09090b;
+  --primary: var(--brand-prune);
+  --primary-foreground: #fff8f2;
 
-  --secondary: #eef0f5;
-  --secondary-foreground: #0f172a;
+  --secondary: #f3e6dd;
+  --secondary-foreground: #1a0810;
 
-  --muted: #eef0f5;
-  --muted-foreground: #64748b; /* slate-500 */
+  --muted: #f3e6dd;
+  --muted-foreground: rgba(26, 8, 16, 0.55);
 
-  --accent: #eef2f6;
-  --accent-foreground: var(--brand-gold-deep);
+  --accent: #f7ebe4;
+  --accent-foreground: var(--brand-prune-deep);
 
   --destructive: #c0392b;
   --destructive-foreground: #fefefe;
 
   --border: var(--brand-border);
-  --input: rgba(9, 10, 15, 0.14);
-  --ring: rgba(212, 175, 55, 0.45);
+  --input: rgba(146, 74, 98, 0.2);
+  --ring: rgba(146, 74, 98, 0.4);
 
-  --chart-1: var(--brand-gold);
-  --chart-2: var(--brand-cyan);
-  --chart-3: #64748b;
-  --chart-4: var(--brand-gold-soft);
-  --chart-5: #334155;
+  --chart-1: var(--brand-prune);
+  --chart-2: var(--brand-rose);
+  --chart-3: #8a7a80;
+  --chart-4: var(--brand-prune-soft);
+  --chart-5: #4a3841;
 }
 
 .dark {
   /* ---- Brand palette (dark) ---- */
-  --brand-bg: #090a0f;
-  --brand-card: #12141d;
-  --brand-border: rgba(212, 175, 55, 0.14);
-  --brand-gold: #d4af37;
-  --brand-gold-soft: #f1d590;
-  --brand-gold-deep: #9c7a22;
-  --brand-cyan: #22d3ee;
+  --brand-bg: #030001;
+  --brand-bg-deep: #1a0810;
+  --brand-card: #0d0509;
+  --brand-border: rgba(222, 143, 169, 0.2);
+  --brand-prune: #924a62;
+  --brand-prune-soft: #b06e86;
+  --brand-prune-deep: #6e384c;
+  --brand-rose: #de8fa9;
 
-  --glow-gold: 0 0 0 1px rgba(212, 175, 55, 0.3), 0 0 24px -4px rgba(212, 175, 55, 0.55);
-  --glow-cyan: 0 0 0 1px rgba(34, 211, 238, 0.28), 0 0 24px -4px rgba(34, 211, 238, 0.5);
+  --glow-prune: 0 0 0 1px rgba(146, 74, 98, 0.55);
+  --glow-rose: 0 0 0 1px rgba(222, 143, 169, 0.5);
 
-  --glass-bg: rgba(18, 20, 29, 0.55);
-  --glass-border: rgba(212, 175, 55, 0.12);
-  --noise-bg: radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.06), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(34, 211, 238, 0.05), transparent 45%);
-  --scrollbar-thumb: rgba(212, 175, 55, 0.25);
-  --selection-bg: rgba(212, 175, 55, 0.35);
+  --glass-bg: rgba(13, 5, 9, 0.6);
+  --glass-border: rgba(222, 143, 169, 0.16);
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(146, 74, 98, 0.1), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(222, 143, 169, 0.07), transparent 45%);
+  --scrollbar-thumb: rgba(222, 143, 169, 0.25);
+  --selection-bg: rgba(222, 143, 169, 0.3);
 
   /* ---- shadcn-style semantic tokens ---- */
   --background: var(--brand-bg);
-  --foreground: #f1f5f9; /* slate-100 */
+  --foreground: #fff8f2;
 
   --card: var(--brand-card);
-  --card-foreground: #f1f5f9;
+  --card-foreground: #fff8f2;
 
   --popover: var(--brand-card);
-  --popover-foreground: #f1f5f9;
+  --popover-foreground: #fff8f2;
 
-  --primary: var(--brand-gold);
-  --primary-foreground: #09090b;
+  --primary: var(--brand-prune);
+  --primary-foreground: #fff8f2;
 
-  --secondary: #17171b;
-  --secondary-foreground: #f1f5f9;
+  --secondary: #140a0e;
+  --secondary-foreground: #fff8f2;
 
-  --muted: #17171b;
-  --muted-foreground: #94a3b8; /* slate-400 */
+  --muted: #140a0e;
+  --muted-foreground: rgba(255, 248, 242, 0.55);
 
-  --accent: #1c1c21;
-  --accent-foreground: var(--brand-gold);
+  --accent: #180c11;
+  --accent-foreground: var(--brand-rose);
 
   --destructive: #b3432f;
-  --destructive-foreground: #f1f5f9;
+  --destructive-foreground: #fff8f2;
 
   --border: var(--brand-border);
-  --input: rgba(212, 175, 55, 0.18);
-  --ring: rgba(212, 175, 55, 0.5);
+  --input: rgba(222, 143, 169, 0.22);
+  --ring: rgba(222, 143, 169, 0.45);
 
-  --chart-1: var(--brand-gold);
-  --chart-2: var(--brand-cyan);
-  --chart-3: #a1a1aa;
-  --chart-4: var(--brand-gold-soft);
-  --chart-5: #4a4a4f;
+  --chart-1: var(--brand-prune);
+  --chart-2: var(--brand-rose);
+  --chart-3: #a89aa0;
+  --chart-4: var(--brand-prune-soft);
+  --chart-5: #4a3841;
 }
 
 @theme inline {
@@ -157,19 +165,15 @@
   --color-ring: var(--ring);
 
   /* Brand utilities: bg-brand-bg, bg-brand-card, border-brand-border,
-     text-brand-gold, bg-brand-gold, text-brand-cyan, bg-brand-cyan... */
+     text-brand-prune, bg-brand-prune, text-brand-rose, bg-brand-rose... */
   --color-brand-bg: var(--brand-bg);
+  --color-brand-bg-deep: var(--brand-bg-deep);
   --color-brand-card: var(--brand-card);
   --color-brand-border: var(--brand-border);
-  --color-brand-gold: var(--brand-gold);
-  --color-brand-gold-soft: var(--brand-gold-soft);
-  --color-brand-gold-deep: var(--brand-gold-deep);
-  --color-brand-cyan: var(--brand-cyan);
-
-  /* Legacy aliases kept so earlier gold-* utilities keep working. */
-  --color-gold: var(--brand-gold);
-  --color-gold-soft: var(--brand-gold-soft);
-  --color-gold-deep: var(--brand-gold-deep);
+  --color-brand-prune: var(--brand-prune);
+  --color-brand-prune-soft: var(--brand-prune-soft);
+  --color-brand-prune-deep: var(--brand-prune-deep);
+  --color-brand-rose: var(--brand-rose);
 
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -177,9 +181,10 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  /* shadow-gold-glow / shadow-cyan-glow */
-  --shadow-gold-glow: var(--glow-gold);
-  --shadow-cyan-glow: var(--glow-cyan);
+  /* shadow-prune-glow / shadow-rose-glow — crisp rings, never blurred
+     (charte §5: "invisibilité des ombres grossières"). */
+  --shadow-prune-glow: var(--glow-prune);
+  --shadow-rose-glow: var(--glow-rose);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -187,7 +192,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   --font-sans: var(--font-inter);
-  --font-serif: var(--font-cormorant);
 }
 
 * {
@@ -195,27 +199,28 @@
 }
 
 body {
-  background: var(--background);
+  background: radial-gradient(ellipse 1200px 800px at 50% -10%, var(--brand-bg-deep), var(--background) 60%);
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.font-serif {
-  font-family: var(--font-serif), Georgia, serif;
+/* Display heading style — thin/light geometric sans, per charte §4
+   ("Helvetica Neue Thin / Light"); Inter's variable weight axis is the
+   closest web-safe analog. */
+.font-display {
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: -0.01em;
 }
 
 .bg-noise {
   background-image: var(--noise-bg);
 }
 
-.text-gradient-gold {
-  background: linear-gradient(
-    120deg,
-    var(--brand-gold-soft),
-    var(--brand-gold) 45%,
-    var(--brand-gold-deep)
-  );
+.text-gradient-prune {
+  background: linear-gradient(120deg, var(--brand-rose), var(--brand-prune) 55%, var(--brand-prune-deep));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -242,4 +247,28 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--scrollbar-thumb);
   border-radius: 999px;
+}
+
+@keyframes aurora-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3%, 4%) scale(1.06);
+  }
+}
+
+.animate-aurora {
+  animation: aurora-drift 14s ease-in-out infinite;
+}
+
+.animate-aurora-slow {
+  animation: aurora-drift 20s ease-in-out infinite reverse;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-aurora,
+  .animate-aurora-slow {
+    animation: none;
+  }
 }

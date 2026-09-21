@@ -22,7 +22,7 @@ export default async function NetworkPage() {
   return (
     <div className="mx-auto max-w-6xl">
       <div className="mb-6">
-        <h1 className="font-serif text-2xl text-foreground">Réseau & Entraide</h1>
+        <h1 className="font-display text-2xl text-foreground">Réseau & Entraide</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           {otherMembers.length} membre{otherMembers.length > 1 ? "s" : ""} du
           club. Filtrez par secteur ou compétences pour créer les bonnes

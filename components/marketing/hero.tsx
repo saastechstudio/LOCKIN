@@ -1,22 +1,27 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden px-6 pt-24 pb-28 text-center">
+    <section className="relative overflow-hidden px-6 pt-28 pb-32 text-center">
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px] bg-[radial-gradient(ellipse_at_top,_rgba(212,175,55,0.14),_transparent_60%)]"
+        className="animate-aurora pointer-events-none absolute -top-40 left-1/2 -z-10 h-[520px] w-[720px] -translate-x-[62%] rounded-full bg-[radial-gradient(closest-side,_rgba(146,74,98,0.35),_transparent_75%)] blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="animate-aurora-slow pointer-events-none absolute -top-32 left-1/2 -z-10 h-[480px] w-[640px] -translate-x-[38%] rounded-full bg-[radial-gradient(closest-side,_rgba(222,143,169,0.28),_transparent_75%)] blur-3xl"
       />
 
-      <span className="inline-flex items-center gap-2 rounded-full border border-brand-gold/25 bg-brand-gold/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-gold-soft uppercase">
+      <span className="inline-flex items-center gap-2 rounded-full border border-brand-rose/25 bg-brand-prune/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-rose uppercase">
+        <Sparkle className="size-3.5" />
         Club privé d&apos;entrepreneurs
       </span>
 
-      <h1 className="mx-auto mt-8 max-w-3xl font-serif text-5xl leading-[1.1] text-foreground sm:text-6xl">
+      <h1 className="font-display mx-auto mt-8 max-w-4xl text-6xl leading-[1.05] font-thin text-foreground sm:text-7xl">
         Le Club d&apos;Entrepreneurs{" "}
-        <span className="text-gradient-gold">d&apos;Excellence</span>
+        <span className="text-gradient-prune font-normal">d&apos;Excellence</span>
       </h1>
 
       <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">

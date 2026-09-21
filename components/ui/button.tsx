@@ -10,15 +10,15 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-gradient-to-b from-brand-gold-soft to-brand-gold text-primary-foreground shadow-gold-glow hover:brightness-110",
+          "bg-gradient-to-b from-brand-prune-soft to-brand-prune text-primary-foreground shadow-prune-glow hover:brightness-110",
         destructive:
           "bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90",
         outline:
-          "border border-border bg-transparent text-foreground hover:bg-accent hover:border-brand-gold/40",
+          "border border-border bg-transparent text-foreground hover:bg-accent hover:border-brand-prune/40",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-brand-gold underline-offset-4 hover:underline",
+        link: "text-brand-prune underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-5 py-2 has-[>svg]:px-4",

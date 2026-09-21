@@ -16,7 +16,7 @@ export function Pricing() {
   return (
     <section id="pricing" className="px-6 py-24">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="font-serif text-3xl text-foreground sm:text-4xl">
+        <h2 className="font-display text-3xl text-foreground sm:text-4xl">
           Un tarif, un engagement clair
         </h2>
         <p className="mt-4 text-muted-foreground">
@@ -29,7 +29,7 @@ export function Pricing() {
           <CardHeader>
             <p className="text-sm text-muted-foreground">Mensuel</p>
             <div className="mt-2 flex items-baseline gap-1">
-              <span className="font-serif text-4xl text-foreground">14,90 €</span>
+              <span className="font-display text-4xl text-foreground">14,90 €</span>
               <span className="text-sm text-muted-foreground">/ mois</span>
             </div>
           </CardHeader>
@@ -37,7 +37,7 @@ export function Pricing() {
             <ul className="space-y-2.5 text-left text-sm text-muted-foreground">
               {FEATURES.map((f) => (
                 <li key={f} className="flex items-start gap-2">
-                  <Check className="mt-0.5 size-4 shrink-0 text-brand-gold" />
+                  <Check className="mt-0.5 size-4 shrink-0 text-brand-prune" />
                   {f}
                 </li>
               ))}
@@ -48,14 +48,14 @@ export function Pricing() {
           </CardContent>
         </Card>
 
-        <Card className="glass relative border-brand-gold/40">
+        <Card className="glass relative border-brand-prune/40">
           <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
             2 mois offerts
           </Badge>
           <CardHeader>
             <p className="text-sm text-muted-foreground">Annuel</p>
             <div className="mt-2 flex items-baseline gap-1">
-              <span className="font-serif text-4xl text-foreground">149 €</span>
+              <span className="font-display text-4xl text-foreground">149 €</span>
               <span className="text-sm text-muted-foreground">/ an</span>
             </div>
           </CardHeader>
@@ -63,7 +63,7 @@ export function Pricing() {
             <ul className="space-y-2.5 text-left text-sm text-muted-foreground">
               {FEATURES.map((f) => (
                 <li key={f} className="flex items-start gap-2">
-                  <Check className="mt-0.5 size-4 shrink-0 text-brand-gold" />
+                  <Check className="mt-0.5 size-4 shrink-0 text-brand-prune" />
                   {f}
                 </li>
               ))}

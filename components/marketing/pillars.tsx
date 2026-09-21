@@ -33,7 +33,7 @@ export function Pillars() {
     <section id="pillars" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-xl text-center">
-          <h2 className="font-serif text-3xl text-foreground sm:text-4xl">
+          <h2 className="font-display text-3xl text-foreground sm:text-4xl">
             Trois piliers, une seule quête
           </h2>
           <p className="mt-4 text-muted-foreground">
@@ -46,10 +46,10 @@ export function Pillars() {
           {PILLARS.map((pillar) => (
             <Card key={pillar.title} className="glass">
               <CardHeader>
-                <div className="mb-2 flex size-11 items-center justify-center rounded-lg border border-brand-gold/25 bg-brand-gold/10">
-                  <pillar.icon className="size-5 text-brand-gold" />
+                <div className="mb-2 flex size-11 items-center justify-center rounded-lg border border-brand-prune/25 bg-brand-prune/10">
+                  <pillar.icon className="size-5 text-brand-prune" />
                 </div>
-                <CardTitle className="font-serif text-xl">
+                <CardTitle className="font-display text-xl">
                   {pillar.title}
                 </CardTitle>
               </CardHeader>

@@ -32,14 +32,14 @@ export function DailyCheckin({ focus }: { focus: DailyFocus }) {
   return (
     <Card className="glass">
       <CardHeader className="flex-row items-center gap-2 space-y-0">
-        <Flame className="size-4 text-brand-gold" />
-        <CardTitle className="font-serif text-xl">Check-in Quotidien</CardTitle>
+        <Flame className="size-4 text-brand-prune" />
+        <CardTitle className="font-display text-xl">Check-in Quotidien</CardTitle>
       </CardHeader>
       <CardContent>
         <form ref={formRef} action={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <Target className="size-3.5 text-brand-gold-soft" />
+              <Target className="size-3.5 text-brand-prune-soft" />
               <Label className="text-xs tracking-wide text-muted-foreground uppercase">
                 Tâche du jour
               </Label>
@@ -50,12 +50,12 @@ export function DailyCheckin({ focus }: { focus: DailyFocus }) {
               className={cn(
                 "flex w-full items-start gap-3 rounded-lg border px-4 py-3 text-left transition-colors",
                 taskCompleted
-                  ? "border-brand-gold/40 bg-brand-gold/10"
-                  : "border-brand-border bg-secondary/30 hover:border-brand-gold/30",
+                  ? "border-brand-prune/40 bg-brand-prune/10"
+                  : "border-brand-border bg-secondary/30 hover:border-brand-prune/30",
               )}
             >
               {taskCompleted ? (
-                <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-brand-gold" />
+                <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-brand-prune" />
               ) : (
                 <Circle className="mt-0.5 size-5 shrink-0 text-muted-foreground/40" />
               )}
@@ -63,7 +63,7 @@ export function DailyCheckin({ focus }: { focus: DailyFocus }) {
                 className={cn(
                   "text-sm",
                   taskCompleted
-                    ? "text-foreground line-through decoration-brand-gold/60"
+                    ? "text-foreground line-through decoration-brand-prune/60"
                     : "text-foreground",
                 )}
               >
@@ -77,7 +77,7 @@ export function DailyCheckin({ focus }: { focus: DailyFocus }) {
               <Label className="text-xs tracking-wide text-muted-foreground uppercase">
                 Discipline aujourd&apos;hui
               </Label>
-              <span className="font-serif text-lg text-brand-cyan">
+              <span className="font-display text-lg text-brand-rose">
                 {disciplineRating}/10
               </span>
             </div>
@@ -91,8 +91,8 @@ export function DailyCheckin({ focus }: { focus: DailyFocus }) {
                   className={cn(
                     "h-8 flex-1 rounded-sm border transition-colors",
                     n <= disciplineRating
-                      ? "border-brand-cyan/50 bg-brand-cyan/60 shadow-cyan-glow"
-                      : "border-brand-border bg-secondary/40 hover:border-brand-cyan/30",
+                      ? "border-brand-rose/50 bg-brand-rose/60 shadow-rose-glow"
+                      : "border-brand-border bg-secondary/40 hover:border-brand-rose/30",
                   )}
                 />
               ))}
@@ -104,7 +104,7 @@ export function DailyCheckin({ focus }: { focus: DailyFocus }) {
           </Button>
 
           {done && !isPending && (
-            <p className="text-center text-xs text-brand-gold-soft">
+            <p className="text-center text-xs text-brand-prune-soft">
               Check-in enregistré. Reste lock in.
             </p>
           )}
