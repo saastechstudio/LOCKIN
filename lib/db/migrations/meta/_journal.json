@@ -15,6 +15,13 @@
       "when": 1790025950345,
       "tag": "0001_colossal_deadpool",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790030322114,
+      "tag": "0002_shocking_starhawk",
+      "breakpoints": true
     }
   ]
 }
