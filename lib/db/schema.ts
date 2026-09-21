@@ -32,6 +32,11 @@ export const taskPriorityEnum = pgEnum("task_priority", [
   "high",
 ]);
 
+export const notificationTypeEnum = pgEnum("notification_type", [
+  "daily_motivation",
+  "system",
+]);
+
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   clerkId: text("clerk_id").notNull().unique(),
@@ -134,6 +139,29 @@ export const planningTasks = pgTable("planning_tasks", {
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
+export const notifications = pgTable(
+  "notifications",
+  {
+    id: serial("id").primaryKey(),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    type: notificationTypeEnum("type").notNull().default("daily_motivation"),
+    title: text("title").notNull(),
+    body: text("body").notNull(),
+    read: boolean("read").notNull().default(false),
+    sendDate: date("send_date", { mode: "date" }).notNull(),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("notifications_user_type_date_idx").on(
+      table.userId,
+      table.type,
+      table.sendDate,
+    ),
+  ],
+);
+
 export const aiConversations = pgTable("ai_conversations", {
   id: serial("id").primaryKey(),
   userId: integer("user_id")
@@ -151,6 +179,11 @@ export const usersRelations = relations(users, ({ many }) => ({
   onboardingAudits: many(onboardingAudits),
   dailyFocusEntries: many(dailyFocus),
   planningTasks: many(planningTasks),
+  notifications: many(notifications),
+}));
+
+export const notificationsRelations = relations(notifications, ({ one }) => ({
+  user: one(users, { fields: [notifications.userId], references: [users.id] }),
 }));
 
 export const planningTasksRelations = relations(planningTasks, ({ one }) => ({
@@ -203,3 +236,5 @@ export type DailyFocus = typeof dailyFocus.$inferSelect;
 export type NewDailyFocus = typeof dailyFocus.$inferInsert;
 export type PlanningTask = typeof planningTasks.$inferSelect;
 export type NewPlanningTask = typeof planningTasks.$inferInsert;
+export type Notification = typeof notifications.$inferSelect;
+export type NewNotification = typeof notifications.$inferInsert;
