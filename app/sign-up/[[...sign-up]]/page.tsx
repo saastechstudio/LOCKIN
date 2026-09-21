@@ -7,10 +7,10 @@ export default function SignUpPage() {
         <SignUp
           appearance={{
             elements: {
-              card: "glass shadow-2xl",
+              card: "surface",
               headerTitle: "font-display text-foreground",
               formButtonPrimary:
-                "bg-gradient-to-b from-brand-prune-soft to-brand-prune text-black hover:brightness-110",
+                "bg-brand-blue text-white rounded-full hover:bg-brand-blue-deep",
             },
           }}
         />

@@ -34,7 +34,7 @@ export function OkrCard({ okr }: { okr: Okr }) {
   };
 
   return (
-    <Card className="glass">
+    <Card className="surface">
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between gap-3">
           <div>
@@ -62,12 +62,12 @@ export function OkrCard({ okr }: { okr: Okr }) {
           <span>
             {current} / {target} {okr.unit}
           </span>
-          <span className="text-brand-rose">{percent}%</span>
+          <span className="text-brand-coral">{percent}%</span>
         </div>
         <Progress value={percent} />
 
         {okr.status === "completed" ? (
-          <p className="flex items-center gap-1.5 text-xs text-brand-prune">
+          <p className="flex items-center gap-1.5 text-xs text-brand-blue">
             <Check className="size-3.5" /> Objectif atteint
           </p>
         ) : (

@@ -56,7 +56,7 @@ export function ExitIntentPopup() {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="max-w-md text-center">
         <DialogHeader className="items-center text-center">
-          <span className="mb-2 inline-flex items-center gap-2 rounded-full border border-brand-rose/25 bg-brand-prune/5 px-3 py-1 text-[10px] tracking-[0.2em] text-brand-rose uppercase">
+          <span className="mb-2 inline-flex items-center gap-2 rounded-full border border-brand-coral/25 bg-brand-blue/5 px-3 py-1 text-[10px] tracking-[0.2em] text-brand-coral uppercase">
             <Flame className="size-3" />
             Avant de partir
           </span>

@@ -44,10 +44,10 @@ export function Pillars() {
 
         <div className="mt-14 grid gap-6 sm:grid-cols-3">
           {PILLARS.map((pillar) => (
-            <Card key={pillar.title} className="glass">
+            <Card key={pillar.title} className="surface">
               <CardHeader>
-                <div className="mb-2 flex size-11 items-center justify-center rounded-lg border border-brand-prune/25 bg-brand-prune/10">
-                  <pillar.icon className="size-5 text-brand-prune" />
+                <div className="mb-2 flex size-11 items-center justify-center rounded-lg border border-brand-blue/25 bg-brand-blue/10">
+                  <pillar.icon className="size-5 text-brand-blue" />
                 </div>
                 <CardTitle className="font-display text-xl">
                   {pillar.title}

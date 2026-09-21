@@ -14,8 +14,16 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2.5">
-          <Image src="/logo-mark.svg" alt="Lock In" width={28} height={28} />
-          <span className="font-display text-lg tracking-[0.18em] text-foreground">
+          <span className="shadow-soft block size-8 overflow-hidden rounded-lg">
+            <Image
+              src="/logo-mark.jpg"
+              alt="Lock In"
+              width={32}
+              height={32}
+              className="size-full object-cover"
+            />
+          </span>
+          <span className="font-display text-lg tracking-[0.1em] text-foreground">
             LOCK IN
           </span>
         </Link>
@@ -25,7 +33,7 @@ export function SiteHeader() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-muted-foreground transition-colors hover:text-brand-prune"
+              className="text-sm text-muted-foreground transition-colors hover:text-brand-blue"
             >
               {link.label}
             </a>

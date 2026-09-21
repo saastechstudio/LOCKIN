@@ -85,7 +85,7 @@ export function NetworkDirectory({ members }: { members: NetworkMember[] }) {
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((member) => (
-            <Card key={member.id} className="glass">
+            <Card key={member.id} className="surface">
               <CardContent className="pt-6">
                 <div className="flex items-center gap-3">
                   <Avatar className="size-11">
@@ -127,7 +127,7 @@ export function NetworkDirectory({ members }: { members: NetworkMember[] }) {
 
                 <a
                   href={`mailto:${member.email}`}
-                  className="mt-4 flex items-center gap-1.5 text-xs text-brand-prune transition-colors hover:text-brand-prune-soft"
+                  className="mt-4 flex items-center gap-1.5 text-xs text-brand-blue transition-colors hover:text-brand-blue-deep"
                 >
                   <Mail className="size-3.5" /> Contacter
                 </a>

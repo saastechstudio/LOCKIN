@@ -45,7 +45,7 @@ export default async function DashboardPage() {
   return (
     <div className="mx-auto max-w-6xl space-y-8">
       <section>
-        <Card className="glass">
+        <Card className="surface">
           <CardHeader className="flex-row items-center justify-between space-y-0">
             <div>
               <CardTitle className="font-display text-xl">
@@ -55,7 +55,7 @@ export default async function DashboardPage() {
                 {userOkrs.length} objectif{userOkrs.length > 1 ? "s" : ""} en cours
               </p>
             </div>
-            <span className="font-display text-2xl text-brand-rose">
+            <span className="font-display text-2xl text-brand-coral">
               {globalProgress}%
             </span>
           </CardHeader>
@@ -72,7 +72,7 @@ export default async function DashboardPage() {
         </div>
 
         {userOkrs.length === 0 ? (
-          <Card className="glass">
+          <Card className="surface">
             <CardContent className="py-10 text-center text-sm text-muted-foreground">
               Aucun objectif pour l&apos;instant. Créez votre premier OKR pour
               commencer à verrouiller votre exécution.
@@ -90,7 +90,7 @@ export default async function DashboardPage() {
       <section className="grid gap-6 lg:grid-cols-2">
         <DailyCheckin focus={todayFocus} />
 
-        <Card className="glass">
+        <Card className="surface">
           <CardHeader>
             <CardTitle className="font-display text-xl">
               Historique de la semaine
@@ -103,7 +103,7 @@ export default async function DashboardPage() {
       </section>
 
       <section>
-        <Card className="glass">
+        <Card className="surface">
           <CardHeader>
             <CardTitle className="font-display text-xl">
               Réflexion du jour

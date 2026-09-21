@@ -5,21 +5,21 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { useMounted } from "@/lib/hooks/use-mounted";
 
 const DARK_VARIABLES = {
-  colorPrimary: "#924A62",
-  colorBackground: "#0d0509",
-  colorForeground: "#fff8f2",
-  colorInput: "#140a0e",
-  colorInputForeground: "#fff8f2",
-  colorNeutral: "#fff8f2",
+  colorPrimary: "#6D97FF",
+  colorBackground: "#251638",
+  colorForeground: "#f8f8f6",
+  colorInput: "#2c1a42",
+  colorInputForeground: "#f8f8f6",
+  colorNeutral: "#f8f8f6",
 };
 
 const LIGHT_VARIABLES = {
-  colorPrimary: "#924A62",
+  colorPrimary: "#4A7FF8",
   colorBackground: "#ffffff",
-  colorForeground: "#1a0810",
-  colorInput: "#f3e6dd",
-  colorInputForeground: "#1a0810",
-  colorNeutral: "#1a0810",
+  colorForeground: "#111827",
+  colorInput: "#f0f0ec",
+  colorInputForeground: "#111827",
+  colorNeutral: "#111827",
 };
 
 /** Keeps Clerk's own widgets (sign-in, sign-up, user menu) in sync with our
@@ -29,9 +29,9 @@ export function BrandedClerkProvider({ children }: { children: React.ReactNode }
   const { resolvedTheme } = useTheme();
   const mounted = useMounted();
 
-  // Defaults to dark (this app's default theme) until the client has
+  // Defaults to light (this app's default theme) until the client has
   // resolved the actual preference, avoiding a light/dark flash.
-  const isDark = !mounted || resolvedTheme !== "light";
+  const isDark = mounted && resolvedTheme === "dark";
 
   return (
     <ClerkProvider

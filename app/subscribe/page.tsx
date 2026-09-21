@@ -21,7 +21,7 @@ export default async function SubscribePage({
   return (
     <div className="mx-auto min-h-svh max-w-3xl px-6 py-20">
       <div className="space-y-3 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-rose/25 bg-brand-prune/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-rose uppercase">
+        <span className="inline-flex items-center gap-2 rounded-full border border-brand-coral/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-coral uppercase">
           <Flame className="size-3.5" />
           Dernière étape
         </span>
@@ -69,7 +69,7 @@ function TrustPoint({
 }) {
   return (
     <div className="flex items-center gap-2 rounded-lg border border-brand-border bg-brand-card/50 px-4 py-3 text-xs text-muted-foreground">
-      <Icon className="size-4 shrink-0 text-brand-prune" />
+      <Icon className="size-4 shrink-0 text-brand-blue" />
       {label}
     </div>
   );

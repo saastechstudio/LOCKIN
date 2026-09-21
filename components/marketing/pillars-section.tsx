@@ -107,7 +107,7 @@ export function PillarsSection() {
     <section id="pillars-values" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-rose/25 bg-brand-prune/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-rose uppercase">
+          <span className="inline-flex items-center gap-2 rounded-full border border-brand-coral/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-coral uppercase">
             Le socle du club
           </span>
           <h2 className="font-display mt-4 text-3xl text-foreground sm:text-4xl">
@@ -126,7 +126,7 @@ export function PillarsSection() {
                 key={pillar.id}
                 style={{ transitionDelay: `${index * 90}ms` }}
                 className={cn(
-                  "glass motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 group relative overflow-hidden rounded-xl p-6 transition-all duration-700 ease-out",
+                  "surface motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 group relative overflow-hidden rounded-xl p-6 transition-all duration-700 ease-out",
                   visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
                 )}
               >
@@ -137,8 +137,8 @@ export function PillarsSection() {
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
-                <div className="border-brand-prune/25 bg-brand-prune/10 group-hover:border-brand-rose/40 mb-4 flex size-11 items-center justify-center rounded-lg border transition-colors">
-                  <Icon className="text-brand-prune size-5" />
+                <div className="border-brand-blue/25 bg-brand-blue/10 group-hover:border-brand-coral/40 mb-4 flex size-11 items-center justify-center rounded-lg border transition-colors">
+                  <Icon className="text-brand-blue size-5" />
                 </div>
 
                 <h3 className="font-display text-xl text-foreground">

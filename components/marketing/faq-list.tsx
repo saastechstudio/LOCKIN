@@ -40,7 +40,7 @@ export function FaqList({ items }: { items: FaqItem[] }) {
         >
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-foreground">
             {item.question}
-            <ChevronDown className="size-4 shrink-0 text-brand-rose transition-transform group-open:rotate-180" />
+            <ChevronDown className="size-4 shrink-0 text-brand-coral transition-transform group-open:rotate-180" />
           </summary>
           <p className="mt-3 text-sm text-muted-foreground">{item.answer}</p>
         </details>

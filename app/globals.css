@@ -4,143 +4,149 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Lock In design tokens — official brand palette (Charte Graphique V1.0):
- * Noir Absolu #030001 (fond), Prune Noble #924A62 (accents/CTA), Rose
- * Mâtin #DE8FA9 (lignes/icônes), Blanc Soie #FFF8F2 (titres/textes).
+ * Lock In design tokens — v2, "Soft & Warm" design system:
+ * cream/white surfaces, Cobalt Blue #4A7FF8 (primary), Vibrant Coral
+ * #FF7648 (secondary/highlight), Honey Yellow #FFC757 (tertiary/badges),
+ * Deep Navy #1D102B (dark accents/charts). Light mode is the primary
+ * experience; dark mode is a complementary variant for the toggle.
  *
  * Two layers:
  *  1. Runtime CSS variables below (`:root` = light, `.dark` = dark) —
  *     these are what actually change when the theme toggles.
  *  2. The `@theme inline` block maps each one to a Tailwind utility, so
  *     `bg-brand-bg`, `bg-brand-card`, `border-brand-border`,
- *     `text-brand-prune`, `bg-brand-prune`, `text-brand-rose`,
- *     `shadow-prune-glow` and `shadow-rose-glow` are real, theme-aware
- *     utility classes usable anywhere in the app.
+ *     `text-brand-blue`, `bg-brand-coral`, `text-brand-yellow`,
+ *     `shadow-soft` / `shadow-soft-md` are real, theme-aware utility
+ *     classes usable anywhere in the app.
  *
  * shadcn-style semantic tokens (background/card/border/primary/...) are
  * wired to the same brand variables, so every primitive in
  * components/ui/* already renders in the brand palette without being
  * touched individually.
- *
- * Rule from the charte (§5): no heavy or blurry drop-shadows on UI
- * blocks — fine 1px borders instead, and crisp (zero-blur) rings for
- * the "glow" utilities rather than soft glows.
  */
 
 :root {
-  --radius: 0.65rem;
+  --radius: 1.25rem;
 
-  /* ---- Brand palette (light) ---- */
-  --brand-bg: #fff8f2;
-  --brand-bg-deep: #f3e6dd;
+  /* ---- Brand palette (light — primary experience) ---- */
+  --brand-bg: #f8f8f6;
+  --brand-bg-deep: #f4f4f0;
   --brand-card: #ffffff;
-  --brand-border: rgba(146, 74, 98, 0.16);
-  --brand-prune: #924a62;
-  --brand-prune-soft: #b06e86;
-  --brand-prune-deep: #6e384c;
-  --brand-rose: #c96f8d;
+  --brand-border: rgba(0, 0, 0, 0.05);
+  --brand-blue: #4a7ff8;
+  --brand-blue-soft: #8fb0ff;
+  --brand-blue-deep: #2e5fd9;
+  --brand-coral: #ff7648;
+  --brand-coral-soft: #ffa184;
+  --brand-yellow: #ffc757;
+  --brand-dark: #1d102b;
 
-  --glow-prune: 0 0 0 1px rgba(146, 74, 98, 0.45);
-  --glow-rose: 0 0 0 1px rgba(201, 111, 141, 0.4);
+  --shadow-color: 17, 24, 39;
+  --glow-blue: 0 8px 20px -6px rgba(74, 127, 248, 0.4);
+  --glow-coral: 0 8px 20px -6px rgba(255, 118, 72, 0.35);
 
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-border: rgba(146, 74, 98, 0.14);
-  --noise-bg: radial-gradient(circle at 20% 20%, rgba(146, 74, 98, 0.07), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(222, 143, 169, 0.08), transparent 45%);
-  --scrollbar-thumb: rgba(146, 74, 98, 0.22);
-  --selection-bg: rgba(146, 74, 98, 0.25);
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(74, 127, 248, 0.05), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(255, 118, 72, 0.05), transparent 45%);
+  --scrollbar-thumb: rgba(0, 0, 0, 0.15);
+  --selection-bg: rgba(74, 127, 248, 0.2);
 
   /* ---- shadcn-style semantic tokens ---- */
   --background: var(--brand-bg);
-  --foreground: #1a0810;
+  --foreground: #111827;
 
   --card: var(--brand-card);
-  --card-foreground: #1a0810;
+  --card-foreground: #111827;
 
   --popover: var(--brand-card);
-  --popover-foreground: #1a0810;
+  --popover-foreground: #111827;
 
-  --primary: var(--brand-prune);
-  --primary-foreground: #fff8f2;
+  --primary: var(--brand-blue);
+  --primary-foreground: #ffffff;
 
-  --secondary: #f3e6dd;
-  --secondary-foreground: #1a0810;
+  --secondary: #f0f0ec;
+  --secondary-foreground: #111827;
 
-  --muted: #f3e6dd;
-  --muted-foreground: rgba(26, 8, 16, 0.55);
+  --muted: #f0f0ec;
+  --muted-foreground: rgba(17, 24, 39, 0.55);
 
-  --accent: #f7ebe4;
-  --accent-foreground: var(--brand-prune-deep);
+  --accent: #eef2ff;
+  --accent-foreground: var(--brand-blue-deep);
 
-  --destructive: #c0392b;
+  --destructive: #d6432f;
   --destructive-foreground: #fefefe;
 
   --border: var(--brand-border);
-  --input: rgba(146, 74, 98, 0.2);
-  --ring: rgba(146, 74, 98, 0.4);
+  --input: rgba(0, 0, 0, 0.08);
+  --ring: rgba(74, 127, 248, 0.4);
 
-  --chart-1: var(--brand-prune);
-  --chart-2: var(--brand-rose);
-  --chart-3: #8a7a80;
-  --chart-4: var(--brand-prune-soft);
-  --chart-5: #4a3841;
+  --chart-1: var(--brand-blue);
+  --chart-2: var(--brand-coral);
+  --chart-3: var(--brand-yellow);
+  --chart-4: var(--brand-dark);
+  --chart-5: #a0aec0;
 }
 
 .dark {
-  /* ---- Brand palette (dark) ---- */
-  --brand-bg: #030001;
-  --brand-bg-deep: #1a0810;
-  --brand-card: #0d0509;
-  --brand-border: rgba(222, 143, 169, 0.2);
-  --brand-prune: #924a62;
-  --brand-prune-soft: #b06e86;
-  --brand-prune-deep: #6e384c;
-  --brand-rose: #de8fa9;
+  /* ---- Brand palette (dark — secondary variant) ---- */
+  --brand-bg: #1d102b;
+  --brand-bg-deep: #150c1f;
+  --brand-card: #251638;
+  --brand-border: rgba(255, 255, 255, 0.08);
+  --brand-blue: #6d97ff;
+  --brand-blue-soft: #9fbaff;
+  --brand-blue-deep: #4a7ff8;
+  --brand-coral: #ff8b64;
+  --brand-coral-soft: #ffab8c;
+  --brand-yellow: #ffd274;
+  --brand-dark: #0f0817;
 
-  --glow-prune: 0 0 0 1px rgba(146, 74, 98, 0.55);
-  --glow-rose: 0 0 0 1px rgba(222, 143, 169, 0.5);
+  --shadow-color: 0, 0, 0;
+  --glow-blue: 0 8px 24px -6px rgba(109, 151, 255, 0.45);
+  --glow-coral: 0 8px 24px -6px rgba(255, 139, 100, 0.4);
 
-  --glass-bg: rgba(13, 5, 9, 0.6);
-  --glass-border: rgba(222, 143, 169, 0.16);
-  --noise-bg: radial-gradient(circle at 20% 20%, rgba(146, 74, 98, 0.1), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(222, 143, 169, 0.07), transparent 45%);
-  --scrollbar-thumb: rgba(222, 143, 169, 0.25);
-  --selection-bg: rgba(222, 143, 169, 0.3);
+  --glass-bg: rgba(37, 22, 56, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(109, 151, 255, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(255, 139, 100, 0.06), transparent 45%);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.2);
+  --selection-bg: rgba(109, 151, 255, 0.3);
 
   /* ---- shadcn-style semantic tokens ---- */
   --background: var(--brand-bg);
-  --foreground: #fff8f2;
+  --foreground: #f8f8f6;
 
   --card: var(--brand-card);
-  --card-foreground: #fff8f2;
+  --card-foreground: #f8f8f6;
 
   --popover: var(--brand-card);
-  --popover-foreground: #fff8f2;
+  --popover-foreground: #f8f8f6;
 
-  --primary: var(--brand-prune);
-  --primary-foreground: #fff8f2;
+  --primary: var(--brand-blue);
+  --primary-foreground: #1d102b;
 
-  --secondary: #140a0e;
-  --secondary-foreground: #fff8f2;
+  --secondary: #2c1a42;
+  --secondary-foreground: #f8f8f6;
 
-  --muted: #140a0e;
-  --muted-foreground: rgba(255, 248, 242, 0.55);
+  --muted: #2c1a42;
+  --muted-foreground: rgba(248, 248, 246, 0.6);
 
-  --accent: #180c11;
-  --accent-foreground: var(--brand-rose);
+  --accent: #33204c;
+  --accent-foreground: var(--brand-coral);
 
-  --destructive: #b3432f;
-  --destructive-foreground: #fff8f2;
+  --destructive: #e05a44;
+  --destructive-foreground: #f8f8f6;
 
   --border: var(--brand-border);
-  --input: rgba(222, 143, 169, 0.22);
-  --ring: rgba(222, 143, 169, 0.45);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: rgba(109, 151, 255, 0.45);
 
-  --chart-1: var(--brand-prune);
-  --chart-2: var(--brand-rose);
-  --chart-3: #a89aa0;
-  --chart-4: var(--brand-prune-soft);
-  --chart-5: #4a3841;
+  --chart-1: var(--brand-blue);
+  --chart-2: var(--brand-coral);
+  --chart-3: var(--brand-yellow);
+  --chart-4: #a0aec0;
+  --chart-5: #5a4a6f;
 }
 
 @theme inline {
@@ -165,15 +171,18 @@
   --color-ring: var(--ring);
 
   /* Brand utilities: bg-brand-bg, bg-brand-card, border-brand-border,
-     text-brand-prune, bg-brand-prune, text-brand-rose, bg-brand-rose... */
+     text-brand-blue, bg-brand-coral, text-brand-yellow... */
   --color-brand-bg: var(--brand-bg);
   --color-brand-bg-deep: var(--brand-bg-deep);
   --color-brand-card: var(--brand-card);
   --color-brand-border: var(--brand-border);
-  --color-brand-prune: var(--brand-prune);
-  --color-brand-prune-soft: var(--brand-prune-soft);
-  --color-brand-prune-deep: var(--brand-prune-deep);
-  --color-brand-rose: var(--brand-rose);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-blue-soft: var(--brand-blue-soft);
+  --color-brand-blue-deep: var(--brand-blue-deep);
+  --color-brand-coral: var(--brand-coral);
+  --color-brand-coral-soft: var(--brand-coral-soft);
+  --color-brand-yellow: var(--brand-yellow);
+  --color-brand-dark: var(--brand-dark);
 
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -181,17 +190,21 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  /* shadow-prune-glow / shadow-rose-glow — crisp rings, never blurred
-     (charte §5: "invisibilité des ombres grossières"). */
-  --shadow-prune-glow: var(--glow-prune);
-  --shadow-rose-glow: var(--glow-rose);
+  /* shadow-blue-glow / shadow-coral-glow — soft, blurred, colored
+     shadows (this direction embraces gentle depth, unlike the previous
+     "no blur" rule). shadow-soft / shadow-soft-md are the generic card
+     elevation shadows. */
+  --shadow-blue-glow: var(--glow-blue);
+  --shadow-coral-glow: var(--glow-coral);
+  --shadow-soft: 0 1px 2px rgba(var(--shadow-color), 0.04), 0 8px 24px -12px rgba(var(--shadow-color), 0.12);
+  --shadow-soft-md: 0 2px 6px rgba(var(--shadow-color), 0.05), 0 16px 32px -16px rgba(var(--shadow-color), 0.18);
 
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 12px);
+  --radius-md: calc(var(--radius) - 6px);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --radius-xl: calc(var(--radius) + 8px);
 
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-jakarta);
 }
 
 * {
@@ -199,38 +212,46 @@
 }
 
 body {
-  background: radial-gradient(ellipse 1200px 800px at 50% -10%, var(--brand-bg-deep), var(--background) 60%);
-  background-attachment: fixed;
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Display heading style — thin/light geometric sans, per charte §4
-   ("Helvetica Neue Thin / Light"); Inter's variable weight axis is the
-   closest web-safe analog. */
+/* Display heading style — warm, confident, rounded-friendly geometric
+   sans (Plus Jakarta Sans, closest Google Font analog to Roobert),
+   bold weight per the new moodboard direction. */
 .font-display {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  font-weight: 300;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
 
 .bg-noise {
   background-image: var(--noise-bg);
 }
 
-.text-gradient-prune {
-  background: linear-gradient(120deg, var(--brand-rose), var(--brand-prune) 55%, var(--brand-prune-deep));
+.text-gradient-blue {
+  background: linear-gradient(120deg, var(--brand-blue), var(--brand-coral) 60%, var(--brand-yellow));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.glass {
+/* "surface" — the elevated card treatment for this design system: solid
+   surface, thin border, soft blurred shadow (no glassmorphism/blur). */
+.surface {
   background: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-soft-md {
+  box-shadow: var(--shadow-soft-md);
 }
 
 ::selection {

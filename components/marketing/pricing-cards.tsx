@@ -41,7 +41,7 @@ function CheckoutButton({ priceId, label }: { priceId?: string; label: string })
 export function PricingCards() {
   return (
     <div className="mx-auto mt-14 grid max-w-3xl gap-6 sm:grid-cols-2">
-      <Card className="glass">
+      <Card className="surface">
         <CardHeader>
           <p className="text-sm text-muted-foreground">Mensuel</p>
           <div className="mt-2 flex items-baseline gap-1">
@@ -55,7 +55,7 @@ export function PricingCards() {
           <ul className="space-y-2.5 text-left text-sm text-muted-foreground">
             {FEATURES.map((f) => (
               <li key={f} className="flex items-start gap-2">
-                <Check className="mt-0.5 size-4 shrink-0 text-brand-prune" />
+                <Check className="mt-0.5 size-4 shrink-0 text-brand-blue" />
                 {f}
               </li>
             ))}
@@ -64,7 +64,7 @@ export function PricingCards() {
         </CardContent>
       </Card>
 
-      <Card className="glass relative border-brand-prune/40">
+      <Card className="surface relative border-brand-blue/40">
         <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
           Économisez {SAVINGS_PERCENT}%
         </Badge>
@@ -84,7 +84,7 @@ export function PricingCards() {
           <ul className="space-y-2.5 text-left text-sm text-muted-foreground">
             {FEATURES.map((f) => (
               <li key={f} className="flex items-start gap-2">
-                <Check className="mt-0.5 size-4 shrink-0 text-brand-prune" />
+                <Check className="mt-0.5 size-4 shrink-0 text-brand-blue" />
                 {f}
               </li>
             ))}
@@ -94,7 +94,7 @@ export function PricingCards() {
       </Card>
 
       <p className="col-span-full flex items-center justify-center gap-2 text-center text-xs text-muted-foreground">
-        <ShieldCheck className="size-3.5 text-brand-rose" />
+        <ShieldCheck className="size-3.5 text-brand-coral" />
         Paiement sécurisé par Stripe · 14 jours d&apos;essai gratuit · Résiliable à tout
         moment
       </p>
