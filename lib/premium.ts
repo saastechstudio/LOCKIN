@@ -1,3 +1,4 @@
+import { isStripeConfigured } from "@/lib/stripe";
 import type { User } from "@/lib/db/schema";
 
 /**
@@ -21,4 +22,14 @@ export function hasPremiumAccess(
     (user.stripeSubscriptionStatus !== null &&
       ACTIVE_SUBSCRIPTION_STATUSES.has(user.stripeSubscriptionStatus))
   );
+}
+
+/**
+ * The subscription paywall only takes effect once Stripe is actually
+ * configured (real keys + price IDs set). Until then every signed-in
+ * member keeps full access — never lock the app out before billing is
+ * wired up.
+ */
+export function requiresSubscription(): boolean {
+  return isStripeConfigured;
 }
