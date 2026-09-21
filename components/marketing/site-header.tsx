@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { MobileSiteNav } from "@/components/marketing/mobile-site-nav";
 
 const NAV_LINKS = [
   { href: "#pillars-values", label: "Le Club" },
@@ -43,9 +44,10 @@ export function SiteHeader() {
           <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
             <Link href="/sign-in">Connexion</Link>
           </Button>
-          <Button asChild size="sm">
+          <Button asChild size="sm" className="hidden sm:inline-flex">
             <Link href="/sign-up">Rejoindre le Club</Link>
           </Button>
+          <MobileSiteNav />
         </div>
       </div>
     </header>
