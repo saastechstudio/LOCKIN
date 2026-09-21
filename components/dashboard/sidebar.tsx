@@ -3,13 +3,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, BrainCircuit, Users, Settings } from "lucide-react";
+import {
+  LayoutDashboard,
+  BrainCircuit,
+  CalendarCheck,
+  Users,
+  Settings,
+} from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 const NAV = [
   { href: "/dashboard", label: "Tableau de bord", icon: LayoutDashboard },
   { href: "/dashboard/coach", label: "Coach IA", icon: BrainCircuit },
+  { href: "/dashboard/planning", label: "Planning", icon: CalendarCheck },
   { href: "/dashboard/network", label: "Réseau", icon: Users },
   { href: "/dashboard/settings", label: "Paramètres", icon: Settings },
 ];

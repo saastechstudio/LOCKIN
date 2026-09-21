@@ -26,6 +26,12 @@ export const okrStatusEnum = pgEnum("okr_status", [
 
 export const aiRoleEnum = pgEnum("ai_role", ["user", "assistant"]);
 
+export const taskPriorityEnum = pgEnum("task_priority", [
+  "low",
+  "medium",
+  "high",
+]);
+
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   clerkId: text("clerk_id").notNull().unique(),
@@ -115,6 +121,19 @@ export const dailyFocus = pgTable(
   (table) => [uniqueIndex("daily_focus_user_date_idx").on(table.userId, table.date)],
 );
 
+export const planningTasks = pgTable("planning_tasks", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
+  notes: text("notes"),
+  dueDate: date("due_date", { mode: "date" }),
+  priority: taskPriorityEnum("priority").notNull().default("medium"),
+  completed: boolean("completed").notNull().default(false),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
 export const aiConversations = pgTable("ai_conversations", {
   id: serial("id").primaryKey(),
   userId: integer("user_id")
@@ -131,6 +150,11 @@ export const usersRelations = relations(users, ({ many }) => ({
   aiConversations: many(aiConversations),
   onboardingAudits: many(onboardingAudits),
   dailyFocusEntries: many(dailyFocus),
+  planningTasks: many(planningTasks),
+}));
+
+export const planningTasksRelations = relations(planningTasks, ({ one }) => ({
+  user: one(users, { fields: [planningTasks.userId], references: [users.id] }),
 }));
 
 export const onboardingAuditsRelations = relations(
@@ -177,3 +201,5 @@ export type OnboardingAudit = typeof onboardingAudits.$inferSelect;
 export type NewOnboardingAudit = typeof onboardingAudits.$inferInsert;
 export type DailyFocus = typeof dailyFocus.$inferSelect;
 export type NewDailyFocus = typeof dailyFocus.$inferInsert;
+export type PlanningTask = typeof planningTasks.$inferSelect;
+export type NewPlanningTask = typeof planningTasks.$inferInsert;
