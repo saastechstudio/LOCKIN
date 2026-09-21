@@ -1,6 +1,6 @@
 import "server-only";
 import { neon } from "@neondatabase/serverless";
-import { drizzle } from "drizzle-orm/neon-http";
+import { drizzle, type NeonHttpDatabase } from "drizzle-orm/neon-http";
 import * as schema from "./schema";
 
 /**
@@ -33,20 +33,47 @@ import * as schema from "./schema";
 // are accepted as fallbacks so this also works out of the box against the
 // full var set the integration writes (including its Prisma-flavored
 // alias) without any extra configuration.
-const connectionString =
-  process.env.DATABASE_URL ??
-  process.env.POSTGRES_URL ??
-  process.env.DATABASE_URL_UNPOOLED ??
-  process.env.POSTGRES_PRISMA_URL;
+function resolveConnectionString(): string {
+  const connectionString =
+    process.env.DATABASE_URL ??
+    process.env.POSTGRES_URL ??
+    process.env.DATABASE_URL_UNPOOLED ??
+    process.env.POSTGRES_PRISMA_URL;
 
-if (!connectionString) {
-  throw new Error(
-    "DATABASE_URL is not set. Add it in Vercel → Project → Settings → " +
-      "Environment Variables (auto-populated per environment when the " +
-      "Neon integration is connected), or in .env.local for local dev.",
-  );
+  if (!connectionString) {
+    throw new Error(
+      "DATABASE_URL is not set. Add it in Vercel → Project → Settings → " +
+        "Environment Variables (auto-populated per environment when the " +
+        "Neon integration is connected), or in .env.local for local dev.",
+    );
+  }
+
+  return connectionString;
 }
 
-const sql = neon(connectionString);
+let cachedDb: NeonHttpDatabase<typeof schema> | null = null;
 
-export const db = drizzle(sql, { schema });
+function getDb(): NeonHttpDatabase<typeof schema> {
+  cachedDb ??= drizzle(neon(resolveConnectionString()), { schema });
+  return cachedDb;
+}
+
+// Exported as a Proxy rather than constructed eagerly: every route/page
+// module in this app does `import { db } from "@/lib/db"`, and Next
+// imports route modules during the build's "Collecting page data" step to
+// inspect their exports — which used to run this file's top-level code
+// and hard-fail the *entire* build the moment DATABASE_URL was missing
+// (e.g. a fresh Vercel project before the Neon integration is connected),
+// even for routes that don't touch the database at build time. Deferring
+// the real client (and the "is it configured" check) to first property
+// access means the build always succeeds; only an actual request to a
+// DB-backed route fails, with the same clear error, until the env var is
+// set. `db.query...`, `db.insert(...)`, etc. all work unchanged.
+export const db: NeonHttpDatabase<typeof schema> = new Proxy(
+  {} as NeonHttpDatabase<typeof schema>,
+  {
+    get(_target, prop, receiver) {
+      return Reflect.get(getDb(), prop, receiver);
+    },
+  },
+);
