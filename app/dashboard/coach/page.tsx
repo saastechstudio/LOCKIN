@@ -24,7 +24,9 @@ export default async function CoachPage() {
   return (
     <div className="mx-auto max-w-3xl">
       <div className="mb-6">
-        <h1 className="font-display text-2xl text-foreground">Coach Lock In</h1>
+        <h1 className="font-display text-2xl text-foreground">
+          {user.aiCoachName ?? "Coach Lock In"}
+        </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Ton mentor exigeant, disponible 24/7 pour challenger ton exécution.
         </p>

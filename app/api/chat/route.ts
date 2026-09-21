@@ -3,7 +3,7 @@ import { streamText, convertToModelMessages, type UIMessage } from "ai";
 import { db } from "@/lib/db";
 import { aiConversations } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
-import { COACH_SYSTEM_PROMPT } from "@/lib/ai/coach";
+import { buildCoachSystemPrompt } from "@/lib/ai/coach";
 import { resolveModel } from "@/lib/ai/model";
 
 export const maxDuration = 30;
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 
   const result = streamText({
     model: resolveModel(),
-    system: COACH_SYSTEM_PROMPT,
+    system: buildCoachSystemPrompt(user),
     messages: await convertToModelMessages(messages),
     onFinish: async ({ text }) => {
       if (text) {

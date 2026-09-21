@@ -40,7 +40,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
   };
 
   return (
-    <div className="bg-brand-card shadow-soft flex h-[calc(100vh-8rem)] flex-col overflow-hidden rounded-2xl border border-border">
+    <div className="bg-brand-card shadow-soft flex h-[calc(100vh-8rem)] flex-col overflow-hidden rounded-lg border border-border">
       <ScrollArea className="flex-1 px-6 py-6">
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-4 py-16 text-center">

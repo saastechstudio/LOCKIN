@@ -2,7 +2,7 @@ import { desc, eq, gte } from "drizzle-orm";
 import { subDays } from "date-fns";
 
 import { db } from "@/lib/db";
-import { okrs, dailyCheckins } from "@/lib/db/schema";
+import { okrs, dailyCheckins, dailyFocus, onboardingAudits } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,23 +12,55 @@ import { NewOkrDialog } from "@/components/dashboard/new-okr-dialog";
 import { CheckinForm } from "@/components/dashboard/checkin-form";
 import { CheckinHistory } from "@/components/dashboard/checkin-history";
 import { DailyCheckin } from "@/components/dashboard/daily-checkin";
+import { EnergyWidget } from "@/components/dashboard/energy-widget";
+import { CoachRecommendations } from "@/components/dashboard/coach-recommendations";
 import { getTodayFocus } from "@/lib/actions/daily-focus";
+
+function average(values: number[]): number {
+  if (values.length === 0) return 0;
+  return values.reduce((sum, v) => sum + v, 0) / values.length;
+}
 
 export default async function DashboardPage() {
   const user = await getOrCreateDbUser();
 
-  const [userOkrs, recentCheckins, todayFocus] = await Promise.all([
-    db.query.okrs.findMany({
-      where: eq(okrs.userId, user.id),
-      orderBy: [desc(okrs.createdAt)],
-    }),
-    db.query.dailyCheckins.findMany({
-      where: (fields, { and }) =>
-        and(eq(fields.userId, user.id), gte(fields.date, subDays(new Date(), 7))),
-      orderBy: [desc(dailyCheckins.date)],
-    }),
-    getTodayFocus(),
-  ]);
+  const [userOkrs, recentCheckins, recentFocus, latestAudit, todayFocus] =
+    await Promise.all([
+      db.query.okrs.findMany({
+        where: eq(okrs.userId, user.id),
+        orderBy: [desc(okrs.createdAt)],
+      }),
+      db.query.dailyCheckins.findMany({
+        where: (fields, { and }) =>
+          and(eq(fields.userId, user.id), gte(fields.date, subDays(new Date(), 7))),
+        orderBy: [desc(dailyCheckins.date)],
+      }),
+      db.query.dailyFocus.findMany({
+        where: (fields, { and }) =>
+          and(eq(fields.userId, user.id), gte(fields.date, subDays(new Date(), 7))),
+        orderBy: [desc(dailyFocus.date)],
+      }),
+      db.query.onboardingAudits.findFirst({
+        where: eq(onboardingAudits.userId, user.id),
+        orderBy: [desc(onboardingAudits.createdAt)],
+      }),
+      getTodayFocus(),
+    ]);
+
+  const energy = Math.round(
+    average(recentCheckins.map((c) => c.rating)) * 20, // 1–5 stars -> %
+  );
+  const disciplineRatings = recentFocus
+    .map((f) => f.disciplineRating)
+    .filter((v): v is number => v !== null);
+  const discipline = Math.round(average(disciplineRatings) * 10); // 1–10 -> %
+  const motivation =
+    recentFocus.length === 0
+      ? 0
+      : Math.round(
+          (recentFocus.filter((f) => f.taskCompleted).length / recentFocus.length) *
+            100,
+        );
 
   const globalProgress =
     userOkrs.length === 0
@@ -100,6 +132,11 @@ export default async function DashboardPage() {
             <CheckinHistory checkins={recentCheckins} />
           </CardContent>
         </Card>
+      </section>
+
+      <section className="grid gap-6 lg:grid-cols-2">
+        <EnergyWidget energy={energy} discipline={discipline} motivation={motivation} />
+        <CoachRecommendations actions={latestAudit?.firstWeekActions ?? []} />
       </section>
 
       <section>
