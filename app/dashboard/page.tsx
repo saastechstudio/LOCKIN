@@ -11,11 +11,13 @@ import { OkrCard } from "@/components/dashboard/okr-card";
 import { NewOkrDialog } from "@/components/dashboard/new-okr-dialog";
 import { CheckinForm } from "@/components/dashboard/checkin-form";
 import { CheckinHistory } from "@/components/dashboard/checkin-history";
+import { DailyCheckin } from "@/components/dashboard/daily-checkin";
+import { getTodayFocus } from "@/lib/actions/daily-focus";
 
 export default async function DashboardPage() {
   const user = await getOrCreateDbUser();
 
-  const [userOkrs, recentCheckins] = await Promise.all([
+  const [userOkrs, recentCheckins, todayFocus] = await Promise.all([
     db.query.okrs.findMany({
       where: eq(okrs.userId, user.id),
       orderBy: [desc(okrs.createdAt)],
@@ -25,6 +27,7 @@ export default async function DashboardPage() {
         and(eq(fields.userId, user.id), gte(fields.date, subDays(new Date(), 7))),
       orderBy: [desc(dailyCheckins.date)],
     }),
+    getTodayFocus(),
   ]);
 
   const globalProgress =
@@ -85,16 +88,7 @@ export default async function DashboardPage() {
       </section>
 
       <section className="grid gap-6 lg:grid-cols-2">
-        <Card className="glass">
-          <CardHeader>
-            <CardTitle className="font-serif text-xl">
-              Check-in du jour
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <CheckinForm />
-          </CardContent>
-        </Card>
+        <DailyCheckin focus={todayFocus} />
 
         <Card className="glass">
           <CardHeader>
@@ -104,6 +98,19 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <CheckinHistory checkins={recentCheckins} />
+          </CardContent>
+        </Card>
+      </section>
+
+      <section>
+        <Card className="glass">
+          <CardHeader>
+            <CardTitle className="font-serif text-xl">
+              Réflexion du jour
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <CheckinForm />
           </CardContent>
         </Card>
       </section>

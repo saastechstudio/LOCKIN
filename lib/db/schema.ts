@@ -7,8 +7,17 @@ import {
   numeric,
   pgEnum,
   date,
+  boolean,
+  jsonb,
+  uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
+
+export type AuditRoadmapPhase = {
+  phase: string;
+  focus: string;
+  durationWeeks: number;
+};
 
 export const okrStatusEnum = pgEnum("okr_status", [
   "in_progress",
@@ -67,6 +76,45 @@ export const dailyCheckins = pgTable("daily_checkins", {
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
+export const onboardingAudits = pgTable("onboarding_audits", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  // Étape 1 — Profil personnel
+  psychologicalBlockers: text("psychological_blockers").notNull(),
+  currentRoutine: text("current_routine").notNull(),
+  disciplineLevel: integer("discipline_level").notNull(),
+  // Étape 2 — Profil professionnel
+  sector: text("sector").notNull(),
+  revenueLevel: text("revenue_level").notNull(),
+  businessGoals: text("business_goals").notNull(),
+  // Étape 3 — Projet & horizon temporel
+  majorGoal: text("major_goal").notNull(),
+  durationMonths: integer("duration_months").notNull(),
+  // Généré par l'IA
+  lockInBlocker: text("lock_in_blocker").notNull(),
+  roadmap: jsonb("roadmap").$type<AuditRoadmapPhase[]>().notNull(),
+  firstWeekActions: jsonb("first_week_actions").$type<string[]>().notNull(),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const dailyFocus = pgTable(
+  "daily_focus",
+  {
+    id: serial("id").primaryKey(),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    date: date("date", { mode: "date" }).notNull(),
+    taskDescription: text("task_description").notNull(),
+    taskCompleted: boolean("task_completed").notNull().default(false),
+    disciplineRating: integer("discipline_rating"),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("daily_focus_user_date_idx").on(table.userId, table.date)],
+);
+
 export const aiConversations = pgTable("ai_conversations", {
   id: serial("id").primaryKey(),
   userId: integer("user_id")
@@ -81,6 +129,22 @@ export const usersRelations = relations(users, ({ many }) => ({
   okrs: many(okrs),
   dailyCheckins: many(dailyCheckins),
   aiConversations: many(aiConversations),
+  onboardingAudits: many(onboardingAudits),
+  dailyFocusEntries: many(dailyFocus),
+}));
+
+export const onboardingAuditsRelations = relations(
+  onboardingAudits,
+  ({ one }) => ({
+    user: one(users, {
+      fields: [onboardingAudits.userId],
+      references: [users.id],
+    }),
+  }),
+);
+
+export const dailyFocusRelations = relations(dailyFocus, ({ one }) => ({
+  user: one(users, { fields: [dailyFocus.userId], references: [users.id] }),
 }));
 
 export const okrsRelations = relations(okrs, ({ one }) => ({
@@ -109,3 +173,7 @@ export type DailyCheckin = typeof dailyCheckins.$inferSelect;
 export type NewDailyCheckin = typeof dailyCheckins.$inferInsert;
 export type AiConversation = typeof aiConversations.$inferSelect;
 export type NewAiConversation = typeof aiConversations.$inferInsert;
+export type OnboardingAudit = typeof onboardingAudits.$inferSelect;
+export type NewOnboardingAudit = typeof onboardingAudits.$inferInsert;
+export type DailyFocus = typeof dailyFocus.$inferSelect;
+export type NewDailyFocus = typeof dailyFocus.$inferInsert;
