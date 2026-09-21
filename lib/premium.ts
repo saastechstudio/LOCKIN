@@ -25,11 +25,22 @@ export function hasPremiumAccess(
 }
 
 /**
- * The subscription paywall only takes effect once Stripe is actually
- * configured (real keys + price IDs set). Until then every signed-in
- * member keeps full access — never lock the app out before billing is
- * wired up.
+ * Explicit testing-phase switch: the app is free for every signed-up
+ * member right now, so the club can be tested properly before billing
+ * goes live. Flip this to `false` when ready to start enforcing the
+ * paywall for real — at that point requiresSubscription() falls back to
+ * "on once Stripe is actually configured", which is what governs
+ * production behavior from then on.
+ */
+const FREE_ACCESS_MODE = true;
+
+/**
+ * The subscription paywall only takes effect once FREE_ACCESS_MODE is
+ * turned off AND Stripe is actually configured (real keys + price IDs
+ * set). Until then every signed-in member keeps full access — never
+ * lock the app out before billing is deliberately turned on.
  */
 export function requiresSubscription(): boolean {
+  if (FREE_ACCESS_MODE) return false;
   return isStripeConfigured;
 }
