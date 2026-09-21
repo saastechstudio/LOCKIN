@@ -1,0 +1,34 @@
+name: Daily motivation notification
+
+# Fires the member-facing "notification quotidienne" at 10h Europe/Paris.
+# GitHub Actions cron only understands UTC, and Paris alternates between
+# UTC+1 (CET) and UTC+2 (CEST), so this runs at both possible UTC offsets
+# and lets the job itself check the real Paris-local hour before acting —
+# that keeps it correct across the DST switch without hardcoding dates.
+on:
+  schedule:
+    - cron: "0 8 * * *"
+    - cron: "0 9 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check it's 10h in Paris right now
+        id: check
+        run: |
+          hour=$(TZ="Europe/Paris" date +%H)
+          echo "Paris local hour: $hour"
+          if [ "$hour" != "10" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Call the daily-motivation endpoint
+        if: steps.check.outputs.skip != 'true'
+        run: |
+          curl --fail --silent --show-error \
+            -X POST "https://lockin-production-f3ed.up.railway.app/api/cron/daily-motivation" \
+            -H "Authorization: Bearer ${CRON_SECRET}"
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}

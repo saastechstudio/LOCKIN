@@ -2,6 +2,10 @@ import { redirect } from "next/navigation";
 
 import { getOrCreateDbUser } from "@/lib/auth";
 import { hasPremiumAccess, requiresSubscription } from "@/lib/premium";
+import {
+  getRecentNotifications,
+  getUnreadNotificationsCount,
+} from "@/lib/actions/notifications";
 import { DashboardSidebar } from "@/components/dashboard/sidebar";
 import { DashboardTopbar } from "@/components/dashboard/topbar";
 
@@ -16,11 +20,20 @@ export default async function DashboardLayout({
     redirect("/subscribe");
   }
 
+  const [notifications, unreadCount] = await Promise.all([
+    getRecentNotifications(),
+    getUnreadNotificationsCount(),
+  ]);
+
   return (
     <div className="flex min-h-screen bg-background bg-noise">
       <DashboardSidebar />
       <div className="flex min-w-0 flex-1 flex-col">
-        <DashboardTopbar user={user} />
+        <DashboardTopbar
+          user={user}
+          notifications={notifications}
+          unreadCount={unreadCount}
+        />
         <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8">{children}</main>
       </div>
     </div>

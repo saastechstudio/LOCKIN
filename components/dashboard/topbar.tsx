@@ -3,7 +3,8 @@ import { UserButton } from "@clerk/nextjs";
 import { Badge } from "@/components/ui/badge";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileNav } from "@/components/dashboard/mobile-nav";
-import type { User } from "@/lib/db/schema";
+import { NotificationBell } from "@/components/dashboard/notification-bell";
+import type { Notification, User } from "@/lib/db/schema";
 
 function greeting() {
   const hour = new Date().getHours();
@@ -19,7 +20,15 @@ const STATUS_LABELS: Record<string, { label: string; variant: "default" | "secon
   canceled: { label: "Résilié", variant: "secondary" },
 };
 
-export function DashboardTopbar({ user }: { user: User }) {
+export function DashboardTopbar({
+  user,
+  notifications,
+  unreadCount,
+}: {
+  user: User;
+  notifications: Notification[];
+  unreadCount: number;
+}) {
   const firstName = user.name?.split(" ")[0] ?? "Membre";
   const status = user.stripeSubscriptionStatus
     ? STATUS_LABELS[user.stripeSubscriptionStatus]
@@ -43,6 +52,10 @@ export function DashboardTopbar({ user }: { user: User }) {
         <Badge variant={status?.variant ?? "outline"} className="hidden sm:inline-flex">
           {status?.label ?? "Aucun abonnement"}
         </Badge>
+        <NotificationBell
+          initialNotifications={notifications}
+          initialUnreadCount={unreadCount}
+        />
         <ThemeToggle />
         <UserButton
           appearance={{
