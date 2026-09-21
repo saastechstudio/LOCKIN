@@ -1,4 +1,5 @@
-import { CreditCard, User as UserIcon } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, CreditCard, Sparkles, User as UserIcon } from "lucide-react";
 
 import { getOrCreateDbUser } from "@/lib/auth";
 import { isStripeConfigured } from "@/lib/stripe";
@@ -41,6 +42,26 @@ export default async function SettingsPage() {
             <p>{user.email}</p>
           </div>
           <ProfileForm user={user} />
+        </CardContent>
+      </Card>
+
+      <Card className="surface">
+        <CardHeader className="flex-row items-center justify-between space-y-0">
+          <div className="flex items-center gap-2">
+            <Sparkles className="size-4 text-brand-blue" />
+            <CardTitle className="text-base">Coach IA</CardTitle>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <p className="mb-4 text-sm text-muted-foreground">
+            Choisis l&apos;apparence, le ton et le nom de ton mentor
+            d&apos;excellence.
+          </p>
+          <Button asChild variant="outline" className="w-full">
+            <Link href="/dashboard/settings/ai">
+              Configurer mon Coach IA <ArrowRight className="size-4" />
+            </Link>
+          </Button>
         </CardContent>
       </Card>
 

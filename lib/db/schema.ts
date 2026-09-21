@@ -37,6 +37,29 @@ export const notificationTypeEnum = pgEnum("notification_type", [
   "system",
 ]);
 
+export const aiCoachToneEnum = pgEnum("ai_coach_tone", [
+  "bienveillant",
+  "exigeant",
+  "scientifique",
+  "creatif",
+  "founder_mode",
+]);
+
+export const aiCoachAppearanceEnum = pgEnum("ai_coach_appearance", [
+  "masculin",
+  "feminin",
+  "neutre",
+  "minimaliste",
+]);
+
+export const aiCoachVisualStyleEnum = pgEnum("ai_coach_visual_style", [
+  "friendly_silicon_valley",
+  "premium_minimaliste",
+  "dark_mode_founder",
+  "gradient_mode",
+  "ultra_minimal",
+]);
+
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   clerkId: text("clerk_id").notNull().unique(),
@@ -53,6 +76,14 @@ export const users = pgTable("users", {
   stripeCurrentPeriodEnd: timestamp("stripe_current_period_end", {
     mode: "date",
   }),
+  aiCoachName: text("ai_coach_name"),
+  aiCoachTone: aiCoachToneEnum("ai_coach_tone").notNull().default("bienveillant"),
+  aiCoachAppearance: aiCoachAppearanceEnum("ai_coach_appearance")
+    .notNull()
+    .default("neutre"),
+  aiCoachVisualStyle: aiCoachVisualStyleEnum("ai_coach_visual_style")
+    .notNull()
+    .default("friendly_silicon_valley"),
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
