@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 const NAV_LINKS = [
-  { href: "#pillars", label: "Le Club" },
+  { href: "#pillars-values", label: "Le Club" },
+  { href: "#features", label: "Fonctionnalités" },
   { href: "#pricing", label: "Tarifs" },
 ];
 
