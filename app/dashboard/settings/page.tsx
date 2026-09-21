@@ -3,6 +3,7 @@ import { CreditCard, User as UserIcon } from "lucide-react";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { isStripeConfigured } from "@/lib/stripe";
 import { createPortalSession } from "@/lib/actions/stripe";
+import { hasComplimentaryAccess } from "@/lib/premium";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +19,7 @@ const STATUS_LABELS: Record<string, string> = {
 
 export default async function SettingsPage() {
   const user = await getOrCreateDbUser();
+  const isComplimentary = hasComplimentaryAccess(user.email);
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -50,14 +52,20 @@ export default async function SettingsPage() {
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Statut</span>
-            <Badge variant={user.stripeSubscriptionStatus === "active" ? "default" : "outline"}>
-              {user.stripeSubscriptionStatus
-                ? (STATUS_LABELS[user.stripeSubscriptionStatus] ?? user.stripeSubscriptionStatus)
-                : "Aucun abonnement"}
+            <Badge variant={isComplimentary || user.stripeSubscriptionStatus === "active" ? "default" : "outline"}>
+              {isComplimentary
+                ? "Premium (offert)"
+                : user.stripeSubscriptionStatus
+                  ? (STATUS_LABELS[user.stripeSubscriptionStatus] ?? user.stripeSubscriptionStatus)
+                  : "Aucun abonnement"}
             </Badge>
           </div>
 
-          {isStripeConfigured ? (
+          {isComplimentary ? (
+            <p className="text-xs text-muted-foreground">
+              Accès premium offert à ce compte — aucun paiement requis.
+            </p>
+          ) : isStripeConfigured ? (
             <form action={createPortalSession}>
               <Button type="submit" variant="outline" className="w-full">
                 Gérer mon abonnement
