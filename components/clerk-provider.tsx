@@ -6,9 +6,9 @@ import { useMounted } from "@/lib/hooks/use-mounted";
 
 const DARK_VARIABLES = {
   colorPrimary: "#6D97FF",
-  colorBackground: "#251638",
+  colorBackground: "#161616",
   colorForeground: "#f8f8f6",
-  colorInput: "#2c1a42",
+  colorInput: "#1a1a1a",
   colorInputForeground: "#f8f8f6",
   colorNeutral: "#f8f8f6",
 };
