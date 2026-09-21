@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Sparkle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Hero() {
@@ -18,12 +18,7 @@ export function Hero() {
         className="pointer-events-none absolute -top-10 left-1/2 -z-10 h-[360px] w-[480px] -translate-x-[10%] rounded-full bg-[radial-gradient(closest-side,_rgba(255,199,87,0.16),_transparent_75%)] blur-3xl"
       />
 
-      <span className="inline-flex items-center gap-2 rounded-full border border-brand-coral/25 bg-white px-4 py-1.5 text-xs tracking-[0.2em] text-brand-coral uppercase shadow-soft">
-        <Sparkle className="size-3.5" />
-        Club privé d&apos;entrepreneurs
-      </span>
-
-      <h1 className="font-display mx-auto mt-8 max-w-4xl text-5xl leading-[1.08] text-foreground sm:text-6xl">
+      <h1 className="font-display mx-auto max-w-4xl text-5xl leading-[1.08] text-foreground sm:text-6xl">
         Le Club d&apos;Entrepreneurs{" "}
         <span className="text-gradient-blue">d&apos;Excellence</span>
       </h1>
