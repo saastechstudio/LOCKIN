@@ -1,6 +1,7 @@
 import { UserButton } from "@clerk/nextjs";
 
 import { Badge } from "@/components/ui/badge";
+import { ThemeToggle } from "@/components/theme-toggle";
 import type { User } from "@/lib/db/schema";
 
 function greeting() {
@@ -34,13 +35,14 @@ export function DashboardTopbar({ user }: { user: User }) {
         </p>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         <Badge variant={status?.variant ?? "outline"}>
           {status?.label ?? "Aucun abonnement"}
         </Badge>
+        <ThemeToggle />
         <UserButton
           appearance={{
-            elements: { avatarBox: "size-9 ring-1 ring-gold/30 rounded-full" },
+            elements: { avatarBox: "size-9 ring-1 ring-brand-gold/30 rounded-full" },
           }}
         />
       </div>

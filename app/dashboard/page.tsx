@@ -52,7 +52,7 @@ export default async function DashboardPage() {
                 {userOkrs.length} objectif{userOkrs.length > 1 ? "s" : ""} en cours
               </p>
             </div>
-            <span className="font-serif text-2xl text-gold">
+            <span className="font-serif text-2xl text-brand-cyan">
               {globalProgress}%
             </span>
           </CardHeader>

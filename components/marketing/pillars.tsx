@@ -46,8 +46,8 @@ export function Pillars() {
           {PILLARS.map((pillar) => (
             <Card key={pillar.title} className="glass">
               <CardHeader>
-                <div className="mb-2 flex size-11 items-center justify-center rounded-lg border border-gold/25 bg-gold/10">
-                  <pillar.icon className="size-5 text-gold" />
+                <div className="mb-2 flex size-11 items-center justify-center rounded-lg border border-brand-gold/25 bg-brand-gold/10">
+                  <pillar.icon className="size-5 text-brand-gold" />
                 </div>
                 <CardTitle className="font-serif text-xl">
                   {pillar.title}

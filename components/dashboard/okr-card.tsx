@@ -62,12 +62,12 @@ export function OkrCard({ okr }: { okr: Okr }) {
           <span>
             {current} / {target} {okr.unit}
           </span>
-          <span className="text-gold-soft">{percent}%</span>
+          <span className="text-brand-cyan">{percent}%</span>
         </div>
         <Progress value={percent} />
 
         {okr.status === "completed" ? (
-          <p className="flex items-center gap-1.5 text-xs text-gold">
+          <p className="flex items-center gap-1.5 text-xs text-brand-gold">
             <Check className="size-3.5" /> Objectif atteint
           </p>
         ) : (

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
+import { BrandedClerkProvider } from "@/components/clerk-provider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,25 +26,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <ClerkProvider
-      appearance={{
-        variables: {
-          colorPrimary: "#D4AF37",
-          colorBackground: "#0f0f12",
-          colorForeground: "#f5f4f1",
-          colorInput: "#17171b",
-          colorInputForeground: "#f5f4f1",
-        },
-      }}
+    <html
+      lang="fr"
+      suppressHydrationWarning
+      className={`${inter.variable} ${cormorant.variable} h-full antialiased`}
     >
-      <html
-        lang="fr"
-        className={`dark ${inter.variable} ${cormorant.variable} h-full antialiased`}
-      >
-        <body className="min-h-full flex flex-col bg-background text-foreground bg-noise">
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+      <body className="min-h-full flex flex-col bg-background text-foreground bg-noise">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <BrandedClerkProvider>{children}</BrandedClerkProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

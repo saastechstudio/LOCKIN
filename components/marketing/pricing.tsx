@@ -37,7 +37,7 @@ export function Pricing() {
             <ul className="space-y-2.5 text-left text-sm text-muted-foreground">
               {FEATURES.map((f) => (
                 <li key={f} className="flex items-start gap-2">
-                  <Check className="mt-0.5 size-4 shrink-0 text-gold" />
+                  <Check className="mt-0.5 size-4 shrink-0 text-brand-gold" />
                   {f}
                 </li>
               ))}
@@ -48,7 +48,7 @@ export function Pricing() {
           </CardContent>
         </Card>
 
-        <Card className="glass relative border-gold/40">
+        <Card className="glass relative border-brand-gold/40">
           <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
             2 mois offerts
           </Badge>
@@ -63,7 +63,7 @@ export function Pricing() {
             <ul className="space-y-2.5 text-left text-sm text-muted-foreground">
               {FEATURES.map((f) => (
                 <li key={f} className="flex items-start gap-2">
-                  <Check className="mt-0.5 size-4 shrink-0 text-gold" />
+                  <Check className="mt-0.5 size-4 shrink-0 text-brand-gold" />
                   {f}
                 </li>
               ))}

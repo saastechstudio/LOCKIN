@@ -127,7 +127,7 @@ export function NetworkDirectory({ members }: { members: NetworkMember[] }) {
 
                 <a
                   href={`mailto:${member.email}`}
-                  className="mt-4 flex items-center gap-1.5 text-xs text-gold transition-colors hover:text-gold-soft"
+                  className="mt-4 flex items-center gap-1.5 text-xs text-brand-gold transition-colors hover:text-brand-gold-soft"
                 >
                   <Mail className="size-3.5" /> Contacter
                 </a>

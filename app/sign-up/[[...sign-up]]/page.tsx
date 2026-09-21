@@ -10,7 +10,7 @@ export default function SignUpPage() {
               card: "glass shadow-2xl",
               headerTitle: "font-serif text-foreground",
               formButtonPrimary:
-                "bg-gradient-to-b from-gold-soft to-gold text-black hover:brightness-110",
+                "bg-gradient-to-b from-brand-gold-soft to-brand-gold text-black hover:brightness-110",
             },
           }}
         />

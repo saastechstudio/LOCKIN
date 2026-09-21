@@ -3,52 +3,136 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Lock In design tokens — brand palette + light/dark.
+ *
+ * Two layers:
+ *  1. Runtime CSS variables below (`:root` = light, `.dark` = dark) —
+ *     these are what actually change when the theme toggles.
+ *  2. The `@theme inline` block maps each one to a Tailwind utility, so
+ *     `bg-brand-bg`, `bg-brand-card`, `border-brand-border`,
+ *     `text-brand-gold`, `bg-brand-gold`, `text-brand-cyan`,
+ *     `shadow-gold-glow` and `shadow-cyan-glow` are real, theme-aware
+ *     utility classes usable anywhere in the app.
+ *
+ * shadcn-style semantic tokens (background/card/border/primary/...) are
+ * wired to the same brand variables, so every primitive in
+ * components/ui/* already renders in the brand palette without being
+ * touched individually.
+ */
+
 :root {
   --radius: 0.65rem;
 
-  /* Luxury dark theme — Lock In */
-  --background: #09090b;
-  --foreground: #f5f4f1;
+  /* ---- Brand palette (light) ---- */
+  --brand-bg: #f6f7fb;
+  --brand-card: #ffffff;
+  --brand-border: rgba(9, 10, 15, 0.1);
+  --brand-gold: #d4af37;
+  --brand-gold-soft: #e8c874;
+  --brand-gold-deep: #9c7a22;
+  --brand-cyan: #0e7490;
 
-  --card: #0f0f12;
-  --card-foreground: #f5f4f1;
+  --glow-gold: 0 0 0 1px rgba(212, 175, 55, 0.35), 0 8px 28px -8px rgba(212, 175, 55, 0.45);
+  --glow-cyan: 0 0 0 1px rgba(14, 116, 144, 0.3), 0 8px 28px -8px rgba(14, 116, 144, 0.35);
 
-  --popover: #0f0f12;
-  --popover-foreground: #f5f4f1;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(9, 10, 15, 0.08);
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(14, 116, 144, 0.06), transparent 45%);
+  --scrollbar-thumb: rgba(9, 10, 15, 0.18);
+  --selection-bg: rgba(212, 175, 55, 0.3);
 
-  --primary: #d4af37;
+  /* ---- shadcn-style semantic tokens ---- */
+  --background: var(--brand-bg);
+  --foreground: #0f172a; /* slate-900 */
+
+  --card: var(--brand-card);
+  --card-foreground: #0f172a;
+
+  --popover: var(--brand-card);
+  --popover-foreground: #0f172a;
+
+  --primary: var(--brand-gold);
   --primary-foreground: #09090b;
 
-  --secondary: #17171b;
-  --secondary-foreground: #f5f4f1;
+  --secondary: #eef0f5;
+  --secondary-foreground: #0f172a;
 
-  --muted: #17171b;
-  --muted-foreground: #a1a1aa;
+  --muted: #eef0f5;
+  --muted-foreground: #64748b; /* slate-500 */
 
-  --accent: #1c1c21;
-  --accent-foreground: #d4af37;
+  --accent: #eef2f6;
+  --accent-foreground: var(--brand-gold-deep);
 
-  --destructive: #b3432f;
-  --destructive-foreground: #f5f4f1;
+  --destructive: #c0392b;
+  --destructive-foreground: #fefefe;
 
-  --border: rgba(212, 175, 55, 0.14);
-  --input: rgba(212, 175, 55, 0.18);
-  --ring: rgba(212, 175, 55, 0.5);
+  --border: var(--brand-border);
+  --input: rgba(9, 10, 15, 0.14);
+  --ring: rgba(212, 175, 55, 0.45);
 
-  --gold: #d4af37;
-  --gold-soft: #f1d590;
-  --gold-deep: #9c7a22;
-
-  --chart-1: #d4af37;
-  --chart-2: #a1a1aa;
-  --chart-3: #6f6f76;
-  --chart-4: #f1d590;
-  --chart-5: #4a4a4f;
+  --chart-1: var(--brand-gold);
+  --chart-2: var(--brand-cyan);
+  --chart-3: #64748b;
+  --chart-4: var(--brand-gold-soft);
+  --chart-5: #334155;
 }
 
 .dark {
-  --background: #09090b;
-  --foreground: #f5f4f1;
+  /* ---- Brand palette (dark) ---- */
+  --brand-bg: #090a0f;
+  --brand-card: #12141d;
+  --brand-border: rgba(212, 175, 55, 0.14);
+  --brand-gold: #d4af37;
+  --brand-gold-soft: #f1d590;
+  --brand-gold-deep: #9c7a22;
+  --brand-cyan: #22d3ee;
+
+  --glow-gold: 0 0 0 1px rgba(212, 175, 55, 0.3), 0 0 24px -4px rgba(212, 175, 55, 0.55);
+  --glow-cyan: 0 0 0 1px rgba(34, 211, 238, 0.28), 0 0 24px -4px rgba(34, 211, 238, 0.5);
+
+  --glass-bg: rgba(18, 20, 29, 0.55);
+  --glass-border: rgba(212, 175, 55, 0.12);
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.06), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(34, 211, 238, 0.05), transparent 45%);
+  --scrollbar-thumb: rgba(212, 175, 55, 0.25);
+  --selection-bg: rgba(212, 175, 55, 0.35);
+
+  /* ---- shadcn-style semantic tokens ---- */
+  --background: var(--brand-bg);
+  --foreground: #f1f5f9; /* slate-100 */
+
+  --card: var(--brand-card);
+  --card-foreground: #f1f5f9;
+
+  --popover: var(--brand-card);
+  --popover-foreground: #f1f5f9;
+
+  --primary: var(--brand-gold);
+  --primary-foreground: #09090b;
+
+  --secondary: #17171b;
+  --secondary-foreground: #f1f5f9;
+
+  --muted: #17171b;
+  --muted-foreground: #94a3b8; /* slate-400 */
+
+  --accent: #1c1c21;
+  --accent-foreground: var(--brand-gold);
+
+  --destructive: #b3432f;
+  --destructive-foreground: #f1f5f9;
+
+  --border: var(--brand-border);
+  --input: rgba(212, 175, 55, 0.18);
+  --ring: rgba(212, 175, 55, 0.5);
+
+  --chart-1: var(--brand-gold);
+  --chart-2: var(--brand-cyan);
+  --chart-3: #a1a1aa;
+  --chart-4: var(--brand-gold-soft);
+  --chart-5: #4a4a4f;
 }
 
 @theme inline {
@@ -71,14 +155,31 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-gold: var(--gold);
-  --color-gold-soft: var(--gold-soft);
-  --color-gold-deep: var(--gold-deep);
+
+  /* Brand utilities: bg-brand-bg, bg-brand-card, border-brand-border,
+     text-brand-gold, bg-brand-gold, text-brand-cyan, bg-brand-cyan... */
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-card: var(--brand-card);
+  --color-brand-border: var(--brand-border);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-gold-soft: var(--brand-gold-soft);
+  --color-brand-gold-deep: var(--brand-gold-deep);
+  --color-brand-cyan: var(--brand-cyan);
+
+  /* Legacy aliases kept so earlier gold-* utilities keep working. */
+  --color-gold: var(--brand-gold);
+  --color-gold-soft: var(--brand-gold-soft);
+  --color-gold-deep: var(--brand-gold-deep);
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
+  /* shadow-gold-glow / shadow-cyan-glow */
+  --shadow-gold-glow: var(--glow-gold);
+  --shadow-cyan-glow: var(--glow-cyan);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -97,6 +198,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .font-serif {
@@ -104,40 +206,40 @@ body {
 }
 
 .bg-noise {
-  background-image: radial-gradient(
-      circle at 20% 20%,
-      rgba(212, 175, 55, 0.06),
-      transparent 40%
-    ),
-    radial-gradient(circle at 80% 0%, rgba(212, 175, 55, 0.05), transparent 45%);
+  background-image: var(--noise-bg);
 }
 
 .text-gradient-gold {
-  background: linear-gradient(120deg, #f1d590, #d4af37 45%, #9c7a22);
+  background: linear-gradient(
+    120deg,
+    var(--brand-gold-soft),
+    var(--brand-gold) 45%,
+    var(--brand-gold-deep)
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
 .glass {
-  background: rgba(15, 15, 18, 0.55);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(212, 175, 55, 0.12);
+  border: 1px solid var(--glass-border);
 }
 
 ::selection {
-  background: rgba(212, 175, 55, 0.35);
-  color: #f5f4f1;
+  background: var(--selection-bg);
+  color: var(--foreground);
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(212, 175, 55, 0.25);
+  background: var(--scrollbar-thumb);
   border-radius: 999px;
 }

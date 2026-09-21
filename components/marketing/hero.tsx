@@ -10,7 +10,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[560px] bg-[radial-gradient(ellipse_at_top,_rgba(212,175,55,0.14),_transparent_60%)]"
       />
 
-      <span className="inline-flex items-center gap-2 rounded-full border border-gold/25 bg-gold/5 px-4 py-1.5 text-xs tracking-[0.2em] text-gold-soft uppercase">
+      <span className="inline-flex items-center gap-2 rounded-full border border-brand-gold/25 bg-brand-gold/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-gold-soft uppercase">
         Club privé d&apos;entrepreneurs
       </span>
 
