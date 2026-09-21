@@ -3,6 +3,9 @@ import { SiteFooter } from "@/components/marketing/site-footer";
 import { Hero } from "@/components/marketing/hero";
 import { Pillars } from "@/components/marketing/pillars";
 import { Pricing } from "@/components/marketing/pricing";
+import { Faq } from "@/components/marketing/faq";
+import { ExitIntentPopup } from "@/components/marketing/exit-intent-popup";
+import { StickyCtaBar } from "@/components/marketing/sticky-cta-bar";
 
 export default function Home() {
   return (
@@ -12,8 +15,11 @@ export default function Home() {
         <Hero />
         <Pillars />
         <Pricing />
+        <Faq />
       </main>
       <SiteFooter />
+      <StickyCtaBar />
+      <ExitIntentPopup />
     </div>
   );
 }

@@ -1,4 +1,7 @@
+import { redirect } from "next/navigation";
+
 import { getOrCreateDbUser } from "@/lib/auth";
+import { hasPremiumAccess, requiresSubscription } from "@/lib/premium";
 import { DashboardSidebar } from "@/components/dashboard/sidebar";
 import { DashboardTopbar } from "@/components/dashboard/topbar";
 
@@ -8,6 +11,10 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const user = await getOrCreateDbUser();
+
+  if (requiresSubscription() && !hasPremiumAccess(user)) {
+    redirect("/subscribe");
+  }
 
   return (
     <div className="flex min-h-screen bg-background bg-noise">

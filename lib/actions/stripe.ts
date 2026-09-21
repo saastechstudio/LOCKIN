@@ -6,11 +6,15 @@ import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
-import { getStripe } from "@/lib/stripe";
+import { getStripe, isStripeConfigured } from "@/lib/stripe";
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
 export async function createCheckoutSession(priceId: string) {
+  if (!isStripeConfigured) {
+    redirect("/subscribe?error=stripe-not-configured");
+  }
+
   const user = await getOrCreateDbUser();
   const stripe = getStripe();
 
