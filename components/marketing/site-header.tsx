@@ -20,11 +20,11 @@ export function SiteHeader() {
               alt="Lock In"
               width={32}
               height={32}
-              className="size-full object-cover"
+              className="size-full object-cover object-top"
             />
           </span>
-          <span className="font-display text-lg tracking-[0.1em] text-foreground">
-            LOCK IN
+          <span className="font-display text-lg tracking-tight text-foreground lowercase">
+            lock in
           </span>
         </Link>
 
