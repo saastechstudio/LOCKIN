@@ -5,6 +5,7 @@ export default function SignInPage() {
     <main className="flex min-h-screen items-center justify-center bg-background bg-noise px-4 py-16">
       <div className="w-full max-w-md">
         <SignIn
+          fallbackRedirectUrl="/dashboard"
           appearance={{
             elements: {
               card: "surface",

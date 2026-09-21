@@ -5,6 +5,7 @@ export default function SignUpPage() {
     <main className="flex min-h-screen items-center justify-center bg-background bg-noise px-4 py-16">
       <div className="w-full max-w-md">
         <SignUp
+          forceRedirectUrl="/onboarding"
           appearance={{
             elements: {
               card: "surface",
