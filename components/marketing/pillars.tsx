@@ -30,7 +30,7 @@ const PILLARS = [
 
 export function Pillars() {
   return (
-    <section id="pillars" className="px-6 py-24">
+    <section id="features" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-xl text-center">
           <h2 className="font-display text-3xl text-foreground sm:text-4xl">
