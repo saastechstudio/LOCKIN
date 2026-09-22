@@ -44,6 +44,7 @@ export async function POST(req: Request) {
     model: candidate.model,
     system: buildCoachSystemPrompt(user, todayFocus.mood),
     messages: await convertToModelMessages(messages),
+    maxRetries: 1,
     onFinish: async ({ text }) => {
       if (text) {
         await db.insert(aiConversations).values({
@@ -61,7 +62,7 @@ export async function POST(req: Request) {
     // messages, audit compris, basculent directement sur le suivant.
     onError: (error) => {
       console.error(`[chat] AI generation failed on ${candidate.id}`, error);
-      markProviderBroken(candidate.id);
+      markProviderBroken(candidate.id, error);
       return "Le Coach IA a rencontré un problème. Réessaie dans un instant.";
     },
   });

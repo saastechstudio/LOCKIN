@@ -49,6 +49,10 @@ export async function POST(req: Request) {
         schema: auditResultSchema,
         system: AUDIT_SYSTEM_PROMPT,
         prompt: buildAuditPrompt(input),
+        // On gère nous-mêmes le repli sur le fournisseur suivant : pas
+        // besoin que le SDK retente 3 fois un fournisseur en panne avant
+        // qu'on passe au suivant, ça ne fait que ralentir la réponse.
+        maxRetries: 1,
       }));
       break;
     } catch (error) {
@@ -56,7 +60,7 @@ export async function POST(req: Request) {
         `[audit/generate] AI generation failed on ${candidate.id}`,
         error,
       );
-      markProviderBroken(candidate.id);
+      markProviderBroken(candidate.id, error);
     }
   }
 
