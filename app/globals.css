@@ -259,6 +259,79 @@ body {
   box-shadow: var(--shadow-soft);
 }
 
+/* Flagship colorful surface for the handful of hero moments that deserve
+   it (dashboard's top stat card, a highlighted pricing plan) — a dark,
+   animated gradient mesh echoing the moodboard's balance/transaction
+   cards, instead of the flat white "surface" everywhere. Always pair with
+   light text (text-white / text-white/70). */
+.mesh-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--brand-dark), #0a161b 70%);
+}
+.mesh-card::before,
+.mesh-card::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 999px;
+  filter: blur(50px);
+}
+.mesh-card::before {
+  top: -35%;
+  left: -15%;
+  width: 75%;
+  height: 150%;
+  background:
+    radial-gradient(closest-side, rgba(232, 181, 99, 0.85), transparent 70%),
+    radial-gradient(closest-side, rgba(232, 130, 90, 0.75), transparent 70%);
+  animation: aurora-drift 14s ease-in-out infinite;
+}
+.mesh-card::after {
+  bottom: -40%;
+  right: -15%;
+  width: 80%;
+  height: 150%;
+  background:
+    radial-gradient(closest-side, rgba(74, 144, 232, 0.9), transparent 70%),
+    radial-gradient(closest-side, rgba(27, 122, 140, 0.8), transparent 70%);
+  animation: aurora-drift 18s ease-in-out infinite reverse;
+}
+
+/* Diagonal light sweep on hover — the glare/shine seen on the moodboard's
+   gradient cards, replayed as a micro-interaction on the primary button. */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 65%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.6s ease;
+}
+.btn-shine:hover::after {
+  transform: translateX(130%);
+}
+
+/* Lift + glow on hover — used on a handful of dashboard cards to make the
+   interface feel alive rather than static. */
+.card-interactive {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-interactive:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft-md);
+}
+
 .shadow-soft {
   box-shadow: var(--shadow-soft);
 }

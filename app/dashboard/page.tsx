@@ -78,22 +78,22 @@ export default async function DashboardPage() {
   return (
     <div className="mx-auto max-w-6xl space-y-8">
       <section>
-        <Card className="surface">
+        <Card className="mesh-card">
           <CardHeader className="flex-row items-center justify-between space-y-0">
             <div>
-              <CardTitle className="font-display text-xl">
+              <CardTitle className="font-display text-xl text-white">
                 Progression globale
               </CardTitle>
-              <p className="mt-1 text-xs text-muted-foreground">
+              <p className="mt-1 text-xs text-white/70">
                 {userOkrs.length} objectif{userOkrs.length > 1 ? "s" : ""} en cours
               </p>
             </div>
-            <span className="font-display text-2xl text-brand-coral">
+            <span className="font-display text-2xl text-white">
               {globalProgress}%
             </span>
           </CardHeader>
           <CardContent>
-            <Progress value={globalProgress} />
+            <Progress value={globalProgress} className="bg-white/20" />
           </CardContent>
         </Card>
       </section>

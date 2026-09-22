@@ -7,7 +7,7 @@ export function CoachRecommendations({ actions }: { actions: string[] }) {
   const topActions = actions.slice(0, 3);
 
   return (
-    <Card className="surface">
+    <Card className="surface card-interactive">
       <CardHeader className="flex-row items-center justify-between space-y-0">
         <CardTitle className="font-display text-xl">
           Recommandations du Coach IA

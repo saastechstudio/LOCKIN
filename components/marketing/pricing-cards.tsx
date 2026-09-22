@@ -61,27 +61,27 @@ export function PricingCards() {
         </CardContent>
       </Card>
 
-      <Card className="surface relative border-brand-blue/40">
+      <Card className="mesh-card relative">
         <Badge className="absolute -top-3 left-1/2 -translate-x-1/2">
           Économisez {SAVINGS_PERCENT}%
         </Badge>
         <CardHeader>
-          <p className="text-sm text-muted-foreground">Annuel</p>
+          <p className="text-sm text-white/70">Annuel</p>
           <div className="mt-2 flex items-baseline gap-2">
-            <span className="font-display text-4xl text-foreground">
+            <span className="font-display text-4xl text-white">
               {YEARLY_PRICE.toFixed(2).replace(".", ",")} €
             </span>
-            <span className="text-sm text-muted-foreground">/ an</span>
+            <span className="text-sm text-white/70">/ an</span>
           </div>
-          <p className="mt-1 text-xs text-muted-foreground/70 line-through">
+          <p className="mt-1 text-xs text-white/50 line-through">
             {YEARLY_EQUIVALENT_MONTHLY.toFixed(2).replace(".", ",")} € au tarif mensuel
           </p>
         </CardHeader>
         <CardContent className="space-y-6">
-          <ul className="space-y-2.5 text-left text-sm text-muted-foreground">
+          <ul className="space-y-2.5 text-left text-sm text-white/80">
             {FEATURES.map((f) => (
               <li key={f} className="flex items-start gap-2">
-                <Check className="mt-0.5 size-4 shrink-0 text-brand-blue" />
+                <Check className="mt-0.5 size-4 shrink-0 text-brand-yellow" />
                 {f}
               </li>
             ))}
