@@ -13,11 +13,17 @@ import {
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
+export type AuditRoadmapStep = {
+  title: string;
+  durationWeeks: number;
+  actions: string[];
+};
+
 export type AuditRoadmapPhase = {
   phase: string;
   objective: string;
   focus: string;
-  keyActions: string[];
+  steps: AuditRoadmapStep[];
   milestone: string;
   durationWeeks: number;
 };

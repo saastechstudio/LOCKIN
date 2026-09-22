@@ -388,18 +388,27 @@ function AuditResultView({
                       🎯 {phase.objective}
                     </p>
                   )}
-                  {phase.keyActions && phase.keyActions.length > 0 && (
-                    <ul className="mt-1.5 space-y-1">
-                      {phase.keyActions.map((action, j) => (
-                        <li
-                          key={j}
-                          className="flex items-start gap-2 text-sm text-muted-foreground"
-                        >
-                          <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-brand-blue" />
-                          {action}
-                        </li>
+                  {phase.steps && phase.steps.length > 0 && (
+                    <div className="mt-2 space-y-3 border-l-2 border-brand-coral/30 pl-3">
+                      {phase.steps.map((step, j) => (
+                        <div key={j}>
+                          <p className="text-sm font-medium text-foreground">
+                            {step.title}
+                          </p>
+                          <ul className="mt-1 space-y-1">
+                            {step.actions.map((action, k) => (
+                              <li
+                                key={k}
+                                className="flex items-start gap-2 text-sm text-muted-foreground"
+                              >
+                                <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-brand-blue" />
+                                {action}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   )}
                   {phase.milestone && (
                     <p className="mt-2 text-xs text-brand-coral">
