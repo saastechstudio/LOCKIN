@@ -48,7 +48,7 @@ export function OkrCard({ okr }: { okr: Okr }) {
   };
 
   return (
-    <Card className="surface">
+    <Card className="surface card-interactive">
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between gap-3">
           <div>

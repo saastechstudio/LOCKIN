@@ -7,15 +7,19 @@ export function Hero() {
     <section className="relative overflow-hidden px-6 pt-28 pb-32 text-center">
       <div
         aria-hidden
-        className="animate-aurora pointer-events-none absolute -top-40 left-1/2 -z-10 h-[520px] w-[720px] -translate-x-[62%] rounded-full bg-[radial-gradient(closest-side,_rgba(74,144,232,0.22),_transparent_75%)] blur-3xl"
+        className="animate-aurora pointer-events-none absolute -top-40 left-1/2 -z-10 h-[520px] w-[720px] -translate-x-[62%] rounded-full bg-[radial-gradient(closest-side,_rgba(74,144,232,0.38),_transparent_75%)] blur-3xl"
       />
       <div
         aria-hidden
-        className="animate-aurora-slow pointer-events-none absolute -top-32 left-1/2 -z-10 h-[480px] w-[640px] -translate-x-[38%] rounded-full bg-[radial-gradient(closest-side,_rgba(232,130,90,0.18),_transparent_75%)] blur-3xl"
+        className="animate-aurora-slow pointer-events-none absolute -top-32 left-1/2 -z-10 h-[480px] w-[640px] -translate-x-[38%] rounded-full bg-[radial-gradient(closest-side,_rgba(232,130,90,0.32),_transparent_75%)] blur-3xl"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-10 left-1/2 -z-10 h-[360px] w-[480px] -translate-x-[10%] rounded-full bg-[radial-gradient(closest-side,_rgba(232,181,99,0.16),_transparent_75%)] blur-3xl"
+        className="pointer-events-none absolute -top-10 left-1/2 -z-10 h-[360px] w-[480px] -translate-x-[10%] rounded-full bg-[radial-gradient(closest-side,_rgba(232,181,99,0.3),_transparent_75%)] blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="animate-aurora pointer-events-none absolute top-20 left-1/2 -z-10 h-[400px] w-[540px] -translate-x-[85%] rounded-full bg-[radial-gradient(closest-side,_rgba(27,122,140,0.28),_transparent_75%)] blur-3xl"
       />
 
       <h1 className="font-display mx-auto max-w-4xl text-5xl leading-[1.08] text-foreground sm:text-6xl">

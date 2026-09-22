@@ -22,7 +22,7 @@ export function EnergyWidget({
   ];
 
   return (
-    <Card className="surface">
+    <Card className="surface card-interactive">
       <CardHeader>
         <CardTitle className="font-display text-xl">
           Énergie &amp; Performance
