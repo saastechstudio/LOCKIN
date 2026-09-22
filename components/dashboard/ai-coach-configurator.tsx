@@ -45,8 +45,8 @@ const TONE_OPTIONS: { id: Tone; label: string; description: string }[] = [
   },
   {
     id: "founder_mode",
-    label: "Founder Mode",
-    description: "Style Y Combinator — vitesse, zéro langue de bois.",
+    label: "Mode Fondateur",
+    description: "Direct, rapide, zéro langue de bois.",
   },
 ];
 

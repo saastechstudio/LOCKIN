@@ -30,11 +30,11 @@ import type { AuditResult } from "@/lib/ai/audit";
 
 const REVENUE_LEVELS = [
   "Pas encore de revenus",
-  "< 1 000 €/mois",
-  "1 000 – 5 000 €/mois",
-  "5 000 – 20 000 €/mois",
-  "20 000 – 50 000 €/mois",
-  "50 000 €+/mois",
+  "Moins de 1 000 €/mois",
+  "De 1 000 à 5 000 €/mois",
+  "De 5 000 à 20 000 €/mois",
+  "De 20 000 à 50 000 €/mois",
+  "Plus de 50 000 €/mois",
 ];
 
 type Step = 1 | 2 | 3;
@@ -350,7 +350,7 @@ function AuditResultView({
       <Card className="border-brand-blue/30 bg-brand-blue/5">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
           <Lock className="size-4 text-brand-blue" />
-          <CardTitle className="font-display text-lg">Ton Lock In Blocker</CardTitle>
+          <CardTitle className="font-display text-lg">Ton Frein Lock In</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-foreground">{result.lockInBlocker}</p>
@@ -387,7 +387,7 @@ function AuditResultView({
       <Card className="surface">
         <CardHeader>
           <CardTitle className="font-display text-lg">
-            Actions prioritaires — Semaine 1
+            Actions prioritaires de la semaine 1
           </CardTitle>
         </CardHeader>
         <CardContent>
