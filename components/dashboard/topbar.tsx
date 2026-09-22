@@ -14,10 +14,8 @@ function greeting() {
 }
 
 const STATUS_LABELS: Record<string, { label: string; variant: "default" | "secondary" | "outline" }> = {
-  trialing: { label: "Essai en cours", variant: "outline" },
   active: { label: "Membre actif", variant: "default" },
-  past_due: { label: "Paiement en retard", variant: "secondary" },
-  canceled: { label: "Résilié", variant: "secondary" },
+  inactive: { label: "Résilié", variant: "secondary" },
 };
 
 export function DashboardTopbar({
@@ -30,8 +28,8 @@ export function DashboardTopbar({
   unreadCount: number;
 }) {
   const firstName = user.name?.split(" ")[0] ?? "Membre";
-  const status = user.stripeSubscriptionStatus
-    ? STATUS_LABELS[user.stripeSubscriptionStatus]
+  const status = user.whopMembershipStatus
+    ? STATUS_LABELS[user.whopMembershipStatus]
     : null;
 
   return (

@@ -41,7 +41,7 @@ export default function CgvPage() {
         </li>
       </ul>
       <p>
-        Les paiements sont traités par notre prestataire Stripe. Lock In ne
+        Les paiements sont traités par notre prestataire Whop. Lock In ne
         collecte ni ne stocke aucune donnée bancaire.
       </p>
 

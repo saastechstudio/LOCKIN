@@ -35,7 +35,7 @@ export default async function SubscribePage({
         </p>
       </div>
 
-      {error === "stripe-not-configured" && (
+      {error === "whop-not-configured" && (
         <p className="mx-auto mt-6 max-w-xl rounded-md border border-destructive/30 bg-destructive/10 px-4 py-3 text-center text-sm text-destructive">
           La facturation n&apos;est pas encore configurée. Réessaie dans un instant
           ou contacte le support.
@@ -45,7 +45,7 @@ export default async function SubscribePage({
       <PricingCards />
 
       <div className="mx-auto mt-16 grid max-w-2xl gap-4 sm:grid-cols-3">
-        <TrustPoint icon={ShieldCheck} label="Paiement sécurisé Stripe" />
+        <TrustPoint icon={ShieldCheck} label="Paiement sécurisé Whop" />
         <TrustPoint icon={Sparkle} label="14 jours d'essai gratuit" />
         <TrustPoint icon={Flame} label="Résiliable à tout moment" />
       </div>

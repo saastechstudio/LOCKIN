@@ -2,8 +2,7 @@ import Link from "next/link";
 import { ArrowRight, CreditCard, Sparkles, User as UserIcon } from "lucide-react";
 
 import { getOrCreateDbUser } from "@/lib/auth";
-import { isStripeConfigured } from "@/lib/stripe";
-import { createPortalSession } from "@/lib/actions/stripe";
+import { isWhopConfigured } from "@/lib/whop";
 import { hasComplimentaryAccess } from "@/lib/premium";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,10 +11,8 @@ import { Button } from "@/components/ui/button";
 import { ProfileForm } from "@/components/dashboard/profile-form";
 
 const STATUS_LABELS: Record<string, string> = {
-  trialing: "Essai en cours",
   active: "Membre actif",
-  past_due: "Paiement en retard",
-  canceled: "Résilié",
+  inactive: "Résilié",
 };
 
 export default async function SettingsPage() {
@@ -73,11 +70,11 @@ export default async function SettingsPage() {
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-sm text-muted-foreground">Statut</span>
-            <Badge variant={isComplimentary || user.stripeSubscriptionStatus === "active" ? "default" : "outline"}>
+            <Badge variant={isComplimentary || user.whopMembershipStatus === "active" ? "default" : "outline"}>
               {isComplimentary
                 ? "Premium (offert)"
-                : user.stripeSubscriptionStatus
-                  ? (STATUS_LABELS[user.stripeSubscriptionStatus] ?? user.stripeSubscriptionStatus)
+                : user.whopMembershipStatus
+                  ? (STATUS_LABELS[user.whopMembershipStatus] ?? user.whopMembershipStatus)
                   : "Aucun abonnement"}
             </Badge>
           </div>
@@ -86,12 +83,12 @@ export default async function SettingsPage() {
             <p className="text-xs text-muted-foreground">
               Accès premium offert à ce compte, aucun paiement requis.
             </p>
-          ) : isStripeConfigured ? (
-            <form action={createPortalSession}>
-              <Button type="submit" variant="outline" className="w-full">
-                Gérer mon abonnement
-              </Button>
-            </form>
+          ) : isWhopConfigured ? (
+            <Button asChild variant="outline" className="w-full">
+              <a href="https://whop.com" target="_blank" rel="noopener noreferrer">
+                Gérer mon abonnement sur Whop
+              </a>
+            </Button>
           ) : (
             <p className="text-xs text-muted-foreground">
               La gestion des paiements sera bientôt disponible.

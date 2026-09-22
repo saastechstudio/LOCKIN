@@ -69,11 +69,10 @@ export const users = pgTable("users", {
   bio: text("bio"),
   sector: text("sector"),
   skills: text("skills"),
-  stripeCustomerId: text("stripe_customer_id").unique(),
-  stripeSubscriptionId: text("stripe_subscription_id").unique(),
-  stripePriceId: text("stripe_price_id"),
-  stripeSubscriptionStatus: text("stripe_subscription_status"),
-  stripeCurrentPeriodEnd: timestamp("stripe_current_period_end", {
+  whopMembershipId: text("whop_membership_id").unique(),
+  whopPlanId: text("whop_plan_id"),
+  whopMembershipStatus: text("whop_membership_status"),
+  whopCurrentPeriodEnd: timestamp("whop_current_period_end", {
     mode: "date",
   }),
   aiCoachName: text("ai_coach_name"),

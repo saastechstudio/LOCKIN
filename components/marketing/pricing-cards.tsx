@@ -2,8 +2,7 @@ import { Check, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { createCheckoutSession } from "@/lib/actions/stripe";
-import { isStripeConfigured, PRICE_MONTHLY, PRICE_YEARLY } from "@/lib/stripe";
+import { WHOP_PLAN_MONTHLY, WHOP_PLAN_YEARLY, whopCheckoutUrl } from "@/lib/whop";
 
 const FEATURES = [
   "Suivi illimité d'objectifs",
@@ -20,8 +19,8 @@ const SAVINGS_PERCENT = Math.round(
   ((YEARLY_EQUIVALENT_MONTHLY - YEARLY_PRICE) / YEARLY_EQUIVALENT_MONTHLY) * 100,
 );
 
-function CheckoutButton({ priceId, label }: { priceId?: string; label: string }) {
-  if (!isStripeConfigured || !priceId) {
+function CheckoutButton({ planId, label }: { planId?: string; label: string }) {
+  if (!planId) {
     return (
       <Button className="w-full" size="lg" disabled>
         Bientôt disponible
@@ -30,11 +29,9 @@ function CheckoutButton({ priceId, label }: { priceId?: string; label: string })
   }
 
   return (
-    <form action={createCheckoutSession.bind(null, priceId)}>
-      <Button type="submit" className="w-full" size="lg">
-        {label}
-      </Button>
-    </form>
+    <Button asChild className="w-full" size="lg">
+      <a href={whopCheckoutUrl(planId)}>{label}</a>
+    </Button>
   );
 }
 
@@ -60,7 +57,7 @@ export function PricingCards() {
               </li>
             ))}
           </ul>
-          <CheckoutButton priceId={PRICE_MONTHLY} label="Rejoindre le Club" />
+          <CheckoutButton planId={WHOP_PLAN_MONTHLY} label="Rejoindre le Club" />
         </CardContent>
       </Card>
 
@@ -89,13 +86,13 @@ export function PricingCards() {
               </li>
             ))}
           </ul>
-          <CheckoutButton priceId={PRICE_YEARLY} label="Rejoindre le Club" />
+          <CheckoutButton planId={WHOP_PLAN_YEARLY} label="Rejoindre le Club" />
         </CardContent>
       </Card>
 
       <p className="col-span-full flex items-center justify-center gap-2 text-center text-xs text-muted-foreground">
         <ShieldCheck className="size-3.5 text-brand-coral" />
-        Paiement sécurisé par Stripe · 14 jours d&apos;essai gratuit · Résiliable à tout
+        Paiement sécurisé par Whop · 14 jours d&apos;essai gratuit · Résiliable à tout
         moment
       </p>
     </div>
