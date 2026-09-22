@@ -4,11 +4,13 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Lock In design tokens — v2, "Soft & Warm" design system:
- * cream/white surfaces, Cobalt Blue #4A7FF8 (primary), Vibrant Coral
- * #FF7648 (secondary/highlight), Honey Yellow #FFC757 (tertiary/badges),
- * Deep Navy #1D102B (dark accents/charts). Light mode is the primary
- * experience; dark mode is a complementary variant for the toggle.
+ * Lock In design tokens — v3, "Dynamic" palette (same "Soft & Warm"
+ * layout/components as v2, only the color code changed): cream/white
+ * surfaces, Vivid Violet #7B3FE4 (primary), Sunset Coral #FF7A5C
+ * (secondary/highlight), Warm Gold #FFBD5C (tertiary/badges), Deep Indigo
+ * #27173F (dark accents/charts) — a violet-to-coral gradient family instead
+ * of the previous cobalt blue. Light mode is the primary experience; dark
+ * mode is a complementary variant for the toggle.
  *
  * Two layers:
  *  1. Runtime CSS variables below (`:root` = light, `.dark` = dark) —
@@ -35,24 +37,24 @@
   --brand-bg-deep: #f4f4f0;
   --brand-card: #ffffff;
   --brand-border: rgba(0, 0, 0, 0.05);
-  --brand-blue: #4a7ff8;
-  --brand-blue-soft: #8fb0ff;
-  --brand-blue-deep: #2e5fd9;
-  --brand-coral: #ff7648;
-  --brand-coral-soft: #ffa184;
-  --brand-yellow: #ffc757;
-  --brand-dark: #1d102b;
+  --brand-blue: #7b3fe4;
+  --brand-blue-soft: #c9aef0;
+  --brand-blue-deep: #4c1d95;
+  --brand-coral: #ff7a5c;
+  --brand-coral-soft: #ffb69c;
+  --brand-yellow: #ffbd5c;
+  --brand-dark: #27173f;
 
   --shadow-color: 17, 24, 39;
-  --glow-blue: 0 8px 20px -6px rgba(74, 127, 248, 0.4);
-  --glow-coral: 0 8px 20px -6px rgba(255, 118, 72, 0.35);
+  --glow-blue: 0 8px 20px -6px rgba(123, 63, 228, 0.4);
+  --glow-coral: 0 8px 20px -6px rgba(255, 122, 92, 0.35);
 
   --glass-bg: rgba(255, 255, 255, 0.8);
   --glass-border: rgba(0, 0, 0, 0.05);
-  --noise-bg: radial-gradient(circle at 20% 20%, rgba(74, 127, 248, 0.05), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(255, 118, 72, 0.05), transparent 45%);
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(123, 63, 228, 0.06), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(255, 122, 92, 0.05), transparent 45%);
   --scrollbar-thumb: rgba(0, 0, 0, 0.15);
-  --selection-bg: rgba(74, 127, 248, 0.2);
+  --selection-bg: rgba(123, 63, 228, 0.2);
 
   /* ---- shadcn-style semantic tokens ---- */
   --background: var(--brand-bg);
@@ -73,7 +75,7 @@
   --muted: #f0f0ec;
   --muted-foreground: rgba(17, 24, 39, 0.55);
 
-  --accent: #eef2ff;
+  --accent: #f3edfd;
   --accent-foreground: var(--brand-blue-deep);
 
   --destructive: #d6432f;
@@ -81,7 +83,7 @@
 
   --border: var(--brand-border);
   --input: rgba(0, 0, 0, 0.08);
-  --ring: rgba(74, 127, 248, 0.4);
+  --ring: rgba(123, 63, 228, 0.4);
 
   --chart-1: var(--brand-blue);
   --chart-2: var(--brand-coral);
@@ -96,24 +98,24 @@
   --brand-bg-deep: #050505;
   --brand-card: #161616;
   --brand-border: rgba(255, 255, 255, 0.08);
-  --brand-blue: #6d97ff;
-  --brand-blue-soft: #9fbaff;
-  --brand-blue-deep: #4a7ff8;
-  --brand-coral: #ff8b64;
-  --brand-coral-soft: #ffab8c;
-  --brand-yellow: #ffd274;
+  --brand-blue: #a480ec;
+  --brand-blue-soft: #c9aef0;
+  --brand-blue-deep: #7b3fe4;
+  --brand-coral: #ff9478;
+  --brand-coral-soft: #ffc2ad;
+  --brand-yellow: #ffcb70;
   --brand-dark: #000000;
 
   --shadow-color: 0, 0, 0;
-  --glow-blue: 0 8px 24px -6px rgba(109, 151, 255, 0.45);
-  --glow-coral: 0 8px 24px -6px rgba(255, 139, 100, 0.4);
+  --glow-blue: 0 8px 24px -6px rgba(164, 128, 236, 0.45);
+  --glow-coral: 0 8px 24px -6px rgba(255, 148, 120, 0.4);
 
   --glass-bg: rgba(22, 22, 22, 0.75);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --noise-bg: radial-gradient(circle at 20% 20%, rgba(109, 151, 255, 0.08), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(255, 139, 100, 0.06), transparent 45%);
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(164, 128, 236, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(255, 148, 120, 0.06), transparent 45%);
   --scrollbar-thumb: rgba(255, 255, 255, 0.2);
-  --selection-bg: rgba(109, 151, 255, 0.3);
+  --selection-bg: rgba(164, 128, 236, 0.3);
 
   /* ---- shadcn-style semantic tokens ---- */
   --background: var(--brand-bg);
@@ -142,7 +144,7 @@
 
   --border: var(--brand-border);
   --input: rgba(255, 255, 255, 0.1);
-  --ring: rgba(109, 151, 255, 0.45);
+  --ring: rgba(164, 128, 236, 0.45);
 
   --chart-1: var(--brand-blue);
   --chart-2: var(--brand-coral);

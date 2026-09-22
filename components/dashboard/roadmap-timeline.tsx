@@ -105,6 +105,29 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
               <p className="text-xs text-muted-foreground">
                 {phase.focus} · {phase.durationWeeks} sem.
               </p>
+              {phase.objective && (
+                <p className="mt-1 text-xs font-medium text-foreground">
+                  Objectif : {phase.objective}
+                </p>
+              )}
+              {phase.keyActions && phase.keyActions.length > 0 && (
+                <ul className="mt-1.5 space-y-1">
+                  {phase.keyActions.map((action, j) => (
+                    <li
+                      key={j}
+                      className="flex items-start gap-1.5 text-xs text-muted-foreground"
+                    >
+                      <span className="mt-1.5 size-1 shrink-0 rounded-full bg-current" />
+                      {action}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {phase.milestone && (
+                <p className="mt-1.5 text-xs text-brand-coral">
+                  Jalon : {phase.milestone}
+                </p>
+              )}
             </div>
           </li>
         ))}

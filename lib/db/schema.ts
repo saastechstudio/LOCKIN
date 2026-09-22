@@ -15,7 +15,10 @@ import { relations } from "drizzle-orm";
 
 export type AuditRoadmapPhase = {
   phase: string;
+  objective: string;
   focus: string;
+  keyActions: string[];
+  milestone: string;
   durationWeeks: number;
 };
 

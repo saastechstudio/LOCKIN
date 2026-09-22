@@ -369,13 +369,13 @@ function AuditResultView({
           <CardTitle className="font-display text-lg">Feuille de route</CardTitle>
         </CardHeader>
         <CardContent>
-          <ol className="space-y-4">
+          <ol className="space-y-5">
             {result.roadmap.map((phase, i) => (
               <li key={i} className="flex gap-4">
                 <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-coral/40 bg-brand-coral/10 font-display text-sm text-brand-coral">
                   {i + 1}
                 </span>
-                <div>
+                <div className="min-w-0 flex-1">
                   <div className="flex items-baseline gap-2">
                     <p className="text-sm font-medium text-foreground">{phase.phase}</p>
                     <span className="text-xs text-muted-foreground">
@@ -383,6 +383,29 @@ function AuditResultView({
                     </span>
                   </div>
                   <p className="mt-0.5 text-sm text-muted-foreground">{phase.focus}</p>
+                  {phase.objective && (
+                    <p className="mt-2 text-sm font-medium text-foreground">
+                      🎯 {phase.objective}
+                    </p>
+                  )}
+                  {phase.keyActions && phase.keyActions.length > 0 && (
+                    <ul className="mt-1.5 space-y-1">
+                      {phase.keyActions.map((action, j) => (
+                        <li
+                          key={j}
+                          className="flex items-start gap-2 text-sm text-muted-foreground"
+                        >
+                          <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-brand-blue" />
+                          {action}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {phase.milestone && (
+                    <p className="mt-2 text-xs text-brand-coral">
+                      Jalon : {phase.milestone}
+                    </p>
+                  )}
                 </div>
               </li>
             ))}

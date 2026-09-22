@@ -5,7 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { useMounted } from "@/lib/hooks/use-mounted";
 
 const DARK_VARIABLES = {
-  colorPrimary: "#6D97FF",
+  colorPrimary: "#A480EC",
   colorBackground: "#161616",
   colorForeground: "#f8f8f6",
   colorInput: "#1a1a1a",
@@ -14,7 +14,7 @@ const DARK_VARIABLES = {
 };
 
 const LIGHT_VARIABLES = {
-  colorPrimary: "#4A7FF8",
+  colorPrimary: "#7B3FE4",
   colorBackground: "#ffffff",
   colorForeground: "#111827",
   colorInput: "#f0f0ec",
