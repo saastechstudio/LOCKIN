@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 const NAV_LINKS = [
   { href: "#pillars-values", label: "Le Club" },
   { href: "#features", label: "Fonctionnalités" },
+  { href: "#methode", label: "La Méthode" },
   { href: "#pricing", label: "Tarifs" },
 ];
 

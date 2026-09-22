@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/marketing/site-footer";
 import { Hero } from "@/components/marketing/hero";
 import { PillarsSection } from "@/components/marketing/pillars-section";
 import { Pillars } from "@/components/marketing/pillars";
+import { MethodologySection } from "@/components/marketing/methodology-section";
 import { Pricing } from "@/components/marketing/pricing";
 import { Faq } from "@/components/marketing/faq";
 import { ExitIntentPopup } from "@/components/marketing/exit-intent-popup";
@@ -16,6 +17,7 @@ export default function Home() {
         <Hero />
         <PillarsSection />
         <Pillars />
+        <MethodologySection />
         <Pricing />
         <Faq />
       </main>

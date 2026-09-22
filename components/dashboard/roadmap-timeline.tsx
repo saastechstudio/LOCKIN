@@ -3,6 +3,9 @@ import { Check, Lock as LockIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import type { OnboardingAudit } from "@/lib/db/schema";
+import { METHODOLOGY_STAGES } from "@/lib/methodology";
+
+const DIAGNOSTIC_STAGE = METHODOLOGY_STAGES[0];
 
 export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
   const weeksSinceAudit = Math.max(
@@ -32,6 +35,20 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
       </div>
 
       <ol className="space-y-3">
+        <li className="flex gap-3">
+          <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-brand-blue bg-brand-blue font-display text-xs text-white">
+            <Check className="size-3.5" />
+          </span>
+          <div className="min-w-0 flex-1 pb-1">
+            <p className="text-sm font-medium text-foreground">
+              {DIAGNOSTIC_STAGE.name}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              {DIAGNOSTIC_STAGE.tagline}
+            </p>
+          </div>
+        </li>
+
         {phases.map((phase, i) => (
           <li key={i} className="flex gap-3">
             <span
@@ -45,7 +62,7 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
                   "border-border text-muted-foreground",
               )}
             >
-              {phase.status === "done" ? <Check className="size-3.5" /> : i + 1}
+              {phase.status === "done" ? <Check className="size-3.5" /> : i + 2}
             </span>
             <div className="min-w-0 flex-1 pb-1">
               <div className="flex items-center gap-2">
