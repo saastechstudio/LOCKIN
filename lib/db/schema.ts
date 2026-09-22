@@ -60,6 +60,13 @@ export const aiCoachVisualStyleEnum = pgEnum("ai_coach_visual_style", [
   "ultra_minimal",
 ]);
 
+export const moodEnum = pgEnum("mood", [
+  "motive",
+  "normal",
+  "fatigue",
+  "stresse",
+]);
+
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   clerkId: text("clerk_id").notNull().unique(),
@@ -152,6 +159,7 @@ export const dailyFocus = pgTable(
     taskDescription: text("task_description").notNull(),
     taskCompleted: boolean("task_completed").notNull().default(false),
     disciplineRating: integer("discipline_rating"),
+    mood: moodEnum("mood"),
     createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
   },
   (table) => [uniqueIndex("daily_focus_user_date_idx").on(table.userId, table.date)],
