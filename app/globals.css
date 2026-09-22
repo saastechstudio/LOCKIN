@@ -4,14 +4,16 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Lock In design tokens — v4, "Sunset" palette (same "Soft & Warm"
- * layout/components as v2/v3, only the color code changed): cream/white
- * surfaces, a warm-to-cool sunset gradient family sampled from the brand
- * moodboard — Gold #DDA05E, Coral-Rose #E08A72, Indigo-Violet #4B4D82,
- * Sky Blue #5774D2 (primary) — used together everywhere the app already
- * composes a brand gradient (hero glow, progress bar, coach avatar), and
- * individually as solid tokens elsewhere. Light mode is the primary
- * experience; dark mode is a complementary variant for the toggle.
+ * Lock In design tokens — v5, "Fintech" palette (same "Soft & Warm"
+ * layout/components as v2/v3/v4, only the color code changed): cream/white
+ * surfaces, colors sampled from the brand moodboard's balance/transaction
+ * cards — Sky Blue #4A90E8 (primary), Coral #E8825A (secondary), Warm Gold
+ * #E8B563 (tertiary), Deep Teal #1B7A8C (dark accent) — deliberately NO
+ * violet/purple anywhere in the palette. Buttons render as a blue → coral →
+ * gold gradient (bg-brand-gradient) instead of a single flat color, so they
+ * visibly alternate through the photo's palette rather than reading as one
+ * flat hue. Light mode is the primary experience; dark mode is a
+ * complementary variant for the toggle.
  *
  * Two layers:
  *  1. Runtime CSS variables below (`:root` = light, `.dark` = dark) —
@@ -38,24 +40,24 @@
   --brand-bg-deep: #f4f4f0;
   --brand-card: #ffffff;
   --brand-border: rgba(0, 0, 0, 0.05);
-  --brand-blue: #5774d2;
-  --brand-blue-soft: #92b4e1;
-  --brand-blue-deep: #4b4d82;
-  --brand-coral: #e08a72;
-  --brand-coral-soft: #f0bcae;
-  --brand-yellow: #dda05e;
-  --brand-dark: #2e2350;
+  --brand-blue: #4a90e8;
+  --brand-blue-soft: #a9cbf2;
+  --brand-blue-deep: #1b7a8c;
+  --brand-coral: #e8825a;
+  --brand-coral-soft: #f5c0a8;
+  --brand-yellow: #e8b563;
+  --brand-dark: #16303a;
 
   --shadow-color: 17, 24, 39;
-  --glow-blue: 0 8px 20px -6px rgba(87, 116, 210, 0.4);
-  --glow-coral: 0 8px 20px -6px rgba(224, 138, 114, 0.35);
+  --glow-blue: 0 8px 20px -6px rgba(74, 144, 232, 0.4);
+  --glow-coral: 0 8px 20px -6px rgba(232, 130, 90, 0.35);
 
   --glass-bg: rgba(255, 255, 255, 0.8);
   --glass-border: rgba(0, 0, 0, 0.05);
-  --noise-bg: radial-gradient(circle at 20% 20%, rgba(87, 116, 210, 0.06), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(224, 138, 114, 0.05), transparent 45%);
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(74, 144, 232, 0.06), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(232, 130, 90, 0.05), transparent 45%);
   --scrollbar-thumb: rgba(0, 0, 0, 0.15);
-  --selection-bg: rgba(87, 116, 210, 0.2);
+  --selection-bg: rgba(74, 144, 232, 0.2);
 
   /* ---- shadcn-style semantic tokens ---- */
   --background: var(--brand-bg);
@@ -76,7 +78,7 @@
   --muted: #f0f0ec;
   --muted-foreground: rgba(17, 24, 39, 0.55);
 
-  --accent: #eef1fc;
+  --accent: #eaf3fb;
   --accent-foreground: var(--brand-blue-deep);
 
   --destructive: #d6432f;
@@ -84,7 +86,7 @@
 
   --border: var(--brand-border);
   --input: rgba(0, 0, 0, 0.08);
-  --ring: rgba(87, 116, 210, 0.4);
+  --ring: rgba(74, 144, 232, 0.4);
 
   --chart-1: var(--brand-blue);
   --chart-2: var(--brand-coral);
@@ -99,24 +101,24 @@
   --brand-bg-deep: #050505;
   --brand-card: #161616;
   --brand-border: rgba(255, 255, 255, 0.08);
-  --brand-blue: #8aa0e8;
-  --brand-blue-soft: #b7cbf0;
-  --brand-blue-deep: #5774d2;
-  --brand-coral: #f2a28d;
-  --brand-coral-soft: #f7c7b8;
-  --brand-yellow: #f0b978;
+  --brand-blue: #7fb3f0;
+  --brand-blue-soft: #b7d6f5;
+  --brand-blue-deep: #4a90e8;
+  --brand-coral: #f0a07e;
+  --brand-coral-soft: #f5c4ad;
+  --brand-yellow: #f0c888;
   --brand-dark: #000000;
 
   --shadow-color: 0, 0, 0;
-  --glow-blue: 0 8px 24px -6px rgba(138, 160, 232, 0.45);
-  --glow-coral: 0 8px 24px -6px rgba(242, 162, 141, 0.4);
+  --glow-blue: 0 8px 24px -6px rgba(127, 179, 240, 0.45);
+  --glow-coral: 0 8px 24px -6px rgba(240, 160, 126, 0.4);
 
   --glass-bg: rgba(22, 22, 22, 0.75);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --noise-bg: radial-gradient(circle at 20% 20%, rgba(138, 160, 232, 0.08), transparent 40%),
-    radial-gradient(circle at 80% 0%, rgba(242, 162, 141, 0.06), transparent 45%);
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(127, 179, 240, 0.08), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(240, 160, 126, 0.06), transparent 45%);
   --scrollbar-thumb: rgba(255, 255, 255, 0.2);
-  --selection-bg: rgba(138, 160, 232, 0.3);
+  --selection-bg: rgba(127, 179, 240, 0.3);
 
   /* ---- shadcn-style semantic tokens ---- */
   --background: var(--brand-bg);
@@ -145,7 +147,7 @@
 
   --border: var(--brand-border);
   --input: rgba(255, 255, 255, 0.1);
-  --ring: rgba(138, 160, 232, 0.45);
+  --ring: rgba(127, 179, 240, 0.45);
 
   --chart-1: var(--brand-blue);
   --chart-2: var(--brand-coral);
@@ -241,6 +243,12 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Primary button surface — alternates through blue → coral → gold instead
+   of a single flat color, echoing the brand moodboard's gradient cards. */
+.bg-brand-gradient {
+  background: linear-gradient(120deg, var(--brand-blue), var(--brand-coral) 60%, var(--brand-yellow));
 }
 
 /* "surface" — the elevated card treatment for this design system: solid
