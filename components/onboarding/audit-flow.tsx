@@ -27,6 +27,8 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { AuditResult } from "@/lib/ai/audit";
+import { GlossaryTerm } from "@/components/ui/glossary-term";
+import { GLOSSARY } from "@/lib/glossary";
 
 const REVENUE_LEVELS = [
   "Pas encore de revenus",
@@ -350,7 +352,11 @@ function AuditResultView({
       <Card className="border-brand-blue/30 bg-brand-blue/5">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
           <Lock className="size-4 text-brand-blue" />
-          <CardTitle className="font-display text-lg">Ton Frein Lock In</CardTitle>
+          <CardTitle className="font-display text-lg">
+            <GlossaryTerm definition={GLOSSARY.freinLockIn}>
+              Ton Frein Lock In
+            </GlossaryTerm>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-foreground">{result.lockInBlocker}</p>
