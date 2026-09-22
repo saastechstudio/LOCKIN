@@ -14,7 +14,10 @@ const PROVIDERS: {
   {
     id: "mistral",
     envVar: "MISTRAL_API_KEY",
-    build: () => mistral("mistral-large-latest"),
+    // mistral-large-latest renvoie "model not available in your
+    // subscription tier" sur un compte gratuit/standard — mistral-small
+    // est disponible sur tous les paliers.
+    build: () => mistral("mistral-small-latest"),
   },
   {
     id: "anthropic",
@@ -25,7 +28,9 @@ const PROVIDERS: {
   {
     id: "google",
     envVar: "GOOGLE_GENERATIVE_AI_API_KEY",
-    build: () => google("gemini-2.0-flash"),
+    // gemini-2.0-flash est déprécié côté Google (erreur explicite pointant
+    // vers gemini-3.6-flash).
+    build: () => google("gemini-3.6-flash"),
   },
 ];
 
