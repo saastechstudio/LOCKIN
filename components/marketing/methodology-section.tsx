@@ -17,7 +17,7 @@ export function MethodologySection() {
             Un seul cadre, tous les profils
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Peu importe ton secteur, ton niveau de revenus ou ton objectif —
+            Peu importe ton secteur, ton niveau de revenus ou ton objectif,
             chaque membre progresse selon les 4 mêmes étapes. C&apos;est le
             contenu qui s&apos;adapte à toi, jamais la structure.
           </p>
