@@ -110,19 +110,33 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
                   Objectif : {phase.objective}
                 </p>
               )}
-              {phase.keyActions && phase.keyActions.length > 0 && (
-                <ul className="mt-1.5 space-y-1">
-                  {phase.keyActions.map((action, j) => (
-                    <li
-                      key={j}
-                      className="flex items-start gap-1.5 text-xs text-muted-foreground"
-                    >
-                      <span className="mt-1.5 size-1 shrink-0 rounded-full bg-current" />
-                      {action}
-                    </li>
+
+              {/* Le détail semaine par semaine n'est déplié que pour l'étape
+                  en cours — les autres restent condensées pour ne pas
+                  surcharger ce widget de dashboard. */}
+              {phase.status === "current" && phase.steps && phase.steps.length > 0 && (
+                <div className="mt-2 space-y-2 border-l border-brand-coral/30 pl-3">
+                  {phase.steps.map((step, j) => (
+                    <div key={j}>
+                      <p className="text-xs font-medium text-foreground">
+                        {step.title}
+                      </p>
+                      <ul className="mt-0.5 space-y-0.5">
+                        {step.actions.map((action, k) => (
+                          <li
+                            key={k}
+                            className="flex items-start gap-1.5 text-xs text-muted-foreground"
+                          >
+                            <span className="mt-1.5 size-1 shrink-0 rounded-full bg-current" />
+                            {action}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                </div>
               )}
+
               {phase.milestone && (
                 <p className="mt-1.5 text-xs text-brand-coral">
                   Jalon : {phase.milestone}

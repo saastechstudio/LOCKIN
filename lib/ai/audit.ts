@@ -47,12 +47,31 @@ export const auditResultSchema = z.object({
           .describe(
             "Pourquoi cette étape compte pour CE membre précisément, en 1 à 2 phrases : le lien avec son frein Lock In et ses motivations profondes. Jamais générique.",
           ),
-        keyActions: z
-          .array(z.string())
-          .min(3)
+        steps: z
+          .array(
+            z.object({
+              title: z
+                .string()
+                .describe(
+                  "Titre court du sous-bloc, commençant par sa plage de semaines dans l'étape, ex: \"Semaines 1-2 : ...\".",
+                ),
+              durationWeeks: z
+                .number()
+                .int()
+                .describe("Durée de ce sous-bloc en semaines."),
+              actions: z
+                .array(z.string())
+                .min(2)
+                .max(3)
+                .describe(
+                  "2 à 3 actions concrètes et personnalisées pour ce sous-bloc précis. Jamais vagues ni génériques — chacune doit être une action que le membre peut cocher cette semaine-là.",
+                ),
+            }),
+          )
+          .min(2)
           .max(4)
           .describe(
-            "3 à 4 actions concrètes, personnalisées et réalisables à mener pendant cette étape pour atteindre l'objectif. Jamais vagues ni génériques — chacune doit être une action que le membre peut cocher.",
+            "2 à 4 sous-blocs qui découpent l'étape dans le temps et montrent une vraie progression (pas les mêmes actions répétées), dont la somme des durées est EXACTEMENT égale à durationWeeks de cette étape.",
           ),
         milestone: z
           .string()
@@ -67,7 +86,7 @@ export const auditResultSchema = z.object({
     )
     .length(3)
     .describe(
-      `Les 3 étapes qui suivent le Diagnostic dans ${METHODOLOGY_NAME} (${ROADMAP_STAGE_NAMES.join(", puis ")}), dans cet ordre, dont la somme des durées couvre la durée cible totale en semaines. Chaque étape doit être un mini plan d'action structuré (objectif, actions, jalon), pas un simple paragraphe d'intention.`,
+      `Les 3 étapes qui suivent le Diagnostic dans ${METHODOLOGY_NAME} (${ROADMAP_STAGE_NAMES.join(", puis ")}), dans cet ordre, dont la somme des durées couvre la durée cible totale en semaines. Chaque étape est un vrai mini programme découpé dans le temps (objectif, sous-blocs progressifs avec leurs actions, jalon), jamais un simple paragraphe d'intention ni une liste plate d'actions valable pour toute la durée de l'étape.`,
     ),
   firstWeekActions: z
     .array(z.string())
@@ -88,8 +107,10 @@ Ce membre vient de terminer le Diagnostic, c'est à dire l'audit. Ta tâche : id
 Règles :
 Sois direct, précis, sans complaisance ni discours motivationnel creux.
 Les 3 étapes de la feuille de route sont fixes dans leur nom et leur ordre : Fondations, Exécution, Ancrage. Seuls le contenu (ce sur quoi porte l'étape) et la répartition des durées s'adaptent à ce membre précis, dans le respect des proportions indicatives de la méthode. La somme des durées doit correspondre à la durée cible demandée.
-Chaque étape est un mini plan d'action structuré, pas un paragraphe d'intention : un objectif mesurable, 3 à 4 actions concrètes que le membre peut cocher une par une, et un jalon vérifiable qui marque la fin de l'étape. Deux membres avec des profils différents ne doivent jamais recevoir les mêmes actions ou le même jalon.
-Les actions (de chaque étape et de la première semaine) doivent être concrètes, mesurables, réalisables dans le temps imparti. Jamais vagues, jamais de généralités du type "travailler sa discipline" sans dire comment.
+Chaque étape est un vrai mini programme, jamais un paragraphe d'intention ni une liste plate d'actions valable pour toute sa durée : un objectif mesurable, 2 à 4 sous-blocs qui découpent l'étape dans le temps (ex: "Semaines 1-2", "Semaines 3-5"...), chacun avec ses propres actions, et un jalon final vérifiable. La somme des durées des sous-blocs d'une étape est exactement égale à la durée de cette étape.
+Les sous-blocs doivent montrer une vraie progression : ce qu'on fait en semaine 1-2 prépare ce qu'on fait ensuite, jamais la même liste d'actions répétée d'un sous-bloc à l'autre. Une étape de 3-4 semaines peut n'avoir que 2 sous-blocs ; une étape longue (10+ semaines) doit en avoir 3 ou 4 pour rester actionnable semaine après semaine plutôt que rester vague sur la durée.
+Deux membres avec des profils différents ne doivent jamais recevoir les mêmes actions, sous-blocs ou jalons.
+Toutes les actions (des sous-blocs et de la première semaine) doivent être concrètes, mesurables, réalisables dans le temps imparti. Jamais vagues, jamais de généralités du type "travailler sa discipline" sans dire comment.
 Intègre la dimension santé (sport, sommeil, alimentation, concentration) quand c'est pertinent pour lever le frein identifié, pas comme un ajout générique.
 Ancre le Frein Lock In, les objectifs d'étape et les actions dans les motivations profondes exprimées par le membre. Le programme doit répondre à son pourquoi, pas seulement à son quoi.
 Réponds en français.`;
