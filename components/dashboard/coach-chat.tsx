@@ -11,8 +11,8 @@ import { cn } from "@/lib/utils";
 const QUICK_PROMPTS = [
   "Analyse mon blocage du jour",
   "Recadre mes priorités de la semaine",
-  "Aide-moi à structurer mon pitch",
-  "Challenge mon dernier OKR",
+  "Aide-moi à structurer ma présentation",
+  "Bouscule-moi sur mon dernier objectif",
 ];
 
 function messageText(message: UIMessage) {

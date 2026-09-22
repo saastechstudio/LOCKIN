@@ -49,7 +49,7 @@ export function NewOkrDialog() {
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Nouvel OKR</DialogTitle>
+          <DialogTitle>Nouvel objectif</DialogTitle>
           <DialogDescription>
             Fixez un objectif mesurable et daté pour rester verrouillé sur
             l&apos;exécution.

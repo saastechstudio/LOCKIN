@@ -25,8 +25,8 @@ export function StickyCtaBar() {
       }`}
     >
       <p className="hidden text-sm text-foreground sm:block">
-        <span className="font-display text-brand-coral">14 jours d&apos;essai gratuit</span>{" "}
-        — dès 9,90&nbsp;€/mois
+        <span className="font-display text-brand-coral">14 jours d&apos;essai gratuit</span>
+        {", dès 9,90 €/mois"}
       </p>
       <Button asChild size="sm" className="w-full sm:w-auto">
         <Link href="/sign-up">

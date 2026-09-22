@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { DiscordIcon } from "@/components/icons/discord-icon";
+import { DISCORD_INVITE_URL } from "@/lib/social-links";
+
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/60 py-12">
@@ -22,7 +25,7 @@ export function SiteFooter() {
           L&apos;excellence n&apos;est pas une destination, c&apos;est une quête.
         </p>
 
-        <div className="flex gap-6 text-xs text-muted-foreground">
+        <div className="flex items-center gap-6 text-xs text-muted-foreground">
           <Link href="/legal/mentions" className="hover:text-brand-blue">
             Mentions légales
           </Link>
@@ -32,6 +35,15 @@ export function SiteFooter() {
           <Link href="/legal/confidentialite" className="hover:text-brand-blue">
             Confidentialité
           </Link>
+          <a
+            href={DISCORD_INVITE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Rejoindre le Discord"
+            className="hover:text-brand-blue"
+          >
+            <DiscordIcon className="size-4" />
+          </a>
         </div>
       </div>
       <p className="mt-8 text-center text-xs text-muted-foreground/60">

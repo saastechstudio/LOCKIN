@@ -43,7 +43,7 @@ export function DashboardTopbar({
             {greeting()}, {firstName}
           </p>
           <p className="hidden text-xs text-muted-foreground sm:block">
-            Verrouille ton focus. Exécute avec excellence.
+            Verrouille ta concentration. Exécute avec excellence.
           </p>
         </div>
       </div>

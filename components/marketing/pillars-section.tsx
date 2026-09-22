@@ -114,7 +114,7 @@ export function PillarsSection() {
             Les 6 Piliers de l&apos;Excellence
           </h2>
           <p className="mt-4 text-muted-foreground">
-            Ce que Lock In exige de chacun de ses membres — non négociable.
+            Ce que Lock In exige de chacun de ses membres, sans exception.
           </p>
         </div>
 

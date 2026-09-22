@@ -27,8 +27,8 @@ export default async function OnboardingWelcomePage() {
           Avant tout, faisons ton audit d&apos;entrée
         </h1>
         <p className="mx-auto max-w-lg text-muted-foreground">
-          5 minutes pour cerner qui tu es et où tu vas — le Coach IA s&apos;en
-          sert pour construire ton programme sur-mesure : ton frein
+          5 minutes pour cerner qui tu es et où tu vas. Le Coach IA s&apos;en
+          sert pour construire ton programme sur mesure : ton frein
           principal, ta feuille de route et tes premières actions.
         </p>
       </div>
@@ -44,7 +44,7 @@ export default async function OnboardingWelcomePage() {
           <CardContent>
             <p className="text-sm text-muted-foreground">
               Tes motivations profondes, tes freins psychologiques, ta routine
-              actuelle et ton niveau de discipline — pour identifier ce qui te
+              actuelle et ton niveau de discipline, pour identifier ce qui te
               pousse vraiment et ce qui te retient.
             </p>
           </CardContent>
@@ -59,8 +59,9 @@ export default async function OnboardingWelcomePage() {
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              Ton secteur, ton niveau de revenus et tes objectifs business —
-              pour calibrer une feuille de route réaliste et ambitieuse.
+              Ton secteur, ton niveau de revenus et tes objectifs
+              professionnels, pour calibrer une feuille de route réaliste et
+              ambitieuse.
             </p>
           </CardContent>
         </Card>
