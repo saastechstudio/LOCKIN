@@ -3,6 +3,7 @@ import { streamText, convertToModelMessages, type UIMessage } from "ai";
 import { db } from "@/lib/db";
 import { aiConversations } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
+import { getTodayFocus } from "@/lib/actions/daily-focus";
 import { buildCoachSystemPrompt } from "@/lib/ai/coach";
 import { resolveModel } from "@/lib/ai/model";
 
@@ -29,9 +30,11 @@ export async function POST(req: Request) {
     });
   }
 
+  const todayFocus = await getTodayFocus();
+
   const result = streamText({
     model: resolveModel(),
-    system: buildCoachSystemPrompt(user),
+    system: buildCoachSystemPrompt(user, todayFocus.mood),
     messages: await convertToModelMessages(messages),
     onFinish: async ({ text }) => {
       if (text) {

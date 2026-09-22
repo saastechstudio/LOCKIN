@@ -14,6 +14,7 @@ import { CheckinHistory } from "@/components/dashboard/checkin-history";
 import { DailyCheckin } from "@/components/dashboard/daily-checkin";
 import { EnergyWidget } from "@/components/dashboard/energy-widget";
 import { CoachRecommendations } from "@/components/dashboard/coach-recommendations";
+import { ModulesGrid } from "@/components/dashboard/modules-grid";
 import { getTodayFocus } from "@/lib/actions/daily-focus";
 
 function average(values: number[]): number {
@@ -95,6 +96,11 @@ export default async function DashboardPage() {
             <Progress value={globalProgress} />
           </CardContent>
         </Card>
+      </section>
+
+      <section>
+        <h2 className="mb-4 font-display text-xl text-foreground">Mes modules</h2>
+        <ModulesGrid />
       </section>
 
       <section>

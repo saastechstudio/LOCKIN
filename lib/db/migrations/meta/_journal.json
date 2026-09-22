@@ -57,6 +57,13 @@
       "when": 1790065715933,
       "tag": "0007_lean_doctor_faustus",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1790073364047,
+      "tag": "0008_blue_sir_ram",
+      "breakpoints": true
     }
   ]
 }

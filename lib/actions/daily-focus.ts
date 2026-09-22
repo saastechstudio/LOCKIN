@@ -5,8 +5,10 @@ import { eq, and, desc } from "drizzle-orm";
 import { z } from "zod";
 
 import { db } from "@/lib/db";
-import { dailyFocus, onboardingAudits } from "@/lib/db/schema";
+import { dailyFocus, onboardingAudits, moodEnum } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
+
+export type Mood = (typeof moodEnum.enumValues)[number];
 
 function startOfToday(): Date {
   const today = new Date();
@@ -80,6 +82,29 @@ export async function updateTodayFocus(formData: FormData) {
       taskCompleted: parsed.taskCompleted,
       disciplineRating: parsed.disciplineRating,
     })
+    .where(and(eq(dailyFocus.id, parsed.focusId), eq(dailyFocus.userId, user.id)));
+
+  revalidatePath("/dashboard");
+}
+
+const moodSchema = z.object({
+  focusId: z.coerce.number().int(),
+  mood: z.enum(moodEnum.enumValues),
+});
+
+/**
+ * Enregistre l'humeur du jour choisie dans le modal obligatoire. Une seule
+ * ligne existe par jour et par membre (contrainte daily_focus_user_date_idx),
+ * donc on ne fait que mettre à jour la ligne déjà créée par getTodayFocus().
+ */
+export async function setTodayMood(focusId: number, mood: Mood) {
+  const user = await getOrCreateDbUser();
+
+  const parsed = moodSchema.parse({ focusId, mood });
+
+  await db
+    .update(dailyFocus)
+    .set({ mood: parsed.mood })
     .where(and(eq(dailyFocus.id, parsed.focusId), eq(dailyFocus.userId, user.id)));
 
   revalidatePath("/dashboard");

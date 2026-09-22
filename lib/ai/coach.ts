@@ -1,4 +1,5 @@
 import type { User } from "@/lib/db/schema";
+import type { Mood } from "@/lib/actions/daily-focus";
 import { METHODOLOGY_NAME, formatMethodologyForPrompt } from "@/lib/methodology";
 
 const BASE_PROMPT = `Tu es LOCK IN, le Coach IA du club d'entrepreneurs d'excellence Lock In. Tu es un mentor et un meilleur ami, conçu pour accompagner le membre dans tous les domaines de sa vie.
@@ -72,18 +73,31 @@ const TONE_MODIFIERS: Record<User["aiCoachTone"], string> = {
     "Ton dominant : Mode Fondateur. Direct, rapide, sans détour. Tu penses comme un entrepreneur pressé qui n'a pas de temps à perdre.",
 };
 
+const MOOD_MODIFIERS: Record<Mood, string> = {
+  motive:
+    "Humeur du jour : Motivé. Le membre est prêt à avancer fort aujourd'hui. Renforce le Mode DISCIPLINE : ton direct, boost d'énergie, propose des actions ambitieuses et pousse la progression, sans jamais devenir brutal.",
+  normal:
+    "Humeur du jour : Normal. Garde un ton équilibré et structuré, ni trop poussé ni trop doux : plans clairs, priorités nettes, exécution posée.",
+  fatigue:
+    "Humeur du jour : Fatigué. Renforce le Mode SOUTIEN : ton doux, rassurant. Propose des micro objectifs faciles à tenir plutôt que de grands plans, et rappelle que ralentir un jour ne casse pas la progression.",
+  stresse:
+    "Humeur du jour : Stressé. Renforce le Mode SOUTIEN au maximum : ton empathique et posé. Commence par aider à respirer et à simplifier la situation en une seule priorité claire, avant toute action. Zéro pression.",
+};
+
 /**
  * Builds the system prompt for a given member, personalized with their
- * Coach IA settings (app/dashboard/settings/ai). The core LOCK IN OS
+ * Coach IA settings (app/dashboard/settings/ai) and, si connue, l'humeur du
+ * jour enregistrée via le modal obligatoire (MoodGate). The core LOCK IN OS
  * doctrine (6 modules + La Méthode Lock In, French, structured) never
- * changes; only the tone modifier and the coach's chosen name are
- * member-specific.
+ * changes; the tone modifier, coach's chosen name, and today's mood are
+ * member- and day-specific.
  */
-export function buildCoachSystemPrompt(user: User): string {
+export function buildCoachSystemPrompt(user: User, mood?: Mood | null): string {
   const toneLine = TONE_MODIFIERS[user.aiCoachTone];
   const nameLine = user.aiCoachName
     ? `Le membre a choisi de t'appeler "${user.aiCoachName}". Présente-toi sous ce nom si on te le demande.`
     : "";
+  const moodLine = mood ? MOOD_MODIFIERS[mood] : "";
 
-  return [BASE_PROMPT, toneLine, nameLine].filter(Boolean).join("\n\n");
+  return [BASE_PROMPT, toneLine, nameLine, moodLine].filter(Boolean).join("\n\n");
 }
