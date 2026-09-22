@@ -11,7 +11,7 @@ export default function SignUpPage() {
               card: "surface",
               headerTitle: "font-display text-foreground",
               formButtonPrimary:
-                "bg-brand-blue text-white rounded-full hover:bg-brand-blue-deep",
+                "bg-brand-gradient text-white rounded-full hover:brightness-105",
             },
           }}
         />

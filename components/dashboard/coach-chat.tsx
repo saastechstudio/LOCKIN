@@ -116,7 +116,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
             type="submit"
             disabled={isLoading || !input.trim()}
             aria-label="Envoyer"
-            className="bg-brand-blue shadow-blue-glow flex size-9 shrink-0 items-center justify-center rounded-full text-white transition-transform hover:scale-105 disabled:pointer-events-none disabled:opacity-40"
+            className="bg-brand-gradient shadow-blue-glow flex size-9 shrink-0 items-center justify-center rounded-full text-white transition-transform hover:scale-105 disabled:pointer-events-none disabled:opacity-40"
           >
             <ArrowUp className="size-4" />
           </button>
