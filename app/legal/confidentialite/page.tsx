@@ -33,7 +33,7 @@ export default function ConfidentialitePage() {
         </li>
         <li>
           <strong>Données de facturation :</strong> statut d&apos;abonnement
-          et identifiant client, gérés par Stripe (Lock In ne stocke aucune
+          et identifiant de membre, gérés par Whop (Lock In ne stocke aucune
           donnée bancaire).
         </li>
         <li>
@@ -64,7 +64,7 @@ export default function ConfidentialitePage() {
       <p>
         Vos données sont traitées par Lock In et par les prestataires
         strictement nécessaires au fonctionnement du service : Clerk
-        (authentification), Stripe (paiement), Neon (hébergement de la base
+        (authentification), Whop (paiement), Neon (hébergement de la base
         de données), Railway (hébergement de l&apos;application), ainsi que
         le ou les fournisseurs d&apos;intelligence artificielle utilisés par
         le coach IA (Anthropic, OpenAI ou Google selon la configuration).

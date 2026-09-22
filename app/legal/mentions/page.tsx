@@ -61,7 +61,7 @@ export default function MentionsLegalesPage() {
 
       <h2>Crédits</h2>
       <p>
-        Authentification assurée par Clerk. Paiements traités par Stripe.
+        Authentification assurée par Clerk. Paiements traités par Whop.
         Assistant IA propulsé par les API d&apos;Anthropic, OpenAI et
         Google, selon la configuration active.
       </p>
