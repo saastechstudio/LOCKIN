@@ -12,6 +12,11 @@ const PROVIDERS: {
   build: () => LanguageModel;
 }[] = [
   {
+    id: "mistral",
+    envVar: "MISTRAL_API_KEY",
+    build: () => mistral("mistral-large-latest"),
+  },
+  {
     id: "anthropic",
     envVar: "ANTHROPIC_API_KEY",
     build: () => anthropic("claude-3-5-sonnet-20241022"),
@@ -21,11 +26,6 @@ const PROVIDERS: {
     id: "google",
     envVar: "GOOGLE_GENERATIVE_AI_API_KEY",
     build: () => google("gemini-2.0-flash"),
-  },
-  {
-    id: "mistral",
-    envVar: "MISTRAL_API_KEY",
-    build: () => mistral("mistral-large-latest"),
   },
 ];
 
@@ -40,7 +40,7 @@ export type ModelCandidate = { id: ProviderId; model: LanguageModel };
 
 /**
  * Fournisseurs IA configurés (clé présente) et non en cooldown, dans l'ordre
- * de préférence Anthropic → OpenAI → Gemini → Mistral. Un appelant qui a
+ * de préférence Mistral → Anthropic → OpenAI → Gemini. Un appelant qui a
  * besoin de résilience doit essayer chaque candidat dans l'ordre et appeler
  * markProviderBroken() sur celui qui échoue avant de passer au suivant.
  */
