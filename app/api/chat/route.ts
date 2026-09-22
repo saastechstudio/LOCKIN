@@ -5,7 +5,7 @@ import { aiConversations } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { getTodayFocus } from "@/lib/actions/daily-focus";
 import { buildCoachSystemPrompt } from "@/lib/ai/coach";
-import { resolveModel } from "@/lib/ai/model";
+import { getModelCandidates, markProviderBroken } from "@/lib/ai/model";
 
 export const maxDuration = 30;
 
@@ -32,8 +32,16 @@ export async function POST(req: Request) {
 
   const todayFocus = await getTodayFocus();
 
+  const [candidate] = getModelCandidates();
+  if (!candidate) {
+    return new Response(
+      "Aucun fournisseur IA disponible pour le moment. Réessaie dans un instant.",
+      { status: 502 },
+    );
+  }
+
   const result = streamText({
-    model: resolveModel(),
+    model: candidate.model,
     system: buildCoachSystemPrompt(user, todayFocus.mood),
     messages: await convertToModelMessages(messages),
     onFinish: async ({ text }) => {
@@ -47,5 +55,14 @@ export async function POST(req: Request) {
     },
   });
 
-  return result.toUIMessageStreamResponse();
+  return result.toUIMessageStreamResponse({
+    // Le fournisseur choisi peut tomber en panne pendant le streaming
+    // (crédit épuisé, quota) : on le met en pause pour que les prochains
+    // messages, audit compris, basculent directement sur le suivant.
+    onError: (error) => {
+      console.error(`[chat] AI generation failed on ${candidate.id}`, error);
+      markProviderBroken(candidate.id);
+      return "Le Coach IA a rencontré un problème. Réessaie dans un instant.";
+    },
+  });
 }
