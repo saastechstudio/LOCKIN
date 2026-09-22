@@ -4,8 +4,11 @@ import { Check, Lock as LockIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { OnboardingAudit } from "@/lib/db/schema";
 import { METHODOLOGY_STAGES } from "@/lib/methodology";
+import { GlossaryTerm } from "@/components/ui/glossary-term";
+import { GLOSSARY } from "@/lib/glossary";
 
 const DIAGNOSTIC_STAGE = METHODOLOGY_STAGES[0];
+const STAGE_BY_NAME = new Map(METHODOLOGY_STAGES.map((stage) => [stage.name, stage]));
 
 export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
   const weeksSinceAudit = Math.max(
@@ -31,7 +34,14 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
     <div className="space-y-4">
       <div className="flex items-start gap-3 rounded-xl border border-brand-blue/20 bg-brand-blue/5 px-4 py-3">
         <LockIcon className="mt-0.5 size-4 shrink-0 text-brand-blue" />
-        <p className="text-sm text-foreground">{audit.lockInBlocker}</p>
+        <div>
+          <p className="mb-1 text-xs font-medium text-brand-blue-deep">
+            <GlossaryTerm definition={GLOSSARY.freinLockIn}>
+              Ton Frein Lock In
+            </GlossaryTerm>
+          </p>
+          <p className="text-sm text-foreground">{audit.lockInBlocker}</p>
+        </div>
       </div>
 
       <ol className="space-y-3">
@@ -41,7 +51,9 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
           </span>
           <div className="min-w-0 flex-1 pb-1">
             <p className="text-sm font-medium text-foreground">
-              {DIAGNOSTIC_STAGE.name}
+              <GlossaryTerm definition={DIAGNOSTIC_STAGE.description}>
+                {DIAGNOSTIC_STAGE.name}
+              </GlossaryTerm>
             </p>
             <p className="text-xs text-muted-foreground">
               {DIAGNOSTIC_STAGE.tagline}
@@ -74,7 +86,15 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
                       : "text-foreground",
                   )}
                 >
-                  {phase.phase}
+                  {STAGE_BY_NAME.get(phase.phase) ? (
+                    <GlossaryTerm
+                      definition={STAGE_BY_NAME.get(phase.phase)!.description}
+                    >
+                      {phase.phase}
+                    </GlossaryTerm>
+                  ) : (
+                    phase.phase
+                  )}
                 </p>
                 {phase.status === "current" && (
                   <span className="rounded-full bg-brand-coral/10 px-2 py-0.5 text-[10px] font-medium text-brand-coral">

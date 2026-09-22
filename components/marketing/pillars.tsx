@@ -6,6 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { GlossaryTerm } from "@/components/ui/glossary-term";
+import { GLOSSARY } from "@/lib/glossary";
 
 const PILLARS = [
   {
@@ -50,7 +52,13 @@ export function Pillars() {
                   <pillar.icon className="size-5 text-brand-blue" />
                 </div>
                 <CardTitle className="font-display text-xl">
-                  {pillar.title}
+                  {pillar.title === "Tracking d'OKRs" ? (
+                    <GlossaryTerm definition={GLOSSARY.okr}>
+                      {pillar.title}
+                    </GlossaryTerm>
+                  ) : (
+                    pillar.title
+                  )}
                 </CardTitle>
               </CardHeader>
               <CardContent>
