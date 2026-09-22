@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description:
     "L'excellence n'est pas une destination, c'est une quête. Rejoignez le club d'entrepreneurs qui suivent leurs objectifs, s'entraident et progressent chaque jour avec un coach IA d'excellence.",
   icons: {
-    icon: "/logo-mark.svg",
+    icon: "/logo-mark.png",
   },
 };
 
