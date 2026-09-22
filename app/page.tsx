@@ -6,6 +6,7 @@ import { Pillars } from "@/components/marketing/pillars";
 import { MethodologySection } from "@/components/marketing/methodology-section";
 import { Pricing } from "@/components/marketing/pricing";
 import { Faq } from "@/components/marketing/faq";
+import { DiscordCta } from "@/components/marketing/discord-cta";
 import { ExitIntentPopup } from "@/components/marketing/exit-intent-popup";
 import { StickyCtaBar } from "@/components/marketing/sticky-cta-bar";
 
@@ -20,6 +21,7 @@ export default function Home() {
         <MethodologySection />
         <Pricing />
         <Faq />
+        <DiscordCta />
       </main>
       <SiteFooter />
       <StickyCtaBar />
