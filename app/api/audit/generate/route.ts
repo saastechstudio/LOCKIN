@@ -48,6 +48,7 @@ export async function POST(req: Request) {
     .insert(onboardingAudits)
     .values({
       userId: user.id,
+      motivations: input.motivations,
       psychologicalBlockers: input.psychologicalBlockers,
       currentRoutine: input.currentRoutine,
       disciplineLevel: input.disciplineLevel,

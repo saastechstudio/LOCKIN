@@ -43,8 +43,9 @@ export default async function OnboardingWelcomePage() {
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              Tes freins psychologiques, ta routine actuelle et ton niveau de
-              discipline — pour identifier ce qui te retient vraiment.
+              Tes motivations profondes, tes freins psychologiques, ta routine
+              actuelle et ton niveau de discipline — pour identifier ce qui te
+              pousse vraiment et ce qui te retient.
             </p>
           </CardContent>
         </Card>

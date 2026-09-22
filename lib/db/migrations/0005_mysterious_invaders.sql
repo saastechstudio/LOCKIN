@@ -1,0 +1,1 @@
+ALTER TABLE "onboarding_audits" ADD COLUMN "motivations" text;
