@@ -21,7 +21,7 @@ export const SUBSCRIPTION_FAQ: FaqItem[] = [
   {
     question: "Mes données et paiements sont-ils sécurisés ?",
     answer:
-      "Les paiements sont traités par Stripe (leader mondial du paiement en ligne) — Lock In ne stocke jamais tes coordonnées bancaires. Tes données membre restent privées et ne sont jamais revendues.",
+      "Les paiements sont traités par Stripe (leader mondial du paiement en ligne). Lock In ne stocke jamais tes coordonnées bancaires. Tes données membre restent privées et ne sont jamais revendues.",
   },
   {
     question: "Quelle est la différence entre mensuel et annuel ?",

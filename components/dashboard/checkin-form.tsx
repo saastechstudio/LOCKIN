@@ -67,7 +67,7 @@ export function CheckinForm() {
       </div>
 
       <div className="space-y-1.5">
-        <Label htmlFor="focusOfTomorrow">Focus de demain</Label>
+        <Label htmlFor="focusOfTomorrow">Priorité de demain</Label>
         <Textarea
           id="focusOfTomorrow"
           name="focusOfTomorrow"

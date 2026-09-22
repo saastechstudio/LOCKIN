@@ -55,7 +55,7 @@ export function NewTaskDialog() {
         <DialogHeader>
           <DialogTitle>Nouvelle tâche</DialogTitle>
           <DialogDescription>
-            Ajoute une action à ton planning — avec ou sans échéance.
+            Ajoute une action à ton planning, avec ou sans échéance.
           </DialogDescription>
         </DialogHeader>
 

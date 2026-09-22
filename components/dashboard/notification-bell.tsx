@@ -79,7 +79,7 @@ export function NotificationBell({
         <div className="max-h-96 overflow-y-auto">
           {items.length === 0 ? (
             <p className="px-4 py-6 text-center text-sm text-muted-foreground">
-              Rien pour l&apos;instant — ton premier message du jour arrive à
+              Rien pour l&apos;instant. Ton premier message du jour arrive à
               10h.
             </p>
           ) : (

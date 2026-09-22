@@ -14,8 +14,6 @@ import { CheckinHistory } from "@/components/dashboard/checkin-history";
 import { DailyCheckin } from "@/components/dashboard/daily-checkin";
 import { EnergyWidget } from "@/components/dashboard/energy-widget";
 import { CoachRecommendations } from "@/components/dashboard/coach-recommendations";
-import { GlossaryTerm } from "@/components/ui/glossary-term";
-import { GLOSSARY } from "@/lib/glossary";
 import { getTodayFocus } from "@/lib/actions/daily-focus";
 
 function average(values: number[]): number {
@@ -101,17 +99,15 @@ export default async function DashboardPage() {
 
       <section>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-display text-xl text-foreground">
-            <GlossaryTerm definition={GLOSSARY.okr}>Mes OKRs</GlossaryTerm>
-          </h2>
+          <h2 className="font-display text-xl text-foreground">Mes objectifs</h2>
           <NewOkrDialog />
         </div>
 
         {userOkrs.length === 0 ? (
           <Card className="surface">
             <CardContent className="py-10 text-center text-sm text-muted-foreground">
-              Aucun objectif pour l&apos;instant. Créez votre premier OKR pour
-              commencer à verrouiller votre exécution.
+              Aucun objectif pour l&apos;instant. Créez votre premier objectif
+              pour commencer à verrouiller votre exécution.
             </CardContent>
           </Card>
         ) : (

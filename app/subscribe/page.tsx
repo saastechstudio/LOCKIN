@@ -30,7 +30,7 @@ export default async function SubscribePage({
         </h1>
         <p className="mx-auto max-w-xl text-muted-foreground">
           Le Club Lock In est réservé aux membres engagés. Choisis ta formule pour
-          débloquer le Coach IA, ton audit personnalisé et le suivi quotidien —
+          débloquer le Coach IA, ton audit personnalisé et le suivi quotidien.
           14 jours d&apos;essai gratuit, sans engagement.
         </p>
       </div>

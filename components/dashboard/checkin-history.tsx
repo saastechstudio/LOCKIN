@@ -38,12 +38,12 @@ export function CheckinHistory({ checkins }: { checkins: DailyCheckin[] }) {
           </div>
           {c.wins && (
             <p className="mt-1.5 text-xs text-muted-foreground">
-              <span className="text-brand-blue-deep">Victoire —</span> {c.wins}
+              <span className="text-brand-blue-deep">Victoire :</span> {c.wins}
             </p>
           )}
           {c.focusOfTomorrow && (
             <p className="mt-1 text-xs text-muted-foreground">
-              <span className="text-brand-blue-deep">Focus —</span>{" "}
+              <span className="text-brand-blue-deep">Priorité :</span>{" "}
               {c.focusOfTomorrow}
             </p>
           )}

@@ -28,7 +28,7 @@ export function EnergyWidget({
           Énergie &amp; Performance
         </CardTitle>
         <p className="text-xs text-muted-foreground">
-          Basé sur tes 7 derniers jours de check-in et de focus quotidien.
+          Basé sur tes 7 derniers jours de bilan et de priorité quotidienne.
         </p>
       </CardHeader>
       <CardContent className="space-y-4">

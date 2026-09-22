@@ -6,13 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { GlossaryTerm } from "@/components/ui/glossary-term";
-import { GLOSSARY } from "@/lib/glossary";
 
 const PILLARS = [
   {
     icon: Target,
-    title: "Tracking d'OKRs",
+    title: "Suivi d'objectifs",
     description:
       "Fixez des objectifs mesurables, suivez votre progression jour après jour et gardez le cap sur ce qui compte vraiment.",
   },
@@ -20,7 +18,7 @@ const PILLARS = [
     icon: BrainCircuit,
     title: "Coach IA d'excellence 24/7",
     description:
-      "Un mentor exigeant et bienveillant, disponible à tout moment pour challenger vos blocages et structurer votre exécution.",
+      "Un mentor exigeant et bienveillant, disponible à tout moment pour bousculer vos blocages et structurer votre exécution.",
   },
   {
     icon: Users,
@@ -52,13 +50,7 @@ export function Pillars() {
                   <pillar.icon className="size-5 text-brand-blue" />
                 </div>
                 <CardTitle className="font-display text-xl">
-                  {pillar.title === "Tracking d'OKRs" ? (
-                    <GlossaryTerm definition={GLOSSARY.okr}>
-                      {pillar.title}
-                    </GlossaryTerm>
-                  ) : (
-                    pillar.title
-                  )}
+                  {pillar.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>

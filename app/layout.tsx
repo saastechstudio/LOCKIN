@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Lock In — Le Club d'Entrepreneurs d'Excellence",
+  title: "Lock In, Le Club d'Entrepreneurs d'Excellence",
   description:
-    "L'excellence n'est pas une destination, c'est une quête. Rejoignez le club d'entrepreneurs qui trackent leurs OKRs, s'entraident et progressent chaque jour avec un coach IA d'excellence.",
+    "L'excellence n'est pas une destination, c'est une quête. Rejoignez le club d'entrepreneurs qui suivent leurs objectifs, s'entraident et progressent chaque jour avec un coach IA d'excellence.",
   icons: {
     icon: "/logo-mark.svg",
   },

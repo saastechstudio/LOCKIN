@@ -8,7 +8,7 @@ export default function CgvPage() {
         Les présentes Conditions Générales de Vente (CGV) régissent l&apos;accès
         et l&apos;utilisation de l&apos;abonnement au service Lock In, club
         privé d&apos;entrepreneurs proposant un accompagnement au suivi
-        d&apos;objectifs (OKRs), un coach IA, un audit personnalisé, un outil
+        d&apos;objectifs, un coach IA, un audit personnalisé, un outil
         de planification et un annuaire de membres. Toute souscription à
         l&apos;abonnement implique l&apos;acceptation pleine et entière des
         présentes CGV.
@@ -18,8 +18,8 @@ export default function CgvPage() {
       <p>
         Lock In est un service accessible par abonnement, sur inscription,
         donnant accès à l&apos;ensemble des fonctionnalités de la
-        plateforme : tableau de bord d&apos;objectifs, check-in quotidien,
-        coach IA, audit d&apos;onboarding, module de planification et
+        plateforme : tableau de bord d&apos;objectifs, bilan quotidien,
+        coach IA, audit d&apos;entrée, module de planification et
         annuaire des membres.
       </p>
 

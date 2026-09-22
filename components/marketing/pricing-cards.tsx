@@ -6,9 +6,9 @@ import { createCheckoutSession } from "@/lib/actions/stripe";
 import { isStripeConfigured, PRICE_MONTHLY, PRICE_YEARLY } from "@/lib/stripe";
 
 const FEATURES = [
-  "Tracking illimité d'OKRs",
-  "Check-in quotidien guidé",
-  "Coach IA d'excellence 24/7 (business & lifestyle)",
+  "Suivi illimité d'objectifs",
+  "Bilan quotidien guidé",
+  "Coach IA d'excellence 24h/24 (vie professionnelle et personnelle)",
   "Audit d'onboarding personnalisé + feuille de route",
   "Accès à l'annuaire des membres",
 ];

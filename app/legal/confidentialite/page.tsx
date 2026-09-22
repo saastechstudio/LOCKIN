@@ -24,9 +24,8 @@ export default function ConfidentialitePage() {
           l&apos;inscription ou modifiés dans les paramètres).
         </li>
         <li>
-          <strong>Données de suivi :</strong> objectifs (OKRs), check-ins
-          quotidiens, tâches de planning, réponses à l&apos;audit
-          d&apos;onboarding.
+          <strong>Données de suivi :</strong> objectifs, bilans quotidiens,
+          tâches de planning, réponses à l&apos;audit d&apos;entrée.
         </li>
         <li>
           <strong>Échanges avec le coach IA :</strong> historique des

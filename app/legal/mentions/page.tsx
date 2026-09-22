@@ -12,7 +12,7 @@ export default function MentionsLegalesPage() {
           <strong>Raison sociale :</strong> [Nom de la société]
         </li>
         <li>
-          <strong>Forme juridique :</strong> [Forme juridique — SAS, SARL...]
+          <strong>Forme juridique :</strong> [Forme juridique, par exemple SAS ou SARL]
         </li>
         <li>
           <strong>Capital social :</strong> [Montant]

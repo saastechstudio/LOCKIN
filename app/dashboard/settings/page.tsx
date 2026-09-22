@@ -84,7 +84,7 @@ export default async function SettingsPage() {
 
           {isComplimentary ? (
             <p className="text-xs text-muted-foreground">
-              Accès premium offert à ce compte — aucun paiement requis.
+              Accès premium offert à ce compte, aucun paiement requis.
             </p>
           ) : isStripeConfigured ? (
             <form action={createPortalSession}>

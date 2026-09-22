@@ -231,7 +231,7 @@ export function AuditFlow() {
                 </Select>
               </div>
               <div className="space-y-1.5">
-                <Label htmlFor="businessGoals">Objectifs business</Label>
+                <Label htmlFor="businessGoals">Objectifs professionnels</Label>
                 <Textarea
                   id="businessGoals"
                   rows={3}
