@@ -40,6 +40,7 @@ const REVENUE_LEVELS = [
 type Step = 1 | 2 | 3;
 
 type FormState = {
+  motivations: string;
   psychologicalBlockers: string;
   currentRoutine: string;
   disciplineLevel: number;
@@ -51,6 +52,7 @@ type FormState = {
 };
 
 const INITIAL_STATE: FormState = {
+  motivations: "",
   psychologicalBlockers: "",
   currentRoutine: "",
   disciplineLevel: 5,
@@ -74,7 +76,9 @@ export function AuditFlow() {
   }
 
   const step1Valid =
-    form.psychologicalBlockers.trim().length > 0 && form.currentRoutine.trim().length > 0;
+    form.motivations.trim().length > 0 &&
+    form.psychologicalBlockers.trim().length > 0 &&
+    form.currentRoutine.trim().length > 0;
   const step2Valid =
     form.sector.trim().length > 0 &&
     form.revenueLevel.length > 0 &&
@@ -141,6 +145,18 @@ export function AuditFlow() {
         <CardContent className="space-y-5">
           {step === 1 && (
             <>
+              <div className="space-y-1.5">
+                <Label htmlFor="motivations">
+                  Pourquoi veux-tu réussir ? Quelles sont tes motivations profondes ?
+                </Label>
+                <Textarea
+                  id="motivations"
+                  rows={3}
+                  placeholder="Liberté financière, prouver quelque chose, protéger tes proches, laisser une trace..."
+                  value={form.motivations}
+                  onChange={(e) => set("motivations", e.target.value)}
+                />
+              </div>
               <div className="space-y-1.5">
                 <Label htmlFor="psychologicalBlockers">
                   Quels sont tes principaux freins psychologiques ?

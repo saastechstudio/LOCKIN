@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const auditInputSchema = z.object({
   // Étape 1 — Profil personnel
+  motivations: z.string().min(1).max(2000),
   psychologicalBlockers: z.string().min(1).max(2000),
   currentRoutine: z.string().min(1).max(2000),
   disciplineLevel: z.coerce.number().int().min(1).max(10),
@@ -56,12 +57,14 @@ Règles :
 - La feuille de route doit être réaliste et progressive (fondations → montée en puissance → consolidation/objectif), et sa durée totale doit correspondre à la durée cible demandée.
 - Les actions de la première semaine doivent être concrètes, mesurables, réalisables en 7 jours — jamais vagues.
 - Intègre la dimension santé (sport/sommeil/alimentation/focus) quand c'est pertinent pour lever le frein identifié, pas comme un ajout générique.
+- Ancre le Lock In Blocker et les actions dans les motivations profondes exprimées par le membre — le programme doit répondre à son "pourquoi", pas seulement à son "quoi".
 - Réponds en français.`;
 
 export function buildAuditPrompt(input: AuditInput): string {
   return `Voici les réponses de l'audit d'un nouveau membre :
 
 ## Profil personnel
+- Motivations profondes : ${input.motivations}
 - Freins psychologiques exprimés : ${input.psychologicalBlockers}
 - Routine actuelle : ${input.currentRoutine}
 - Niveau de discipline auto-évalué (1-10) : ${input.disciplineLevel}

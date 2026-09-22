@@ -124,6 +124,7 @@ export const onboardingAudits = pgTable("onboarding_audits", {
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   // Étape 1 — Profil personnel
+  motivations: text("motivations"),
   psychologicalBlockers: text("psychological_blockers").notNull(),
   currentRoutine: text("current_routine").notNull(),
   disciplineLevel: integer("discipline_level").notNull(),
