@@ -5,7 +5,13 @@ import { mistral } from "@ai-sdk/mistral";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { APICallError, RetryError, type LanguageModel } from "ai";
 
-export type ProviderId = "edenai" | "mistral" | "anthropic" | "openai" | "google";
+export type ProviderId =
+  | "nvidia"
+  | "edenai"
+  | "mistral"
+  | "anthropic"
+  | "openai"
+  | "google";
 
 const edenai = createOpenAICompatible({
   name: "edenai",
@@ -13,11 +19,26 @@ const edenai = createOpenAICompatible({
   apiKey: process.env.EDEN_AI_API_KEY,
 });
 
+const nvidia = createOpenAICompatible({
+  name: "nvidia",
+  baseURL: "https://integrate.api.nvidia.com/v1",
+  apiKey: process.env.NVIDIA_API_KEY,
+});
+
 const PROVIDERS: {
   id: ProviderId;
   envVar: string;
   build: () => LanguageModel;
 }[] = [
+  {
+    id: "nvidia",
+    envVar: "NVIDIA_API_KEY",
+    // NVIDIA NIM (build.nvidia.com) — API compatible OpenAI donnant accès
+    // à des modèles open source hébergés par NVIDIA, palier gratuit
+    // généreux (40 req/min). Llama 3.3 70B est un bon choix généraliste
+    // pour le coaching et les sorties structurées de l'audit.
+    build: () => nvidia.chatModel("meta/llama-3.3-70b-instruct"),
+  },
   {
     id: "edenai",
     envVar: "EDEN_AI_API_KEY",
@@ -109,10 +130,10 @@ export type ModelCandidate = { id: ProviderId; model: LanguageModel };
 
 /**
  * Fournisseurs IA configurés (clé présente) et non en cooldown, dans l'ordre
- * de préférence Eden AI → Mistral → Anthropic → OpenAI → Gemini. Un
- * appelant qui a besoin de résilience doit essayer chaque candidat dans
- * l'ordre et appeler markProviderBroken() sur celui qui échoue avant de
- * passer au suivant.
+ * de préférence NVIDIA NIM → Eden AI → Mistral → Anthropic → OpenAI →
+ * Gemini. Un appelant qui a besoin de résilience doit essayer chaque
+ * candidat dans l'ordre et appeler markProviderBroken() sur celui qui
+ * échoue avant de passer au suivant.
  */
 export function getModelCandidates(): ModelCandidate[] {
   const now = Date.now();
@@ -134,7 +155,7 @@ export function resolveModel(): LanguageModel {
   const [first] = getModelCandidates();
   if (!first) {
     throw new Error(
-      "Aucun fournisseur IA disponible pour le moment — vérifie EDEN_AI_API_KEY, MISTRAL_API_KEY, ANTHROPIC_API_KEY, OPENAI_API_KEY ou GOOGLE_GENERATIVE_AI_API_KEY (crédit, quota, clé valide).",
+      "Aucun fournisseur IA disponible pour le moment — vérifie NVIDIA_API_KEY, EDEN_AI_API_KEY, MISTRAL_API_KEY, ANTHROPIC_API_KEY, OPENAI_API_KEY ou GOOGLE_GENERATIVE_AI_API_KEY (crédit, quota, clé valide).",
     );
   }
   return first.model;
