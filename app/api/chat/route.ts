@@ -1,4 +1,10 @@
-import { streamText, convertToModelMessages, type UIMessage } from "ai";
+import {
+  streamText,
+  convertToModelMessages,
+  createUIMessageStream,
+  createUIMessageStreamResponse,
+  type UIMessage,
+} from "ai";
 
 import { db } from "@/lib/db";
 import { aiConversations } from "@/lib/db/schema";
@@ -8,6 +14,9 @@ import { buildCoachSystemPrompt } from "@/lib/ai/coach";
 import { getModelCandidates, markProviderBroken } from "@/lib/ai/model";
 
 export const maxDuration = 30;
+
+const FALLBACK_TEXT =
+  "Le Coach IA a rencontré un problème. Réessaie dans un instant.";
 
 export async function POST(req: Request) {
   const user = await getOrCreateDbUser();
@@ -31,21 +40,47 @@ export async function POST(req: Request) {
   }
 
   const todayFocus = await getTodayFocus();
+  const system = buildCoachSystemPrompt(user, todayFocus.mood);
+  const modelMessages = await convertToModelMessages(messages);
 
-  const [candidate] = getModelCandidates();
-  if (!candidate) {
+  const candidates = getModelCandidates();
+  if (candidates.length === 0) {
     return new Response(
       "Aucun fournisseur IA disponible pour le moment. Réessaie dans un instant.",
       { status: 502 },
     );
   }
 
-  const result = streamText({
-    model: candidate.model,
-    system: buildCoachSystemPrompt(user, todayFocus.mood),
-    messages: await convertToModelMessages(messages),
-    maxRetries: 1,
-    onFinish: async ({ text }) => {
+  // Un fournisseur peut être en panne (crédit épuisé, quota, limite de
+  // débit) sans que les autres le soient. On essaie chaque fournisseur
+  // configuré dans l'ordre — comme pour l'audit — plutôt que de dépendre
+  // du seul premier candidat et de faire échouer tout le message.
+  const stream = createUIMessageStream({
+    execute: async ({ writer }) => {
+      let text: string | undefined;
+
+      for (const candidate of candidates) {
+        try {
+          const result = streamText({
+            model: candidate.model,
+            system,
+            messages: modelMessages,
+            maxRetries: 1,
+          });
+          text = await result.text;
+          break;
+        } catch (error) {
+          console.error(`[chat] AI generation failed on ${candidate.id}`, error);
+          markProviderBroken(candidate.id, error);
+        }
+      }
+
+      const finalText = text ?? FALLBACK_TEXT;
+
+      writer.write({ type: "text-start", id: "0" });
+      writer.write({ type: "text-delta", id: "0", delta: finalText });
+      writer.write({ type: "text-end", id: "0" });
+
       if (text) {
         await db.insert(aiConversations).values({
           userId: user.id,
@@ -56,14 +91,5 @@ export async function POST(req: Request) {
     },
   });
 
-  return result.toUIMessageStreamResponse({
-    // Le fournisseur choisi peut tomber en panne pendant le streaming
-    // (crédit épuisé, quota) : on le met en pause pour que les prochains
-    // messages, audit compris, basculent directement sur le suivant.
-    onError: (error) => {
-      console.error(`[chat] AI generation failed on ${candidate.id}`, error);
-      markProviderBroken(candidate.id, error);
-      return "Le Coach IA a rencontré un problème. Réessaie dans un instant.";
-    },
-  });
+  return createUIMessageStreamResponse({ stream });
 }

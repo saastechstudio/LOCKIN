@@ -65,8 +65,10 @@ const BILLING_PATTERNS = [
   /credit balance/i,
   /no credits remaining/i,
   /insufficient_quota/i,
+  /insufficient.*credit/i,
   /exceeded your current quota/i,
   /not available in your subscription tier/i,
+  /top up your balance/i,
   /billing/i,
 ];
 const TRANSIENT_PATTERNS = [
