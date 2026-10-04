@@ -12,7 +12,7 @@ export function SectionWhy() {
   return (
     <section id="pourquoi" className="border-t-2 border-camp-brown bg-camp-cream px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
-        <SectionTitle index="03" eyebrow="La promesse" title="Pourquoi Lock-In ?" className="mb-12" />
+        <SectionTitle index="07" eyebrow="La promesse" title="Pourquoi Lock-In ?" className="mb-12" />
 
         <div className="grid grid-cols-1 gap-0 sm:grid-cols-2">
           {PILLARS.map((p, i) => (

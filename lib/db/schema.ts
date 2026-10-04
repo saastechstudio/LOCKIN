@@ -248,6 +248,10 @@ export const campRegistrations = pgTable(
     email: text("email").notNull(),
     sportChoices: jsonb("sport_choices").$type<CampSportChoice[]>().notNull().default([]),
     excursionChoices: jsonb("excursion_choices").$type<string[]>().notNull().default([]),
+    // Nullable : ajouté après coup (programme officiel), les anciennes
+    // lignes n'en ont pas — jamais bloquant pour une pré-inscription déjà
+    // en base.
+    funActivityChoice: text("fun_activity_choice"),
     status: campRegistrationStatusEnum("status").notNull().default("pending"),
     createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
   },

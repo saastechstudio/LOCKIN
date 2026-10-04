@@ -242,14 +242,14 @@
  * restent disponibles partout via le bloc @theme inline.
  */
 :root {
-  --camp-cream: #f2ebdb;
-  --camp-cream-deep: #e4d8bd;
-  --camp-brown: #3a2a1c;
-  --camp-charcoal: #15120f;
-  --camp-gold: #ad8a42;
-  --camp-gold-ink: #8c6f35;
+  --camp-cream: #f5efe6;
+  --camp-cream-deep: #e9dfcd;
+  --camp-brown: #3a2f2f;
+  --camp-charcoal: #0e0e0e;
+  --camp-gold: #c9a86a;
+  --camp-gold-ink: #9c7c42;
   --camp-turquoise: #2f6e68;
-  --camp-line: rgba(58, 42, 28, 0.2);
+  --camp-line: rgba(58, 47, 47, 0.2);
 }
 
 .camp-scope {

@@ -11,7 +11,7 @@ export function SectionSessions({ sessions }: SectionSessionsProps) {
     <section id="sessions" className="border-t-2 border-camp-gold bg-camp-charcoal px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
-          index="04"
+          index="08"
           eyebrow="20 places par session"
           title="Choisis ta session"
           tone="dark"

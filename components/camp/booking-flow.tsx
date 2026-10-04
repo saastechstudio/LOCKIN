@@ -19,12 +19,15 @@ import {
 import {
   EXCURSIONS,
   EXCURSIONS_TO_CHOOSE,
+  FUN_ACTIVITIES,
+  FUN_ACTIVITIES_TO_CHOOSE,
   SPORT_ACTIVITIES,
   sessionDurationDays,
 } from "@/lib/camp/data";
 import type { CampSportChoice } from "@/lib/db/schema";
 
-type Step = 1 | 2 | 3 | 4;
+type Step = 1 | 2 | 3 | 4 | 5;
+const TOTAL_STEPS = 5;
 
 type BookingFlowProps = {
   session: CampSessionWithAvailability;
@@ -42,6 +45,7 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
   const [email, setEmail] = useState(initialEmail ?? "");
   const [sportChoices, setSportChoices] = useState<CampSportChoice[]>([]);
   const [excursionChoices, setExcursionChoices] = useState<string[]>([]);
+  const [funActivityChoice, setFunActivityChoice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -72,8 +76,10 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
   const step1Valid = fullName.trim().length > 1 && /\S+@\S+\.\S+/.test(email);
   const step2Valid = sportChoices.length === days.length;
   const step3Valid = excursionChoices.length === EXCURSIONS_TO_CHOOSE;
+  const step4Valid = funActivityChoice !== null;
 
   function handleSubmit() {
+    if (!funActivityChoice) return;
     setError(null);
     startTransition(async () => {
       try {
@@ -83,6 +89,7 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
           email: email.trim(),
           sportChoices,
           excursionChoices,
+          funActivityChoice,
         });
         setDone(true);
       } catch (err) {
@@ -111,11 +118,11 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
         <div className="h-2 w-full border-2 border-camp-brown bg-camp-cream-deep">
           <div
             className="h-full bg-camp-brown transition-all duration-500"
-            style={{ width: `${(step / 4) * 100}%` }}
+            style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
           />
         </div>
         <p className="text-right font-mono text-xs font-bold tracking-[0.1em] text-camp-brown/60 uppercase">
-          Étape {step} / 4
+          Étape {step} / {TOTAL_STEPS}
         </p>
       </div>
 
@@ -155,7 +162,7 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
           <SectionTitle
             eyebrow="Sport"
             title="Une activité par jour"
-            description="Football, Boxe Thaï, Padel ou Yoga."
+            description="Football, Muay Thaï, Pilates, Padel, Fitness ou Yoga."
           />
           <div className="space-y-3">
             {days.map((day) => {
@@ -165,7 +172,7 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
                   <p className="font-mono text-xs font-bold tracking-[0.08em] text-camp-brown/60 uppercase">
                     Jour {day}
                   </p>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {SPORT_ACTIVITIES.map((activity) => (
                       <CardActivity
                         key={activity.id}
@@ -185,9 +192,9 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
       {step === 3 && (
         <div className="space-y-5">
           <SectionTitle
-            eyebrow="Excursions"
-            title={`Choisis ${EXCURSIONS_TO_CHOOSE} excursions`}
-            description={`${excursionChoices.length}/${EXCURSIONS_TO_CHOOSE} sélectionnées`}
+            eyebrow="Excursion"
+            title={`Choisis ${EXCURSIONS_TO_CHOOSE} excursion`}
+            description={`${excursionChoices.length}/${EXCURSIONS_TO_CHOOSE} sélectionnée`}
           />
           <div className="grid gap-2 sm:grid-cols-2">
             {EXCURSIONS.map((excursion) => (
@@ -205,6 +212,29 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
 
       {step === 4 && (
         <div className="space-y-5">
+          <SectionTitle
+            eyebrow="Activité fun"
+            title={`Choisis ${FUN_ACTIVITIES_TO_CHOOSE} activité`}
+            description={funActivityChoice ? "1/1 sélectionnée" : "0/1 sélectionnée"}
+          />
+          <div className="grid gap-2 sm:grid-cols-2">
+            {FUN_ACTIVITIES.map((activity) => (
+              <CardExcursion
+                key={activity.id}
+                excursion={activity}
+                selected={funActivityChoice === activity.id}
+                disabled={funActivityChoice !== null && funActivityChoice !== activity.id}
+                onToggle={() =>
+                  setFunActivityChoice((prev) => (prev === activity.id ? null : activity.id))
+                }
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {step === 5 && (
+        <div className="space-y-5">
           <SectionTitle eyebrow="Récapitulatif" title="Vérifie ta réservation" />
           <div className="space-y-3 border-2 border-camp-brown p-5 text-sm">
             <div className="flex justify-between border-b border-camp-brown/20 pb-3">
@@ -219,12 +249,18 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
               <span className="font-bold text-camp-brown">{fullName}</span>
             </div>
             <div className="flex justify-between border-b border-camp-brown/20 pb-3">
-              <span className="font-mono text-xs text-camp-brown/60 uppercase">Excursions</span>
+              <span className="font-mono text-xs text-camp-brown/60 uppercase">Excursion</span>
               <span className="font-bold text-camp-brown">
                 {excursionChoices
                   .map((id) => EXCURSIONS.find((e) => e.id === id)?.name)
                   .filter(Boolean)
                   .join(", ")}
+              </span>
+            </div>
+            <div className="flex justify-between border-b border-camp-brown/20 pb-3">
+              <span className="font-mono text-xs text-camp-brown/60 uppercase">Activité fun</span>
+              <span className="font-bold text-camp-brown">
+                {FUN_ACTIVITIES.find((a) => a.id === funActivityChoice)?.name}
               </span>
             </div>
             <div className="flex justify-between pt-1">
@@ -246,12 +282,13 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
         ) : (
           <span />
         )}
-        {step < 4 ? (
+        {step < TOTAL_STEPS ? (
           <CTAButton
             disabled={
               (step === 1 && !step1Valid) ||
               (step === 2 && !step2Valid) ||
-              (step === 3 && !step3Valid)
+              (step === 3 && !step3Valid) ||
+              (step === 4 && !step4Valid)
             }
             onClick={() => setStep((s) => (s + 1) as Step)}
           >

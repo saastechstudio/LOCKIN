@@ -1,0 +1,1 @@
+ALTER TABLE "camp_registrations" ADD COLUMN "fun_activity_choice" text;
