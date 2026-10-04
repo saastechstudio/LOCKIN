@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
+import { requireLockinOnboarded } from "@/lib/auth";
 import { getQuestion } from "@/lib/actions/help";
 import { AnswerSection } from "@/components/social/answer-section";
 
@@ -12,6 +13,7 @@ export default async function QuestionDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
+  await requireLockinOnboarded();
   const { id } = await params;
   const questionId = Number(id);
   if (!Number.isInteger(questionId)) notFound();

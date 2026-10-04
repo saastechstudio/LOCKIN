@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { requireLockinOnboarded } from "@/lib/auth";
 import { getFeedPosts } from "@/lib/actions/feed";
 import { LOCKIN_TAGS } from "@/lib/social/data";
 import { PostComposer } from "@/components/social/post-composer";
@@ -13,6 +14,7 @@ export default async function FeedPage({
 }: {
   searchParams: Promise<{ tag?: string; sport?: string; country?: string }>;
 }) {
+  await requireLockinOnboarded();
   const { tag, sport, country } = await searchParams;
   const posts = await getFeedPosts({ tag, sport, country });
 

@@ -2,12 +2,14 @@ import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 
+import { requireLockinOnboarded } from "@/lib/auth";
 import { getConversations } from "@/lib/actions/messages";
 import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
 
 export default async function MessagesInboxPage() {
+  await requireLockinOnboarded();
   const conversations = await getConversations();
 
   return (

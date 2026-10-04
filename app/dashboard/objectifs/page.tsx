@@ -1,3 +1,4 @@
+import { requireLockinOnboarded } from "@/lib/auth";
 import { getGoals, getRoutineItems } from "@/lib/actions/goals";
 import { GoalsBoard } from "@/components/social/goals-board";
 import { RoutineBoard } from "@/components/social/routine-board";
@@ -5,6 +6,7 @@ import { RoutineBoard } from "@/components/social/routine-board";
 export const dynamic = "force-dynamic";
 
 export default async function ObjectifsPage() {
+  await requireLockinOnboarded();
   const [goals, routine] = await Promise.all([getGoals(), getRoutineItems()]);
 
   return (

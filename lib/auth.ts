@@ -50,6 +50,20 @@ export async function getOrCreateDbUser(): Promise<User> {
   return fallback;
 }
 
+/**
+ * Porte d'entrée du Lockin Social Club — un membre qui n'a pas encore fait
+ * le rituel d'inscription (motivation + objectif + sport + routine) est
+ * renvoyé vers /dashboard/rituel-lockin avant de pouvoir voir le feed, un
+ * profil, un groupe, l'entraide ou ses messages.
+ */
+export async function requireLockinOnboarded(): Promise<User> {
+  const user = await getOrCreateDbUser();
+  if (!user.lockinOnboardingCompletedAt) {
+    redirect("/dashboard/rituel-lockin");
+  }
+  return user;
+}
+
 export async function getDbUserOrNull(): Promise<User | null> {
   const { userId } = await auth();
   if (!userId) return null;

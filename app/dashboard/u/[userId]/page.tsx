@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MessageCircle } from "lucide-react";
 
+import { requireLockinOnboarded } from "@/lib/auth";
 import { getSocialProfile } from "@/lib/actions/social-profile";
 import { ProfileView } from "@/components/social/profile-view";
 
@@ -12,6 +13,7 @@ export default async function PublicProfilePage({
 }: {
   params: Promise<{ userId: string }>;
 }) {
+  await requireLockinOnboarded();
   const { userId } = await params;
   const id = Number(userId);
   if (!Number.isInteger(id)) notFound();
