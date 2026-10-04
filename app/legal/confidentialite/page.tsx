@@ -32,6 +32,20 @@ export default function ConfidentialitePage() {
           conversations, utilisé pour maintenir le contexte de vos échanges.
         </li>
         <li>
+          <strong>Lockin Social Club :</strong> motivation initiale, objectifs
+          personnels et professionnels, routines quotidiennes, sport
+          principal, niveau Lockin, posts, commentaires, messages privés,
+          appartenance à des groupes, questions et réponses d&apos;entraide.
+          La motivation initiale et les posts sont visibles par les autres
+          membres ; les objectifs ne sont visibles que si vous choisissez
+          explicitement de les rendre publics.
+        </li>
+        <li>
+          <strong>Modération :</strong> signalements que vous déposez ou dont
+          vous faites l&apos;objet, et événements de modération (strikes,
+          score de respect) liés à votre compte.
+        </li>
+        <li>
           <strong>Données de facturation :</strong> statut d&apos;abonnement
           et identifiant de membre, gérés par Whop (Lock In ne stocke aucune
           donnée bancaire).
@@ -77,6 +91,14 @@ export default function ConfidentialitePage() {
         vous choisissez de rendre visibles (nom, secteur, compétences, bio) ;
         votre adresse e-mail n&apos;est jamais partagée avec les autres
         membres.
+      </p>
+      <p>
+        Sur le Lockin Social Club, votre profil (nom, photo, bio, pays/ville,
+        sport principal, niveau Lockin), vos posts et votre motivation
+        initiale sont visibles par l&apos;ensemble des membres connectés ;
+        vos messages privés ne sont visibles que par leur destinataire. Un
+        signalement que vous déposez est visible par les modérateurs
+        uniquement.
       </p>
 
       <h2>6. Durée de conservation</h2>
