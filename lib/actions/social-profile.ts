@@ -1,0 +1,88 @@
+"use server";
+
+import "server-only";
+import { revalidatePath } from "next/cache";
+import { eq } from "drizzle-orm";
+import { z } from "zod";
+
+import { db } from "@/lib/db";
+import { users, goals, routineItems, type ProfileLink } from "@/lib/db/schema";
+import { getOrCreateDbUser, getDbUserOrNull } from "@/lib/auth";
+
+/**
+ * Profil public Lockin Social Club. `viewerIsOwner` dit si l'appelant peut
+ * voir ses objectifs privés (isPublic=false) et éditer la fiche — sinon on
+ * ne renvoie que les objectifs publics.
+ */
+export async function getSocialProfile(userId: number) {
+  const viewer = await getDbUserOrNull();
+  const viewerIsOwner = viewer?.id === userId;
+
+  const profile = await db.query.users.findFirst({
+    where: eq(users.id, userId),
+    columns: {
+      id: true,
+      name: true,
+      avatarUrl: true,
+      bio: true,
+      sector: true,
+      country: true,
+      city: true,
+      mainSport: true,
+      lockinLevel: true,
+      links: true,
+    },
+  });
+  if (!profile) return null;
+
+  const allGoals = await db.query.goals.findMany({
+    where: eq(goals.userId, userId),
+    orderBy: (fields, { desc }) => [desc(fields.createdAt)],
+  });
+  const visibleGoals = viewerIsOwner ? allGoals : allGoals.filter((g) => g.isPublic);
+
+  const routine = await db.query.routineItems.findMany({
+    where: eq(routineItems.userId, userId),
+    orderBy: (fields, { asc }) => [asc(fields.position)],
+  });
+
+  return { profile, goals: visibleGoals, routine, viewerIsOwner };
+}
+
+const linkSchema = z.object({
+  label: z.string().trim().min(1).max(40),
+  url: z.string().trim().url().max(300),
+});
+
+const updateSchema = z.object({
+  bio: z.string().max(500).optional(),
+  country: z.string().max(80).optional(),
+  city: z.string().max(80).optional(),
+  sector: z.string().max(80).optional(),
+  mainSport: z.string().max(40).optional(),
+  lockinLevel: z.number().int().min(1).max(5),
+  links: z.array(linkSchema).max(6),
+});
+
+export type UpdateSocialProfileInput = z.infer<typeof updateSchema>;
+
+export async function updateSocialProfile(input: UpdateSocialProfileInput) {
+  const user = await getOrCreateDbUser();
+  const parsed = updateSchema.parse(input);
+
+  await db
+    .update(users)
+    .set({
+      bio: parsed.bio || null,
+      country: parsed.country || null,
+      city: parsed.city || null,
+      sector: parsed.sector || null,
+      mainSport: parsed.mainSport || null,
+      lockinLevel: parsed.lockinLevel,
+      links: parsed.links as ProfileLink[],
+    })
+    .where(eq(users.id, user.id));
+
+  revalidatePath("/dashboard/profil");
+  revalidatePath(`/dashboard/u/${user.id}`);
+}
