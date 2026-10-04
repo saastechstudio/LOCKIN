@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeft } from "lucide-react";
 
 import { getCampSession } from "@/lib/actions/camp";
 import { BookingFlow } from "@/components/camp/booking-flow";
@@ -16,23 +18,30 @@ export default async function CampReservationPage({
   const session = await getCampSession(slug);
   if (!session) notFound();
 
-  if (session.remainingSpots <= 0) {
-    return (
-      <div className="mx-auto max-w-xl px-6 py-14 text-center">
-        <p className="font-display text-xl text-camp-brown-deep">
-          Cette session est complète.
-        </p>
-        <p className="mt-2 text-sm text-camp-brown-soft">
-          Les places restantes se comptent en temps réel : reviens un peu
-          plus tard ou choisis l&apos;autre session.
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <div className="mx-auto max-w-xl px-6 py-14">
-      <BookingFlow session={session} />
+    <div>
+      <div className="border-b-2 border-camp-brown px-6 py-5">
+        <Link
+          href="/camp"
+          className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-[0.1em] text-camp-brown uppercase hover:text-camp-gold-ink"
+        >
+          <ArrowLeft className="size-3.5" /> lock-in camp
+        </Link>
+      </div>
+
+      {session.remainingSpots <= 0 ? (
+        <div className="mx-auto max-w-xl px-6 py-20 text-center">
+          <p className="font-display text-xl font-bold text-camp-brown uppercase">
+            Cette session est complète
+          </p>
+          <p className="mt-2 text-sm text-camp-brown/60">
+            Les places restantes se comptent en temps réel : reviens un peu
+            plus tard ou choisis l&apos;autre session.
+          </p>
+        </div>
+      ) : (
+        <BookingFlow session={session} />
+      )}
     </div>
   );
 }

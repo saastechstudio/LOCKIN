@@ -1,29 +1,34 @@
 import type { ComponentProps } from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
 
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type CTAButtonProps = Omit<ComponentProps<typeof Button>, "variant"> & {
-  variant?: "primary" | "secondary";
-};
-
 /**
- * Bouton d'action pour les écrans Lock-In Camp. "primary" reprend le brun
- * plein (identité camp) plutôt que le dégradé bleu/corail/or du reste de
- * l'app ; "secondary" reste discret (contour brun) pour les actions
- * secondaires (retour, annuler).
+ * Bouton brutaliste pour les écrans Lock-In Camp : angles droits, ombre
+ * "dure" décalée (pas de flou), qui se rétracte au clic/survol comme un
+ * bouton qu'on enfonce — volontairement différent du `Button` partagé
+ * (rounded-lg, dégradé, glow) utilisé par le reste de l'app.
  */
-export function CTAButton({ variant = "primary", className, ...props }: CTAButtonProps) {
-  return (
-    <Button
-      variant={variant === "primary" ? "default" : "outline"}
-      className={cn(
-        variant === "primary"
-          ? "bg-camp-brown text-camp-cream shadow-none hover:bg-camp-brown-deep hover:brightness-100"
-          : "border-camp-border bg-transparent text-camp-brown-deep hover:border-camp-brown/40 hover:text-camp-brown",
-        className,
-      )}
-      {...props}
-    />
-  );
+const ctaButtonVariants = cva(
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap border-2 px-7 py-3.5 font-mono text-sm font-bold tracking-[0.1em] uppercase transition-all duration-150 ease-out disabled:pointer-events-none disabled:opacity-40",
+  {
+    variants: {
+      variant: {
+        primary:
+          "border-camp-charcoal bg-camp-charcoal text-camp-cream shadow-[6px_6px_0_0_var(--camp-gold)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none active:translate-x-[6px] active:translate-y-[6px]",
+        secondary:
+          "border-camp-brown bg-transparent text-camp-brown shadow-[4px_4px_0_0_var(--camp-charcoal)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:translate-x-[4px] active:translate-y-[4px]",
+      },
+    },
+    defaultVariants: { variant: "primary" },
+  },
+);
+
+type CTAButtonProps = ComponentProps<"button"> &
+  VariantProps<typeof ctaButtonVariants> & { asChild?: boolean };
+
+export function CTAButton({ variant, className, asChild = false, ...props }: CTAButtonProps) {
+  const Comp = asChild ? Slot : "button";
+  return <Comp className={cn(ctaButtonVariants({ variant }), className)} {...props} />;
 }

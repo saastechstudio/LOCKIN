@@ -213,44 +213,59 @@
 
   --font-sans: var(--font-inter);
 
-  /* Lock-In Camp sous-identité (marron / beige crème — cf. bloc .camp-scope
-     plus bas pour le contexte) */
-  --color-camp-bg: var(--camp-bg);
-  --color-camp-bg-deep: var(--camp-bg-deep);
-  --color-camp-card: var(--camp-card);
-  --color-camp-border: var(--camp-border);
-  --color-camp-brown: var(--camp-brown);
-  --color-camp-brown-deep: var(--camp-brown-deep);
-  --color-camp-brown-soft: var(--camp-brown-soft);
-  --color-camp-sand: var(--camp-sand);
+  /* Lock-In Camp sous-identité (brutaliste / fintech premium — cf. bloc
+     .camp-scope plus bas pour le contexte) */
   --color-camp-cream: var(--camp-cream);
+  --color-camp-cream-deep: var(--camp-cream-deep);
+  --color-camp-brown: var(--camp-brown);
+  --color-camp-charcoal: var(--camp-charcoal);
+  --color-camp-gold: var(--camp-gold);
+  --color-camp-gold-ink: var(--camp-gold-ink);
+  --color-camp-turquoise: var(--camp-turquoise);
+  --color-camp-line: var(--camp-line);
 }
 
 /*
  * Lock-In Camp — sous-identité visuelle dédiée (retraite sportive premium à
  * Phuket), volontairement distincte de la palette bleu/corail/or du reste de
- * l'app : marron + beige crème, minimaliste, peu de texte par écran. Fixe
- * (ne suit pas le toggle clair/sombre) car c'est une identité de "marque
- * dans la marque", comme une landing page produit. Appliquer `.camp-scope`
- * au conteneur racine des écrans /camp pour hériter du fond et du
- * texte par défaut ; les utilitaires `bg-camp-*` / `text-camp-*` /
- * `border-camp-*` restent disponibles partout via le bloc @theme inline.
+ * l'app. Parti pris "anti-IA" délibéré : pas de dégradé violet/bleu, pas de
+ * carte arrondie façon SaaS, pas d'ombre floue — brutaliste / fintech
+ * premium à la place. Beige crème + marron profond + noir charbon + doré
+ * mat, une touche de turquoise très contrôlée (jamais plus d'un accent par
+ * section). Angles droits partout (pas de rounded-*), ombres "dures"
+ * décalées (.camp-hard / .camp-hard-gold) au lieu du flou, grille visible
+ * via des bordures franches plutôt que des cartes flottantes. Fixe (ne suit
+ * pas le toggle clair/sombre) car c'est une identité de "marque dans la
+ * marque", comme une landing page produit. Appliquer `.camp-scope` au
+ * conteneur racine des écrans /camp pour hériter du fond et du texte par
+ * défaut ; les utilitaires `bg-camp-*` / `text-camp-*` / `border-camp-*`
+ * restent disponibles partout via le bloc @theme inline.
  */
 :root {
-  --camp-bg: #f5efe6;
-  --camp-bg-deep: #ece1cd;
-  --camp-card: #fffbf4;
-  --camp-border: rgba(63, 42, 29, 0.12);
-  --camp-brown: #6b4226;
-  --camp-brown-deep: #3f2a1d;
-  --camp-brown-soft: #a9826a;
-  --camp-sand: #cf9f5f;
-  --camp-cream: #f5efe6;
+  --camp-cream: #f2ebdb;
+  --camp-cream-deep: #e4d8bd;
+  --camp-brown: #3a2a1c;
+  --camp-charcoal: #15120f;
+  --camp-gold: #ad8a42;
+  --camp-gold-ink: #8c6f35;
+  --camp-turquoise: #2f6e68;
+  --camp-line: rgba(58, 42, 28, 0.2);
 }
 
 .camp-scope {
-  background: var(--camp-bg);
-  color: var(--camp-brown-deep);
+  background: var(--camp-cream);
+  color: var(--camp-brown);
+}
+
+/* Ombre "dure" décalée — la signature brutaliste à la place du flou. */
+.camp-hard {
+  box-shadow: 6px 6px 0 0 var(--camp-charcoal);
+}
+.camp-hard-gold {
+  box-shadow: 6px 6px 0 0 var(--camp-gold);
+}
+.camp-hard-sm {
+  box-shadow: 4px 4px 0 0 var(--camp-charcoal);
 }
 
 * {

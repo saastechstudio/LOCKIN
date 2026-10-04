@@ -9,7 +9,7 @@ type CardActivityProps = {
   onSelect: () => void;
 };
 
-/** Carte sélectionnable pour choisir l'activité sportive du jour (football, boxe thaï, padel, yoga). */
+/** Bloc sélectionnable pour choisir l'activité sportive du jour (football, boxe thaï, padel, yoga). */
 export function CardActivity({ activity, selected, onSelect }: CardActivityProps) {
   return (
     <button
@@ -17,15 +17,17 @@ export function CardActivity({ activity, selected, onSelect }: CardActivityProps
       onClick={onSelect}
       aria-pressed={selected}
       className={cn(
-        "flex flex-1 flex-col items-center gap-2 rounded-lg border px-4 py-5 text-center transition-all",
+        "flex flex-1 flex-col items-center gap-2 border-2 px-4 py-5 text-center transition-colors",
         selected
-          ? "border-camp-brown bg-camp-brown text-camp-cream shadow-soft"
-          : "border-camp-border bg-camp-card text-camp-brown-deep hover:border-camp-brown/40",
+          ? "border-camp-charcoal bg-camp-charcoal text-camp-cream"
+          : "border-camp-brown/30 bg-camp-cream text-camp-brown hover:border-camp-brown",
       )}
     >
       <span className="text-2xl">{activity.emoji}</span>
-      <span className="text-sm font-medium">{activity.name}</span>
-      {selected ? <Check className="size-4" /> : null}
+      <span className="font-mono text-xs font-bold tracking-[0.08em] uppercase">
+        {activity.name}
+      </span>
+      {selected ? <Check className="size-4 text-camp-gold" /> : null}
     </button>
   );
 }
