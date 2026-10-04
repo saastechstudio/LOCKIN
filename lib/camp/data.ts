@@ -190,8 +190,8 @@ export const CAMP_DAY_STRUCTURE: DayPeriod[] = [
   },
   {
     period: "Soir",
-    title: "Excursions / temps libre",
-    description: "Selon le programme du jour.",
+    title: "Temps libre",
+    description: "Détente, repos, ou excursion les jours où elle est programmée.",
   },
 ];
 
