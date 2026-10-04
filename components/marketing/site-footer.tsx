@@ -46,7 +46,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Rejoindre le Discord"
-            className="hover:text-brand-blue"
+            className="flex size-9 items-center justify-center rounded-full bg-brand-dark text-brand-blue transition-transform hover:scale-105"
           >
             <DiscordIcon className="size-4" />
           </a>
