@@ -5,10 +5,10 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileSiteNav } from "@/components/marketing/mobile-site-nav";
 
 const NAV_LINKS = [
-  { href: "#pillars-values", label: "Le Club" },
-  { href: "#features", label: "Fonctionnalités" },
-  { href: "#methode", label: "La Méthode" },
-  { href: "#pricing", label: "Tarifs" },
+  { href: "/#modules", label: "Le Club" },
+  { href: "/camp", label: "Lock-In Camp" },
+  { href: "/methode", label: "La Méthode" },
+  { href: "/methode#pricing", label: "Tarifs" },
 ];
 
 export function SiteHeader() {

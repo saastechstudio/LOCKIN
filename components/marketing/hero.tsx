@@ -1,51 +1,49 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+
+import { FeedPreview } from "@/components/marketing/feed-preview";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden px-6 pt-28 pb-32 text-center">
-      <div
-        aria-hidden
-        className="animate-aurora pointer-events-none absolute -top-40 left-1/2 -z-10 h-[520px] w-[720px] -translate-x-[62%] rounded-full bg-[radial-gradient(closest-side,_rgba(74,144,232,0.38),_transparent_75%)] blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="animate-aurora-slow pointer-events-none absolute -top-32 left-1/2 -z-10 h-[480px] w-[640px] -translate-x-[38%] rounded-full bg-[radial-gradient(closest-side,_rgba(232,130,90,0.32),_transparent_75%)] blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-10 left-1/2 -z-10 h-[360px] w-[480px] -translate-x-[10%] rounded-full bg-[radial-gradient(closest-side,_rgba(232,181,99,0.3),_transparent_75%)] blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="animate-aurora pointer-events-none absolute top-20 left-1/2 -z-10 h-[400px] w-[540px] -translate-x-[85%] rounded-full bg-[radial-gradient(closest-side,_rgba(27,122,140,0.28),_transparent_75%)] blur-3xl"
-      />
+    <section className="camp-scope border-b border-camp-hairline px-6 py-20 sm:py-28">
+      <div className="mx-auto grid max-w-6xl gap-16 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+        <div>
+          <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+            Lockin Social Club
+          </p>
+          <h1 className="font-display mt-4 text-4xl leading-[1.05] font-bold text-camp-charcoal uppercase sm:text-5xl lg:text-6xl">
+            Le réseau social
+            <br />
+            de la discipline
+          </h1>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-camp-charcoal/70">
+            Feed, objectifs, groupes, entraide. Une communauté internationale
+            d&apos;entrepreneurs et de sportifs qui avancent, jour après
+            jour. Gratuit, sans publicité.
+          </p>
 
-      <h1 className="font-display mx-auto max-w-4xl text-5xl leading-[1.08] text-foreground sm:text-6xl">
-        Le Club d&apos;Entrepreneurs{" "}
-        <span className="text-gradient-blue">d&apos;Excellence</span>
-      </h1>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Link
+              href="/sign-up"
+              className="inline-flex items-center justify-center gap-2 border-2 border-camp-charcoal bg-camp-gold px-6 py-3.5 font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase"
+            >
+              Rejoindre le Club <ArrowRight className="size-4" />
+            </Link>
+            <Link
+              href="/methode"
+              className="inline-flex items-center justify-center gap-2 border-2 border-camp-charcoal px-6 py-3.5 font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase hover:bg-camp-cream"
+            >
+              Découvrir la Méthode
+            </Link>
+          </div>
 
-      <p className="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
-        L&apos;excellence n&apos;est pas une destination, c&apos;est une
-        quête. Lock In structure votre progression, jour après jour.
-      </p>
+          <p className="mt-6 font-mono text-[11px] tracking-[0.1em] text-camp-charcoal/40 uppercase">
+            Feed · Objectifs · Groupes · Entraide · Messages
+          </p>
+        </div>
 
-      <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <Button asChild size="lg">
-          <Link href="/sign-up">
-            Rejoindre le Club <ArrowRight className="size-4" />
-          </Link>
-        </Button>
-        <Button asChild size="lg" variant="outline">
-          <a href="#pricing">Voir les tarifs</a>
-        </Button>
+        <FeedPreview />
       </div>
-
-      <p className="mt-6 text-xs tracking-wide text-muted-foreground/70">
-        14 jours d&apos;essai · Sans engagement · Annulation à tout moment
-      </p>
     </section>
   );
 }
