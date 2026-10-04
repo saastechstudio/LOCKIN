@@ -32,8 +32,14 @@ export function SiteFooter() {
           <Link href="/legal/cgv" className="hover:text-brand-blue">
             CGV
           </Link>
+          <Link href="/legal/cgu" className="hover:text-brand-blue">
+            CGU
+          </Link>
           <Link href="/legal/confidentialite" className="hover:text-brand-blue">
             Confidentialité
+          </Link>
+          <Link href="/legal/charte-moderation" className="hover:text-brand-blue">
+            Charte de modération
           </Link>
           <a
             href={DISCORD_INVITE_URL}

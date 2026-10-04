@@ -53,6 +53,17 @@ export function ConfirmationScreen({ data }: ConfirmationScreenProps) {
         Ta motivation devient ton premier post, visible par toute la
         communauté Lockin.
       </p>
+      <p className="mt-2 text-xs text-camp-charcoal/40">
+        En continuant, tu acceptes les{" "}
+        <a href="/legal/cgu" target="_blank" className="underline hover:text-camp-charcoal">
+          CGU
+        </a>{" "}
+        et la{" "}
+        <a href="/legal/charte-moderation" target="_blank" className="underline hover:text-camp-charcoal">
+          Charte de modération
+        </a>{" "}
+        du Lockin Social Club.
+      </p>
     </div>
   );
 }

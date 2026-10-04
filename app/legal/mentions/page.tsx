@@ -29,6 +29,13 @@ export default function MentionsLegalesPage() {
         <li>
           <strong>Contact :</strong> [Adresse e-mail de contact]
         </li>
+        <li>
+          <strong>Contact juridique :</strong> [Adresse e-mail juridique]
+        </li>
+        <li>
+          <strong>Contact modération (Lockin Social Club) :</strong>{" "}
+          [Adresse e-mail de modération]
+        </li>
       </ul>
 
       <h2>Hébergement</h2>
