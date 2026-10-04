@@ -1,6 +1,7 @@
 import {
   LayoutDashboard,
   Rss,
+  UserRound,
   BrainCircuit,
   CalendarCheck,
   Users,
@@ -21,6 +22,7 @@ export type DashboardNavItem = {
 export const DASHBOARD_NAV: DashboardNavItem[] = [
   { href: "/dashboard", label: "Tableau de bord", icon: LayoutDashboard },
   { href: "/dashboard/feed", label: "Feed", icon: Rss },
+  { href: "/dashboard/profil", label: "Profil", icon: UserRound },
   { href: "/dashboard/coach", label: "Coach IA", icon: BrainCircuit },
   { href: "/dashboard/planning", label: "Planning", icon: CalendarCheck },
   { href: "/dashboard/network", label: "Réseau", icon: Users },
