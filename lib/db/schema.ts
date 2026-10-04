@@ -87,6 +87,29 @@ export type CampSportChoice = {
   activityId: string;
 };
 
+export const groupTypeEnum = pgEnum("group_type", [
+  "city",
+  "sport",
+  "profession",
+  "theme",
+  "circle",
+]);
+
+export const goalCategoryEnum = pgEnum("goal_category", [
+  "personal",
+  "professional",
+]);
+
+export const routinePeriodEnum = pgEnum("routine_period", [
+  "morning",
+  "evening",
+]);
+
+export type ProfileLink = {
+  label: string;
+  url: string;
+};
+
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   clerkId: text("clerk_id").notNull().unique(),
@@ -96,6 +119,12 @@ export const users = pgTable("users", {
   bio: text("bio"),
   sector: text("sector"),
   skills: text("skills"),
+  // Lockin Social Club — profil public (Twitter x LinkedIn Lockin)
+  country: text("country"),
+  city: text("city"),
+  mainSport: text("main_sport"),
+  lockinLevel: integer("lockin_level").notNull().default(1),
+  links: jsonb("links").$type<ProfileLink[]>().notNull().default([]),
   whopMembershipId: text("whop_membership_id").unique(),
   whopPlanId: text("whop_plan_id"),
   whopMembershipStatus: text("whop_membership_status"),
@@ -272,6 +301,174 @@ export const aiConversations = pgTable("ai_conversations", {
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
+// ---------------------------------------------------------------------------
+// Lockin Social Club — réseau social interne (feed, groupes, messages,
+// objectifs, entraide). Tables additives uniquement ; les modules se
+// branchent dessus indépendamment (lib/actions/feed.ts, groups.ts, etc.).
+// ---------------------------------------------------------------------------
+
+export const groups = pgTable("groups", {
+  id: serial("id").primaryKey(),
+  slug: text("slug").notNull().unique(),
+  name: text("name").notNull(),
+  type: groupTypeEnum("type").notNull(),
+  description: text("description"),
+  // Les "petits cercles Lockin" (messages privés groupés) sont des groupes
+  // privés : même table, pas de système dédié.
+  isPrivate: boolean("is_private").notNull().default(false),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const groupMembers = pgTable(
+  "group_members",
+  {
+    id: serial("id").primaryKey(),
+    groupId: integer("group_id")
+      .notNull()
+      .references(() => groups.id, { onDelete: "cascade" }),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    joinedAt: timestamp("joined_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("group_members_group_user_idx").on(table.groupId, table.userId)],
+);
+
+export const posts = pgTable("posts", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  content: text("content").notNull(),
+  imageUrl: text("image_url"),
+  // Tag libre aligné sur le vocabulaire Lockin (Discipline, Sport, Business,
+  // Mindset, Lifestyle — cf. lib/social/data.ts LOCKIN_TAGS).
+  tag: text("tag"),
+  sport: text("sport"),
+  country: text("country"),
+  // Null = feed global ; sinon post dans un groupe.
+  groupId: integer("group_id").references(() => groups.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const postLikes = pgTable(
+  "post_likes",
+  {
+    id: serial("id").primaryKey(),
+    postId: integer("post_id")
+      .notNull()
+      .references(() => posts.id, { onDelete: "cascade" }),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("post_likes_post_user_idx").on(table.postId, table.userId)],
+);
+
+export const postComments = pgTable("post_comments", {
+  id: serial("id").primaryKey(),
+  postId: integer("post_id")
+    .notNull()
+    .references(() => posts.id, { onDelete: "cascade" }),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const messages = pgTable("messages", {
+  id: serial("id").primaryKey(),
+  senderId: integer("sender_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  recipientId: integer("recipient_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  content: text("content").notNull(),
+  readAt: timestamp("read_at", { mode: "date" }),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const goals = pgTable("goals", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  category: goalCategoryEnum("category").notNull(),
+  title: text("title").notNull(),
+  // Horizon en jours (30/60/90) — libre, pas un enum, pour rester simple.
+  horizonDays: integer("horizon_days"),
+  progress: integer("progress").notNull().default(0),
+  isPublic: boolean("is_public").notNull().default(false),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const routineItems = pgTable("routine_items", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  period: routinePeriodEnum("period").notNull(),
+  label: text("label").notNull(),
+  position: integer("position").notNull().default(0),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const routineCheckins = pgTable(
+  "routine_checkins",
+  {
+    id: serial("id").primaryKey(),
+    routineItemId: integer("routine_item_id")
+      .notNull()
+      .references(() => routineItems.id, { onDelete: "cascade" }),
+    date: date("date", { mode: "date" }).notNull(),
+    completedAt: timestamp("completed_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("routine_checkins_item_date_idx").on(table.routineItemId, table.date),
+  ],
+);
+
+export const helpQuestions = pgTable("help_questions", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
+  body: text("body").notNull(),
+  tags: jsonb("tags").$type<string[]>().notNull().default([]),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const helpAnswers = pgTable("help_answers", {
+  id: serial("id").primaryKey(),
+  questionId: integer("question_id")
+    .notNull()
+    .references(() => helpQuestions.id, { onDelete: "cascade" }),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  body: text("body").notNull(),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const helpUpvotes = pgTable(
+  "help_upvotes",
+  {
+    id: serial("id").primaryKey(),
+    answerId: integer("answer_id")
+      .notNull()
+      .references(() => helpAnswers.id, { onDelete: "cascade" }),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("help_upvotes_answer_user_idx").on(table.answerId, table.userId)],
+);
+
 export const usersRelations = relations(users, ({ many }) => ({
   okrs: many(okrs),
   dailyCheckins: many(dailyCheckins),
@@ -281,6 +478,91 @@ export const usersRelations = relations(users, ({ many }) => ({
   planningTasks: many(planningTasks),
   notifications: many(notifications),
   campRegistrations: many(campRegistrations),
+  posts: many(posts),
+  postLikes: many(postLikes),
+  postComments: many(postComments),
+  groupMemberships: many(groupMembers),
+  goals: many(goals),
+  routineItems: many(routineItems),
+  helpQuestions: many(helpQuestions),
+  helpAnswers: many(helpAnswers),
+  sentMessages: many(messages, { relationName: "sender" }),
+  receivedMessages: many(messages, { relationName: "recipient" }),
+}));
+
+export const groupsRelations = relations(groups, ({ many }) => ({
+  members: many(groupMembers),
+  posts: many(posts),
+}));
+
+export const groupMembersRelations = relations(groupMembers, ({ one }) => ({
+  group: one(groups, { fields: [groupMembers.groupId], references: [groups.id] }),
+  user: one(users, { fields: [groupMembers.userId], references: [users.id] }),
+}));
+
+export const postsRelations = relations(posts, ({ one, many }) => ({
+  user: one(users, { fields: [posts.userId], references: [users.id] }),
+  group: one(groups, { fields: [posts.groupId], references: [groups.id] }),
+  likes: many(postLikes),
+  comments: many(postComments),
+}));
+
+export const postLikesRelations = relations(postLikes, ({ one }) => ({
+  post: one(posts, { fields: [postLikes.postId], references: [posts.id] }),
+  user: one(users, { fields: [postLikes.userId], references: [users.id] }),
+}));
+
+export const postCommentsRelations = relations(postComments, ({ one }) => ({
+  post: one(posts, { fields: [postComments.postId], references: [posts.id] }),
+  user: one(users, { fields: [postComments.userId], references: [users.id] }),
+}));
+
+export const messagesRelations = relations(messages, ({ one }) => ({
+  sender: one(users, {
+    fields: [messages.senderId],
+    references: [users.id],
+    relationName: "sender",
+  }),
+  recipient: one(users, {
+    fields: [messages.recipientId],
+    references: [users.id],
+    relationName: "recipient",
+  }),
+}));
+
+export const goalsRelations = relations(goals, ({ one }) => ({
+  user: one(users, { fields: [goals.userId], references: [users.id] }),
+}));
+
+export const routineItemsRelations = relations(routineItems, ({ one, many }) => ({
+  user: one(users, { fields: [routineItems.userId], references: [users.id] }),
+  checkins: many(routineCheckins),
+}));
+
+export const routineCheckinsRelations = relations(routineCheckins, ({ one }) => ({
+  routineItem: one(routineItems, {
+    fields: [routineCheckins.routineItemId],
+    references: [routineItems.id],
+  }),
+}));
+
+export const helpQuestionsRelations = relations(helpQuestions, ({ one, many }) => ({
+  user: one(users, { fields: [helpQuestions.userId], references: [users.id] }),
+  answers: many(helpAnswers),
+}));
+
+export const helpAnswersRelations = relations(helpAnswers, ({ one, many }) => ({
+  question: one(helpQuestions, {
+    fields: [helpAnswers.questionId],
+    references: [helpQuestions.id],
+  }),
+  user: one(users, { fields: [helpAnswers.userId], references: [users.id] }),
+  upvotes: many(helpUpvotes),
+}));
+
+export const helpUpvotesRelations = relations(helpUpvotes, ({ one }) => ({
+  answer: one(helpAnswers, { fields: [helpUpvotes.answerId], references: [helpAnswers.id] }),
+  user: one(users, { fields: [helpUpvotes.userId], references: [users.id] }),
 }));
 
 export const campSessionsRelations = relations(campSessions, ({ many }) => ({
@@ -355,3 +637,23 @@ export type CampSession = typeof campSessions.$inferSelect;
 export type NewCampSession = typeof campSessions.$inferInsert;
 export type CampRegistration = typeof campRegistrations.$inferSelect;
 export type NewCampRegistration = typeof campRegistrations.$inferInsert;
+export type Group = typeof groups.$inferSelect;
+export type NewGroup = typeof groups.$inferInsert;
+export type GroupMember = typeof groupMembers.$inferSelect;
+export type Post = typeof posts.$inferSelect;
+export type NewPost = typeof posts.$inferInsert;
+export type PostLike = typeof postLikes.$inferSelect;
+export type PostComment = typeof postComments.$inferSelect;
+export type NewPostComment = typeof postComments.$inferInsert;
+export type Message = typeof messages.$inferSelect;
+export type NewMessage = typeof messages.$inferInsert;
+export type Goal = typeof goals.$inferSelect;
+export type NewGoal = typeof goals.$inferInsert;
+export type RoutineItem = typeof routineItems.$inferSelect;
+export type NewRoutineItem = typeof routineItems.$inferInsert;
+export type RoutineCheckin = typeof routineCheckins.$inferSelect;
+export type HelpQuestion = typeof helpQuestions.$inferSelect;
+export type NewHelpQuestion = typeof helpQuestions.$inferInsert;
+export type HelpAnswer = typeof helpAnswers.$inferSelect;
+export type NewHelpAnswer = typeof helpAnswers.$inferInsert;
+export type HelpUpvote = typeof helpUpvotes.$inferSelect;
