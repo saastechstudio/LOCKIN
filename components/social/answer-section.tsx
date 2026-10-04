@@ -5,6 +5,7 @@ import { ArrowUp } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { addAnswer, toggleUpvote } from "@/lib/actions/help";
+import { ReportButton } from "@/components/moderation/report-button";
 
 type AnswerSectionProps = {
   questionId: number;
@@ -21,14 +22,20 @@ type AnswerSectionProps = {
 /** Liste des réponses (triées par upvotes côté serveur) + composeur de nouvelle réponse. */
 export function AnswerSection({ questionId, answers }: AnswerSectionProps) {
   const [body, setBody] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   function handleSubmit() {
     const value = body.trim();
     if (!value) return;
+    setError(null);
     startTransition(async () => {
-      await addAnswer({ questionId, body: value });
-      setBody("");
+      try {
+        await addAnswer({ questionId, body: value });
+        setBody("");
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Impossible de publier cette réponse.");
+      }
     });
   }
 
@@ -67,9 +74,12 @@ export function AnswerSection({ questionId, answers }: AnswerSectionProps) {
               <p className="text-sm leading-relaxed whitespace-pre-wrap text-camp-charcoal">
                 {answer.body}
               </p>
-              <p className="mt-1.5 font-mono text-[11px] text-camp-charcoal/40 uppercase">
-                {answer.user.name ?? "Membre Lockin"}
-              </p>
+              <div className="mt-1.5 flex items-baseline justify-between gap-2">
+                <p className="font-mono text-[11px] text-camp-charcoal/40 uppercase">
+                  {answer.user.name ?? "Membre Lockin"}
+                </p>
+                <ReportButton targetType="help_answer" targetId={answer.id} />
+              </div>
             </div>
           </div>
         ))}
@@ -79,6 +89,11 @@ export function AnswerSection({ questionId, answers }: AnswerSectionProps) {
       </div>
 
       <div className="space-y-2 border-t-2 border-camp-charcoal pt-5">
+        {error ? (
+          <p className="border border-camp-charcoal bg-camp-cream px-4 py-2.5 text-sm text-camp-charcoal">
+            {error}
+          </p>
+        ) : null}
         <textarea
           value={body}
           onChange={(e) => setBody(e.target.value)}

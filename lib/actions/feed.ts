@@ -7,6 +7,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { postComments, postLikes, posts } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
+import { moderateOrThrow } from "@/lib/moderation/enforce";
 
 export type FeedFilters = {
   tag?: string;
@@ -72,6 +73,7 @@ export type CreatePostInput = z.infer<typeof createPostSchema>;
 export async function createPost(input: CreatePostInput) {
   const user = await getOrCreateDbUser();
   const parsed = createPostSchema.parse(input);
+  await moderateOrThrow(user, parsed.content);
 
   await db.insert(posts).values({
     userId: user.id,
@@ -111,6 +113,7 @@ const commentSchema = z.object({
 export async function addComment(input: z.infer<typeof commentSchema>) {
   const user = await getOrCreateDbUser();
   const parsed = commentSchema.parse(input);
+  await moderateOrThrow(user, parsed.content);
 
   await db.insert(postComments).values({
     postId: parsed.postId,

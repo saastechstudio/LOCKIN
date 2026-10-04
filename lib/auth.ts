@@ -64,6 +64,15 @@ export async function requireLockinOnboarded(): Promise<User> {
   return user;
 }
 
+/** Dashboard de modération — réservé aux comptes avec users.isAdmin = true. */
+export async function requireAdmin(): Promise<User> {
+  const user = await getOrCreateDbUser();
+  if (!user.isAdmin) {
+    redirect("/dashboard/feed");
+  }
+  return user;
+}
+
 export async function getDbUserOrNull(): Promise<User | null> {
   const { userId } = await auth();
   if (!userId) return null;

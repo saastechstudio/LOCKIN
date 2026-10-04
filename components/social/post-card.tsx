@@ -8,6 +8,7 @@ import { Heart, MessageCircle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { addComment, toggleLike } from "@/lib/actions/feed";
+import { ReportButton } from "@/components/moderation/report-button";
 
 type PostCardUser = {
   id: number;
@@ -68,6 +69,7 @@ function MiniAvatar({
 export function PostCard({ post }: PostCardProps) {
   const [showComments, setShowComments] = useState(false);
   const [comment, setComment] = useState("");
+  const [commentError, setCommentError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   function handleLike() {
@@ -77,9 +79,14 @@ export function PostCard({ post }: PostCardProps) {
   function handleComment() {
     const value = comment.trim();
     if (!value) return;
+    setCommentError(null);
     startTransition(async () => {
-      await addComment({ postId: post.id, content: value });
-      setComment("");
+      try {
+        await addComment({ postId: post.id, content: value });
+        setComment("");
+      } catch (err) {
+        setCommentError(err instanceof Error ? err.message : "Impossible de publier ce commentaire.");
+      }
     });
   }
 
@@ -150,6 +157,7 @@ export function PostCard({ post }: PostCardProps) {
               <MessageCircle className="size-4" />
               {post.comments.length}
             </button>
+            <ReportButton targetType="post" targetId={post.id} className="ml-auto" />
           </div>
 
           {showComments ? (
@@ -157,18 +165,29 @@ export function PostCard({ post }: PostCardProps) {
               {post.comments.map((c) => (
                 <div key={c.id} className="flex items-start gap-2.5">
                   <MiniAvatar user={c.user} size="sm" />
-                  <div className="min-w-0">
-                    <p className="font-mono text-[11px] font-bold text-camp-charcoal uppercase">
-                      {c.user.name ?? "Membre Lockin"}
-                    </p>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <p className="font-mono text-[11px] font-bold text-camp-charcoal uppercase">
+                        {c.user.name ?? "Membre Lockin"}
+                      </p>
+                      <ReportButton targetType="comment" targetId={c.id} />
+                    </div>
                     <p className="text-sm text-camp-charcoal/80">{c.content}</p>
                   </div>
                 </div>
               ))}
+              {commentError ? (
+                <p className="border border-camp-charcoal bg-camp-cream px-3 py-2 text-sm text-camp-charcoal">
+                  {commentError}
+                </p>
+              ) : null}
               <div className="flex items-center gap-2 pt-1">
                 <input
                   value={comment}
-                  onChange={(e) => setComment(e.target.value)}
+                  onChange={(e) => {
+                    setComment(e.target.value);
+                    setCommentError(null);
+                  }}
                   onKeyDown={(e) => e.key === "Enter" && handleComment()}
                   placeholder="Répondre…"
                   className="flex-1 border border-camp-hairline bg-camp-white px-3 py-2 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"

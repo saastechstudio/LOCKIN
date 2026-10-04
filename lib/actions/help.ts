@@ -8,6 +8,7 @@ import { db } from "@/lib/db";
 import { helpAnswers, helpQuestions, helpUpvotes } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { LOCKIN_TAGS } from "@/lib/social/data";
+import { moderateOrThrow } from "@/lib/moderation/enforce";
 
 export async function getQuestions(tag?: string) {
   const rows = await db.query.helpQuestions.findMany({
@@ -62,6 +63,7 @@ const createQuestionSchema = z.object({
 export async function createQuestion(input: z.infer<typeof createQuestionSchema>) {
   const user = await getOrCreateDbUser();
   const parsed = createQuestionSchema.parse(input);
+  await moderateOrThrow(user, `${parsed.title}\n${parsed.body}`);
 
   const [question] = await db
     .insert(helpQuestions)
@@ -80,6 +82,7 @@ const addAnswerSchema = z.object({
 export async function addAnswer(input: z.infer<typeof addAnswerSchema>) {
   const user = await getOrCreateDbUser();
   const parsed = addAnswerSchema.parse(input);
+  await moderateOrThrow(user, parsed.body);
 
   await db.insert(helpAnswers).values({
     questionId: parsed.questionId,
