@@ -91,23 +91,30 @@ export type DayPeriod = {
   period: string;
   title: string;
   description: string;
+  /** Sous-blocs affichés comme des blocs distincts (période "Soir" uniquement). */
+  blocks?: string[];
 };
 
 export const CAMP_DAY_STRUCTURE: DayPeriod[] = [
   {
     period: "Matin",
-    title: "Activité sportive",
-    description: "Football, Boxe Thaï, Padel ou Yoga, au choix.",
+    title: "Sport au choix",
+    description: "Football, Boxe Thaï, Padel ou Yoga.",
   },
   {
     period: "Après-midi",
-    title: "Excursion, temps libre ou récupération",
+    title: "Excursions / récupération",
     description: "Selon le programme du jour.",
   },
   {
-    period: "Fin de journée",
-    title: "Session Lock In (2h)",
-    description: "Inspiration & intervenant · Atelier pratique · Focus personnel & plan d'action",
+    period: "Soir",
+    title: "Session Lock-In (2h)",
+    description: "",
+    blocks: [
+      "Inspiration & intervenant",
+      "Atelier pratique",
+      "Focus personnel / plan d'action",
+    ],
   },
 ];
 
