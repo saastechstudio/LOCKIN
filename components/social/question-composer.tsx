@@ -14,6 +14,7 @@ export function QuestionComposer() {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tags, setTags] = useState<LockinTag[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   function toggleTag(tag: LockinTag) {
@@ -22,13 +23,18 @@ export function QuestionComposer() {
 
   function handleSubmit() {
     if (!title.trim() || !body.trim()) return;
+    setError(null);
     startTransition(async () => {
-      const question = await createQuestion({ title: title.trim(), body: body.trim(), tags });
-      setTitle("");
-      setBody("");
-      setTags([]);
-      setOpen(false);
-      if (question) router.push(`/dashboard/entraide/${question.id}`);
+      try {
+        const question = await createQuestion({ title: title.trim(), body: body.trim(), tags });
+        setTitle("");
+        setBody("");
+        setTags([]);
+        setOpen(false);
+        if (question) router.push(`/dashboard/entraide/${question.id}`);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Impossible de publier cette question.");
+      }
     });
   }
 
@@ -59,6 +65,12 @@ export function QuestionComposer() {
         placeholder="Détaille le contexte…"
         className="w-full resize-none border border-camp-hairline bg-camp-white px-4 py-3 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
       />
+      {error ? (
+        <p className="border border-camp-charcoal bg-camp-cream px-4 py-2.5 text-sm text-camp-charcoal">
+          {error}
+        </p>
+      ) : null}
+
       <div className="flex flex-wrap items-center gap-2">
         {LOCKIN_TAGS.map((tag) => (
           <button

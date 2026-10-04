@@ -7,6 +7,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { messages, users } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
+import { moderateOrThrow } from "@/lib/moderation/enforce";
 
 /**
  * Boîte de réception — une ligne par interlocuteur, avec le dernier
@@ -92,6 +93,7 @@ const sendMessageSchema = z.object({
 export async function sendMessage(input: z.infer<typeof sendMessageSchema>) {
   const user = await getOrCreateDbUser();
   const parsed = sendMessageSchema.parse(input);
+  await moderateOrThrow(user, parsed.content);
 
   await db.insert(messages).values({
     senderId: user.id,

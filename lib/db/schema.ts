@@ -105,6 +105,41 @@ export const routinePeriodEnum = pgEnum("routine_period", [
   "evening",
 ]);
 
+// Modération Lockin — cf. lib/moderation/.
+export const moderationSourceEnum = pgEnum("moderation_source", [
+  "auto_filter",
+  "report",
+  "manual",
+]);
+
+export const moderationActionEnum = pgEnum("moderation_action", [
+  "warning",
+  "block_24h",
+  "suspend_7d",
+  "ban",
+]);
+
+export const reportTargetTypeEnum = pgEnum("report_target_type", [
+  "post",
+  "comment",
+  "message",
+  "help_answer",
+]);
+
+export const reportReasonEnum = pgEnum("report_reason", [
+  "insulte",
+  "harcelement",
+  "discrimination",
+  "spam",
+  "autre",
+]);
+
+export const reportStatusEnum = pgEnum("report_status", [
+  "pending",
+  "reviewed",
+  "dismissed",
+]);
+
 export type ProfileLink = {
   label: string;
   url: string;
@@ -146,6 +181,14 @@ export const users = pgTable("users", {
   aiCoachVisualStyle: aiCoachVisualStyleEnum("ai_coach_visual_style")
     .notNull()
     .default("friendly_silicon_valley"),
+  // Modération Lockin — score de respect (baisse sur contenu bloqué ou
+  // signalement confirmé), strikes 1→4, sanctions, et accès au dashboard
+  // de modération. Cf. lib/moderation/.
+  respectScore: integer("respect_score").notNull().default(100),
+  strikeCount: integer("strike_count").notNull().default(0),
+  suspendedUntil: timestamp("suspended_until", { mode: "date" }),
+  bannedAt: timestamp("banned_at", { mode: "date" }),
+  isAdmin: boolean("is_admin").notNull().default(false),
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
@@ -479,6 +522,43 @@ export const helpUpvotes = pgTable(
   (table) => [uniqueIndex("help_upvotes_answer_user_idx").on(table.answerId, table.userId)],
 );
 
+/**
+ * Journal de modération — chaque filtrage automatique bloqué et chaque
+ * signalement confirmé par un modérateur y ajoute une ligne. `action` est
+ * la sanction effectivement appliquée (ou null pour un simple log sans
+ * sanction) ; cette ligne EST le "strike" demandé par le produit — pas de
+ * table séparée, `users.strikeCount` compte combien de lignes ont une
+ * action non nulle.
+ */
+export const moderationEvents = pgTable("moderation_events", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  source: moderationSourceEnum("source").notNull(),
+  reason: text("reason").notNull(),
+  contentSnapshot: text("content_snapshot"),
+  action: moderationActionEnum("action"),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const moderationReports = pgTable("moderation_reports", {
+  id: serial("id").primaryKey(),
+  reporterId: integer("reporter_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  reportedUserId: integer("reported_user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  targetType: reportTargetTypeEnum("target_type").notNull(),
+  targetId: integer("target_id").notNull(),
+  reason: reportReasonEnum("reason").notNull(),
+  details: text("details"),
+  status: reportStatusEnum("status").notNull().default("pending"),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  reviewedAt: timestamp("reviewed_at", { mode: "date" }),
+});
+
 export const usersRelations = relations(users, ({ many }) => ({
   okrs: many(okrs),
   dailyCheckins: many(dailyCheckins),
@@ -498,6 +578,26 @@ export const usersRelations = relations(users, ({ many }) => ({
   helpAnswers: many(helpAnswers),
   sentMessages: many(messages, { relationName: "sender" }),
   receivedMessages: many(messages, { relationName: "recipient" }),
+  moderationEvents: many(moderationEvents),
+  reportsFiled: many(moderationReports, { relationName: "reporter" }),
+  reportsAgainst: many(moderationReports, { relationName: "reportedUser" }),
+}));
+
+export const moderationEventsRelations = relations(moderationEvents, ({ one }) => ({
+  user: one(users, { fields: [moderationEvents.userId], references: [users.id] }),
+}));
+
+export const moderationReportsRelations = relations(moderationReports, ({ one }) => ({
+  reporter: one(users, {
+    fields: [moderationReports.reporterId],
+    references: [users.id],
+    relationName: "reporter",
+  }),
+  reportedUser: one(users, {
+    fields: [moderationReports.reportedUserId],
+    references: [users.id],
+    relationName: "reportedUser",
+  }),
 }));
 
 export const groupsRelations = relations(groups, ({ many }) => ({
@@ -667,3 +767,7 @@ export type NewHelpQuestion = typeof helpQuestions.$inferInsert;
 export type HelpAnswer = typeof helpAnswers.$inferSelect;
 export type NewHelpAnswer = typeof helpAnswers.$inferInsert;
 export type HelpUpvote = typeof helpUpvotes.$inferSelect;
+export type ModerationEvent = typeof moderationEvents.$inferSelect;
+export type NewModerationEvent = typeof moderationEvents.$inferInsert;
+export type ModerationReport = typeof moderationReports.$inferSelect;
+export type NewModerationReport = typeof moderationReports.$inferInsert;
