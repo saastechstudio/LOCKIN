@@ -10,7 +10,7 @@ type CardExcursionProps = {
   onToggle: () => void;
 };
 
-/** Bloc sélectionnable pour choisir une excursion (max 2 au total, imposé par le parent). */
+/** Bloc sélectionnable (excursion ou activité fun) — fond blanc, filet fin, sélection en aplat charbon. */
 export function CardExcursion({ excursion, selected, disabled, onToggle }: CardExcursionProps) {
   return (
     <button
@@ -19,10 +19,10 @@ export function CardExcursion({ excursion, selected, disabled, onToggle }: CardE
       disabled={disabled && !selected}
       aria-pressed={selected}
       className={cn(
-        "flex items-center gap-3 border-2 px-4 py-3 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-40",
+        "flex items-center gap-3 border px-4 py-3 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-40",
         selected
-          ? "border-camp-charcoal bg-camp-charcoal text-camp-cream"
-          : "border-camp-brown/30 bg-camp-cream text-camp-brown hover:border-camp-brown",
+          ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
+          : "border-camp-hairline bg-camp-white text-camp-charcoal hover:border-camp-charcoal",
       )}
     >
       <span className="text-xl">{excursion.emoji}</span>

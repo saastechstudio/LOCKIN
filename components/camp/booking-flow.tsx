@@ -36,7 +36,7 @@ type BookingFlowProps = {
 };
 
 const fieldClassName =
-  "rounded-none border-2 border-camp-brown bg-camp-cream text-camp-brown shadow-none placeholder:text-camp-brown/40 focus-visible:border-camp-gold focus-visible:ring-0";
+  "rounded-none border-2 border-camp-charcoal bg-camp-white text-camp-charcoal shadow-none placeholder:text-camp-charcoal/40 focus-visible:border-camp-gold focus-visible:ring-0";
 
 export function BookingFlow({ session, initialFullName, initialEmail }: BookingFlowProps) {
   const router = useRouter();
@@ -101,7 +101,7 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
   if (done) {
     return (
       <div className="mx-auto max-w-md space-y-6 px-6 py-20 text-center">
-        <CheckCircle2 className="mx-auto size-12 text-camp-gold-ink" />
+        <CheckCircle2 className="mx-auto size-12 text-camp-gold" />
         <SectionTitle
           eyebrow="C'est verrouillé"
           title="Pré-inscription confirmée"
@@ -115,13 +115,13 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
   return (
     <div className="mx-auto max-w-xl space-y-8 px-6 py-14">
       <div className="space-y-2">
-        <div className="h-2 w-full border-2 border-camp-brown bg-camp-cream-deep">
+        <div className="h-2 w-full border-2 border-camp-charcoal bg-camp-hairline">
           <div
-            className="h-full bg-camp-brown transition-all duration-500"
+            className="h-full bg-camp-charcoal transition-all duration-500"
             style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
           />
         </div>
-        <p className="text-right font-mono text-xs font-bold tracking-[0.1em] text-camp-brown/60 uppercase">
+        <p className="text-right font-mono text-xs font-bold tracking-[0.1em] text-camp-charcoal/60 uppercase">
           Étape {step} / {TOTAL_STEPS}
         </p>
       </div>
@@ -130,7 +130,7 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
         <div className="space-y-5">
           <SectionTitle eyebrow="Profil" title="Tes coordonnées" />
           <div className="space-y-1.5">
-            <Label htmlFor="fullName" className="font-mono text-xs font-bold tracking-[0.08em] text-camp-brown uppercase">
+            <Label htmlFor="fullName" className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase">
               Nom complet
             </Label>
             <Input
@@ -142,7 +142,7 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
             />
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="email" className="font-mono text-xs font-bold tracking-[0.08em] text-camp-brown uppercase">
+            <Label htmlFor="email" className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase">
               Email
             </Label>
             <Input
@@ -169,7 +169,7 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
               const current = sportChoices.find((c) => c.day === day)?.activityId;
               return (
                 <div key={day} className="space-y-2">
-                  <p className="font-mono text-xs font-bold tracking-[0.08em] text-camp-brown/60 uppercase">
+                  <p className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal/60 uppercase">
                     Jour {day}
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -236,36 +236,36 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
       {step === 5 && (
         <div className="space-y-5">
           <SectionTitle eyebrow="Récapitulatif" title="Vérifie ta réservation" />
-          <div className="space-y-3 border-2 border-camp-brown p-5 text-sm">
-            <div className="flex justify-between border-b border-camp-brown/20 pb-3">
-              <span className="font-mono text-xs text-camp-brown/60 uppercase">Session</span>
-              <span className="font-bold text-camp-brown">
+          <div className="space-y-3 border-2 border-camp-charcoal p-5 text-sm">
+            <div className="flex justify-between border-b border-camp-hairline pb-3">
+              <span className="font-mono text-xs text-camp-charcoal/60 uppercase">Session</span>
+              <span className="font-bold text-camp-charcoal">
                 {format(session.startDate, "d MMM", { locale: fr })} –{" "}
                 {format(session.endDate, "d MMM yyyy", { locale: fr })}
               </span>
             </div>
-            <div className="flex justify-between border-b border-camp-brown/20 pb-3">
-              <span className="font-mono text-xs text-camp-brown/60 uppercase">Participant</span>
-              <span className="font-bold text-camp-brown">{fullName}</span>
+            <div className="flex justify-between border-b border-camp-hairline pb-3">
+              <span className="font-mono text-xs text-camp-charcoal/60 uppercase">Participant</span>
+              <span className="font-bold text-camp-charcoal">{fullName}</span>
             </div>
-            <div className="flex justify-between border-b border-camp-brown/20 pb-3">
-              <span className="font-mono text-xs text-camp-brown/60 uppercase">Excursion</span>
-              <span className="font-bold text-camp-brown">
+            <div className="flex justify-between border-b border-camp-hairline pb-3">
+              <span className="font-mono text-xs text-camp-charcoal/60 uppercase">Excursion</span>
+              <span className="font-bold text-camp-charcoal">
                 {excursionChoices
                   .map((id) => EXCURSIONS.find((e) => e.id === id)?.name)
                   .filter(Boolean)
                   .join(", ")}
               </span>
             </div>
-            <div className="flex justify-between border-b border-camp-brown/20 pb-3">
-              <span className="font-mono text-xs text-camp-brown/60 uppercase">Activité fun</span>
-              <span className="font-bold text-camp-brown">
+            <div className="flex justify-between border-b border-camp-hairline pb-3">
+              <span className="font-mono text-xs text-camp-charcoal/60 uppercase">Activité fun</span>
+              <span className="font-bold text-camp-charcoal">
                 {FUN_ACTIVITIES.find((a) => a.id === funActivityChoice)?.name}
               </span>
             </div>
             <div className="flex justify-between pt-1">
-              <span className="font-mono text-xs text-camp-brown/60 uppercase">Prix</span>
-              <span className="font-display text-xl font-bold text-camp-brown">
+              <span className="font-mono text-xs text-camp-charcoal/60 uppercase">Prix</span>
+              <span className="font-display text-xl font-bold text-camp-charcoal">
                 {session.pricePerPerson.toLocaleString("fr-FR")} €
               </span>
             </div>

@@ -9,7 +9,7 @@ type CardActivityProps = {
   onSelect: () => void;
 };
 
-/** Bloc sélectionnable pour choisir l'activité sportive du jour (football, boxe thaï, padel, yoga). */
+/** Bloc sélectionnable pour choisir l'activité sportive du jour — fond blanc, filet fin, sélection en aplat charbon. */
 export function CardActivity({ activity, selected, onSelect }: CardActivityProps) {
   return (
     <button
@@ -17,10 +17,10 @@ export function CardActivity({ activity, selected, onSelect }: CardActivityProps
       onClick={onSelect}
       aria-pressed={selected}
       className={cn(
-        "flex flex-1 flex-col items-center gap-2 border-2 px-4 py-5 text-center transition-colors",
+        "flex flex-1 flex-col items-center gap-2 border px-4 py-5 text-center transition-colors",
         selected
-          ? "border-camp-charcoal bg-camp-charcoal text-camp-cream"
-          : "border-camp-brown/30 bg-camp-cream text-camp-brown hover:border-camp-brown",
+          ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
+          : "border-camp-hairline bg-camp-white text-camp-charcoal hover:border-camp-charcoal",
       )}
     >
       <span className="text-2xl">{activity.emoji}</span>
