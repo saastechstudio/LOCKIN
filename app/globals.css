@@ -40,24 +40,24 @@
   --brand-bg-deep: #f4f4f0;
   --brand-card: #ffffff;
   --brand-border: rgba(0, 0, 0, 0.05);
-  --brand-blue: #4a90e8;
+  --brand-blue: #4696cb;
   --brand-blue-soft: #a9cbf2;
   --brand-blue-deep: #1b7a8c;
   --brand-coral: #e8825a;
   --brand-coral-soft: #f5c0a8;
   --brand-yellow: #e8b563;
-  --brand-dark: #16303a;
+  --brand-dark: #1e1f23;
 
   --shadow-color: 17, 24, 39;
-  --glow-blue: 0 8px 20px -6px rgba(74, 144, 232, 0.4);
+  --glow-blue: 0 8px 20px -6px rgba(70, 150, 203, 0.4);
   --glow-coral: 0 8px 20px -6px rgba(232, 130, 90, 0.35);
 
   --glass-bg: rgba(255, 255, 255, 0.8);
   --glass-border: rgba(0, 0, 0, 0.05);
-  --noise-bg: radial-gradient(circle at 20% 20%, rgba(74, 144, 232, 0.06), transparent 40%),
+  --noise-bg: radial-gradient(circle at 20% 20%, rgba(70, 150, 203, 0.06), transparent 40%),
     radial-gradient(circle at 80% 0%, rgba(232, 130, 90, 0.05), transparent 45%);
   --scrollbar-thumb: rgba(0, 0, 0, 0.15);
-  --selection-bg: rgba(74, 144, 232, 0.2);
+  --selection-bg: rgba(70, 150, 203, 0.2);
 
   /* ---- shadcn-style semantic tokens ---- */
   --background: var(--brand-bg);
@@ -86,7 +86,7 @@
 
   --border: var(--brand-border);
   --input: rgba(0, 0, 0, 0.08);
-  --ring: rgba(74, 144, 232, 0.4);
+  --ring: rgba(70, 150, 203, 0.4);
 
   --chart-1: var(--brand-blue);
   --chart-2: var(--brand-coral);
@@ -101,9 +101,9 @@
   --brand-bg-deep: #050505;
   --brand-card: #161616;
   --brand-border: rgba(255, 255, 255, 0.08);
-  --brand-blue: #7fb3f0;
+  --brand-blue: #7bb9d3;
   --brand-blue-soft: #b7d6f5;
-  --brand-blue-deep: #4a90e8;
+  --brand-blue-deep: #4696cb;
   --brand-coral: #f0a07e;
   --brand-coral-soft: #f5c4ad;
   --brand-yellow: #f0c888;
@@ -332,7 +332,7 @@ body {
   width: 80%;
   height: 150%;
   background:
-    radial-gradient(closest-side, rgba(74, 144, 232, 0.9), transparent 70%),
+    radial-gradient(closest-side, rgba(70, 150, 203, 0.9), transparent 70%),
     radial-gradient(closest-side, rgba(27, 122, 140, 0.8), transparent 70%);
   animation: aurora-drift 18s ease-in-out infinite reverse;
 }
