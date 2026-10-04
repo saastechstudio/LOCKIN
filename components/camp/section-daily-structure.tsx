@@ -2,7 +2,7 @@ import { SectionTitle } from "@/components/camp/section-title";
 import { CAMP_DAILY_BLOCKS } from "@/lib/camp/data";
 
 /**
- * Détail chronométré de la session Lock-In du soir (2h). Fond blanc,
+ * Détail chronométré de la session Lock-In du matin (10h–12h). Fond blanc,
  * quatre blocs en ligne, la durée affichée comme un repère chiffré plutôt
  * qu'une icône d'horloge.
  */
@@ -12,7 +12,7 @@ export function SectionDailyStructure() {
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           index="04"
-          eyebrow="La session du soir"
+          eyebrow="La session du matin · 10h–12h"
           title="Structure quotidienne — 2h"
           className="mb-12"
         />

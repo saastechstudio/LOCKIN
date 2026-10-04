@@ -158,7 +158,7 @@ export const CAMP_PROGRAM_PARTS: ProgramPart[] = [
   },
 ];
 
-/** Détail chronométré de la session Lock-In quotidienne (2h, période "Soir"). */
+/** Détail chronométré de la session Lock-In quotidienne (2h, le matin, 10h–12h). */
 export type TimedBlock = {
   label: string;
   duration: string;
@@ -179,19 +179,19 @@ export type DayPeriod = {
 
 export const CAMP_DAY_STRUCTURE: DayPeriod[] = [
   {
-    period: "Matin",
+    period: "Matin · 10h–12h",
+    title: "Session Lock-In (2h)",
+    description: "Inspiration · Atelier pratique · Focus personnel · Clôture.",
+  },
+  {
+    period: "Après-midi · 14h–16h",
     title: "Sport au choix",
     description: "Football, Muay Thaï, Pilates, Padel, Fitness ou Yoga.",
   },
   {
-    period: "Après-midi",
-    title: "Excursions / récupération",
-    description: "Selon le programme du jour.",
-  },
-  {
     period: "Soir",
-    title: "Session Lock-In (2h)",
-    description: "Inspiration · Atelier pratique · Focus personnel · Clôture.",
+    title: "Excursions / temps libre",
+    description: "Selon le programme du jour.",
   },
 ];
 

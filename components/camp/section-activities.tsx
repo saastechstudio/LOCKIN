@@ -13,7 +13,7 @@ export function SectionActivities() {
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           index="05"
-          eyebrow="Chaque matin"
+          eyebrow="Chaque après-midi · 14h–16h"
           title="Activités sportives quotidiennes"
           description="Une activité au choix, chaque jour du séjour."
           className="mb-12"
