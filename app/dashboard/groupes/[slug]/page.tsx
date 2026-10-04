@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 
+import { requireLockinOnboarded } from "@/lib/auth";
 import { getGroup } from "@/lib/actions/groups";
 import { getFeedPosts } from "@/lib/actions/feed";
 import { GROUP_TYPE_LABELS } from "@/lib/social/data";
@@ -15,6 +16,7 @@ export default async function GroupDetailPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  await requireLockinOnboarded();
   const { slug } = await params;
   const group = await getGroup(slug);
   if (!group) notFound();

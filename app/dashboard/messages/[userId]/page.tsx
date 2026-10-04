@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
+import { requireLockinOnboarded } from "@/lib/auth";
 import { getMessages } from "@/lib/actions/messages";
 import { MessageThread } from "@/components/social/message-thread";
 
@@ -12,6 +13,7 @@ export default async function MessageThreadPage({
 }: {
   params: Promise<{ userId: string }>;
 }) {
+  await requireLockinOnboarded();
   const { userId } = await params;
   const otherUserId = Number(userId);
   if (!Number.isInteger(otherUserId)) notFound();

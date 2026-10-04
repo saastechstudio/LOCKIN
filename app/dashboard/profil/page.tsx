@@ -1,11 +1,11 @@
-import { getOrCreateDbUser } from "@/lib/auth";
+import { requireLockinOnboarded } from "@/lib/auth";
 import { getSocialProfile } from "@/lib/actions/social-profile";
 import { OwnProfile } from "@/components/social/own-profile";
 
 export const dynamic = "force-dynamic";
 
 export default async function OwnProfilePage() {
-  const user = await getOrCreateDbUser();
+  const user = await requireLockinOnboarded();
   const data = await getSocialProfile(user.id);
   if (!data) return null;
 

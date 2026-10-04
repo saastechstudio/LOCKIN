@@ -125,6 +125,13 @@ export const users = pgTable("users", {
   mainSport: text("main_sport"),
   lockinLevel: integer("lockin_level").notNull().default(1),
   links: jsonb("links").$type<ProfileLink[]>().notNull().default([]),
+  // Rituel d'inscription Lockin — "Pourquoi veux-tu devenir Lockin ?"
+  // devient le premier post ; le timestamp sert de porte d'entrée vers le
+  // Social Club (cf. requireLockinOnboarded dans lib/auth.ts).
+  motivationInitiale: text("motivation_initiale"),
+  lockinOnboardingCompletedAt: timestamp("lockin_onboarding_completed_at", {
+    mode: "date",
+  }),
   whopMembershipId: text("whop_membership_id").unique(),
   whopPlanId: text("whop_plan_id"),
   whopMembershipStatus: text("whop_membership_status"),
@@ -400,6 +407,9 @@ export const goals = pgTable("goals", {
   title: text("title").notNull(),
   // Horizon en jours (30/60/90) — libre, pas un enum, pour rester simple.
   horizonDays: integer("horizon_days"),
+  // Domaine libre (Santé/Sport/Business/Discipline/Mindset/Lifestyle), posé
+  // par le rituel d'inscription — cf. lib/social/data.ts LOCKIN_TAGS.
+  domain: text("domain"),
   progress: integer("progress").notNull().default(0),
   isPublic: boolean("is_public").notNull().default(false),
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),

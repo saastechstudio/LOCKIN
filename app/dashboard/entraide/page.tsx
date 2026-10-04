@@ -3,6 +3,7 @@ import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import { MessageCircle } from "lucide-react";
 
+import { requireLockinOnboarded } from "@/lib/auth";
 import { getQuestions } from "@/lib/actions/help";
 import { LOCKIN_TAGS } from "@/lib/social/data";
 import { QuestionComposer } from "@/components/social/question-composer";
@@ -15,6 +16,7 @@ export default async function EntraidePage({
 }: {
   searchParams: Promise<{ tag?: string }>;
 }) {
+  await requireLockinOnboarded();
   const { tag } = await searchParams;
   const questions = await getQuestions(tag);
 

@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { requireLockinOnboarded } from "@/lib/auth";
 import { getGroups } from "@/lib/actions/groups";
 import { GROUP_TYPE_LABELS } from "@/lib/social/data";
 import type { GroupSeed } from "@/lib/social/data";
@@ -7,6 +8,7 @@ import type { GroupSeed } from "@/lib/social/data";
 export const dynamic = "force-dynamic";
 
 export default async function GroupesPage() {
+  await requireLockinOnboarded();
   const groups = await getGroups();
 
   const sections = (Object.keys(GROUP_TYPE_LABELS) as GroupSeed["type"][]).map((type) => ({

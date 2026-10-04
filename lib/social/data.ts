@@ -7,11 +7,45 @@ import { SPORT_ACTIVITIES } from "@/lib/camp/data";
 
 export { SPORT_ACTIVITIES };
 
-export const LOCKIN_TAGS = ["Discipline", "Sport", "Business", "Mindset", "Lifestyle"] as const;
+export const LOCKIN_TAGS = ["Discipline", "Sport", "Business", "Mindset", "Lifestyle", "Santé"] as const;
 
 export type LockinTag = (typeof LOCKIN_TAGS)[number];
 
 export const LOCKIN_LEVELS = [1, 2, 3, 4, 5] as const;
+
+/**
+ * Rituel d'inscription (écran "Objectif 30 jours") — mêmes mots que
+ * LOCKIN_TAGS, dans l'ordre demandé par le produit.
+ */
+export const GOAL_DOMAINS: readonly LockinTag[] = [
+  "Santé",
+  "Sport",
+  "Business",
+  "Discipline",
+  "Mindset",
+  "Lifestyle",
+];
+
+/** Domaines qui comptent comme objectif professionnel plutôt que personnel. */
+export const PROFESSIONAL_GOAL_DOMAINS: readonly LockinTag[] = ["Business"];
+
+export const MORNING_ROUTINE_CHOICES = [
+  "Réveil à heure fixe",
+  "Sport matinal",
+  "Méditation",
+  "Journaling",
+  "Lecture",
+  "Planification de la journée",
+] as const;
+
+export const EVENING_ROUTINE_CHOICES = [
+  "Lecture",
+  "Planification du lendemain",
+  "Méditation",
+  "Journaling",
+  "Déconnexion écrans",
+  "Étirements / mobilité",
+] as const;
 
 /**
  * Amorçage des groupes — même logique que CAMP_SESSIONS_SEED dans
