@@ -237,9 +237,10 @@ export const campRegistrations = pgTable(
   "camp_registrations",
   {
     id: serial("id").primaryKey(),
-    userId: integer("user_id")
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }),
+    // Nullable : le camp se réserve sans compte (page publique, pas de
+    // Clerk). Quand le visiteur est quand même connecté, on rattache la
+    // pré-inscription à son compte en plus — mais ça n'est jamais requis.
+    userId: integer("user_id").references(() => users.id, { onDelete: "cascade" }),
     sessionId: integer("session_id")
       .notNull()
       .references(() => campSessions.id, { onDelete: "cascade" }),
@@ -251,7 +252,9 @@ export const campRegistrations = pgTable(
     createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
   },
   (table) => [
-    uniqueIndex("camp_registrations_user_session_idx").on(table.userId, table.sessionId),
+    // Dédoublonne par email plutôt que par utilisateur — userId est souvent
+    // absent (réservation anonyme), l'email est la seule identité fiable.
+    uniqueIndex("camp_registrations_session_email_idx").on(table.sessionId, table.email),
   ],
 );
 

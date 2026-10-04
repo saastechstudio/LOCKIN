@@ -232,7 +232,7 @@
  * l'app : marron + beige crème, minimaliste, peu de texte par écran. Fixe
  * (ne suit pas le toggle clair/sombre) car c'est une identité de "marque
  * dans la marque", comme une landing page produit. Appliquer `.camp-scope`
- * au conteneur racine des écrans /dashboard/camp pour hériter du fond et du
+ * au conteneur racine des écrans /camp pour hériter du fond et du
  * texte par défaut ; les utilitaires `bg-camp-*` / `text-camp-*` /
  * `border-camp-*` restent disponibles partout via le bloc @theme inline.
  */

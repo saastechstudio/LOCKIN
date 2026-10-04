@@ -19,6 +19,6 @@ export const DASHBOARD_NAV: DashboardNavItem[] = [
   { href: "/dashboard/coach", label: "Coach IA", icon: BrainCircuit },
   { href: "/dashboard/planning", label: "Planning", icon: CalendarCheck },
   { href: "/dashboard/network", label: "Réseau", icon: Users },
-  { href: "/dashboard/camp", label: "Lock-In Camp", icon: Plane },
+  { href: "/camp", label: "Lock-In Camp", icon: Plane },
   { href: "/dashboard/settings", label: "Paramètres", icon: Settings },
 ];
