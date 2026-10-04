@@ -5,20 +5,18 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 /**
- * Bouton brutaliste pour les écrans Lock-In Camp : angles droits, ombre
- * "dure" décalée (pas de flou), qui se rétracte au clic/survol comme un
- * bouton qu'on enfonce — volontairement différent du `Button` partagé
- * (rounded-lg, dégradé, glow) utilisé par le reste de l'app.
+ * Bouton brutaliste pour les écrans Lock-In Camp : angles droits, aucune
+ * ombre (même pas l'ombre "dure" décalée des versions précédentes) — juste
+ * un aplat de couleur et un contour net. "primary" porte le doré mat de
+ * l'identité ; "secondary" reste un simple contour noir charbon.
  */
 const ctaButtonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap border-2 px-7 py-3.5 font-mono text-sm font-bold tracking-[0.1em] uppercase transition-all duration-150 ease-out disabled:pointer-events-none disabled:opacity-40",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap border-2 px-7 py-3.5 font-mono text-sm font-bold tracking-[0.1em] uppercase shadow-none transition-colors duration-150 ease-out disabled:pointer-events-none disabled:opacity-40",
   {
     variants: {
       variant: {
-        primary:
-          "border-camp-charcoal bg-camp-charcoal text-camp-cream shadow-[6px_6px_0_0_var(--camp-gold)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none active:translate-x-[6px] active:translate-y-[6px]",
-        secondary:
-          "border-camp-brown bg-transparent text-camp-brown shadow-[4px_4px_0_0_var(--camp-charcoal)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none active:translate-x-[4px] active:translate-y-[4px]",
+        primary: "border-camp-gold bg-camp-gold text-camp-charcoal hover:bg-camp-charcoal hover:border-camp-charcoal hover:text-camp-white",
+        secondary: "border-camp-charcoal bg-transparent text-camp-charcoal hover:bg-camp-charcoal hover:text-camp-white",
       },
     },
     defaultVariants: { variant: "primary" },

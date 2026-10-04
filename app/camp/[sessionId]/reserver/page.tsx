@@ -20,10 +20,10 @@ export default async function CampReservationPage({
 
   return (
     <div>
-      <div className="border-b-2 border-camp-brown px-6 py-5">
+      <div className="border-b-2 border-camp-charcoal px-6 py-5">
         <Link
           href="/camp"
-          className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-[0.1em] text-camp-brown uppercase hover:text-camp-gold-ink"
+          className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-[0.1em] text-camp-charcoal uppercase hover:text-camp-gold"
         >
           <ArrowLeft className="size-3.5" /> lock-in camp
         </Link>
@@ -31,10 +31,10 @@ export default async function CampReservationPage({
 
       {session.remainingSpots <= 0 ? (
         <div className="mx-auto max-w-xl px-6 py-20 text-center">
-          <p className="font-display text-xl font-bold text-camp-brown uppercase">
+          <p className="font-display text-xl font-bold text-camp-charcoal uppercase">
             Cette session est complète
           </p>
-          <p className="mt-2 text-sm text-camp-brown/60">
+          <p className="mt-2 text-sm text-camp-charcoal/60">
             Les places restantes se comptent en temps réel : reviens un peu
             plus tard ou choisis l&apos;autre session.
           </p>

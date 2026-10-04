@@ -3,16 +3,13 @@ import { CAMP_PROGRAM_PARTS } from "@/lib/camp/data";
 
 /**
  * Le programme Lock-In officiel (2h/jour), en 5 parties — pas des cartes,
- * une colonne de blocs typographiques empilés : le numéro de partie en
- * grand, le titre, puis les trois points comme une liste à filets plutôt
- * que des puces.
+ * une colonne de blocs typographiques empilés sur fond blanc : le numéro
+ * de partie en doré mat, le titre, puis les trois points comme une liste
+ * à filets plutôt que des puces.
  */
 export function SectionProgramLockIn() {
   return (
-    <section
-      id="programme-lockin"
-      className="border-t-2 border-camp-brown bg-camp-cream px-6 py-20 sm:py-28"
-    >
+    <section id="programme-lockin" className="bg-camp-white px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           index="03"
@@ -22,24 +19,24 @@ export function SectionProgramLockIn() {
           className="mb-12"
         />
 
-        <div className="border-2 border-camp-brown">
+        <div className="border-2 border-camp-charcoal">
           {CAMP_PROGRAM_PARTS.map((part) => (
             <div
               key={part.number}
-              className="grid grid-cols-1 gap-4 border-b-2 border-camp-brown p-6 last:border-b-0 sm:grid-cols-[auto_1fr] sm:gap-10 sm:p-8"
+              className="grid grid-cols-1 gap-4 border-b border-camp-hairline p-6 last:border-b-0 sm:grid-cols-[auto_1fr] sm:gap-10 sm:p-8"
             >
               <span className="font-display text-5xl leading-none font-bold text-camp-gold sm:text-6xl">
                 {part.number}
               </span>
               <div>
-                <p className="font-display text-xl font-bold text-camp-brown uppercase sm:text-2xl">
+                <p className="font-display text-xl font-bold text-camp-charcoal uppercase sm:text-2xl">
                   {part.title}
                 </p>
                 <ul className="mt-4 space-y-2">
                   {part.items.map((item) => (
                     <li
                       key={item}
-                      className="border-t border-camp-brown/20 pt-2 text-sm leading-relaxed text-camp-brown/80 first:border-t-0 first:pt-0"
+                      className="border-t border-camp-hairline pt-2 text-sm leading-relaxed text-camp-charcoal/70 first:border-t-0 first:pt-0"
                     >
                       {item}
                     </li>
