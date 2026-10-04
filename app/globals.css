@@ -212,6 +212,45 @@
   --radius-xl: var(--radius);
 
   --font-sans: var(--font-inter);
+
+  /* Lock-In Camp sous-identité (marron / beige crème — cf. bloc .camp-scope
+     plus bas pour le contexte) */
+  --color-camp-bg: var(--camp-bg);
+  --color-camp-bg-deep: var(--camp-bg-deep);
+  --color-camp-card: var(--camp-card);
+  --color-camp-border: var(--camp-border);
+  --color-camp-brown: var(--camp-brown);
+  --color-camp-brown-deep: var(--camp-brown-deep);
+  --color-camp-brown-soft: var(--camp-brown-soft);
+  --color-camp-sand: var(--camp-sand);
+  --color-camp-cream: var(--camp-cream);
+}
+
+/*
+ * Lock-In Camp — sous-identité visuelle dédiée (retraite sportive premium à
+ * Phuket), volontairement distincte de la palette bleu/corail/or du reste de
+ * l'app : marron + beige crème, minimaliste, peu de texte par écran. Fixe
+ * (ne suit pas le toggle clair/sombre) car c'est une identité de "marque
+ * dans la marque", comme une landing page produit. Appliquer `.camp-scope`
+ * au conteneur racine des écrans /dashboard/camp pour hériter du fond et du
+ * texte par défaut ; les utilitaires `bg-camp-*` / `text-camp-*` /
+ * `border-camp-*` restent disponibles partout via le bloc @theme inline.
+ */
+:root {
+  --camp-bg: #f5efe6;
+  --camp-bg-deep: #ece1cd;
+  --camp-card: #fffbf4;
+  --camp-border: rgba(63, 42, 29, 0.12);
+  --camp-brown: #6b4226;
+  --camp-brown-deep: #3f2a1d;
+  --camp-brown-soft: #a9826a;
+  --camp-sand: #cf9f5f;
+  --camp-cream: #f5efe6;
+}
+
+.camp-scope {
+  background: var(--camp-bg);
+  color: var(--camp-brown-deep);
 }
 
 * {

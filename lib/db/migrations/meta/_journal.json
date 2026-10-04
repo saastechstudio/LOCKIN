@@ -64,6 +64,13 @@
       "when": 1790073364047,
       "tag": "0008_blue_sir_ram",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1791118578242,
+      "tag": "0009_plain_omega_red",
+      "breakpoints": true
     }
   ]
 }

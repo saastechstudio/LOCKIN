@@ -76,6 +76,17 @@ export const moodEnum = pgEnum("mood", [
   "stresse",
 ]);
 
+export const campRegistrationStatusEnum = pgEnum("camp_registration_status", [
+  "pending",
+  "confirmed",
+  "cancelled",
+]);
+
+export type CampSportChoice = {
+  day: number;
+  activityId: string;
+};
+
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
   clerkId: text("clerk_id").notNull().unique(),
@@ -210,6 +221,40 @@ export const notifications = pgTable(
   ],
 );
 
+export const campSessions = pgTable("camp_sessions", {
+  id: serial("id").primaryKey(),
+  slug: text("slug").notNull().unique(),
+  name: text("name").notNull(),
+  destination: text("destination").notNull().default("Phuket"),
+  startDate: date("start_date", { mode: "date" }).notNull(),
+  endDate: date("end_date", { mode: "date" }).notNull(),
+  pricePerPerson: numeric("price_per_person", { precision: 10, scale: 2 }).notNull(),
+  totalSpots: integer("total_spots").notNull(),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const campRegistrations = pgTable(
+  "camp_registrations",
+  {
+    id: serial("id").primaryKey(),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    sessionId: integer("session_id")
+      .notNull()
+      .references(() => campSessions.id, { onDelete: "cascade" }),
+    fullName: text("full_name").notNull(),
+    email: text("email").notNull(),
+    sportChoices: jsonb("sport_choices").$type<CampSportChoice[]>().notNull().default([]),
+    excursionChoices: jsonb("excursion_choices").$type<string[]>().notNull().default([]),
+    status: campRegistrationStatusEnum("status").notNull().default("pending"),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("camp_registrations_user_session_idx").on(table.userId, table.sessionId),
+  ],
+);
+
 export const aiConversations = pgTable("ai_conversations", {
   id: serial("id").primaryKey(),
   userId: integer("user_id")
@@ -228,6 +273,19 @@ export const usersRelations = relations(users, ({ many }) => ({
   dailyFocusEntries: many(dailyFocus),
   planningTasks: many(planningTasks),
   notifications: many(notifications),
+  campRegistrations: many(campRegistrations),
+}));
+
+export const campSessionsRelations = relations(campSessions, ({ many }) => ({
+  registrations: many(campRegistrations),
+}));
+
+export const campRegistrationsRelations = relations(campRegistrations, ({ one }) => ({
+  user: one(users, { fields: [campRegistrations.userId], references: [users.id] }),
+  session: one(campSessions, {
+    fields: [campRegistrations.sessionId],
+    references: [campSessions.id],
+  }),
 }));
 
 export const notificationsRelations = relations(notifications, ({ one }) => ({
@@ -286,3 +344,7 @@ export type PlanningTask = typeof planningTasks.$inferSelect;
 export type NewPlanningTask = typeof planningTasks.$inferInsert;
 export type Notification = typeof notifications.$inferSelect;
 export type NewNotification = typeof notifications.$inferInsert;
+export type CampSession = typeof campSessions.$inferSelect;
+export type NewCampSession = typeof campSessions.$inferInsert;
+export type CampRegistration = typeof campRegistrations.$inferSelect;
+export type NewCampRegistration = typeof campRegistrations.$inferInsert;
