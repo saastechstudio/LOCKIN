@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/marketing/site-header";
 import { SiteFooter } from "@/components/marketing/site-footer";
 import { Hero } from "@/components/marketing/hero";
+import { HomeModuleLockInCamp } from "@/components/marketing/home-module-lock-in-camp";
 import { PillarsSection } from "@/components/marketing/pillars-section";
 import { Pillars } from "@/components/marketing/pillars";
 import { MethodologySection } from "@/components/marketing/methodology-section";
@@ -16,6 +17,7 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-1">
         <Hero />
+        <HomeModuleLockInCamp />
         <PillarsSection />
         <Pillars />
         <MethodologySection />

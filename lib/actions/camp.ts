@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import { db } from "@/lib/db";
 import { campSessions, campRegistrations, type CampSportChoice } from "@/lib/db/schema";
-import { getOrCreateDbUser } from "@/lib/auth";
+import { getDbUserOrNull } from "@/lib/auth";
 import {
   CAMP_SESSIONS_SEED,
   CAMP_PRICE_PER_PERSON,
@@ -99,16 +99,6 @@ async function withAvailability(session: {
   };
 }
 
-export async function getUserCampRegistration(sessionId: number) {
-  const user = await getOrCreateDbUser();
-  return db.query.campRegistrations.findFirst({
-    where: and(
-      eq(campRegistrations.userId, user.id),
-      eq(campRegistrations.sessionId, sessionId),
-    ),
-  });
-}
-
 const sportChoiceSchema = z.object({
   day: z.number().int().min(1),
   activityId: z.string().min(1),
@@ -137,13 +127,17 @@ export type CreateCampRegistrationInput = {
 };
 
 /**
- * Enregistre une pré-inscription (une par membre et par session — contrainte
- * camp_registrations_user_session_idx). Le paiement n'est pas branché ici :
- * la place est réservée au statut "pending" en attendant l'intégration
- * ultérieure (cf. lib/actions/camp.ts -> getCampPaymentPlaceholder).
+ * Enregistre une pré-inscription — accessible sans compte (page publique,
+ * pas de Clerk requis). Une par email et par session (contrainte
+ * camp_registrations_session_email_idx) : re-soumettre le formulaire avec
+ * le même email met à jour la réservation plutôt que d'échouer. Si le
+ * visiteur est par ailleurs connecté, on rattache sa pré-inscription à son
+ * compte membre en plus — mais ça reste un bonus, jamais une condition. Le
+ * paiement n'est pas branché ici : la place est réservée au statut
+ * "pending" en attendant l'intégration ultérieure (cf.
+ * getCampPaymentPlaceholder plus bas).
  */
 export async function createCampRegistration(input: CreateCampRegistrationInput) {
-  const user = await getOrCreateDbUser();
   const parsed = createRegistrationSchema.parse(input);
 
   const session = await db.query.campSessions.findFirst({
@@ -151,10 +145,12 @@ export async function createCampRegistration(input: CreateCampRegistrationInput)
   });
   if (!session) throw new Error("Session introuvable");
 
+  const user = await getDbUserOrNull();
+
   const [registration] = await db
     .insert(campRegistrations)
     .values({
-      userId: user.id,
+      userId: user?.id,
       sessionId: parsed.sessionId,
       fullName: parsed.fullName,
       email: parsed.email,
@@ -162,18 +158,19 @@ export async function createCampRegistration(input: CreateCampRegistrationInput)
       excursionChoices: parsed.excursionChoices,
     })
     .onConflictDoUpdate({
-      target: [campRegistrations.userId, campRegistrations.sessionId],
+      target: [campRegistrations.sessionId, campRegistrations.email],
       set: {
+        userId: user?.id,
         fullName: parsed.fullName,
-        email: parsed.email,
         sportChoices: parsed.sportChoices,
         excursionChoices: parsed.excursionChoices,
       },
     })
     .returning();
 
-  revalidatePath("/dashboard/camp");
-  revalidatePath(`/dashboard/camp/${session.slug}`);
+  revalidatePath("/camp");
+  revalidatePath(`/camp/${session.slug}`);
+  revalidatePath(`/camp/${session.slug}/reserver`);
 
   return registration;
 }
