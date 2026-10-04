@@ -13,6 +13,7 @@ import {
   CAMP_TOTAL_SPOTS_PER_SESSION,
   EXCURSIONS_TO_CHOOSE,
   EXCURSIONS,
+  FUN_ACTIVITIES,
 } from "@/lib/camp/data";
 
 export type CampSessionWithAvailability = {
@@ -116,6 +117,9 @@ const createRegistrationSchema = z.object({
       (ids) => ids.every((id) => EXCURSIONS.some((e) => e.id === id)),
       "Excursion inconnue",
     ),
+  funActivityChoice: z
+    .string()
+    .refine((id) => FUN_ACTIVITIES.some((a) => a.id === id), "Activité fun inconnue"),
 });
 
 export type CreateCampRegistrationInput = {
@@ -124,6 +128,7 @@ export type CreateCampRegistrationInput = {
   email: string;
   sportChoices: CampSportChoice[];
   excursionChoices: string[];
+  funActivityChoice: string;
 };
 
 /**
@@ -156,6 +161,7 @@ export async function createCampRegistration(input: CreateCampRegistrationInput)
       email: parsed.email,
       sportChoices: parsed.sportChoices,
       excursionChoices: parsed.excursionChoices,
+      funActivityChoice: parsed.funActivityChoice,
     })
     .onConflictDoUpdate({
       target: [campRegistrations.sessionId, campRegistrations.email],
@@ -164,6 +170,7 @@ export async function createCampRegistration(input: CreateCampRegistrationInput)
         fullName: parsed.fullName,
         sportChoices: parsed.sportChoices,
         excursionChoices: parsed.excursionChoices,
+        funActivityChoice: parsed.funActivityChoice,
       },
     })
     .returning();

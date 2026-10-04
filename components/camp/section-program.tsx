@@ -28,27 +28,9 @@ export function SectionProgram() {
                 0{i + 1} — {block.period}
               </p>
               <p className="font-display mt-3 text-xl font-bold text-camp-cream">{block.title}</p>
-              {block.description ? (
-                <p className="mt-2 text-sm leading-relaxed text-camp-cream/60">
-                  {block.description}
-                </p>
-              ) : null}
-
-              {block.blocks ? (
-                <div className="mt-5 space-y-2">
-                  {block.blocks.map((b, bi) => (
-                    <div
-                      key={b}
-                      className="flex items-baseline gap-3 border border-camp-cream/20 px-3 py-2"
-                    >
-                      <span className="font-mono text-[11px] font-bold text-camp-turquoise">
-                        {bi + 1}
-                      </span>
-                      <span className="text-sm text-camp-cream/80">{b}</span>
-                    </div>
-                  ))}
-                </div>
-              ) : null}
+              <p className="mt-2 text-sm leading-relaxed text-camp-cream/60">
+                {block.description}
+              </p>
             </div>
           ))}
         </div>
