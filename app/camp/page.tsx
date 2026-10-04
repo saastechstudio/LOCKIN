@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Check } from "lucide-react";
 
 import { getCampSessions } from "@/lib/actions/camp";
@@ -21,13 +22,17 @@ export default async function LockInCampScreen() {
   return (
     <div className="mx-auto max-w-3xl space-y-14 px-6 py-14">
       {/* A) Présentation */}
-      <div className="space-y-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-camp-sand">
-          Lock-In Camp — Édition Phuket 2027
-        </p>
-        <h1 className="font-display text-3xl text-camp-brown-deep sm:text-4xl">
-          Discipline, sport, mindset & business
-        </h1>
+      <div className="space-y-5 text-center">
+        <div className="overflow-hidden rounded-2xl border border-camp-border shadow-soft-md">
+          <Image
+            src="/camp-hero.jpg"
+            alt="Lock-In Camp — Édition Phuket"
+            width={1024}
+            height={1024}
+            priority
+            className="h-auto w-full"
+          />
+        </div>
         <p className="mx-auto max-w-xl text-sm leading-relaxed text-camp-brown-soft">
           Le Lock-In Camp – Édition Phuket est une immersion de 10 jours
           dédiée à la discipline, au sport, au mindset et au business.
