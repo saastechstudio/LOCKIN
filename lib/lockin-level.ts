@@ -1,12 +1,12 @@
 /**
- * Niveau Lockin : le cadenas se verrouille palier par palier.
+ * Niveau Lockin : le cadenas se remplit palier par palier, jusqu'à « Débloqué ».
  * Un seul calcul pour le hero de l'app, les profils, le feed et la
  * progression. Il se gagne (score de discipline des 7 derniers jours),
  * il ne se déclare pas. Échelle 1–5, comme la colonne users.lockin_level.
  */
 export const LEVEL_MAX = 5;
 
-const LEVEL_NAMES = ["Initié", "Engagé", "Constant", "Discipliné", "Verrouillé"] as const;
+const LEVEL_NAMES = ["Initié", "Engagé", "Constant", "Discipliné", "Débloqué"] as const;
 
 /** Score minimal (0–100) pour atteindre les niveaux 2 à 5 ; le niveau 1 est acquis à l'entrée. */
 const THRESHOLDS = [30, 50, 70, 90];

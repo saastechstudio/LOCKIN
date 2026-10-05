@@ -1,13 +1,15 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Le cadenas Lockin : vertical, rectangulaire, anse carrée, angles vifs.
- * Symbole principal de la marque — logo, icône de niveau, états verrouillés.
+ * Le cadenas Lockin : vertical, rectangulaire, anse carrée, angles vifs —
+ * et ouvert. L'anse est levée, sa branche gauche sortie du corps : le club
+ * débloque la situation de ses membres. Symbole principal de la marque :
+ * logo, icône de niveau.
  *
  * - `solid` : corps plein (logo, marque).
  * - `level`/`max` : le corps se remplit par paliers depuis le bas, un palier
  *   par niveau atteint. C'est l'icône de niveau des profils : on ne gagne pas
- *   de badge, on verrouille sa discipline, palier après palier.
+ *   de badge, on débloque sa discipline, palier après palier.
  */
 export function LockIcon({
   className,
@@ -41,9 +43,10 @@ export function LockIcon({
       shapeRendering="crispEdges"
     >
       {title ? <title>{title}</title> : null}
-      {/* Anse : un U inversé à angles droits. */}
+      {/* Anse ouverte : U inversé à angles droits, branche droite dans le corps,
+          branche gauche levée au-dessus. */}
       <path
-        d="M6 13V3H18V13"
+        d="M18 13V2H6V7"
         fill="none"
         stroke="currentColor"
         strokeWidth="2.5"
