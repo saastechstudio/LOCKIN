@@ -1,25 +1,25 @@
-import { SiteHeader } from "@/components/marketing/site-header";
-import { SiteFooter } from "@/components/marketing/site-footer";
-import { Hero } from "@/components/marketing/hero";
-import { ModulesShowcase } from "@/components/marketing/modules-showcase";
-import { HomeModuleLockInCamp } from "@/components/marketing/home-module-lock-in-camp";
-import { JoinCta } from "@/components/marketing/join-cta";
-import { ExitIntentPopup } from "@/components/marketing/exit-intent-popup";
-import { StickyCtaBar } from "@/components/marketing/sticky-cta-bar";
+import type { Metadata } from "next";
+
+import { LandingLayout } from "@/components/landing/landing-layout";
+import { Hero } from "@/components/landing/hero";
+import { SectionWhatIsLockin } from "@/components/landing/section-what-is-lockin";
+import { SectionInside } from "@/components/landing/section-inside";
+import { SectionMotivation } from "@/components/landing/section-motivation";
+import { SectionEthics } from "@/components/landing/section-ethics";
+
+export const metadata: Metadata = {
+  title: "Lockin Social Club — Mouvement mondial de discipline",
+  description: "Discipline, objectifs, entraide, réseau. Un club mondial, gratuit.",
+};
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-1 flex-col bg-background">
-      <SiteHeader />
-      <main className="flex-1">
-        <Hero />
-        <ModulesShowcase />
-        <HomeModuleLockInCamp />
-        <JoinCta />
-      </main>
-      <SiteFooter />
-      <StickyCtaBar />
-      <ExitIntentPopup />
-    </div>
+    <LandingLayout>
+      <Hero />
+      <SectionWhatIsLockin />
+      <SectionInside />
+      <SectionMotivation />
+      <SectionEthics />
+    </LandingLayout>
   );
 }

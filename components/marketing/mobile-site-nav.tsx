@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [
-  { href: "/#modules", label: "Le Club" },
+  { href: "/#mouvement", label: "Le Club" },
   { href: "/camp", label: "Lock-In Camp" },
   { href: "/methode", label: "La Méthode" },
   { href: "/methode#pricing", label: "Tarifs" },
