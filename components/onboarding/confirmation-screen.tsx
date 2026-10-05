@@ -1,3 +1,4 @@
+import { Slogan } from "@/components/lockin/primitives";
 import { SPORT_ACTIVITIES, type LockinTag } from "@/lib/social/data";
 
 type ConfirmationScreenProps = {
@@ -37,6 +38,8 @@ export function ConfirmationScreen({ data }: ConfirmationScreenProps) {
       <p className="mt-2 text-sm text-camp-charcoal/60">
         Dernière vérification avant d&apos;entrer dans le club.
       </p>
+
+      <Slogan as="p" size="md" className="mt-8 border-l-2 border-lk-gold pl-4" />
 
       <dl className="mt-6 divide-y divide-camp-hairline border border-camp-hairline">
         {rows.map((row) => (

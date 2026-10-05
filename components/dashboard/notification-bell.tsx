@@ -52,11 +52,11 @@ export function NotificationBell({
         <button
           type="button"
           aria-label="Notifications"
-          className="relative flex size-9 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-accent"
+          className="relative flex size-9 items-center justify-center rounded-none border border-border text-foreground transition-colors hover:bg-accent"
         >
           <Bell className="size-4" />
           {unreadCount > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 flex size-4 items-center justify-center rounded-full bg-brand-coral text-[10px] font-semibold text-white">
+            <span className="absolute -top-0.5 -right-0.5 flex size-4 items-center justify-center rounded-none bg-brand-coral text-[10px] font-semibold text-white">
               {unreadCount > 9 ? "9+" : unreadCount}
             </span>
           )}
@@ -92,7 +92,7 @@ export function NotificationBell({
               >
                 <div className="flex items-center gap-2">
                   {!notification.read && (
-                    <span className="size-1.5 shrink-0 rounded-full bg-brand-coral" />
+                    <span className="size-1.5 shrink-0 rounded-none bg-brand-coral" />
                   )}
                   <p className="truncate text-sm font-medium text-foreground">
                     {notification.title}

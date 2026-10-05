@@ -11,7 +11,7 @@ export default function SignInPage() {
               card: "surface",
               headerTitle: "font-display text-foreground",
               formButtonPrimary:
-                "bg-brand-gradient text-white rounded-full hover:brightness-105",
+                "bg-brand-gradient text-white rounded-none hover:brightness-105",
             },
           }}
         />

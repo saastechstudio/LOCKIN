@@ -10,7 +10,7 @@ export function MethodologySection() {
     <section id="methode" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-blue/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-blue-deep uppercase">
+          <span className="inline-flex items-center gap-2 rounded-none border border-brand-blue/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-blue-deep uppercase">
             {METHODOLOGY_NAME}
           </span>
           <h2 className="mt-4 font-display text-3xl text-foreground sm:text-4xl">

@@ -5,25 +5,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold tracking-wide transition-all duration-150 ease-out disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 outline-none focus-visible:ring-2 focus-visible:ring-ring/50 active:scale-[0.98]",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-none text-sm font-medium transition-opacity duration-150 disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lk-black",
   {
     variants: {
       variant: {
-        default:
-          "btn-shine bg-brand-gradient text-primary-foreground shadow-blue-glow hover:brightness-105 hover:shadow-soft-md active:brightness-95",
-        destructive:
-          "bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90",
+        // Bouton Lockin : aplat noir, angles droits, survol sobre.
+        default: "bg-lk-black text-lk-white hover:opacity-85",
+        destructive: "bg-lk-ink-1 text-lk-white hover:opacity-85",
         outline:
-          "border border-border bg-white text-foreground shadow-soft hover:border-brand-blue/40 hover:text-brand-blue",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-brand-blue underline-offset-4 hover:underline",
+          "border border-lk-black bg-lk-white text-lk-black hover:bg-lk-black hover:text-lk-white",
+        secondary: "bg-lk-mist text-lk-black hover:opacity-85",
+        ghost: "text-lk-black hover:bg-lk-mist",
+        link: "text-lk-black underline decoration-lk-line underline-offset-4 hover:decoration-lk-black",
       },
       size: {
-        default: "h-10 px-5 py-2 has-[>svg]:px-4",
-        sm: "h-8 gap-1.5 px-3 has-[>svg]:px-2.5 text-xs",
-        lg: "h-12 px-7 text-base has-[>svg]:px-5",
+        default: "h-11 px-6 py-2 has-[>svg]:px-5",
+        sm: "h-9 gap-1.5 px-4 has-[>svg]:px-3 text-xs",
+        lg: "h-13 px-8 text-base has-[>svg]:px-6",
         icon: "size-10",
       },
     },

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { Footer } from "@/components/landing/footer";
+import { Logo } from "@/components/lockin/logo";
 
 /**
  * Entrer dans le club = créer son compte puis faire le rituel (/rejoindre),
@@ -12,19 +13,14 @@ export const JOIN_HREF = "/sign-up?redirect_url=%2Frejoindre";
 /**
  * Coque de la landing Lockin Social Club — fond blanc imposé (camp-scope,
  * indépendant du thème clair/sombre du reste du site), en-tête minimal :
- * le logo typographique et deux portes d'entrée, rien d'autre.
+ * le cadenas Lockin et deux portes d'entrée, rien d'autre.
  */
 export function LandingLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="camp-scope flex min-h-screen flex-col">
       <header className="border-b border-camp-hairline">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-8">
-          <Link
-            href="/"
-            className="text-xs font-bold tracking-[0.14em] whitespace-nowrap text-camp-charcoal uppercase sm:text-sm sm:tracking-[0.18em]"
-          >
-            Lockin Social Club
-          </Link>
+          <Logo size="sm" wordmarkFrom="sm" />
 
           <nav className="flex items-center gap-4 text-sm sm:gap-6">
             <Link

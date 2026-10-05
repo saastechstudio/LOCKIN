@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Menu, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { DASHBOARD_NAV } from "@/lib/dashboard-nav";
+import { Logo } from "@/components/lockin/logo";
 
 export function MobileNav() {
   const [open, setOpen] = useState(false);
@@ -20,7 +20,7 @@ export function MobileNav() {
         <button
           type="button"
           aria-label="Ouvrir le menu"
-          className="flex size-9 items-center justify-center rounded-full border border-border text-foreground md:hidden"
+          className="flex size-9 items-center justify-center rounded-none border border-border text-foreground md:hidden"
         >
           <Menu className="size-4" />
         </button>
@@ -37,23 +37,12 @@ export function MobileNav() {
             Menu de navigation
           </DialogPrimitive.Title>
           <div className="flex h-16 items-center justify-between border-b border-border/60 px-6">
-            <div className="flex items-center gap-2.5">
-              <Image
-                src="/logo-mark.png"
-                alt="Lock In"
-                width={28}
-                height={33}
-                className="h-7 w-auto"
-              />
-              <span className="font-display text-base tracking-tight text-foreground lowercase">
-                lock in
-              </span>
-            </div>
+            <Logo size="sm" href="/dashboard" />
             <DialogPrimitive.Close asChild>
               <button
                 type="button"
                 aria-label="Fermer le menu"
-                className="flex size-8 items-center justify-center rounded-full text-muted-foreground hover:bg-accent hover:text-foreground"
+                className="flex size-8 items-center justify-center rounded-none text-muted-foreground hover:bg-accent hover:text-foreground"
               >
                 <X className="size-4" />
               </button>
@@ -72,7 +61,7 @@ export function MobileNav() {
                   href={item.href}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "flex items-center gap-3 rounded-full px-3 py-2.5 text-sm transition-colors",
+                    "flex items-center gap-3 rounded-none px-3 py-2.5 text-sm transition-colors",
                     active
                       ? "bg-brand-blue/10 text-brand-blue-deep border border-brand-blue/20"
                       : "text-muted-foreground hover:bg-accent hover:text-foreground",

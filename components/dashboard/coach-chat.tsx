@@ -44,7 +44,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
       <ScrollArea className="flex-1 px-6 py-6">
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-4 py-16 text-center">
-            <div className="flex size-12 items-center justify-center rounded-full bg-gradient-to-br from-brand-blue/15 via-brand-coral/15 to-brand-yellow/15">
+            <div className="flex size-12 items-center justify-center rounded-none bg-gradient-to-br from-brand-blue/15 via-brand-coral/15 to-brand-yellow/15">
               <Sparkles className="text-brand-blue size-5" />
             </div>
             <p className="max-w-sm text-sm text-muted-foreground">
@@ -92,7 +92,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
               key={prompt}
               onClick={() => submit(prompt)}
               disabled={isLoading}
-              className="rounded-full border border-brand-blue/20 bg-brand-blue/5 px-3 py-1 text-xs text-brand-blue-deep transition-colors hover:bg-brand-blue/10 disabled:opacity-50"
+              className="rounded-none border border-brand-blue/20 bg-brand-blue/5 px-3 py-1 text-xs text-brand-blue-deep transition-colors hover:bg-brand-blue/10 disabled:opacity-50"
             >
               {prompt}
             </button>
@@ -104,7 +104,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
             e.preventDefault();
             submit(input);
           }}
-          className="shadow-soft flex items-center gap-2 rounded-full border border-border bg-gradient-to-r from-brand-blue/[0.06] via-brand-coral/[0.06] to-brand-yellow/[0.06] p-1.5 pl-5"
+          className="shadow-soft flex items-center gap-2 rounded-none border border-border bg-gradient-to-r from-brand-blue/[0.06] via-brand-coral/[0.06] to-brand-yellow/[0.06] p-1.5 pl-5"
         >
           <input
             value={input}
@@ -116,7 +116,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
             type="submit"
             disabled={isLoading || !input.trim()}
             aria-label="Envoyer"
-            className="bg-brand-gradient shadow-blue-glow flex size-9 shrink-0 items-center justify-center rounded-full text-white transition-transform hover:scale-105 disabled:pointer-events-none disabled:opacity-40"
+            className="bg-brand-gradient shadow-blue-glow flex size-9 shrink-0 items-center justify-center rounded-none text-white transition-transform hover:scale-105 disabled:pointer-events-none disabled:opacity-40"
           >
             <ArrowUp className="size-4" />
           </button>

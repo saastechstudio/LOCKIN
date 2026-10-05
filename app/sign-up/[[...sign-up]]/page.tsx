@@ -1,19 +1,14 @@
 import { Suspense } from "react";
-import Link from "next/link";
 
 import { SignUpForm } from "@/components/auth/sign-up-form";
+import { Logo } from "@/components/lockin/logo";
 
 export default function SignUpPage() {
   return (
     <div className="camp-scope flex min-h-screen flex-col">
       <header className="border-b border-camp-hairline">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center px-5 sm:px-8">
-          <Link
-            href="/"
-            className="text-xs font-bold tracking-[0.14em] whitespace-nowrap text-camp-charcoal uppercase sm:text-sm sm:tracking-[0.18em]"
-          >
-            Lockin Social Club
-          </Link>
+          <Logo size="sm" />
         </div>
       </header>
 

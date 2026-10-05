@@ -10,7 +10,7 @@ export default function NotFound() {
     <div className="flex min-h-screen flex-col bg-background bg-noise">
       <SiteHeader />
       <main className="mx-auto flex max-w-lg flex-1 flex-col items-center justify-center px-6 py-24 text-center">
-        <div className="flex size-14 items-center justify-center rounded-full bg-brand-blue/10">
+        <div className="flex size-14 items-center justify-center rounded-none bg-brand-blue/10">
           <Compass className="size-6 text-brand-blue" />
         </div>
         <h1 className="font-display mt-6 text-3xl text-foreground">
