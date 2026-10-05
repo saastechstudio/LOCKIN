@@ -19,12 +19,13 @@ const TARGET_LABELS: Record<string, string> = {
   comment: "Commentaire",
   message: "Message privé",
   help_answer: "Réponse entraide",
+  business_offer: "Annonce business",
 };
 
 type ReportRowProps = {
   report: {
     id: number;
-    targetType: "post" | "comment" | "message" | "help_answer";
+    targetType: "post" | "comment" | "message" | "help_answer" | "business_offer";
     targetId: number;
     reason: string;
     details: string | null;
