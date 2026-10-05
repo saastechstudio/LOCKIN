@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
 import { CTAButton } from "@/components/camp/cta-button";
 import { CAMP_PRICE_PER_PERSON, CAMP_SESSIONS_SEED, sessionDurationDays } from "@/lib/camp/data";
+import { Logo } from "@/components/lockin/logo";
 
 /**
  * Hero fond blanc pur — pas de dégradé, pas de visuel photo, pas de bloc
@@ -19,12 +19,7 @@ export function Hero() {
   return (
     <section className="bg-camp-white px-6 pt-20 pb-16 sm:pt-28 sm:pb-24">
       <div className="mx-auto flex max-w-5xl flex-col gap-10">
-        <div className="flex items-center gap-2.5">
-          <Image src="/logo-mark.png" alt="" width={28} height={33} className="h-7 w-auto" />
-          <span className="font-display text-sm tracking-[0.2em] text-camp-charcoal uppercase">
-            lock in
-          </span>
-        </div>
+        <Logo size="sm" />
 
         <div className="space-y-6 border-t-2 border-camp-gold pt-8">
           <p className="font-mono text-xs font-semibold tracking-[0.3em] text-camp-gold uppercase">

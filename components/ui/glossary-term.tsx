@@ -24,7 +24,7 @@ export function GlossaryTerm({
           <button
             type="button"
             aria-label="Voir la définition simple"
-            className="flex size-4 shrink-0 items-center justify-center rounded-full text-muted-foreground/70 transition-colors hover:text-brand-blue"
+            className="flex size-4 shrink-0 items-center justify-center rounded-none text-muted-foreground/70 transition-colors hover:text-brand-blue"
           >
             <Info className="size-3.5" />
           </button>

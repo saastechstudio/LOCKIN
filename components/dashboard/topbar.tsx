@@ -1,6 +1,5 @@
 import { UserButton } from "@clerk/nextjs";
 
-import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileNav } from "@/components/dashboard/mobile-nav";
 import { NotificationBell } from "@/components/dashboard/notification-bell";
 import type { Notification, User } from "@/lib/db/schema";
@@ -42,10 +41,9 @@ export function DashboardTopbar({
           initialNotifications={notifications}
           initialUnreadCount={unreadCount}
         />
-        <ThemeToggle />
         <UserButton
           appearance={{
-            elements: { avatarBox: "size-9 ring-1 ring-brand-blue/30 rounded-full" },
+            elements: { avatarBox: "size-9 ring-1 ring-brand-blue/30 rounded-none" },
           }}
         />
       </div>

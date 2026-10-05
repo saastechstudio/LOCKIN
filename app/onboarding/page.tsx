@@ -13,7 +13,7 @@ export default async function OnboardingWelcomePage() {
   return (
     <div className="mx-auto flex min-h-svh max-w-2xl flex-col justify-center px-6 py-16">
       <div className="space-y-3 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-brand-coral/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-coral uppercase">
+        <span className="inline-flex items-center gap-2 rounded-none border border-brand-coral/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-coral uppercase">
           <Sparkle className="size-3.5" />
           Bienvenue, {firstName}
         </span>

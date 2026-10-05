@@ -1,5 +1,8 @@
 import Link from "next/link";
 
+import { Logo } from "@/components/lockin/logo";
+import { SLOGAN } from "@/components/lockin/primitives";
+
 const LINKS = [
   { href: "/legal/cgu", label: "CGU" },
   { href: "/legal/confidentialite", label: "Confidentialité" },
@@ -14,10 +17,8 @@ export function Footer() {
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8">
         <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="text-2xl font-bold tracking-[0.12em] text-camp-charcoal uppercase sm:text-3xl">
-              Lockin Social Club
-            </p>
-            <p className="mt-3 text-sm text-camp-charcoal/60">Mouvement mondial de discipline.</p>
+            <Logo size="lg" />
+            <p className="mt-4 text-sm text-camp-charcoal/60">{SLOGAN}</p>
           </div>
 
           <nav className="flex flex-wrap gap-x-8 gap-y-3 text-sm">

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { BrandedClerkProvider } from "@/components/clerk-provider";
@@ -9,13 +9,17 @@ const inter = Inter({
   subsets: ["latin"],
 });
 
+/** Titres Lockin : géométrique, structuré. */
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["500", "700"],
+});
+
 export const metadata: Metadata = {
-  title: "Lock In, Le Club d'Entrepreneurs d'Excellence",
+  title: "Lockin Social Club",
   description:
-    "L'excellence n'est pas une destination, c'est une quête. Rejoignez le club d'entrepreneurs qui suivent leurs objectifs, s'entraident et progressent chaque jour avec un coach IA d'excellence.",
-  icons: {
-    icon: "/logo-mark.png",
-  },
+    "La vie est un combat. Le vrai, c'est contre toi. Lockin Social Club : discipline, objectifs, routines, progression. Un club mondial, gratuit.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -23,15 +27,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="fr"
       suppressHydrationWarning
-      className={`${inter.variable} h-full antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground bg-noise">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <body className="min-h-full flex flex-col bg-background text-foreground">
+        {/* Identité Lockin : un seul thème, fond blanc pur. */}
+        <ThemeProvider attribute="class" forcedTheme="light" disableTransitionOnChange>
           <BrandedClerkProvider>{children}</BrandedClerkProvider>
         </ThemeProvider>
       </body>

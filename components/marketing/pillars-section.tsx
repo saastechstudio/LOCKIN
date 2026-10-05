@@ -107,7 +107,7 @@ export function PillarsSection() {
     <section id="pillars-values" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-coral/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-coral uppercase">
+          <span className="inline-flex items-center gap-2 rounded-none border border-brand-coral/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-coral uppercase">
             Le socle du club
           </span>
           <h2 className="font-display mt-4 text-3xl text-foreground sm:text-4xl">

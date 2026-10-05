@@ -2,8 +2,9 @@
 
 import { useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight, Lock } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
+import { Logo } from "@/components/lockin/logo";
 import { completeLockinOnboarding } from "@/lib/actions/onboarding-lockin";
 import type { LockinTag } from "@/lib/social/data";
 import { cn } from "@/lib/utils";
@@ -91,9 +92,7 @@ export function LockinOnboardingWizard({ next }: { next: string }) {
     <div className="camp-scope min-h-screen px-5 py-12 sm:px-10 sm:py-16">
       <div className="mx-auto max-w-xl">
         <div className="mb-8 flex items-center justify-between">
-          <span className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
-            <Lock className="size-3.5" /> Lockin Social Club
-          </span>
+          <Logo size="sm" href={null} />
           <span className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal/50 uppercase">
             0{step + 1} / 0{STEP_LABELS.length}
           </span>

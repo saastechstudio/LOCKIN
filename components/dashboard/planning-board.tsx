@@ -72,7 +72,7 @@ function TaskRow({ task }: { task: PlanningTask }) {
         }}
         aria-label={optimisticCompleted ? "Marquer comme à faire" : "Marquer comme terminée"}
         className={cn(
-          "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full border transition-colors",
+          "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-none border transition-colors",
           optimisticCompleted
             ? "border-brand-blue bg-brand-blue text-white"
             : "border-border text-transparent hover:border-brand-blue/50",

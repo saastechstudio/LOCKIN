@@ -46,7 +46,7 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
 
       <ol className="space-y-3">
         <li className="flex gap-3">
-          <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-brand-blue bg-brand-blue font-display text-xs text-white">
+          <span className="flex size-7 shrink-0 items-center justify-center rounded-none border border-brand-blue bg-brand-blue font-display text-xs text-white">
             <Check className="size-3.5" />
           </span>
           <div className="min-w-0 flex-1 pb-1">
@@ -65,7 +65,7 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
           <li key={i} className="flex gap-3">
             <span
               className={cn(
-                "flex size-7 shrink-0 items-center justify-center rounded-full border font-display text-xs",
+                "flex size-7 shrink-0 items-center justify-center rounded-none border font-display text-xs",
                 phase.status === "done" &&
                   "border-brand-blue bg-brand-blue text-white",
                 phase.status === "current" &&
@@ -97,7 +97,7 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
                   )}
                 </p>
                 {phase.status === "current" && (
-                  <span className="rounded-full bg-brand-coral/10 px-2 py-0.5 text-[10px] font-medium text-brand-coral">
+                  <span className="rounded-none bg-brand-coral/10 px-2 py-0.5 text-[10px] font-medium text-brand-coral">
                     En cours
                   </span>
                 )}
@@ -127,7 +127,7 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
                             key={k}
                             className="flex items-start gap-1.5 text-xs text-muted-foreground"
                           >
-                            <span className="mt-1.5 size-1 shrink-0 rounded-full bg-current" />
+                            <span className="mt-1.5 size-1 shrink-0 rounded-none bg-current" />
                             {action}
                           </li>
                         ))}

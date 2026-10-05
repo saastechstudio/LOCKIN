@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { DASHBOARD_NAV } from "@/lib/dashboard-nav";
+import { Logo } from "@/components/lockin/logo";
 
 export function DashboardSidebar() {
   const pathname = usePathname();
@@ -13,16 +13,7 @@ export function DashboardSidebar() {
   return (
     <aside className="hidden w-60 shrink-0 flex-col border-r border-border/60 bg-card/40 md:flex">
       <div className="flex h-16 items-center gap-2.5 border-b border-border/60 px-6">
-        <Image
-          src="/logo-mark.png"
-          alt="Lock In"
-          width={28}
-          height={33}
-          className="h-7 w-auto"
-        />
-        <span className="font-display text-base tracking-tight text-foreground lowercase">
-          lock in
-        </span>
+        <Logo size="sm" href="/dashboard" />
       </div>
 
       <nav className="flex-1 space-y-1 px-3 py-6">
@@ -36,7 +27,7 @@ export function DashboardSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 rounded-full px-3 py-2.5 text-sm transition-colors",
+                "flex items-center gap-3 rounded-none px-3 py-2.5 text-sm transition-colors",
                 active
                   ? "bg-brand-blue/10 text-brand-blue-deep border border-brand-blue/20"
                   : "text-muted-foreground hover:bg-accent hover:text-foreground",

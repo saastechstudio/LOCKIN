@@ -1,25 +1,14 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import { DiscordIcon } from "@/components/icons/discord-icon";
 import { DISCORD_INVITE_URL } from "@/lib/social-links";
+import { Logo } from "@/components/lockin/logo";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-border/60 py-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">
-        <div className="flex items-center gap-2.5">
-          <Image
-            src="/logo-mark.png"
-            alt="Lock In"
-            width={24}
-            height={29}
-            className="h-6 w-auto"
-          />
-          <span className="font-display text-sm tracking-tight text-foreground lowercase">
-            lock in
-          </span>
-        </div>
+        <Logo size="sm" />
 
         <p className="max-w-sm text-xs leading-relaxed text-muted-foreground">
           L&apos;excellence n&apos;est pas une destination, c&apos;est une quête.
@@ -46,7 +35,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Rejoindre le Discord"
-            className="flex size-9 items-center justify-center rounded-full bg-brand-dark text-brand-blue transition-transform hover:scale-105"
+            className="flex size-9 items-center justify-center rounded-none bg-brand-dark text-brand-blue transition-transform hover:scale-105"
           >
             <DiscordIcon className="size-4" />
           </a>

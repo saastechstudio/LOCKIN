@@ -23,7 +23,7 @@ export function MobileSiteNav() {
         <button
           type="button"
           aria-label="Ouvrir le menu"
-          className="flex size-9 items-center justify-center rounded-full border border-border text-foreground md:hidden"
+          className="flex size-9 items-center justify-center rounded-none border border-border text-foreground md:hidden"
         >
           <Menu className="size-4" />
         </button>
@@ -44,7 +44,7 @@ export function MobileSiteNav() {
               <button
                 type="button"
                 aria-label="Fermer le menu"
-                className="flex size-8 items-center justify-center rounded-full text-muted-foreground hover:bg-accent hover:text-foreground"
+                className="flex size-8 items-center justify-center rounded-none text-muted-foreground hover:bg-accent hover:text-foreground"
               >
                 <X className="size-4" />
               </button>
@@ -57,7 +57,7 @@ export function MobileSiteNav() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-full px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-accent"
+                className="rounded-none px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-accent"
               >
                 {link.label}
               </a>
