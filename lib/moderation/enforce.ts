@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/lib/db";
 import { moderationEvents, users, type User } from "@/lib/db/schema";
+import { UserFacingError } from "@/lib/action-result";
 import { checkContent, LOCKIN_MODERATION_MESSAGE } from "./filter";
 
 const HOUR = 60 * 60 * 1000;
@@ -15,9 +16,9 @@ function actionForStrikeCount(count: number): StrikeAction {
   return STRIKE_ACTIONS[Math.min(count, STRIKE_ACTIONS.length) - 1];
 }
 
-export class ModerationBlockedError extends Error {}
-export class AccountSuspendedError extends Error {}
-export class NotClubMemberError extends Error {}
+export class ModerationBlockedError extends UserFacingError {}
+export class AccountSuspendedError extends UserFacingError {}
+export class NotClubMemberError extends UserFacingError {}
 
 /**
  * Le club est réservé aux membres qui ont fait le rituel d'inscription.

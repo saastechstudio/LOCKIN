@@ -203,6 +203,90 @@
   }
 }
 
+/*
+ * Classes Lockin « maison » : le module Formation s'écrit avec elles.
+ * Rectangles stricts, filet noir de 1 px, aucun rayon ni ombre. Dans
+ * @layer components : un utilitaire Tailwind peut toujours les ajuster.
+ */
+@layer components {
+  .lockin-title {
+    font-family: var(--font-space-grotesk), var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    line-height: 1.05;
+    color: var(--lk-black);
+  }
+  @media (max-width: 640px) {
+    .lockin-title {
+      font-size: 32px;
+    }
+  }
+
+  .lockin-section {
+    border: 1px solid var(--lk-black);
+    padding: 24px;
+    background: var(--lk-white);
+  }
+
+  .lockin-card {
+    border: 1px solid var(--lk-black);
+    padding: 24px;
+    background: var(--lk-white);
+  }
+
+  .lockin-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--lk-black);
+    color: var(--lk-white);
+    border: 1px solid var(--lk-black);
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+  }
+  .lockin-button:hover {
+    opacity: 0.85;
+  }
+  .lockin-button:disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .lockin-button--outline {
+    background: var(--lk-white);
+    color: var(--lk-black);
+  }
+  .lockin-button--outline:hover {
+    opacity: 1;
+    background: var(--lk-black);
+    color: var(--lk-white);
+  }
+
+  .lockin-input {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--lk-black);
+    background: var(--lk-white);
+    color: var(--lk-black);
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .lockin-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+  }
+  .lockin-input:focus-visible {
+    outline: 2px solid var(--lk-black);
+    outline-offset: 2px;
+  }
+}
+
 .camp-scope {
   background: var(--lk-white);
   color: var(--lk-black);

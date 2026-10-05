@@ -125,6 +125,7 @@ export const reportTargetTypeEnum = pgEnum("report_target_type", [
   "message",
   "help_answer",
   "business_offer",
+  "formation",
 ]);
 
 export const reportReasonEnum = pgEnum("report_reason", [
@@ -615,6 +616,120 @@ export const businessOffers = pgTable("business_offers", {
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
+// ---------------------------------------------------------------------------
+// Module Formation — un membre structure et transmet une formation.
+// Formation → modules → chapitres → ressources. Tables additives.
+// ---------------------------------------------------------------------------
+
+export const formations = pgTable("formations", {
+  id: serial("id").primaryKey(),
+  creatorId: integer("creator_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  /** Un des LOCKIN_TAGS (Discipline, Sport, Business…) — validé par zod. */
+  theme: text("theme").notNull(),
+  /** "debutant" | "intermediaire" | "avance" — validé par zod. */
+  level: text("level").notNull(),
+  /** Durée estimée, en heures. */
+  durationHours: integer("duration_hours").notNull(),
+  /** Prix en centimes d'euro ; null = gratuite. Aucun paiement n'est encore branché. */
+  priceCents: integer("price_cents"),
+  /** "draft" | "published". */
+  status: text("status").notNull().default("draft"),
+  publishedAt: timestamp("published_at", { mode: "date" }),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const formationModules = pgTable("formation_modules", {
+  id: serial("id").primaryKey(),
+  formationId: integer("formation_id")
+    .notNull()
+    .references(() => formations.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
+  position: integer("position").notNull(),
+});
+
+export const formationChapters = pgTable("formation_chapters", {
+  id: serial("id").primaryKey(),
+  moduleId: integer("module_id")
+    .notNull()
+    .references(() => formationModules.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
+  position: integer("position").notNull(),
+});
+
+export const formationResources = pgTable("formation_resources", {
+  id: serial("id").primaryKey(),
+  chapterId: integer("chapter_id")
+    .notNull()
+    .references(() => formationChapters.id, { onDelete: "cascade" }),
+  /** "text" | "video" | "audio" | "pdf" — validé par zod. */
+  type: text("type").notNull(),
+  title: text("title").notNull(),
+  /** Texte pour "text" ; adresse https pour les autres types (pas d'hébergement de fichiers). */
+  content: text("content").notNull(),
+  position: integer("position").notNull(),
+});
+
+export const formationEnrollments = pgTable(
+  "formation_enrollments",
+  {
+    id: serial("id").primaryKey(),
+    formationId: integer("formation_id")
+      .notNull()
+      .references(() => formations.id, { onDelete: "cascade" }),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("formation_enrollments_formation_user_idx").on(table.formationId, table.userId)],
+);
+
+/** Une ligne = un chapitre terminé par un apprenant ; décocher supprime la ligne. */
+export const formationProgress = pgTable(
+  "formation_progress",
+  {
+    id: serial("id").primaryKey(),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    formationId: integer("formation_id")
+      .notNull()
+      .references(() => formations.id, { onDelete: "cascade" }),
+    chapterId: integer("chapter_id")
+      .notNull()
+      .references(() => formationChapters.id, { onDelete: "cascade" }),
+    completedAt: timestamp("completed_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("formation_progress_user_chapter_idx").on(table.userId, table.chapterId)],
+);
+
+/**
+ * Mentor → apprenants : une question disciplinée (ce que j'ai essayé + la
+ * question) appelle une réponse structurée (réponse + prochaine action).
+ * Pas de likes, pas de fil libre.
+ */
+export const formationQuestions = pgTable("formation_questions", {
+  id: serial("id").primaryKey(),
+  formationId: integer("formation_id")
+    .notNull()
+    .references(() => formations.id, { onDelete: "cascade" }),
+  chapterId: integer("chapter_id").references(() => formationChapters.id, { onDelete: "set null" }),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  tried: text("tried").notNull(),
+  question: text("question").notNull(),
+  answer: text("answer"),
+  nextAction: text("next_action"),
+  answeredAt: timestamp("answered_at", { mode: "date" }),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
 export const moderationReports = pgTable("moderation_reports", {
   id: serial("id").primaryKey(),
   reporterId: integer("reporter_id")
@@ -772,6 +887,38 @@ export const businessOffersRelations = relations(businessOffers, ({ one }) => ({
   user: one(users, { fields: [businessOffers.userId], references: [users.id] }),
 }));
 
+export const formationsRelations = relations(formations, ({ one, many }) => ({
+  creator: one(users, { fields: [formations.creatorId], references: [users.id] }),
+  modules: many(formationModules),
+  enrollments: many(formationEnrollments),
+  questions: many(formationQuestions),
+}));
+
+export const formationModulesRelations = relations(formationModules, ({ one, many }) => ({
+  formation: one(formations, { fields: [formationModules.formationId], references: [formations.id] }),
+  chapters: many(formationChapters),
+}));
+
+export const formationChaptersRelations = relations(formationChapters, ({ one, many }) => ({
+  module: one(formationModules, { fields: [formationChapters.moduleId], references: [formationModules.id] }),
+  resources: many(formationResources),
+}));
+
+export const formationResourcesRelations = relations(formationResources, ({ one }) => ({
+  chapter: one(formationChapters, { fields: [formationResources.chapterId], references: [formationChapters.id] }),
+}));
+
+export const formationEnrollmentsRelations = relations(formationEnrollments, ({ one }) => ({
+  formation: one(formations, { fields: [formationEnrollments.formationId], references: [formations.id] }),
+  user: one(users, { fields: [formationEnrollments.userId], references: [users.id] }),
+}));
+
+export const formationQuestionsRelations = relations(formationQuestions, ({ one }) => ({
+  formation: one(formations, { fields: [formationQuestions.formationId], references: [formations.id] }),
+  chapter: one(formationChapters, { fields: [formationQuestions.chapterId], references: [formationChapters.id] }),
+  user: one(users, { fields: [formationQuestions.userId], references: [users.id] }),
+}));
+
 export const campSessionsRelations = relations(campSessions, ({ many }) => ({
   registrations: many(campRegistrations),
 }));
@@ -871,3 +1018,4 @@ export type NewModerationReport = typeof moderationReports.$inferInsert;
 
 export type Challenge = typeof challenges.$inferSelect;
 export type BusinessOffer = typeof businessOffers.$inferSelect;
+export type Formation = typeof formations.$inferSelect;

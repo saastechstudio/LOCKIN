@@ -5,6 +5,7 @@ const isProtectedRoute = createRouteMatcher([
   "/onboarding(.*)",
   "/api/audit(.*)",
   "/api/chat(.*)",
+  "/formations(.*)",
   "/rejoindre(.*)",
   // La page /camp reste publique ; réserver exige un compte membre.
   "/camp/(.*)/reserver(.*)",

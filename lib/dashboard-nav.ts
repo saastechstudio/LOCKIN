@@ -14,6 +14,7 @@ import {
   Settings,
   SquareUser,
   Swords,
+  BookOpen,
   Target,
   type LucideIcon,
 } from "lucide-react";
@@ -51,6 +52,7 @@ export const DASHBOARD_NAV_GROUPS: DashboardNavGroup[] = [
       { href: "/dashboard/objectifs", label: "Objectifs & routines", icon: Target },
       { href: "/dashboard/progression", label: "Progression", icon: ChartColumn },
       { href: "/dashboard/challenges", label: "Challenges", icon: Swords },
+      { href: "/formations", label: "Formations", icon: BookOpen },
       { href: "/dashboard/planning", label: "Planning", icon: CalendarCheck },
       { href: "/dashboard/coach", label: "Coach IA", icon: BrainCircuit },
     ],
