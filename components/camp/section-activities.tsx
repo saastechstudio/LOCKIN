@@ -19,11 +19,11 @@ export function SectionActivities() {
           className="mb-12"
         />
 
-        <div className="grid grid-cols-2 border-t border-l border-camp-hairline sm:grid-cols-3 lg:grid-cols-6">
+        <div className="grid grid-cols-2 border-t border-l border-camp-hairline sm:grid-cols-4 lg:grid-cols-7">
           {SPORT_ACTIVITIES.map((activity, i) => (
             <div
               key={activity.id}
-              className="flex flex-col items-center gap-2 border-r border-b border-camp-hairline px-4 py-8 text-center"
+              className="flex flex-col items-center gap-2 border-r border-b border-camp-hairline px-2 py-8 text-center"
             >
               <span className="text-[11px] font-bold text-camp-gold">0{i + 1}</span>
               <span className="text-xs font-bold tracking-[0.06em] text-camp-charcoal uppercase">

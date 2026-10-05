@@ -53,7 +53,7 @@ export function AppHero({
 
       <dl className="grid grid-cols-3 border-t border-lk-white/15">
         {[
-          { label: "Discipline 7 j", value: `${discipline}` },
+          { label: "Discipline 7 j", value: `${discipline}`, live: true },
           { label: "Progression", value: `${progress}%` },
           { label: "Objectifs actifs", value: `${activeGoals}` },
         ].map((stat, i) => (
@@ -65,6 +65,7 @@ export function AppHero({
               {stat.label}
             </dt>
             <dd className="font-display mt-2 text-3xl tabular-nums sm:text-4xl">{stat.value}</dd>
+            {"live" in stat ? <div className="mt-3 h-0.5 w-8 bg-lk-teal" aria-hidden /> : null}
           </div>
         ))}
       </dl>

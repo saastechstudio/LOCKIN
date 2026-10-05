@@ -7,7 +7,8 @@
  * LOCKIN — design system.
  *
  * Discipline, structure, engagement. Brutalisme premium : fond blanc pur,
- * noir profond, trois gris "discipline", un doré mat en accent minimal.
+ * noir profond, trois gris "discipline", un doré mat en accent minimal,
+ * un bleu-vert pour le mouvement, à toute petite dose.
  * Angles droits partout (radius 0), lignes fines, aucune ombre, aucun
  * dégradé, aucune animation décorative. Un seul thème : clair (forcé dans
  * app/layout.tsx).
@@ -27,6 +28,13 @@
   --lk-ink-2: #222222;
   --lk-ink-3: #333333;
   --lk-gold: #c6a667;
+  /*
+   * Bleu-vert : le dynamisme, avec parcimonie. Il ne marque que ce qui est
+   * en mouvement — l'écran actif, la journée en cours, ce qui avance.
+   * Jamais en aplat de fond, jamais plus d'une touche par bloc. Le doré
+   * reste réservé aux paliers atteints. Contraste 4,8:1 sur blanc.
+   */
+  --lk-teal: #0f8080;
   /* Lignes fines et surface de repos : les deux seuls tons clairs. */
   --lk-line: #e5e5e5;
   --lk-mist: #f4f4f4;
@@ -101,6 +109,7 @@
   --color-lk-ink-2: var(--lk-ink-2);
   --color-lk-ink-3: var(--lk-ink-3);
   --color-lk-gold: var(--lk-gold);
+  --color-lk-teal: var(--lk-teal);
   --color-lk-line: var(--lk-line);
   --color-lk-mist: var(--lk-mist);
 

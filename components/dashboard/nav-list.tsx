@@ -27,10 +27,10 @@ export function NavList({ onNavigate }: { onNavigate?: () => void }) {
                     onClick={onNavigate}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "flex items-center gap-3 px-3 py-2 text-sm transition-colors",
+                      "flex items-center gap-3 border-l-2 px-3 py-2 text-sm transition-colors",
                       active
-                        ? "bg-lk-black font-medium text-lk-white"
-                        : "text-lk-black/70 hover:bg-lk-mist hover:text-lk-black",
+                        ? "border-lk-teal bg-lk-black font-medium text-lk-white"
+                        : "border-transparent text-lk-black/70 hover:bg-lk-mist hover:text-lk-black",
                     )}
                   >
                     <item.icon className="size-4" />

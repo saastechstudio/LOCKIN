@@ -55,7 +55,7 @@ export default async function ChallengePage({ params }: { params: Promise<{ slug
                 className={cn(
                   "flex aspect-square items-end justify-start border p-1 text-[10px] tabular-nums",
                   done ? "border-lk-black bg-lk-black text-lk-white" : "border-lk-line text-lk-black/40",
-                  !mine.finished && i + 1 === mine.dayIndex && !done && "border-lk-gold",
+                  !mine.finished && i + 1 === mine.dayIndex && !done && "border-2 border-lk-teal text-lk-teal",
                 )}
                 title={`Jour ${i + 1}${done ? " : tenu" : ""}`}
               >

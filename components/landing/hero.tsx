@@ -18,7 +18,7 @@ export function Hero() {
     <section className="border-b border-lk-line">
       <div className="mx-auto grid w-full max-w-6xl gap-16 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12 lg:items-end lg:gap-12">
         <div className="lg:col-span-7">
-          <Eyebrow>Mouvement mondial de discipline</Eyebrow>
+          <Eyebrow className="text-lk-teal">Mouvement mondial de discipline</Eyebrow>
           <Slogan className="mt-8" />
           <p className="mt-8 max-w-md text-lg leading-relaxed text-lk-black/60">
             Rejoins le Lockin Social Club. Discipline, objectifs, routines, progression. Un club
