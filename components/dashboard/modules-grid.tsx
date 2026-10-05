@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Icon } from "@/components/lockin/icon";
 import { LOCK_IN_MODULES } from "@/lib/modules";
 
 /**
@@ -10,22 +10,16 @@ import { LOCK_IN_MODULES } from "@/lib/modules";
  */
 export function ModulesGrid() {
   return (
-    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+    <div className="grid grid-cols-2 border-t border-l border-lk-line sm:grid-cols-3">
       {LOCK_IN_MODULES.map((module) => (
-        <Link key={module.id} href="/dashboard/coach">
-          <Card className="surface card-interactive h-full hover:border-brand-blue/50">
-            <CardHeader className="pb-2">
-              <span className="text-2xl">{module.emoji}</span>
-              <h3 className="font-display text-sm text-foreground">
-                {module.name}
-              </h3>
-            </CardHeader>
-            <CardContent>
-              <p className="text-xs text-muted-foreground">
-                {module.description}
-              </p>
-            </CardContent>
-          </Card>
+        <Link
+          key={module.id}
+          href="/dashboard/coach"
+          className="group border-r border-b border-lk-line p-5 transition-colors hover:bg-lk-mist"
+        >
+          <Icon icon={module.icon} framed className="group-hover:bg-lk-black group-hover:text-lk-white" />
+          <h3 className="font-display mt-4 text-sm text-lk-black">{module.name}</h3>
+          <p className="mt-1 text-xs leading-relaxed text-lk-black/60">{module.description}</p>
         </Link>
       ))}
     </div>

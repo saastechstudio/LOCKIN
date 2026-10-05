@@ -7,6 +7,7 @@ import { getTodayFocus } from "@/lib/actions/daily-focus";
 import { DashboardSidebar } from "@/components/dashboard/sidebar";
 import { DashboardTopbar } from "@/components/dashboard/topbar";
 import { MoodGate } from "@/components/dashboard/mood-gate";
+import { MobileTabBar } from "@/components/dashboard/mobile-tab-bar";
 
 export default async function DashboardLayout({
   children,
@@ -24,7 +25,7 @@ export default async function DashboardLayout({
   ]);
 
   return (
-    <div className="flex min-h-screen bg-background bg-noise">
+    <div className="flex min-h-screen bg-lk-white">
       <DashboardSidebar />
       <div className="flex min-w-0 flex-1 flex-col">
         <DashboardTopbar
@@ -32,8 +33,10 @@ export default async function DashboardLayout({
           notifications={notifications}
           unreadCount={unreadCount}
         />
-        <main className="flex-1 px-4 py-6 sm:px-6 sm:py-8">{children}</main>
+        {/* pb-24 : la barre d'onglets mobile ne recouvre pas la fin des pages. */}
+        <main className="flex-1 px-4 pt-6 pb-24 sm:px-8 sm:pt-10 md:pb-12">{children}</main>
       </div>
+      <MobileTabBar />
       <MoodGate focusId={todayFocus.id} initialMood={todayFocus.mood} />
     </div>
   );
