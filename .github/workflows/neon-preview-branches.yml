@@ -1,22 +1,16 @@
-# Explicit, CI-driven Neon database branching for Vercel Preview
-# Deployments — an alternative/complement to simply connecting the "Neon"
-# integration from the Vercel Marketplace (Project → Storage → Connect
-# Database), which does the same branch-per-preview lifecycle from the
-# Vercel dashboard with zero YAML.
+# Branche Neon par pull request : chaque PR obtient une copie de la base
+# (preview/pr-<n>) sur laquelle ses migrations Drizzle sont appliquées,
+# pour vérifier le schéma avant la fusion sans toucher à la production.
 #
-# Use THIS workflow instead of (or alongside) the dashboard integration
-# when you want the branch's lifecycle and migration run to be visible and
-# auditable in CI logs / PR comments, e.g. for teams that don't want Vercel
-# managing Neon branches implicitly, or that need the connection string
-# before Vercel's build (some checks run pre-deploy).
+# Secrets du dépôt (Settings → Secrets and variables → Actions) :
+#   NEON_API_KEY     — https://console.neon.tech/app/settings/api-keys
+#   NEON_PROJECT_ID  — Neon → projet → Settings → General
+# Sans ces deux secrets, le workflow se termine en succès avec un simple
+# avertissement : il ne bloque ni ne pollue les PR.
 #
-# Required repo secrets:
-#   NEON_API_KEY      — https://console.neon.tech/app/settings/api-keys
-#   NEON_PROJECT_ID   — Neon project → Settings → General
-# Optional (only if you also want this workflow, rather than the Vercel
-# dashboard integration, to push the branch's URL into Vercel's Preview
-# environment for this PR's git branch):
-#   VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+# Note : l'ancienne version testait `secrets.*` dans un `if:` d'étape,
+# ce que GitHub refuse — le fichier était invalide et chaque push
+# s'affichait en échec. Les secrets sont désormais lus dans `env`.
 name: Neon preview branches
 
 on:
@@ -35,13 +29,25 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Vérifier la configuration Neon
+        id: cfg
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_ID: ${{ secrets.NEON_PROJECT_ID }}
+        run: |
+          if [ -n "$NEON_API_KEY" ] && [ -n "$NEON_PROJECT_ID" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::notice::NEON_API_KEY / NEON_PROJECT_ID absents : branche de prévisualisation ignorée."
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
 
-      # Creates (or reuses, on subsequent pushes) a copy-on-write branch off
-      # the parent named for this PR, e.g. preview/pr-123. Cheap and fast —
-      # Neon branches share storage with the parent until data diverges.
-      - name: Create Neon branch for this PR
+      - uses: actions/checkout@v4
+        if: steps.cfg.outputs.enabled == 'true'
+
+      - name: Créer la branche Neon de la PR
         id: neon-branch
+        if: steps.cfg.outputs.enabled == 'true'
         uses: neondatabase/create-branch-action@v6
         with:
           project_id: ${{ secrets.NEON_PROJECT_ID }}
@@ -49,33 +55,23 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 
       - uses: actions/setup-node@v4
+        if: steps.cfg.outputs.enabled == 'true'
         with:
           node-version: 22
           cache: npm
 
       - run: npm ci
+        if: steps.cfg.outputs.enabled == 'true'
 
-      # Applies this PR's pending migrations to its own branch so the
-      # schema is verified — and the preview deployment works — before
-      # merge, without ever touching production data.
-      - name: Run pending migrations against the preview branch
+      - name: Appliquer les migrations sur la branche de la PR
+        if: steps.cfg.outputs.enabled == 'true'
         env:
           DATABASE_URL: ${{ steps.neon-branch.outputs.db_url }}
         run: npm run db:migrate
 
-      - name: Sync branch URL to Vercel Preview env (optional)
-        if: ${{ secrets.VERCEL_TOKEN != '' }}
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-          DATABASE_URL: ${{ steps.neon-branch.outputs.db_url }}
-          GIT_BRANCH: ${{ github.head_ref }}
-        run: |
-          npx vercel env rm DATABASE_URL preview --git-branch "$GIT_BRANCH" --yes --token "$VERCEL_TOKEN" 2>/dev/null || true
-          echo "$DATABASE_URL" | npx vercel env add DATABASE_URL preview --git-branch "$GIT_BRANCH" --token "$VERCEL_TOKEN"
-
-      - name: Comment on the PR
+      # Un seul commentaire, à l'ouverture : pas un par push.
+      - name: Commenter la PR
+        if: steps.cfg.outputs.enabled == 'true' && github.event.action == 'opened'
         uses: actions/github-script@v7
         with:
           script: |
@@ -84,14 +80,27 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
-              body: `🗄️ Neon branch \`${branch}\` is ready and migrated for this PR's preview.`,
+              body: `Branche Neon \`${branch}\` créée et migrée pour cette PR.`,
             });
 
   delete:
     if: github.event.action == 'closed'
     runs-on: ubuntu-latest
     steps:
-      - name: Delete Neon branch for this PR
+      - name: Vérifier la configuration Neon
+        id: cfg
+        env:
+          NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
+          NEON_PROJECT_ID: ${{ secrets.NEON_PROJECT_ID }}
+        run: |
+          if [ -n "$NEON_API_KEY" ] && [ -n "$NEON_PROJECT_ID" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Supprimer la branche Neon de la PR
+        if: steps.cfg.outputs.enabled == 'true'
         uses: neondatabase/delete-branch-action@v3
         with:
           project_id: ${{ secrets.NEON_PROJECT_ID }}

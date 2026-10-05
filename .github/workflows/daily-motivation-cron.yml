@@ -1,10 +1,11 @@
 name: Daily motivation notification
 
-# Fires the member-facing "notification quotidienne" at 10h Europe/Paris.
-# GitHub Actions cron only understands UTC, and Paris alternates between
-# UTC+1 (CET) and UTC+2 (CEST), so this runs at both possible UTC offsets
-# and lets the job itself check the real Paris-local hour before acting —
-# that keeps it correct across the DST switch without hardcoding dates.
+# Notification quotidienne des membres, à partir de 10h (Europe/Paris).
+# Le cron GitHub est en UTC et Paris alterne UTC+1 / UTC+2 : on se
+# déclenche aux deux heures possibles. GitHub retarde souvent les crons
+# de plusieurs heures ; on n'exige donc plus « exactement 10h », mais
+# « 10h ou plus tard » à Paris. L'endpoint est idempotent (une seule
+# notification par membre et par jour), deux appels sont sans effet.
 on:
   schedule:
     - cron: "0 8 * * *"
@@ -20,12 +21,14 @@ jobs:
   trigger:
     runs-on: ubuntu-latest
     steps:
-      - name: Check it's 10h in Paris right now
+      - name: Vérifier qu'il est au moins 10h à Paris
         id: check
+        env:
+          FORCE_RUN: ${{ inputs.force_run }}
         run: |
-          hour=$(TZ="Europe/Paris" date +%H)
-          echo "Paris local hour: $hour"
-          if [ "$hour" != "10" ] && [ "${{ inputs.force_run }}" != "true" ]; then
+          hour=$(TZ="Europe/Paris" date +%-H)
+          echo "Heure locale à Paris : $hour"
+          if [ "$hour" -lt 10 ] && [ "$FORCE_RUN" != "true" ]; then
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -33,8 +36,10 @@ jobs:
         if: steps.check.outputs.skip != 'true'
         run: |
           curl --fail --silent --show-error \
-            -X POST "https://lockin-production-f3ed.up.railway.app/api/cron/daily-motivation" \
+            -X POST "${APP_URL}/api/cron/daily-motivation" \
             -H "Authorization: Bearer ${CRON_SECRET}" \
             -w "\nHTTP_STATUS:%{http_code}\n"
         env:
           CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          # Domaine Railway du service (l'ancien domaine f3ed n'avait pas de port : appels perdus).
+          APP_URL: ${{ vars.APP_URL || 'https://lockin-production-2b84.up.railway.app' }}
