@@ -50,7 +50,11 @@ export async function getOrCreateDbUser(): Promise<User> {
       country: signUpData.country,
       avatarUrl: clerkUser?.imageUrl,
     })
-    .onConflictDoNothing({ target: users.clerkId })
+    // Sans cible : couvre clerk_id ET email. Deux requêtes parallèles du même
+    // nouveau membre (la coque charge plusieurs composants serveur) entrent
+    // en conflit sur les deux contraintes ; avec la seule cible clerk_id,
+    // Postgres levait la violation « users_email_unique » et la page échouait.
+    .onConflictDoNothing()
     .returning();
 
   if (created) return created;
