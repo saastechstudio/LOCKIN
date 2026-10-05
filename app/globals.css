@@ -252,8 +252,13 @@
   color: var(--camp-charcoal);
 }
 
-* {
-  border-color: var(--border);
+/* Dans @layer base : hors couche, cette règle battait tous les
+   utilitaires border-* (les couches perdent toujours face au CSS non
+   classé), si bien que border-camp-charcoal & co. rendaient --border. */
+@layer base {
+  * {
+    border-color: var(--border);
+  }
 }
 
 body {

@@ -5,7 +5,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { MobileSiteNav } from "@/components/marketing/mobile-site-nav";
 
 const NAV_LINKS = [
-  { href: "/#modules", label: "Le Club" },
+  { href: "/#mouvement", label: "Le Club" },
   { href: "/camp", label: "Lock-In Camp" },
   { href: "/methode", label: "La Méthode" },
   { href: "/methode#pricing", label: "Tarifs" },
