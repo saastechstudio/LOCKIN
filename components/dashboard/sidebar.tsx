@@ -1,47 +1,20 @@
-"use client";
-
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-import { cn } from "@/lib/utils";
-import { DASHBOARD_NAV } from "@/lib/dashboard-nav";
 import { Logo } from "@/components/lockin/logo";
+import { SLOGAN_LINE_1, SLOGAN_LINE_2 } from "@/components/lockin/primitives";
+import { NavList } from "@/components/dashboard/nav-list";
 
 export function DashboardSidebar() {
-  const pathname = usePathname();
-
   return (
-    <aside className="hidden w-60 shrink-0 flex-col border-r border-border/60 bg-card/40 md:flex">
-      <div className="flex h-16 items-center gap-2.5 border-b border-border/60 px-6">
+    <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-lk-line bg-lk-white md:flex">
+      <div className="flex h-16 items-center border-b border-lk-line px-6">
         <Logo size="sm" href="/dashboard" />
       </div>
 
-      <nav className="flex-1 space-y-1 px-3 py-6">
-        {DASHBOARD_NAV.map((item) => {
-          const active =
-            item.href === "/dashboard"
-              ? pathname === "/dashboard"
-              : pathname.startsWith(item.href);
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "flex items-center gap-3 rounded-none px-3 py-2.5 text-sm transition-colors",
-                active
-                  ? "bg-brand-blue/10 text-brand-blue-deep border border-brand-blue/20"
-                  : "text-muted-foreground hover:bg-accent hover:text-foreground",
-              )}
-            >
-              <item.icon className="size-4" />
-              {item.label}
-            </Link>
-          );
-        })}
-      </nav>
+      <NavList />
 
-      <div className="border-t border-border/60 p-4 text-center text-[11px] tracking-wide text-muted-foreground/60">
-        L&apos;excellence n&apos;est pas une destination.
+      <div className="border-t border-lk-black px-6 py-5 text-xs leading-relaxed text-lk-black/60">
+        {SLOGAN_LINE_1}
+        <br />
+        <span className="font-medium text-lk-black">{SLOGAN_LINE_2}</span>
       </div>
     </aside>
   );

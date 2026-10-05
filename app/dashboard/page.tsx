@@ -6,7 +6,6 @@ import { okrs, dailyCheckins, dailyFocus, onboardingAudits } from "@/lib/db/sche
 import { getOrCreateDbUser } from "@/lib/auth";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { OkrCard } from "@/components/dashboard/okr-card";
 import { NewOkrDialog } from "@/components/dashboard/new-okr-dialog";
 import { CheckinForm } from "@/components/dashboard/checkin-form";
@@ -15,6 +14,7 @@ import { DailyCheckin } from "@/components/dashboard/daily-checkin";
 import { EnergyWidget } from "@/components/dashboard/energy-widget";
 import { CoachRecommendations } from "@/components/dashboard/coach-recommendations";
 import { ModulesGrid } from "@/components/dashboard/modules-grid";
+import { AppHero } from "@/components/dashboard/app-hero";
 import { getTodayFocus } from "@/lib/actions/daily-focus";
 
 function average(values: number[]): number {
@@ -77,29 +77,15 @@ export default async function DashboardPage() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-8">
-      <section>
-        <Card className="mesh-card">
-          <CardHeader className="flex-row items-center justify-between space-y-0">
-            <div>
-              <CardTitle className="font-display text-xl text-white">
-                Progression globale
-              </CardTitle>
-              <p className="mt-1 text-xs text-white/70">
-                {userOkrs.length} objectif{userOkrs.length > 1 ? "s" : ""} en cours
-              </p>
-            </div>
-            <span className="font-display text-2xl text-white">
-              {globalProgress}%
-            </span>
-          </CardHeader>
-          <CardContent>
-            <Progress value={globalProgress} className="bg-white/20" />
-          </CardContent>
-        </Card>
-      </section>
+      <AppHero
+        firstName={user.name?.split(" ")[0] ?? "Membre"}
+        discipline={discipline}
+        progress={globalProgress}
+        activeGoals={userOkrs.length}
+      />
 
       <section>
-        <h2 className="mb-4 font-display text-xl text-foreground">Mes modules</h2>
+        <h2 className="mb-4 font-display text-xl text-lk-black">Les six modules du coach</h2>
         <ModulesGrid />
       </section>
 
@@ -112,8 +98,8 @@ export default async function DashboardPage() {
         {userOkrs.length === 0 ? (
           <Card className="surface">
             <CardContent className="py-10 text-center text-sm text-muted-foreground">
-              Aucun objectif pour l&apos;instant. Créez votre premier objectif
-              pour commencer à verrouiller votre exécution.
+              Aucun objectif pour l&apos;instant. Fixe ton premier objectif :
+              c&apos;est là que le combat commence.
             </CardContent>
           </Card>
         ) : (
