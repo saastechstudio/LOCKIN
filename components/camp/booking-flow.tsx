@@ -161,7 +161,7 @@ export function BookingFlow({ session, initialFullName, email }: BookingFlowProp
           <SectionTitle
             eyebrow="Sport"
             title="Une activité par jour"
-            description="Football, Muay Thaï, Pilates, Padel, Fitness ou Yoga."
+            description="Football, Muay Thaï, Pilates, Padel, Pickleball, Fitness ou Yoga."
           />
           <div className="space-y-3">
             {days.map((day) => {

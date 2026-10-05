@@ -23,8 +23,8 @@ export function MobileTabBar() {
             href={tab.href}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "flex h-14 flex-col items-center justify-center gap-1 text-[10px] font-medium tracking-wide uppercase",
-              active ? "bg-lk-black text-lk-white" : "text-lk-black/60",
+              "flex h-14 flex-col items-center justify-center gap-1 border-t-2 text-[10px] font-medium tracking-wide uppercase",
+              active ? "border-lk-teal bg-lk-black text-lk-white" : "border-transparent text-lk-black/60",
             )}
           >
             <tab.icon className="size-4" />

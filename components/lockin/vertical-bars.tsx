@@ -7,8 +7,10 @@ export type VerticalBar = {
   label?: string;
   /** Libellé lisible par lecteur d'écran, ex. « 3 octobre : 70 ». */
   title?: string;
-  /** Barre mise en avant (aujourd'hui, palier atteint…) : doré mat. */
+  /** Palier ou objectif atteint : doré mat. */
   accent?: boolean;
+  /** Ce qui est en cours (aujourd'hui) : bleu-vert. */
+  live?: boolean;
 };
 
 /**
@@ -43,7 +45,7 @@ export function VerticalBars({
               <div className="h-1 w-full border-t border-dashed border-lk-black/30" />
             ) : (
               <div
-                className={cn("w-full", bar.accent ? "bg-lk-gold" : "bg-lk-black")}
+                className={cn("w-full", bar.live ? "bg-lk-teal" : bar.accent ? "bg-lk-gold" : "bg-lk-black")}
                 style={{ height: `${Math.max(2, Math.min(100, bar.value))}%` }}
               />
             )}

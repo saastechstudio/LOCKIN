@@ -21,12 +21,14 @@ const PALETTE = [
   { name: "Gris 2", token: "lk-ink-2", hex: "#222222", className: "bg-lk-ink-2" },
   { name: "Gris 3", token: "lk-ink-3", hex: "#333333", className: "bg-lk-ink-3" },
   { name: "Doré mat", token: "lk-gold", hex: "#C6A667", className: "bg-lk-gold" },
+  { name: "Bleu-vert", token: "lk-teal", hex: "#0F8080", className: "bg-lk-teal" },
 ];
 
 const RULES = [
   "Angles droits partout. Aucune courbe, aucun rayon.",
   "Aucun dégradé, aucune ombre floue, aucun effet de verre.",
   "Le doré est un accent : un chiffre, un filet, un palier. Jamais un fond d'action.",
+  "Le bleu-vert, c'est le mouvement : l'écran actif, la journée en cours. Une touche par bloc, jamais en fond.",
   "Anti-dopamine : « Respect » au lieu du like, pas de cœur, pas d'emoji, pas de compteur public.",
   "Graphiques en barres verticales uniquement. Pas de camembert.",
   "Interaction : un changement d'opacité ou une inversion noir/blanc. Rien qui bouge pour décorer.",
@@ -60,7 +62,7 @@ export default function DesignSystemPage() {
 
       <Section>
         <Eyebrow>Palette</Eyebrow>
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-6">
+        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-7">
           {PALETTE.map((c) => (
             <div key={c.token}>
               <div className={`h-24 ${c.className}`} />
@@ -132,7 +134,7 @@ export default function DesignSystemPage() {
                 key: String(i),
                 value: v,
                 label: String(i + 1),
-                accent: i === a.length - 1,
+                live: i === a.length - 1,
               }))}
             />
           </div>

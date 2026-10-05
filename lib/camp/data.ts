@@ -43,6 +43,7 @@ export const SPORT_ACTIVITIES: SportActivity[] = [
   { id: "muay-thai", name: "Muay Thaï" },
   { id: "pilates", name: "Pilates" },
   { id: "padel", name: "Padel" },
+  { id: "pickleball", name: "Pickleball" },
   { id: "fitness", name: "Fitness" },
   { id: "yoga", name: "Yoga" },
 ];
@@ -183,7 +184,7 @@ export const CAMP_DAY_STRUCTURE: DayPeriod[] = [
   {
     period: "Après-midi · 14h–16h",
     title: "Sport au choix",
-    description: "Football, Muay Thaï, Pilates, Padel, Fitness ou Yoga.",
+    description: "Football, Muay Thaï, Pilates, Padel, Pickleball, Fitness ou Yoga.",
   },
   {
     period: "Soir",

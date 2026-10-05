@@ -47,7 +47,7 @@ export default async function ProgressionPage() {
       <section>
         <Eyebrow>Discipline · 30 jours</Eyebrow>
         <p className="mt-2 mb-6 text-sm text-lk-black/60">
-          Ta note de discipline quotidienne. Aujourd&apos;hui en doré ; un tiret = journée non notée.
+          Ta note de discipline quotidienne. Aujourd&apos;hui en bleu-vert ; un tiret = journée non notée.
         </p>
         <VerticalBars
           height={200}
@@ -56,7 +56,7 @@ export default async function ProgressionPage() {
             value: d.value,
             label: i % 5 === 4 || i === data.days.length - 1 ? dayFormat.format(d.date) : "",
             title: `${fullFormat.format(d.date)} : ${d.value === null ? "non notée" : d.value / 10 + "/10"}`,
-            accent: i === data.days.length - 1,
+            live: i === data.days.length - 1,
           }))}
         />
       </section>
