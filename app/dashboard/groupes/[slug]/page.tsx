@@ -29,7 +29,7 @@ export default async function GroupDetailPage({
         <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
           {GROUP_TYPE_LABELS[group.type as GroupSeed["type"]]}
         </p>
-        <div className="mb-6 flex flex-col gap-4 border-b-2 border-camp-charcoal pb-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-6 flex flex-col gap-4 border-b border-camp-charcoal pb-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h1 className="font-display text-3xl text-lk-black sm:text-4xl">
               {group.name}

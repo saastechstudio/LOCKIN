@@ -53,7 +53,7 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
   }
 
   return (
-    <div className="space-y-5 border-b-2 border-camp-charcoal pb-6">
+    <div className="space-y-5 border-b border-camp-charcoal pb-6">
       <div className="space-y-1.5">
         <label className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase">
           Bio

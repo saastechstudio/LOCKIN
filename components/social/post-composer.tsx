@@ -57,7 +57,7 @@ export function PostComposer({ groupId, placeholder = "Quoi de neuf ?" }: PostCo
   }
 
   return (
-    <div className="border-b-2 border-camp-charcoal pb-6">
+    <div className="border-b border-camp-charcoal pb-6">
       <textarea
         value={content}
         onChange={(e) => {

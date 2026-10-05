@@ -31,7 +31,7 @@ export default async function MessageThreadPage({
           <ArrowLeft className="size-3.5" /> Messages
         </Link>
 
-        <div className="mb-4 flex items-center gap-3 border-b-2 border-camp-charcoal pb-4">
+        <div className="mb-4 flex items-center gap-3 border-b border-camp-charcoal pb-4">
           <Link
             href={`/dashboard/u/${data.otherUser.id}`}
             className="font-display text-lg text-lk-black hover:text-camp-gold"

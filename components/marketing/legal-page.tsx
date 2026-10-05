@@ -9,7 +9,7 @@ export function LegalPage({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-background bg-noise">
+    <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
       <main className="mx-auto w-full max-w-2xl flex-1 px-6 py-24">
         <h1 className="font-display text-3xl text-foreground">{title}</h1>

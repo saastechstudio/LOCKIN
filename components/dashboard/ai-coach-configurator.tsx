@@ -77,7 +77,7 @@ function OptionCard({
       className={cn(
         "flex flex-col items-start gap-1 rounded-lg border p-4 text-left transition-all duration-150 ease-out",
         selected
-          ? "border-brand-blue bg-brand-blue/5 shadow-soft"
+          ? "border-brand-blue bg-lk-mist shadow-soft"
           : "border-border bg-brand-card hover:border-brand-blue/40",
       )}
     >

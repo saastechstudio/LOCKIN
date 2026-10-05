@@ -18,11 +18,11 @@ type SectionTitleProps = {
 export function SectionTitle({ index, eyebrow, title, description, className }: SectionTitleProps) {
   return (
     <div className={cn("space-y-3", className)}>
-      <p className="font-mono text-xs font-semibold tracking-[0.25em] text-camp-gold uppercase">
+      <p className="text-xs font-semibold tracking-[0.25em] text-camp-gold uppercase">
         {index ? `${index} — ` : ""}
         {eyebrow}
       </p>
-      <h2 className="font-display text-3xl leading-[1.05] font-bold text-camp-charcoal uppercase sm:text-4xl">
+      <h2 className="font-display text-3xl leading-[1.05] text-camp-charcoal sm:text-4xl">
         {title}
       </h2>
       {description ? (

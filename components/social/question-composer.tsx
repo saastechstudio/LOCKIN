@@ -51,7 +51,7 @@ export function QuestionComposer() {
   }
 
   return (
-    <div className="mb-6 space-y-3 border-b-2 border-camp-charcoal pb-6">
+    <div className="mb-6 space-y-3 border-b border-camp-charcoal pb-6">
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}

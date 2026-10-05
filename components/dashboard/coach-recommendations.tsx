@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -32,7 +32,7 @@ export function CoachRecommendations({ actions }: { actions: string[] }) {
           <ul className="space-y-3">
             {topActions.map((action, index) => (
               <li key={index} className="flex items-start gap-2.5 text-sm">
-                <Sparkles className="mt-0.5 size-3.5 shrink-0 text-brand-yellow" />
+                <span className="mt-1.5 size-1.5 shrink-0 bg-lk-gold" aria-hidden />
                 <span className="text-foreground">{action}</span>
               </li>
             ))}

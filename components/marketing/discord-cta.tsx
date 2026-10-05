@@ -7,9 +7,9 @@ import { DISCORD_INVITE_URL } from "@/lib/social-links";
 export function DiscordCta() {
   return (
     <section className="px-6 py-16">
-      <div className="surface mx-auto flex max-w-4xl flex-col items-center gap-5 rounded-2xl px-8 py-12 text-center">
-        <div className="flex size-14 items-center justify-center rounded-none border border-brand-blue/25 bg-brand-blue/10">
-          <DiscordIcon className="size-6 text-brand-blue" />
+      <div className="mx-auto flex max-w-4xl flex-col items-center gap-5 border border-lk-black px-8 py-12 text-center">
+        <div className="flex size-14 items-center justify-center border border-lk-black">
+          <DiscordIcon className="size-6 text-lk-black" />
         </div>
         <h2 className="font-display text-2xl text-foreground sm:text-3xl">
           Intègre le mouvement

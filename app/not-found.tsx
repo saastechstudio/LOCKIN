@@ -1,18 +1,16 @@
 import Link from "next/link";
-import { Compass } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/marketing/site-header";
 import { SiteFooter } from "@/components/marketing/site-footer";
+import { LockIcon } from "@/components/lockin/lock-icon";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col bg-background bg-noise">
+    <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
       <main className="mx-auto flex max-w-lg flex-1 flex-col items-center justify-center px-6 py-24 text-center">
-        <div className="flex size-14 items-center justify-center rounded-none bg-brand-blue/10">
-          <Compass className="size-6 text-brand-blue" />
-        </div>
+        <LockIcon className="h-14 w-[42px]" solid={false} />
         <h1 className="font-display mt-6 text-3xl text-foreground">
           Page introuvable
         </h1>

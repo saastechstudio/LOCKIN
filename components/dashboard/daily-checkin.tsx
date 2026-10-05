@@ -50,7 +50,7 @@ export function DailyCheckin({ focus }: { focus: DailyFocus }) {
               className={cn(
                 "flex w-full items-start gap-3 rounded-lg border px-4 py-3 text-left transition-colors",
                 taskCompleted
-                  ? "border-brand-blue/40 bg-brand-blue/10"
+                  ? "border-brand-blue/40 bg-lk-mist"
                   : "border-brand-border bg-secondary/30 hover:border-brand-blue/30",
               )}
             >

@@ -3,7 +3,7 @@ export default function Loading() {
     <div className="flex min-h-screen items-center justify-center bg-background">
       <div
         aria-label="Chargement"
-        className="size-8 animate-spin rounded-none border-2 border-brand-blue/20 border-t-brand-blue"
+        className="size-8 animate-spin rounded-none border border-brand-blue/20 border-t-brand-blue"
       />
     </div>
   );

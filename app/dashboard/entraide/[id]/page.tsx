@@ -31,7 +31,7 @@ export default async function QuestionDetailPage({
           <ArrowLeft className="size-3.5" /> Entraide
         </Link>
 
-        <div className="mb-8 border-b-2 border-camp-charcoal pb-6">
+        <div className="mb-8 border-b border-camp-charcoal pb-6">
           <div className="mb-2 flex flex-wrap gap-2">
             {question.tags.map((t) => (
               <span
@@ -42,7 +42,7 @@ export default async function QuestionDetailPage({
               </span>
             ))}
           </div>
-          <h1 className="font-display text-xl font-bold text-camp-charcoal">{question.title}</h1>
+          <h1 className="font-display text-xl text-camp-charcoal">{question.title}</h1>
           <p className="mt-3 text-sm leading-relaxed whitespace-pre-wrap text-camp-charcoal/80">
             {question.body}
           </p>

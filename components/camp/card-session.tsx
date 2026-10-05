@@ -21,24 +21,24 @@ export function CardSession({ session, index }: CardSessionProps) {
   const isFull = session.remainingSpots <= 0;
 
   return (
-    <div className="border-2 border-camp-charcoal bg-camp-white">
-      <div className="flex flex-col gap-6 border-b-2 border-camp-charcoal p-6 sm:flex-row sm:items-start sm:justify-between">
+    <div className="border border-camp-charcoal bg-camp-white">
+      <div className="flex flex-col gap-6 border-b border-camp-charcoal p-6 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="font-mono text-xs font-semibold tracking-[0.25em] text-camp-gold uppercase">
+          <p className="text-xs font-semibold tracking-[0.25em] text-camp-gold uppercase">
             {index} — {session.name}
           </p>
-          <p className="font-display mt-2 text-2xl leading-none font-bold text-camp-charcoal uppercase sm:text-3xl">
+          <p className="font-display mt-2 text-2xl leading-none text-camp-charcoal sm:text-3xl">
             {format(session.startDate, "d", { locale: fr })} →{" "}
             {format(session.endDate, "d MMM yyyy", { locale: fr })}
           </p>
         </div>
         <div className="text-left sm:text-right">
-          <p className="font-mono text-2xl font-bold text-camp-charcoal">
+          <p className="text-2xl font-bold text-camp-charcoal">
             {session.pricePerPerson.toLocaleString("fr-FR")} €
           </p>
           <p
             className={cn(
-              "font-mono text-xs font-semibold tracking-[0.1em] uppercase",
+              "text-xs font-semibold tracking-[0.1em] uppercase",
               isFull ? "text-camp-charcoal/40" : "text-camp-gold",
             )}
           >
@@ -48,7 +48,7 @@ export function CardSession({ session, index }: CardSessionProps) {
       </div>
 
       {isFull ? (
-        <div className="flex items-center justify-center p-5 font-mono text-sm font-bold tracking-[0.15em] text-camp-charcoal/40 uppercase">
+        <div className="flex items-center justify-center p-5 text-sm font-bold tracking-[0.15em] text-camp-charcoal/40 uppercase">
           Session complète
         </div>
       ) : (
@@ -56,7 +56,7 @@ export function CardSession({ session, index }: CardSessionProps) {
           href={`/camp/${session.slug}/reserver`}
           className="group flex items-center justify-between bg-camp-charcoal p-5 text-camp-white transition-colors hover:bg-camp-gold hover:text-camp-charcoal"
         >
-          <span className="font-mono text-sm font-bold tracking-[0.15em] uppercase">
+          <span className="text-sm font-bold tracking-[0.15em] uppercase">
             Je verrouille cette session
           </span>
           <ArrowRight className="size-5 transition-transform group-hover:translate-x-1" />
