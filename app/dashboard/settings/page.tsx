@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles, User as UserIcon } from "lucide-react";
+import { ArrowRight, BrainCircuit, User as UserIcon } from "lucide-react";
 
 import { getOrCreateDbUser } from "@/lib/auth";
 
@@ -36,7 +36,7 @@ export default async function SettingsPage() {
       <Card className="surface">
         <CardHeader className="flex-row items-center justify-between space-y-0">
           <div className="flex items-center gap-2">
-            <Sparkles className="size-4 text-brand-blue" />
+            <BrainCircuit className="size-4" />
             <CardTitle className="text-base">Coach IA</CardTitle>
           </div>
         </CardHeader>

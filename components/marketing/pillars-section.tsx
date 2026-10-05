@@ -1,17 +1,14 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import {
   CalendarCheck,
-  HeartHandshake,
-  HeartPulse,
+  Handshake,
+  Activity,
   PiggyBank,
   Rocket,
   Scale,
   type LucideIcon,
 } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { Icon as LockinIcon } from "@/components/lockin/icon";
 
 /**
  * The club's 6 founding pillars — its actual membership criteria, distinct
@@ -31,8 +28,8 @@ const ICONS: Record<PillarId, LucideIcon> = {
   discipline: CalendarCheck,
   "education-financiere": PiggyBank,
   ethique: Scale,
-  humilite: HeartHandshake,
-  "vie-saine": HeartPulse,
+  humilite: Handshake,
+  "vie-saine": Activity,
 };
 
 export const pillarsData: {
@@ -83,31 +80,11 @@ export const pillarsData: {
 ];
 
 export function PillarsSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section id="pillars-values" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-none border border-brand-coral/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-coral uppercase">
+          <span className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
             Le socle du club
           </span>
           <h2 className="font-display mt-4 text-3xl text-foreground sm:text-4xl">
@@ -118,28 +95,19 @@ export function PillarsSection() {
           </p>
         </div>
 
-        <div ref={sectionRef} className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid border-t border-l border-lk-line sm:grid-cols-2 lg:grid-cols-3">
           {pillarsData.map((pillar, index) => {
             const Icon = ICONS[pillar.iconName];
             return (
-              <div
-                key={pillar.id}
-                style={{ transitionDelay: `${index * 90}ms` }}
-                className={cn(
-                  "surface motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0 group relative overflow-hidden rounded-xl p-6 transition-all duration-700 ease-out",
-                  visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
-                )}
-              >
+              <div key={pillar.id} className="relative border-r border-b border-lk-line p-6">
                 <span
                   aria-hidden
-                  className="font-display absolute top-4 right-5 text-3xl font-thin text-foreground/[0.06]"
+                  className="absolute top-5 right-6 text-xs font-medium text-lk-gold tabular-nums"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
-                <div className="border-brand-blue/25 bg-brand-blue/10 group-hover:border-brand-coral/40 mb-4 flex size-11 items-center justify-center rounded-lg border transition-colors">
-                  <Icon className="text-brand-blue size-5" />
-                </div>
+                <LockinIcon icon={Icon} framed className="mb-5" />
 
                 <h3 className="font-display text-xl text-foreground">
                   {pillar.title}

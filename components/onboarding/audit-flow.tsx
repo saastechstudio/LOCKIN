@@ -9,7 +9,6 @@ import {
   Flame,
   Loader2,
   Lock,
-  Sparkles,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -118,7 +117,7 @@ export function AuditFlow() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="space-y-2 text-center">
-        <span className="inline-flex items-center gap-2 rounded-none border border-brand-blue/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-blue-deep uppercase">
+        <span className="inline-flex items-center gap-2 rounded-none border border-brand-blue/25 bg-lk-mist px-4 py-1.5 text-xs tracking-[0.2em] text-brand-blue-deep uppercase">
           Audit d&apos;entrée
         </span>
         <h1 className="font-display text-3xl text-foreground">
@@ -319,7 +318,7 @@ export function AuditFlow() {
                   </>
                 ) : (
                   <>
-                    <Sparkles className="size-4" /> Générer mon programme
+                    Générer mon programme
                   </>
                 )}
               </Button>
@@ -341,7 +340,7 @@ function AuditResultView({
   return (
     <div className="mx-auto max-w-2xl space-y-6">
       <div className="space-y-2 text-center">
-        <span className="inline-flex items-center gap-2 rounded-none border border-brand-blue/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-blue-deep uppercase">
+        <span className="inline-flex items-center gap-2 rounded-none border border-brand-blue/25 bg-lk-mist px-4 py-1.5 text-xs tracking-[0.2em] text-brand-blue-deep uppercase">
           Ton programme Lock In
         </span>
         <h1 className="font-display text-3xl text-foreground">
@@ -349,7 +348,7 @@ function AuditResultView({
         </h1>
       </div>
 
-      <Card className="border-brand-blue/30 bg-brand-blue/5">
+      <Card className="border-brand-blue/30 bg-lk-mist">
         <CardHeader className="flex-row items-center gap-2 space-y-0">
           <Lock className="size-4 text-brand-blue" />
           <CardTitle className="font-display text-lg">
@@ -372,7 +371,7 @@ function AuditResultView({
           <ol className="space-y-5">
             {result.roadmap.map((phase, i) => (
               <li key={i} className="flex gap-4">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-none border border-brand-coral/40 bg-brand-coral/10 font-display text-sm text-brand-coral">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-none border border-brand-coral/40 bg-lk-mist font-display text-sm text-brand-coral">
                   {i + 1}
                 </span>
                 <div className="min-w-0 flex-1">

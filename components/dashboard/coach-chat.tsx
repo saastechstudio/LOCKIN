@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
-import { ArrowUp, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+
+import { LockIcon } from "@/components/lockin/lock-icon";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
@@ -40,14 +42,12 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
   };
 
   return (
-    <div className="bg-brand-card shadow-soft flex h-[calc(100vh-8rem)] flex-col overflow-hidden rounded-lg border border-border">
+    <div className="flex h-[calc(100vh-12rem)] flex-col overflow-hidden border border-lk-black bg-lk-white md:h-[calc(100vh-10rem)]">
       <ScrollArea className="flex-1 px-6 py-6">
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-4 py-16 text-center">
-            <div className="flex size-12 items-center justify-center rounded-none bg-gradient-to-br from-brand-blue/15 via-brand-coral/15 to-brand-yellow/15">
-              <Sparkles className="text-brand-blue size-5" />
-            </div>
-            <p className="max-w-sm text-sm text-muted-foreground">
+            <LockIcon className="h-10 w-[30px]" />
+            <p className="max-w-sm text-sm text-lk-black/60">
               Pose ta question au Coach Lock In. Direct, exigeant, orienté
               exécution.
             </p>
@@ -64,10 +64,10 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
               >
                 <div
                   className={cn(
-                    "max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed whitespace-pre-wrap",
+                    "max-w-[80%] px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap",
                     message.role === "user"
-                      ? "bg-brand-blue shadow-blue-glow text-white"
-                      : "bg-secondary text-foreground",
+                      ? "bg-lk-black text-lk-white"
+                      : "border border-lk-line bg-lk-white text-lk-black",
                   )}
                 >
                   {messageText(message)}
@@ -92,7 +92,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
               key={prompt}
               onClick={() => submit(prompt)}
               disabled={isLoading}
-              className="rounded-none border border-brand-blue/20 bg-brand-blue/5 px-3 py-1 text-xs text-brand-blue-deep transition-colors hover:bg-brand-blue/10 disabled:opacity-50"
+              className="border border-lk-line px-3 py-1.5 text-xs text-lk-black transition-colors hover:border-lk-black disabled:opacity-50"
             >
               {prompt}
             </button>
@@ -104,7 +104,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
             e.preventDefault();
             submit(input);
           }}
-          className="shadow-soft flex items-center gap-2 rounded-none border border-border bg-gradient-to-r from-brand-blue/[0.06] via-brand-coral/[0.06] to-brand-yellow/[0.06] p-1.5 pl-5"
+          className="flex items-center gap-2 border border-lk-black bg-lk-white p-1.5 pl-5"
         >
           <input
             value={input}
@@ -116,9 +116,9 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
             type="submit"
             disabled={isLoading || !input.trim()}
             aria-label="Envoyer"
-            className="bg-brand-gradient shadow-blue-glow flex size-9 shrink-0 items-center justify-center rounded-none text-white transition-transform hover:scale-105 disabled:pointer-events-none disabled:opacity-40"
+            className="flex size-9 shrink-0 items-center justify-center bg-lk-black text-lk-white transition-opacity hover:opacity-85 disabled:pointer-events-none disabled:opacity-40"
           >
-            <ArrowUp className="size-4" />
+            <ArrowRight className="size-4" />
           </button>
         </form>
       </div>

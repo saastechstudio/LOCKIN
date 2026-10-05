@@ -32,7 +32,7 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-start gap-3 rounded-xl border border-brand-blue/20 bg-brand-blue/5 px-4 py-3">
+      <div className="flex items-start gap-3 rounded-xl border border-brand-blue/20 bg-lk-mist px-4 py-3">
         <LockIcon className="mt-0.5 size-4 shrink-0 text-brand-blue" />
         <div>
           <p className="mb-1 text-xs font-medium text-brand-blue-deep">
@@ -69,7 +69,7 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
                 phase.status === "done" &&
                   "border-brand-blue bg-brand-blue text-white",
                 phase.status === "current" &&
-                  "border-brand-coral bg-brand-coral/10 text-brand-coral",
+                  "border-brand-coral bg-lk-mist text-brand-coral",
                 phase.status === "upcoming" &&
                   "border-border text-muted-foreground",
               )}
@@ -97,7 +97,7 @@ export function RoadmapTimeline({ audit }: { audit: OnboardingAudit }) {
                   )}
                 </p>
                 {phase.status === "current" && (
-                  <span className="rounded-none bg-brand-coral/10 px-2 py-0.5 text-[10px] font-medium text-brand-coral">
+                  <span className="rounded-none bg-lk-mist px-2 py-0.5 text-[10px] font-medium text-brand-coral">
                     En cours
                   </span>
                 )}

@@ -25,7 +25,7 @@ export function CardExcursion({ excursion, selected, disabled, onToggle }: CardE
           : "border-camp-hairline bg-camp-white text-camp-charcoal hover:border-camp-charcoal",
       )}
     >
-      <span className="flex-1 font-mono text-xs font-bold tracking-[0.04em] uppercase">
+      <span className="flex-1 text-xs font-bold tracking-[0.04em] uppercase">
         {excursion.name}
       </span>
       {selected ? <Check className="size-4 shrink-0 text-camp-gold" /> : null}

@@ -97,7 +97,7 @@ export function MessageThread({ recipientId, currentUserId, thread }: MessageThr
         </p>
       ) : null}
 
-      <div className="flex gap-2 border-t-2 border-camp-charcoal pt-4">
+      <div className="flex gap-2 border-t border-camp-charcoal pt-4">
         <input
           value={content}
           onChange={(e) => {

@@ -19,17 +19,17 @@ export function SectionProgramLockIn() {
           className="mb-12"
         />
 
-        <div className="border-2 border-camp-charcoal">
+        <div className="border border-camp-charcoal">
           {CAMP_PROGRAM_PARTS.map((part) => (
             <div
               key={part.number}
               className="grid grid-cols-1 gap-4 border-b border-camp-hairline p-6 last:border-b-0 sm:grid-cols-[auto_1fr] sm:gap-10 sm:p-8"
             >
-              <span className="font-display text-5xl leading-none font-bold text-camp-gold sm:text-6xl">
+              <span className="font-display text-5xl leading-none text-camp-gold sm:text-6xl">
                 {part.number}
               </span>
               <div>
-                <p className="font-display text-xl font-bold text-camp-charcoal uppercase sm:text-2xl">
+                <p className="font-display text-xl text-camp-charcoal sm:text-2xl">
                   {part.title}
                 </p>
                 <ul className="mt-4 space-y-2">

@@ -141,7 +141,7 @@ export function LockinOnboardingWizard({ next }: { next: string }) {
           </p>
         ) : null}
 
-        <div className="mt-10 flex items-center justify-between border-t-2 border-camp-charcoal pt-6">
+        <div className="mt-10 flex items-center justify-between border-t border-camp-charcoal pt-6">
           <button
             type="button"
             onClick={goBack}

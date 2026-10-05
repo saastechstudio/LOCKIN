@@ -80,6 +80,20 @@
   --chart-5: var(--lk-line);
 }
 
+/*
+ * Garde-fous du design system : les ombres, flous et la police mono par
+ * défaut de Tailwind sont retirés du thème. shadow-lg, backdrop-blur-md,
+ * font-mono… ne produisent donc plus rien, même s'ils réapparaissent.
+ */
+@theme {
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --text-shadow-*: initial;
+  --blur-*: initial;
+  --font-mono: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
 @theme inline {
   --color-lk-white: var(--lk-white);
   --color-lk-black: var(--lk-black);

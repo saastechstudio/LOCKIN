@@ -55,7 +55,7 @@ function RoutineColumn({
               type="button"
               onClick={() => startTransition(() => toggleRoutineCheckin(item.id))}
               className={cn(
-                "flex size-6 shrink-0 items-center justify-center border-2",
+                "flex size-6 shrink-0 items-center justify-center border",
                 item.checkedToday
                   ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
                   : "border-camp-hairline text-transparent",

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, HeartPulse, Rocket, Sparkle } from "lucide-react";
+import { ArrowRight, Activity, Rocket } from "lucide-react";
 
 import { getOrCreateDbUser } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
@@ -13,8 +13,7 @@ export default async function OnboardingWelcomePage() {
   return (
     <div className="mx-auto flex min-h-svh max-w-2xl flex-col justify-center px-6 py-16">
       <div className="space-y-3 text-center">
-        <span className="inline-flex items-center gap-2 rounded-none border border-brand-coral/25 bg-brand-blue/5 px-4 py-1.5 text-xs tracking-[0.2em] text-brand-coral uppercase">
-          <Sparkle className="size-3.5" />
+        <span className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
           Bienvenue, {firstName}
         </span>
         <h1 className="font-display text-3xl text-foreground sm:text-4xl">
@@ -30,7 +29,7 @@ export default async function OnboardingWelcomePage() {
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         <Card className="surface">
           <CardHeader className="flex-row items-center gap-2 space-y-0">
-            <HeartPulse className="size-4 shrink-0 text-brand-coral" />
+            <Activity className="size-4 shrink-0 text-brand-coral" />
             <CardTitle className="font-display text-lg">
               Volet personnel
             </CardTitle>

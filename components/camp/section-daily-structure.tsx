@@ -17,19 +17,19 @@ export function SectionDailyStructure() {
           className="mb-12"
         />
 
-        <div className="grid grid-cols-1 border-2 border-camp-charcoal sm:grid-cols-4">
+        <div className="grid grid-cols-1 border border-camp-charcoal sm:grid-cols-4">
           {CAMP_DAILY_BLOCKS.map((block, i) => (
             <div
               key={block.label}
               className="border-b border-camp-hairline p-6 sm:border-r sm:border-b-0 [&:last-child]:border-r-0"
             >
-              <p className="font-mono text-xs font-bold tracking-[0.2em] text-camp-gold uppercase">
+              <p className="text-xs font-bold tracking-[0.2em] text-camp-gold uppercase">
                 Bloc 0{i + 1}
               </p>
-              <p className="font-display mt-3 text-lg font-bold text-camp-charcoal">
+              <p className="font-display mt-3 text-lg text-camp-charcoal">
                 {block.label}
               </p>
-              <p className="font-mono mt-2 text-sm font-semibold text-camp-charcoal/60">
+              <p className="mt-2 text-sm font-semibold text-camp-charcoal/60">
                 {block.duration}
               </p>
             </div>

@@ -17,9 +17,9 @@ export function SectionExcursionFun() {
           className="mb-12"
         />
 
-        <div className="grid grid-cols-1 border-2 border-camp-charcoal sm:grid-cols-2">
+        <div className="grid grid-cols-1 border border-camp-charcoal sm:grid-cols-2">
           <div className="border-b border-camp-hairline p-6 sm:border-r sm:border-b-0 sm:p-8">
-            <p className="font-mono text-xs font-bold tracking-[0.2em] text-camp-gold uppercase">
+            <p className="text-xs font-bold tracking-[0.2em] text-camp-gold uppercase">
               Excursion — 1 incluse
             </p>
             <ul className="mt-5 space-y-0">
@@ -36,7 +36,7 @@ export function SectionExcursionFun() {
           </div>
 
           <div className="p-6 sm:p-8">
-            <p className="font-mono text-xs font-bold tracking-[0.2em] text-camp-gold uppercase">
+            <p className="text-xs font-bold tracking-[0.2em] text-camp-gold uppercase">
               Activité fun — 1 incluse
             </p>
             <ul className="mt-5 space-y-0">

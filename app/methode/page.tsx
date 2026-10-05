@@ -12,7 +12,7 @@ import { DiscordCta } from "@/components/marketing/discord-cta";
  */
 export default function MethodePage() {
   return (
-    <div className="flex min-h-screen flex-1 flex-col bg-background bg-noise">
+    <div className="flex min-h-screen flex-1 flex-col bg-background">
       <SiteHeader />
       <main className="flex-1">
         <section className="px-6 pt-20 pb-8 text-center">
