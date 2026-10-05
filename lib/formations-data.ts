@@ -58,3 +58,21 @@ export function nativeMediaKind(type: string, url: string): "video" | "audio" | 
   if (type === "audio" && /\.(mp3|m4a|ogg|oga|wav)$/.test(pathname)) return "audio";
   return null;
 }
+
+/** Vérification des créateurs : bornes partagées entre le formulaire et l'action serveur. */
+export const CREATOR_VERIFICATION_LIMITS = {
+  legalName: 120,
+  presentationMin: 40,
+  presentation: 800,
+  proofUrl: 300,
+  decisionNote: 500,
+} as const;
+
+export const CREATOR_STATUS_LABELS = {
+  none: "Non vérifié",
+  pending: "En cours d'examen",
+  approved: "Créateur vérifié",
+  rejected: "Demande refusée",
+} as const;
+
+export type CreatorStatus = keyof typeof CREATOR_STATUS_LABELS;

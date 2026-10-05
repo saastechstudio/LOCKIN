@@ -33,6 +33,8 @@ export const RATE_LIMITS = {
   formationProgress: { limit: 200, windowMs: 10 * MINUTE },
   formationQuestion: { limit: 10, windowMs: HOUR },
   formationAnswer: { limit: 40, windowMs: 10 * MINUTE },
+  creatorVerification: { limit: 3, windowMs: HOUR },
+  creatorDecision: { limit: 120, windowMs: 10 * MINUTE },
 } satisfies Record<string, RateLimitRule>;
 
 export class RateLimitError extends UserFacingError {

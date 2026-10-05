@@ -50,6 +50,11 @@ export default async function FormationPage({ params }: { params: Promise<{ id: 
           <Link href={`/dashboard/u/${formation.creator.id}`} className="font-medium text-lk-black underline underline-offset-4">
             {formation.creator.name ?? "Membre Lockin"}
           </Link>
+          {formation.creatorVerified ? (
+            <span className="ml-3 border border-lk-black px-2 py-0.5 text-[10px] font-semibold tracking-[0.15em] uppercase">
+              Créateur vérifié
+            </span>
+          ) : null}
         </p>
       </header>
 

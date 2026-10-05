@@ -15,6 +15,7 @@ import {
 } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { assertClubMember, moderateOrThrow } from "@/lib/moderation/enforce";
+import { isVerifiedCreator } from "@/lib/creator-verification";
 import { enforceRateLimit } from "@/lib/rate-limit";
 import { FORMATION_LEVELS, FORMATION_LIMITS, FORMATION_THEMES } from "@/lib/formations-data";
 import {
@@ -97,6 +98,11 @@ export const publishFormation = action(async (formationId: number) => {
   enforceRateLimit("formationEdit", user.id);
   await assertOwnsFormation(formationId, user.id);
 
+  // Publier engage devant les autres membres : l'identité du créateur doit avoir été validée.
+  if (!(await isVerifiedCreator(user.id))) {
+    throw new UserFacingError("Fais valider ton identité de créateur avant de publier une formation.");
+  }
+
   const modules = await db.query.formationModules.findMany({
     columns: { id: true },
     where: eq(formationModules.formationId, formationId),
@@ -147,6 +153,7 @@ export const enrollInFormation = action(async (formationId: number) => {
   });
   if (!formation || formation.status !== "published") throw new UserFacingError("Formation introuvable.");
   if (formation.creatorId === user.id) throw new UserFacingError("Tu es le créateur de cette formation.");
+  if (!(await isVerifiedCreator(formation.creatorId))) throw new UserFacingError("Formation introuvable.");
   if (formation.priceCents && formation.priceCents > 0) {
     throw new UserFacingError("Le paiement n'est pas encore activé sur Lockin : cette formation payante n'est pas ouverte aux inscriptions.");
   }

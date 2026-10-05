@@ -4,6 +4,8 @@ import { ArrowLeft } from "lucide-react";
 
 import { requireLockinOnboarded } from "@/lib/auth";
 import { getFormationView } from "@/lib/formations-queries";
+import { getCreatorVerification } from "@/lib/creator-verification";
+import { CREATOR_STATUS_LABELS } from "@/lib/formations-data";
 import { Eyebrow, PageHeader } from "@/components/lockin/primitives";
 import { FormationBuilder } from "@/components/formations/formation-builder";
 import { FormationForm } from "@/components/formations/formation-form";
@@ -23,6 +25,8 @@ export default async function BuilderPage({ params }: { params: Promise<{ id: st
   if (!formation.viewer.isCreator) redirect(`/formations/${formationId}`);
 
   const published = formation.status === "published";
+  const verification = await getCreatorVerification(user.id);
+  const verified = verification.status === "approved";
 
   return (
     <div className="mx-auto max-w-4xl space-y-10">
@@ -54,9 +58,24 @@ export default async function BuilderPage({ params }: { params: Promise<{ id: st
         <p className="mt-3 mb-4 text-sm text-lk-black/70">
           {published
             ? "Visible de tous les membres du club."
-            : "Brouillon : visible de toi seul. Publier exige au moins un chapitre."}
+            : "Brouillon : visible de toi seul. Publier exige au moins un chapitre et une identité validée."}
         </p>
-        <PublishControls formationId={formation.id} published={published} />
+        {!verified ? (
+          <div className="mb-4 space-y-2 border border-lk-black bg-lk-mist p-4 text-sm">
+            <p className="font-medium">{CREATOR_STATUS_LABELS[verification.status]}</p>
+            <p className="text-lk-black/70">
+              {verification.status === "pending"
+                ? "Un administrateur examine ta demande. Tu pourras publier dès qu'elle sera approuvée."
+                : "Pour publier, fais valider ton identité de créateur."}
+            </p>
+            {verification.status !== "pending" ? (
+              <Link href="/formations/verification" className="lockin-button lockin-button--outline">
+                {verification.status === "rejected" ? "Corriger ma demande" : "Demander la vérification"}
+              </Link>
+            ) : null}
+          </div>
+        ) : null}
+        <PublishControls formationId={formation.id} published={published} canPublish={verified} />
       </section>
 
       <details className="lockin-section group">

@@ -730,6 +730,33 @@ export const formationQuestions = pgTable("formation_questions", {
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
+/**
+ * Vérification d'identité des créateurs de formations. Une demande par
+ * membre : nom réel, présentation, lien de preuve (profil pro, site…).
+ * Aucun document d'identité n'est stocké : un administrateur juge la
+ * demande (et peut échanger avec la personne), seul le verdict est conservé.
+ * Publier une formation exige le statut « approved ».
+ */
+export const creatorVerifications = pgTable("creator_verifications", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .unique()
+    .references(() => users.id, { onDelete: "cascade" }),
+  legalName: text("legal_name").notNull(),
+  presentation: text("presentation").notNull(),
+  /** Lien https vers une preuve publique : LinkedIn, site, portfolio… */
+  proofUrl: text("proof_url").notNull(),
+  /** "pending" | "approved" | "rejected". */
+  status: text("status").notNull().default("pending"),
+  /** Motif du refus ou du retrait, montré au membre. */
+  decisionNote: text("decision_note"),
+  reviewedBy: integer("reviewed_by").references(() => users.id, { onDelete: "set null" }),
+  reviewedAt: timestamp("reviewed_at", { mode: "date" }),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: "date" }).notNull().defaultNow(),
+});
+
 export const moderationReports = pgTable("moderation_reports", {
   id: serial("id").primaryKey(),
   reporterId: integer("reporter_id")
@@ -919,6 +946,10 @@ export const formationQuestionsRelations = relations(formationQuestions, ({ one 
   user: one(users, { fields: [formationQuestions.userId], references: [users.id] }),
 }));
 
+export const creatorVerificationsRelations = relations(creatorVerifications, ({ one }) => ({
+  user: one(users, { fields: [creatorVerifications.userId], references: [users.id] }),
+}));
+
 export const campSessionsRelations = relations(campSessions, ({ many }) => ({
   registrations: many(campRegistrations),
 }));
@@ -1019,3 +1050,4 @@ export type NewModerationReport = typeof moderationReports.$inferInsert;
 export type Challenge = typeof challenges.$inferSelect;
 export type BusinessOffer = typeof businessOffers.$inferSelect;
 export type Formation = typeof formations.$inferSelect;
+export type CreatorVerification = typeof creatorVerifications.$inferSelect;

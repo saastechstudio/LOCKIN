@@ -1,8 +1,10 @@
 import "server-only";
-import { and, desc, eq, inArray, isNull } from "drizzle-orm";
+import { and, desc, eq, exists, inArray, isNull } from "drizzle-orm";
 
 import { db } from "@/lib/db";
+import { isVerifiedCreator } from "@/lib/creator-verification";
 import {
+  creatorVerifications,
   formationEnrollments,
   formationProgress,
   formationQuestions,
@@ -52,9 +54,16 @@ export type FormationSummary = ReturnType<typeof summarize>;
 /** Catalogue public (publiées uniquement), paginé : pas de défilement infini. */
 export async function listPublishedFormations(opts: { theme?: string; page?: number }) {
   const theme = FORMATION_THEMES.find((t) => t === opts.theme);
+  // Publiée ET créateur vérifié : même si une formation reste « publiée » après un retrait, elle disparaît.
+  const verifiedCreator = exists(
+    db
+      .select({ id: creatorVerifications.id })
+      .from(creatorVerifications)
+      .where(and(eq(creatorVerifications.userId, formations.creatorId), eq(creatorVerifications.status, "approved"))),
+  );
   const where = theme
-    ? and(eq(formations.status, "published"), eq(formations.theme, theme))
-    : eq(formations.status, "published");
+    ? and(eq(formations.status, "published"), verifiedCreator, eq(formations.theme, theme))
+    : and(eq(formations.status, "published"), verifiedCreator);
   const pageSize = FORMATION_LIMITS.pageSize;
   const total = await db.$count(formations, where);
   const pageCount = Math.max(1, Math.ceil(total / pageSize));
@@ -108,6 +117,8 @@ export async function getFormationView(formationId: number, viewerId: number) {
 
   const isCreator = f.creatorId === viewerId;
   if (f.status !== "published" && !isCreator) return null;
+  const creatorVerified = await isVerifiedCreator(f.creatorId);
+  if (!creatorVerified && !isCreator) return null;
 
   const enrolled = f.enrollments.some((e) => e.userId === viewerId);
   const canRead = isCreator || enrolled;
@@ -154,6 +165,7 @@ export async function getFormationView(formationId: number, viewerId: number) {
     status: f.status,
     publishedAt: f.publishedAt,
     creator: f.creator,
+    creatorVerified,
     modules,
     learnerCount: f.enrollments.length,
     chapterCount: chapterIds.length,
@@ -188,6 +200,7 @@ export async function getMentorView(formationId: number, viewerId: number) {
   if (!f) return null;
   const isCreator = f.creatorId === viewerId;
   if (f.status !== "published" && !isCreator) return null;
+  if (!isCreator && !(await isVerifiedCreator(f.creatorId))) return null;
 
   const enrolled = isCreator
     ? false
