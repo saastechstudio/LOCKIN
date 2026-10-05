@@ -7,7 +7,16 @@ import { LockinButton } from "@/components/lockin/lockin-ui";
 import { FormError, useAction } from "@/components/formations/use-action";
 
 /** Publier / dépublier / supprimer — les trois actions sensibles du créateur, réunies. */
-export function PublishControls({ formationId, published }: { formationId: number; published: boolean }) {
+export function PublishControls({
+  formationId,
+  published,
+  canPublish,
+}: {
+  formationId: number;
+  published: boolean;
+  /** Créateur vérifié ? Sinon la publication est bloquée (et refusée côté serveur). */
+  canPublish: boolean;
+}) {
   const router = useRouter();
   const { run, pending, error } = useAction();
 
@@ -19,7 +28,7 @@ export function PublishControls({ formationId, published }: { formationId: numbe
             Repasser en brouillon
           </LockinButton>
         ) : (
-          <LockinButton disabled={pending} onClick={() => run(() => publishFormation(formationId))}>
+          <LockinButton disabled={pending || !canPublish} onClick={() => run(() => publishFormation(formationId))}>
             Publier la formation
           </LockinButton>
         )}

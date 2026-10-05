@@ -2,6 +2,8 @@ import Link from "next/link";
 
 import { requireLockinOnboarded } from "@/lib/auth";
 import { listMyFormations, listPublishedFormations } from "@/lib/formations-queries";
+import { getCreatorVerification } from "@/lib/creator-verification";
+import { CREATOR_STATUS_LABELS } from "@/lib/formations-data";
 import { FORMATION_THEMES } from "@/lib/formations-data";
 import { cn } from "@/lib/utils";
 import { Eyebrow, PageHeader, Slogan } from "@/components/lockin/primitives";
@@ -24,9 +26,10 @@ export default async function FormationsPage({
 }) {
   const user = await requireLockinOnboarded("/formations");
   const sp = await searchParams;
-  const [catalog, mine] = await Promise.all([
+  const [catalog, mine, verification] = await Promise.all([
     listPublishedFormations({ theme: sp.theme, page: Number(sp.page) }),
     listMyFormations(user.id),
+    getCreatorVerification(user.id),
   ]);
 
   return (
@@ -41,6 +44,18 @@ export default async function FormationsPage({
           </Link>
         }
       />
+
+      {verification.status !== "approved" ? (
+        <aside className="flex flex-col gap-3 border border-lk-black p-5 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-lk-black/70">
+            <span className="font-medium text-lk-black">{CREATOR_STATUS_LABELS[verification.status]}.</span> Pour publier une
+            formation, ton identité de créateur doit être validée.
+          </p>
+          <Link href="/formations/verification" className="lockin-button lockin-button--outline shrink-0">
+            {verification.status === "pending" ? "Voir ma demande" : "Demander la vérification"}
+          </Link>
+        </aside>
+      ) : null}
 
       {mine.length > 0 ? (
         <section>

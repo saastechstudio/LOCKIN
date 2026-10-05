@@ -41,6 +41,16 @@ export default function ConfidentialitePage() {
           explicitement de les rendre publics.
         </li>
         <li>
+          <strong>Vérification des créateurs de formations :</strong> si vous
+          demandez à publier des formations, votre nom et prénom, une
+          présentation de votre expertise et un lien public de preuve (profil
+          professionnel, site). Ces informations ne sont visibles que des
+          administrateurs, qui peuvent vous contacter pour les compléter.
+          Aucun document d&apos;identité n&apos;est demandé ni conservé : seule
+          la décision (approuvée, refusée) et son motif sont enregistrés. Elles
+          sont supprimées avec votre compte ou sur simple demande.
+        </li>
+        <li>
           <strong>Modération :</strong> signalements que vous déposez ou dont
           vous faites l&apos;objet, et événements de modération (strikes,
           score de respect) liés à votre compte.

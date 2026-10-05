@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { getModerationOverview } from "@/lib/actions/moderation";
 import { ReportRow } from "@/components/moderation/report-row";
 
@@ -29,9 +31,12 @@ export default async function ModerationAdminPage() {
         <h1 className="font-display mb-2 text-3xl text-lk-black sm:text-4xl">
           Modération
         </h1>
-        <p className="mb-8 text-sm text-camp-charcoal/60">
+        <p className="mb-4 text-sm text-camp-charcoal/60">
           Respect, discipline, entraide, éthique, focus — charte de modération Lockin.
         </p>
+        <Link href="/dashboard/admin/creators" className="lockin-button lockin-button--outline mb-8">
+          Vérification des créateurs
+        </Link>
 
         <section className="mb-12">
           <h2 className="mb-3 text-xs font-semibold tracking-[0.15em] text-camp-charcoal uppercase">
