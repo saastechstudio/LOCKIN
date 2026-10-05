@@ -23,7 +23,6 @@ export function CardActivity({ activity, selected, onSelect }: CardActivityProps
           : "border-camp-hairline bg-camp-white text-camp-charcoal hover:border-camp-charcoal",
       )}
     >
-      <span className="text-2xl">{activity.emoji}</span>
       <span className="font-mono text-xs font-bold tracking-[0.08em] uppercase">
         {activity.name}
       </span>

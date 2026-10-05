@@ -26,7 +26,6 @@ export function SectionActivities() {
               className="flex flex-col items-center gap-2 border-r border-b border-camp-hairline px-4 py-8 text-center"
             >
               <span className="font-mono text-[11px] font-bold text-camp-gold">0{i + 1}</span>
-              <span className="text-2xl">{activity.emoji}</span>
               <span className="font-mono text-xs font-bold tracking-[0.06em] text-camp-charcoal uppercase">
                 {activity.name}
               </span>

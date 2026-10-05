@@ -48,7 +48,7 @@ export function MessageThread({ recipientId, currentUserId, thread }: MessageThr
     <div className="flex flex-col">
       <div className="space-y-3 pb-6">
         {thread.length === 0 ? (
-          <p className="py-10 text-center font-mono text-xs text-camp-charcoal/50 uppercase">
+          <p className="py-10 text-center text-xs text-camp-charcoal/50 uppercase">
             Aucun message — commence la conversation.
           </p>
         ) : (
@@ -67,7 +67,7 @@ export function MessageThread({ recipientId, currentUserId, thread }: MessageThr
                   <p className="text-sm whitespace-pre-wrap">{m.content}</p>
                   <p
                     className={cn(
-                      "mt-1 font-mono text-[10px] uppercase",
+                      "mt-1 text-[10px] uppercase",
                       isMine ? "text-camp-white/50" : "text-camp-charcoal/40",
                     )}
                   >
@@ -113,7 +113,7 @@ export function MessageThread({ recipientId, currentUserId, thread }: MessageThr
           type="button"
           onClick={handleSend}
           disabled={isPending || !content.trim()}
-          className="border-2 border-camp-charcoal bg-camp-gold px-5 py-2.5 font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          className="border border-camp-charcoal bg-camp-gold px-5 py-2.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
         >
           Envoyer
         </button>

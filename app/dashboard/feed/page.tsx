@@ -19,12 +19,12 @@ export default async function FeedPage({
   const posts = await getFeedPosts({ tag, sport, country });
 
   return (
-    <div className="camp-scope -m-4 min-h-[calc(100vh-5rem)] border border-camp-hairline p-6 sm:-m-6 sm:p-8">
+    <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
-        <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
           Lockin Social Club
         </p>
-        <h1 className="font-display mb-6 text-2xl font-bold text-camp-charcoal uppercase">
+        <h1 className="font-display mb-6 text-3xl text-lk-black sm:text-4xl">
           Feed
         </h1>
 
@@ -43,7 +43,7 @@ export default async function FeedPage({
 
         <div>
           {posts.length === 0 ? (
-            <p className="py-10 text-center font-mono text-xs text-camp-charcoal/50 uppercase">
+            <p className="py-10 text-center text-xs text-camp-charcoal/50 uppercase">
               Aucun post pour l&apos;instant — sois le premier à publier.
             </p>
           ) : (
@@ -68,7 +68,7 @@ function FilterPill({
     <Link
       href={href}
       className={cn(
-        "border px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] uppercase transition-colors",
+        "border px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] uppercase transition-colors",
         active
           ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
           : "border-camp-hairline text-camp-charcoal/70 hover:border-camp-charcoal hover:text-camp-charcoal",

@@ -24,20 +24,20 @@ export default async function GroupDetailPage({
   const posts = await getFeedPosts({ groupId: group.id });
 
   return (
-    <div className="camp-scope -m-4 min-h-[calc(100vh-5rem)] border border-camp-hairline p-6 sm:-m-6 sm:p-8">
+    <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
-        <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
           {GROUP_TYPE_LABELS[group.type as GroupSeed["type"]]}
         </p>
         <div className="mb-6 flex flex-col gap-4 border-b-2 border-camp-charcoal pb-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="font-display text-2xl font-bold text-camp-charcoal uppercase">
+            <h1 className="font-display text-3xl text-lk-black sm:text-4xl">
               {group.name}
             </h1>
             {group.description ? (
               <p className="mt-1 text-sm text-camp-charcoal/60">{group.description}</p>
             ) : null}
-            <p className="mt-1 font-mono text-[11px] text-camp-charcoal/40">
+            <p className="mt-1 text-[11px] text-camp-charcoal/40">
               {group.memberCount} membre{group.memberCount > 1 ? "s" : ""}
             </p>
           </div>
@@ -48,7 +48,7 @@ export default async function GroupDetailPage({
 
         <div>
           {posts.length === 0 ? (
-            <p className="py-10 text-center font-mono text-xs text-camp-charcoal/50 uppercase">
+            <p className="py-10 text-center text-xs text-camp-charcoal/50 uppercase">
               Aucun post dans ce groupe pour l&apos;instant.
             </p>
           ) : (

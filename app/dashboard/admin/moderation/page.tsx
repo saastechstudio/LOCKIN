@@ -21,12 +21,12 @@ export default async function ModerationAdminPage() {
   const { pendingReports, recentEvents } = await getModerationOverview();
 
   return (
-    <div className="camp-scope -m-4 min-h-[calc(100vh-5rem)] border border-camp-hairline p-6 sm:-m-6 sm:p-8">
+    <div className="camp-scope">
       <div className="mx-auto max-w-3xl">
-        <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
           Lockin Social Club · Admin
         </p>
-        <h1 className="font-display mb-2 text-2xl font-bold text-camp-charcoal uppercase">
+        <h1 className="font-display mb-2 text-3xl text-lk-black sm:text-4xl">
           Modération
         </h1>
         <p className="mb-8 text-sm text-camp-charcoal/60">
@@ -34,11 +34,11 @@ export default async function ModerationAdminPage() {
         </p>
 
         <section className="mb-12">
-          <h2 className="mb-3 font-mono text-xs font-bold tracking-[0.15em] text-camp-charcoal uppercase">
+          <h2 className="mb-3 text-xs font-semibold tracking-[0.15em] text-camp-charcoal uppercase">
             Signalements en attente ({pendingReports.length})
           </h2>
           {pendingReports.length === 0 ? (
-            <p className="py-6 text-center font-mono text-xs text-camp-charcoal/40 uppercase">
+            <p className="py-6 text-center text-xs text-camp-charcoal/40 uppercase">
               Rien en attente.
             </p>
           ) : (
@@ -51,11 +51,11 @@ export default async function ModerationAdminPage() {
         </section>
 
         <section>
-          <h2 className="mb-3 font-mono text-xs font-bold tracking-[0.15em] text-camp-charcoal uppercase">
+          <h2 className="mb-3 text-xs font-semibold tracking-[0.15em] text-camp-charcoal uppercase">
             Derniers événements de modération
           </h2>
           {recentEvents.length === 0 ? (
-            <p className="py-6 text-center font-mono text-xs text-camp-charcoal/40 uppercase">
+            <p className="py-6 text-center text-xs text-camp-charcoal/40 uppercase">
               Aucun événement pour l&apos;instant.
             </p>
           ) : (
@@ -68,7 +68,7 @@ export default async function ModerationAdminPage() {
                       — {SOURCE_LABELS[event.source]} ({event.reason})
                     </p>
                   </div>
-                  <span className="shrink-0 font-mono text-[11px] font-bold text-camp-gold uppercase">
+                  <span className="shrink-0 text-[11px] font-bold text-camp-gold uppercase">
                     {event.action ? ACTION_LABELS[event.action] : "—"}
                   </span>
                 </div>

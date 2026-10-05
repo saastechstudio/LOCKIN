@@ -43,7 +43,7 @@ export function QuestionComposer() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="mb-6 border-2 border-camp-charcoal bg-camp-gold px-5 py-2.5 font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase"
+        className="mb-6 border border-camp-charcoal bg-camp-gold px-5 py-2.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase"
       >
         Poser une question
       </button>
@@ -78,7 +78,7 @@ export function QuestionComposer() {
             type="button"
             onClick={() => toggleTag(tag)}
             className={cn(
-              "border px-2.5 py-1 font-mono text-[11px] font-bold tracking-[0.06em] uppercase",
+              "border px-2.5 py-1 text-[11px] font-semibold tracking-[0.06em] uppercase",
               tags.includes(tag)
                 ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
                 : "border-camp-hairline text-camp-charcoal/70",
@@ -91,7 +91,7 @@ export function QuestionComposer() {
           type="button"
           onClick={handleSubmit}
           disabled={isPending || !title.trim() || !body.trim()}
-          className="ml-auto border-2 border-camp-charcoal bg-camp-gold px-5 py-1.5 font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          className="ml-auto border border-camp-charcoal bg-camp-gold px-5 py-1.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
         >
           Publier
         </button>

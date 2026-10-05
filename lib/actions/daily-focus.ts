@@ -1,12 +1,14 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { eq, and, desc } from "drizzle-orm";
+import { eq, and, desc, gte } from "drizzle-orm";
+import { subDays } from "date-fns";
 import { z } from "zod";
 
 import { db } from "@/lib/db";
-import { dailyFocus, onboardingAudits, moodEnum } from "@/lib/db/schema";
+import { dailyFocus, onboardingAudits, moodEnum, users } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
+import { disciplineLevel, disciplineScore } from "@/lib/lockin-level";
 
 export type Mood = (typeof moodEnum.enumValues)[number];
 
@@ -84,7 +86,18 @@ export async function updateTodayFocus(formData: FormData) {
     })
     .where(and(eq(dailyFocus.id, parsed.focusId), eq(dailyFocus.userId, user.id)));
 
+  // Le niveau Lockin se gagne : recalculé à chaque note, sur 7 jours glissants.
+  const recent = await db.query.dailyFocus.findMany({
+    columns: { disciplineRating: true },
+    where: and(eq(dailyFocus.userId, user.id), gte(dailyFocus.date, subDays(startOfToday(), 6))),
+  });
+  const score = disciplineScore(
+    recent.map((f) => f.disciplineRating).filter((v): v is number => v !== null),
+  );
+  await db.update(users).set({ lockinLevel: disciplineLevel(score) }).where(eq(users.id, user.id));
+
   revalidatePath("/dashboard");
+  revalidatePath("/dashboard/profil");
 }
 
 const moodSchema = z.object({

@@ -36,33 +36,31 @@ export const CAMP_SESSIONS_SEED: CampSessionSeed[] = [
 export type SportActivity = {
   id: string;
   name: string;
-  emoji: string;
 };
 
 export const SPORT_ACTIVITIES: SportActivity[] = [
-  { id: "football", name: "Football", emoji: "⚽" },
-  { id: "muay-thai", name: "Muay Thaï", emoji: "🥊" },
-  { id: "pilates", name: "Pilates", emoji: "🤸" },
-  { id: "padel", name: "Padel", emoji: "🎾" },
-  { id: "fitness", name: "Fitness", emoji: "🏋️" },
-  { id: "yoga", name: "Yoga", emoji: "🧘" },
+  { id: "football", name: "Football" },
+  { id: "muay-thai", name: "Muay Thaï" },
+  { id: "pilates", name: "Pilates" },
+  { id: "padel", name: "Padel" },
+  { id: "fitness", name: "Fitness" },
+  { id: "yoga", name: "Yoga" },
 ];
 
 export type Excursion = {
   id: string;
   name: string;
-  emoji: string;
 };
 
 /** Une excursion incluse par séjour — cf. EXCURSIONS_TO_CHOOSE. */
 export const EXCURSIONS: Excursion[] = [
-  { id: "phi-phi", name: "Phi Phi Islands", emoji: "🏝️" },
-  { id: "similan", name: "Similan Islands", emoji: "🐠" },
-  { id: "james-bond", name: "James Bond Island", emoji: "🗿" },
-  { id: "racha-coral", name: "Racha & Coral Island", emoji: "🪸" },
-  { id: "big-buddha", name: "Big Buddha & Temples", emoji: "🙏" },
-  { id: "elephant-sanctuary", name: "Elephant Sanctuary", emoji: "🐘" },
-  { id: "old-town", name: "Phuket Old Town", emoji: "🏘️" },
+  { id: "phi-phi", name: "Phi Phi Islands" },
+  { id: "similan", name: "Similan Islands" },
+  { id: "james-bond", name: "James Bond Island" },
+  { id: "racha-coral", name: "Racha & Coral Island" },
+  { id: "big-buddha", name: "Big Buddha & Temples" },
+  { id: "elephant-sanctuary", name: "Elephant Sanctuary" },
+  { id: "old-town", name: "Phuket Old Town" },
 ];
 
 export const EXCURSIONS_TO_CHOOSE = 1;
@@ -71,16 +69,15 @@ export const EXCURSIONS_TO_CHOOSE = 1;
 export type FunActivity = {
   id: string;
   name: string;
-  emoji: string;
 };
 
 export const FUN_ACTIVITIES: FunActivity[] = [
-  { id: "jet-ski", name: "Jet Ski", emoji: "🚤" },
-  { id: "quad-jungle", name: "Quad Jungle", emoji: "🏍️" },
-  { id: "kayak-grottes", name: "Kayak Grottes", emoji: "🛶" },
-  { id: "parachute-ascensionnel", name: "Parachute Ascensionnel", emoji: "🪂" },
-  { id: "zipline", name: "Zipline", emoji: "🧗" },
-  { id: "snorkeling-fun", name: "Snorkeling Fun", emoji: "🤿" },
+  { id: "jet-ski", name: "Jet Ski" },
+  { id: "quad-jungle", name: "Quad Jungle" },
+  { id: "kayak-grottes", name: "Kayak Grottes" },
+  { id: "parachute-ascensionnel", name: "Parachute Ascensionnel" },
+  { id: "zipline", name: "Zipline" },
+  { id: "snorkeling-fun", name: "Snorkeling Fun" },
 ];
 
 export const FUN_ACTIVITIES_TO_CHOOSE = 1;

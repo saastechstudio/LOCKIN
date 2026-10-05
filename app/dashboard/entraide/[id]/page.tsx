@@ -22,11 +22,11 @@ export default async function QuestionDetailPage({
   if (!question) notFound();
 
   return (
-    <div className="camp-scope -m-4 min-h-[calc(100vh-5rem)] border border-camp-hairline p-6 sm:-m-6 sm:p-8">
+    <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
         <Link
           href="/dashboard/entraide"
-          className="mb-6 inline-flex items-center gap-1.5 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal/60 uppercase hover:text-camp-charcoal"
+          className="mb-6 inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal/60 uppercase hover:text-camp-charcoal"
         >
           <ArrowLeft className="size-3.5" /> Entraide
         </Link>
@@ -36,7 +36,7 @@ export default async function QuestionDetailPage({
             {question.tags.map((t) => (
               <span
                 key={t}
-                className="border border-camp-hairline px-2 py-0.5 font-mono text-[10px] font-bold tracking-[0.06em] text-camp-gold uppercase"
+                className="border border-camp-hairline px-2 py-0.5 text-[10px] font-semibold tracking-[0.06em] text-camp-gold uppercase"
               >
                 {t}
               </span>
@@ -46,12 +46,16 @@ export default async function QuestionDetailPage({
           <p className="mt-3 text-sm leading-relaxed whitespace-pre-wrap text-camp-charcoal/80">
             {question.body}
           </p>
-          <p className="mt-3 font-mono text-[11px] text-camp-charcoal/40 uppercase">
+          <p className="mt-3 text-[11px] text-camp-charcoal/40 uppercase">
             Posée par {question.user.name ?? "Membre Lockin"}
           </p>
         </div>
 
-        <AnswerSection questionId={question.id} answers={question.answers} />
+        <AnswerSection
+          questionId={question.id}
+          isQuestionAuthor={question.isMine}
+          answers={question.answers}
+        />
       </div>
     </div>
   );

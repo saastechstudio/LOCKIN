@@ -36,7 +36,7 @@ export const DASHBOARD_NAV_GROUPS: DashboardNavGroup[] = [
     items: [
       { href: "/dashboard", label: "Accueil", icon: LayoutGrid },
       { href: "/dashboard/feed", label: "Feed", icon: Rows3 },
-      { href: "/dashboard/groupes", label: "Groupes", icon: Building2 },
+      { href: "/dashboard/groupes", label: "Clubs", icon: Building2 },
       { href: "/dashboard/entraide", label: "Entraide", icon: LifeBuoy },
       { href: "/dashboard/messages", label: "Messages", icon: MessageSquare },
     ],

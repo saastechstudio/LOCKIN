@@ -7,10 +7,10 @@ type MotivationScreenProps = {
 export function MotivationScreen({ value, onChange }: MotivationScreenProps) {
   return (
     <div>
-      <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
         Écran 01 — Motivation
       </p>
-      <h1 className="font-display mt-3 text-2xl font-bold text-camp-charcoal uppercase sm:text-3xl">
+      <h1 className="font-display mt-3 text-3xl text-lk-black sm:text-4xl sm:text-3xl">
         Pourquoi veux-tu devenir Lockin ?
       </h1>
       <p className="mt-2 text-sm text-camp-charcoal/60">
@@ -27,7 +27,7 @@ export function MotivationScreen({ value, onChange }: MotivationScreenProps) {
         autoFocus
         className="mt-6 w-full resize-none border border-camp-hairline bg-camp-white px-4 py-3.5 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
       />
-      <p className="mt-2 text-right font-mono text-[10px] text-camp-charcoal/40">
+      <p className="mt-2 text-right text-[10px] text-camp-charcoal/40">
         {value.length} / 600
       </p>
     </div>

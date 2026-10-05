@@ -492,6 +492,13 @@ export const helpQuestions = pgTable("help_questions", {
   title: text("title").notNull(),
   body: text("body").notNull(),
   tags: jsonb("tags").$type<string[]>().notNull().default([]),
+  /**
+   * Réponse retenue par l'auteur de la question (pas de vote public : c'est
+   * celui qui a demandé de l'aide qui dit ce qui l'a aidé). Sans clé
+   * étrangère pour éviter la référence circulaire question ↔ réponse ; une
+   * réponse supprimée laisse simplement un id orphelin, ignoré à l'affichage.
+   */
+  acceptedAnswerId: integer("accepted_answer_id"),
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 

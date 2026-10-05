@@ -10,10 +10,10 @@ type SportScreenProps = {
 export function SportScreen({ value, onChange }: SportScreenProps) {
   return (
     <div>
-      <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
         Écran 03 — Sport Lockin
       </p>
-      <h1 className="font-display mt-3 text-2xl font-bold text-camp-charcoal uppercase sm:text-3xl">
+      <h1 className="font-display mt-3 text-3xl text-lk-black sm:text-4xl sm:text-3xl">
         Quel est ton sport principal ?
       </h1>
       <p className="mt-2 text-sm text-camp-charcoal/60">
@@ -33,10 +33,7 @@ export function SportScreen({ value, onChange }: SportScreenProps) {
                 : "text-camp-charcoal hover:border-camp-charcoal",
             )}
           >
-            <span className="text-xl" aria-hidden>
-              {sport.emoji}
-            </span>
-            <span className="font-mono text-xs font-bold tracking-[0.06em] uppercase">
+            <span className="text-xs font-semibold tracking-[0.06em] uppercase">
               {sport.name}
             </span>
           </button>

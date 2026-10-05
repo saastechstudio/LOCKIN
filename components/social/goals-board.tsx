@@ -62,7 +62,7 @@ function GoalColumn({
 
   return (
     <div>
-      <p className="mb-3 font-mono text-[11px] font-bold tracking-[0.15em] text-camp-gold uppercase">
+      <p className="mb-3 text-[11px] font-semibold tracking-[0.15em] text-camp-gold uppercase">
         {title}
       </p>
 
@@ -86,7 +86,7 @@ function GoalColumn({
           <select
             value={horizon}
             onChange={(e) => setHorizon(e.target.value ? Number(e.target.value) : "")}
-            className="border border-camp-hairline bg-camp-white px-2.5 py-1.5 font-mono text-[11px] font-bold text-camp-charcoal uppercase outline-none"
+            className="border border-camp-hairline bg-camp-white px-2.5 py-1.5 text-[11px] font-bold text-camp-charcoal uppercase outline-none"
           >
             <option value="">Horizon</option>
             {HORIZONS.map((h) => (
@@ -95,7 +95,7 @@ function GoalColumn({
               </option>
             ))}
           </select>
-          <label className="inline-flex items-center gap-1.5 font-mono text-[11px] font-bold text-camp-charcoal/70 uppercase">
+          <label className="inline-flex items-center gap-1.5 text-[11px] font-bold text-camp-charcoal/70 uppercase">
             <input
               type="checkbox"
               checked={isPublic}
@@ -108,7 +108,7 @@ function GoalColumn({
             type="button"
             onClick={handleAdd}
             disabled={isPending || !title_.trim()}
-            className="ml-auto border-2 border-camp-charcoal bg-camp-gold px-4 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal uppercase disabled:opacity-40"
+            className="ml-auto border border-camp-charcoal bg-camp-gold px-4 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase disabled:opacity-40"
           >
             Ajouter
           </button>
@@ -131,7 +131,7 @@ function GoalRow({ goal }: { goal: Goal }) {
         <div>
           <p className="text-sm font-medium text-camp-charcoal">{goal.title}</p>
           {goal.horizonDays ? (
-            <p className="font-mono text-[10px] text-camp-charcoal/40 uppercase">
+            <p className="text-[10px] text-camp-charcoal/40 uppercase">
               {goal.horizonDays} jours {goal.isPublic ? "· public" : ""}
             </p>
           ) : null}
@@ -168,9 +168,9 @@ function GoalRow({ goal }: { goal: Goal }) {
           max={100}
           value={goal.progress}
           onChange={(e) => setProgress(Number(e.target.value))}
-          className="w-14 border border-camp-hairline bg-camp-white px-1.5 py-0.5 text-right font-mono text-xs text-camp-charcoal outline-none"
+          className="w-14 border border-camp-hairline bg-camp-white px-1.5 py-0.5 text-right text-xs text-camp-charcoal outline-none"
         />
-        <span className="font-mono text-xs text-camp-charcoal/50">%</span>
+        <span className="text-xs text-camp-charcoal/50">%</span>
       </div>
     </div>
   );

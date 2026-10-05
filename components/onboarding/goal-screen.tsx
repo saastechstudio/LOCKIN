@@ -12,10 +12,10 @@ type GoalScreenProps = {
 export function GoalScreen({ domain, onDomainChange, subGoal, onSubGoalChange }: GoalScreenProps) {
   return (
     <div>
-      <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
         Écran 02 — Objectif 30 jours
       </p>
-      <h1 className="font-display mt-3 text-2xl font-bold text-camp-charcoal uppercase sm:text-3xl">
+      <h1 className="font-display mt-3 text-3xl text-lk-black sm:text-4xl sm:text-3xl">
         Sur quoi tu te concentres ?
       </h1>
       <p className="mt-2 text-sm text-camp-charcoal/60">
@@ -30,7 +30,7 @@ export function GoalScreen({ domain, onDomainChange, subGoal, onSubGoalChange }:
             type="button"
             onClick={() => onDomainChange(option)}
             className={cn(
-              "border border-camp-hairline bg-camp-white px-3 py-4 text-center font-mono text-xs font-bold tracking-[0.08em] uppercase transition-colors",
+              "border border-camp-hairline bg-camp-white px-3 py-4 text-center text-xs font-semibold tracking-[0.08em] uppercase transition-colors",
               domain === option
                 ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
                 : "text-camp-charcoal hover:border-camp-charcoal",
@@ -42,7 +42,7 @@ export function GoalScreen({ domain, onDomainChange, subGoal, onSubGoalChange }:
       </div>
 
       <label className="mt-6 block">
-        <span className="font-mono text-[11px] font-bold tracking-[0.08em] text-camp-charcoal/60 uppercase">
+        <span className="text-[11px] font-semibold tracking-[0.08em] text-camp-charcoal/60 uppercase">
           Sous-objectif (optionnel)
         </span>
         <input

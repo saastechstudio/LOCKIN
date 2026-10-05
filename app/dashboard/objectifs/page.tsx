@@ -10,13 +10,13 @@ export default async function ObjectifsPage() {
   const [goals, routine] = await Promise.all([getGoals(), getRoutineItems()]);
 
   return (
-    <div className="camp-scope -m-4 min-h-[calc(100vh-5rem)] border border-camp-hairline p-6 sm:-m-6 sm:p-8">
+    <div className="camp-scope">
       <div className="mx-auto max-w-2xl space-y-12">
         <div>
-          <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
             Lockin Social Club
           </p>
-          <h1 className="font-display text-2xl font-bold text-camp-charcoal uppercase">
+          <h1 className="font-display text-3xl text-lk-black sm:text-4xl">
             Objectifs
           </h1>
           <p className="mt-1 text-sm text-camp-charcoal/60">

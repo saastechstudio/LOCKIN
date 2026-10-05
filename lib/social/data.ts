@@ -64,6 +64,7 @@ const CITY_GROUPS: GroupSeed[] = [
   { slug: "dakar", name: "Dakar", type: "city", description: "La communauté Lockin à Dakar." },
   { slug: "colombo", name: "Colombo", type: "city", description: "La communauté Lockin à Colombo." },
   { slug: "bali", name: "Bali", type: "city", description: "La communauté Lockin à Bali." },
+  { slug: "montreal", name: "Montréal", type: "city", description: "La communauté Lockin à Montréal." },
   { slug: "mexico", name: "Mexico", type: "city", description: "La communauté Lockin à Mexico." },
   { slug: "dubai", name: "Dubai", type: "city", description: "La communauté Lockin à Dubai." },
 ];
@@ -97,7 +98,7 @@ export const GROUPS_SEED: GroupSeed[] = [
 ];
 
 export const GROUP_TYPE_LABELS: Record<GroupSeed["type"], string> = {
-  city: "Ville",
+  city: "Clubs locaux",
   sport: "Sport",
   profession: "Métier",
   theme: "Thématique",
