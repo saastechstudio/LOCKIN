@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { safeNextPath } from "@/lib/auth";
+import { safeNextPath } from "@/lib/safe-path";
 import { getLockinOnboardingStatus } from "@/lib/actions/onboarding-lockin";
 import { LockinOnboardingWizard } from "@/components/onboarding/lockin-onboarding-wizard";
 

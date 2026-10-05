@@ -35,6 +35,10 @@ export function BrandedClerkProvider({ children }: { children: React.ReactNode }
 
   return (
     <ClerkProvider
+      // Nos propres pages, même sans les variables NEXT_PUBLIC_CLERK_SIGN_*_URL
+      // (absentes sur Railway) : sinon Clerk renvoie vers ses pages hébergées.
+      signInUrl="/sign-in"
+      signUpUrl="/sign-up"
       appearance={{
         variables: isDark ? DARK_VARIABLES : LIGHT_VARIABLES,
       }}
