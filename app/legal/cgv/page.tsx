@@ -1,115 +1,80 @@
 import { LegalPage } from "@/components/marketing/legal-page";
+import { CAMP_EDITION, CAMP_PRICE_PER_PERSON } from "@/lib/camp/data";
 
 export default function CgvPage() {
   return (
-    <LegalPage title="Conditions Générales de Vente">
+    <LegalPage title="Conditions Générales de Vente — Lock-In Camp">
       <h2>1. Objet</h2>
       <p>
-        Les présentes Conditions Générales de Vente (CGV) régissent l&apos;accès
-        et l&apos;utilisation de l&apos;abonnement au service Lock In, club
-        privé d&apos;entrepreneurs proposant un accompagnement au suivi
-        d&apos;objectifs, un coach IA, un audit personnalisé, un outil
-        de planification et un annuaire de membres. Toute souscription à
-        l&apos;abonnement implique l&apos;acceptation pleine et entière des
-        présentes CGV.
+        Le Lockin Social Club et l&apos;ensemble de ses fonctionnalités sont
+        gratuits ; leur utilisation relève des{" "}
+        <a href="/legal/cgu" className="text-brand-blue hover:underline">
+          CGU
+        </a>
+        . Les présentes Conditions Générales de Vente (CGV) s&apos;appliquent
+        uniquement à la réservation des Lock-In Camp, seuls services payants
+        proposés par Lock In. Toute réservation implique l&apos;acceptation
+        pleine et entière des présentes CGV.
       </p>
 
-      <h2>2. Description de l&apos;offre</h2>
+      <h2>2. Accès à la réservation</h2>
       <p>
-        Lock In est un service accessible par abonnement, sur inscription,
-        donnant accès à l&apos;ensemble des fonctionnalités de la
-        plateforme : tableau de bord d&apos;objectifs, bilan quotidien,
-        coach IA, audit d&apos;entrée, module de planification et
-        annuaire des membres.
+        La réservation d&apos;un Lock-In Camp est réservée aux membres du
+        Lockin Social Club, c&apos;est-à-dire aux personnes disposant
+        d&apos;un compte et ayant complété le rituel d&apos;inscription au
+        club. L&apos;inscription au club est gratuite et peut être faite au
+        moment de la réservation.
       </p>
 
-      <h2>3. Tarifs</h2>
+      <h2>3. Prix</h2>
       <p>
-        L&apos;abonnement est proposé selon deux formules, au choix du
-        membre :
-      </p>
-      <ul>
-        <li>
-          <strong>Mensuel</strong> : 9,90&nbsp;€ TTC par mois, prélevé
-          automatiquement chaque mois à la date anniversaire de
-          l&apos;inscription.
-        </li>
-        <li>
-          <strong>Annuel</strong> : 89,90&nbsp;€ TTC par an, prélevé en une
-          seule fois à la souscription puis chaque année à la date
-          anniversaire.
-        </li>
-      </ul>
-      <p>
-        Les paiements sont traités par notre prestataire Whop. Lock In ne
-        collecte ni ne stocke aucune donnée bancaire.
+        Le prix de l&apos;{CAMP_EDITION} est de{" "}
+        {CAMP_PRICE_PER_PERSON.toLocaleString("fr-FR")}&nbsp;€ TTC par
+        personne. Le détail des prestations incluses (vol, hébergement,
+        programme, activités, excursion) figure sur la{" "}
+        <a href="/camp" className="text-brand-blue hover:underline">
+          page du Lock-In Camp
+        </a>{" "}
+        à la date de la réservation.
       </p>
 
-      <h2>4. Essai gratuit</h2>
+      <h2>4. Réservation et paiement</h2>
       <p>
-        Un essai gratuit de 14 jours est proposé à la souscription. Une carte
-        bancaire est requise pour activer l&apos;essai, mais aucun montant
-        n&apos;est prélevé avant son terme. Le membre peut résilier à tout
-        moment pendant cette période, sans frais et sans justification,
-        depuis son espace membre.
+        Le membre effectue une pré-inscription en ligne pour la session de
+        son choix, dans la limite des places disponibles. Les modalités de
+        paiement lui sont ensuite communiquées par email. La place
+        n&apos;est définitivement acquise qu&apos;à réception du paiement.
       </p>
 
-      <h2>5. Durée et résiliation</h2>
+      <h2>5. Annulation et remboursement</h2>
       <p>
-        L&apos;abonnement est conclu pour la durée de la formule choisie
-        (mensuelle ou annuelle) et se renouvelle automatiquement par
-        tacite reconduction pour une durée identique, sauf résiliation par
-        le membre avant la date de renouvellement. La résiliation
-        s&apos;effectue à tout moment, en un clic, depuis
-        Paramètres → Abonnement. Elle prend effet à la fin de la période
-        en cours ; aucun remboursement au prorata n&apos;est effectué pour
-        la période déjà entamée.
+        [Conditions d&apos;annulation et de remboursement à définir. Un séjour
+        incluant transport et hébergement constitue un voyage à forfait au
+        sens du Code du tourisme : ces conditions, ainsi que le droit de
+        résolution du voyageur, doivent être validées juridiquement avant
+        l&apos;ouverture des paiements.]
       </p>
 
-      <h2>6. Droit de rétractation</h2>
+      <h2>6. Responsabilité et aptitude</h2>
       <p>
-        Conformément à l&apos;article L221-28 du Code de la consommation, le
-        droit de rétractation ne s&apos;applique pas aux contenus numériques
-        fournis sur un support immatériel dont l&apos;exécution a commencé
-        après accord préalable exprès du consommateur, qui a renoncé à son
-        droit de rétractation. En souscrivant à l&apos;essai gratuit ou à
-        l&apos;abonnement, le membre reconnaît demander l&apos;accès
-        immédiat au service et renoncer à ce droit pour la période
-        déjà consommée ; il conserve à tout moment la possibilité de
-        résilier son abonnement dans les conditions de l&apos;article 5
-        ci-dessus.
+        Le programme comprend des activités sportives quotidiennes. Chaque
+        participant est responsable de s&apos;assurer de son aptitude
+        physique à les pratiquer et est invité à souscrire une assurance
+        voyage couvrant l&apos;annulation, l&apos;assistance et le
+        rapatriement.
       </p>
 
-      <h2>7. Responsabilité</h2>
+      <h2>7. Données personnelles</h2>
       <p>
-        Lock In met en œuvre tous les moyens raisonnables pour assurer la
-        disponibilité et la fiabilité du service, sans garantie de
-        résultat. Les contenus générés par le coach IA sont fournis à
-        titre indicatif et ne constituent ni un conseil professionnel,
-        juridique, financier ou médical, ni un engagement de résultat sur
-        les performances entrepreneuriales du membre.
-      </p>
-
-      <h2>8. Propriété intellectuelle</h2>
-      <p>
-        L&apos;ensemble des éléments du service (marque, logo, interface,
-        contenus éditoriaux) est protégé par le droit de la propriété
-        intellectuelle et demeure la propriété exclusive de Lock In. Toute
-        reproduction ou représentation, totale ou partielle, sans
-        autorisation est interdite.
-      </p>
-
-      <h2>9. Données personnelles</h2>
-      <p>
-        Le traitement des données personnelles dans le cadre de
-        l&apos;abonnement est décrit dans notre{" "}
+        Le traitement des données liées à une réservation est décrit dans
+        notre{" "}
         <a href="/legal/confidentialite" className="text-brand-blue hover:underline">
           Politique de confidentialité
         </a>
         .
       </p>
 
-      <h2>10. Droit applicable et litiges</h2>
+      <h2>8. Droit applicable et litiges</h2>
       <p>
         Les présentes CGV sont soumises au droit français. En cas de litige,
         une solution amiable sera recherchée en priorité ; à défaut, les

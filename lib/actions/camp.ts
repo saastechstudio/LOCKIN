@@ -6,7 +6,7 @@ import { z } from "zod";
 
 import { db } from "@/lib/db";
 import { campSessions, campRegistrations, type CampSportChoice } from "@/lib/db/schema";
-import { getDbUserOrNull } from "@/lib/auth";
+import { getOrCreateDbUser } from "@/lib/auth";
 import {
   CAMP_SESSIONS_SEED,
   CAMP_PRICE_PER_PERSON,
@@ -108,7 +108,6 @@ const sportChoiceSchema = z.object({
 const createRegistrationSchema = z.object({
   sessionId: z.number().int(),
   fullName: z.string().min(2).max(140),
-  email: z.string().email(),
   sportChoices: z.array(sportChoiceSchema),
   excursionChoices: z
     .array(z.string())
@@ -125,24 +124,26 @@ const createRegistrationSchema = z.object({
 export type CreateCampRegistrationInput = {
   sessionId: number;
   fullName: string;
-  email: string;
   sportChoices: CampSportChoice[];
   excursionChoices: string[];
   funActivityChoice: string;
 };
 
 /**
- * Enregistre une pré-inscription — accessible sans compte (page publique,
- * pas de Clerk requis). Une par email et par session (contrainte
- * camp_registrations_session_email_idx) : re-soumettre le formulaire avec
- * le même email met à jour la réservation plutôt que d'échouer. Si le
- * visiteur est par ailleurs connecté, on rattache sa pré-inscription à son
- * compte membre en plus — mais ça reste un bonus, jamais une condition. Le
- * paiement n'est pas branché ici : la place est réservée au statut
- * "pending" en attendant l'intégration ultérieure (cf.
- * getCampPaymentPlaceholder plus bas).
+ * Enregistre une pré-inscription — réservée aux membres du club (compte +
+ * rituel d'inscription fait), vérifié ici et pas seulement par la page :
+ * une Server Action s'appelle directement. L'email est celui du compte,
+ * jamais une saisie libre. Une par email et par session (contrainte
+ * camp_registrations_session_email_idx) : re-soumettre met à jour la
+ * réservation plutôt que d'échouer. Le paiement n'est pas branché ici : la
+ * place est réservée au statut "pending" en attendant l'intégration
+ * ultérieure (cf. getCampPaymentPlaceholder plus bas).
  */
 export async function createCampRegistration(input: CreateCampRegistrationInput) {
+  const user = await getOrCreateDbUser();
+  if (!user.lockinOnboardingCompletedAt) {
+    throw new Error("Les Lock-In Camp sont réservés aux membres du Lockin Social Club.");
+  }
   const parsed = createRegistrationSchema.parse(input);
 
   const session = await db.query.campSessions.findFirst({
@@ -150,15 +151,13 @@ export async function createCampRegistration(input: CreateCampRegistrationInput)
   });
   if (!session) throw new Error("Session introuvable");
 
-  const user = await getDbUserOrNull();
-
   const [registration] = await db
     .insert(campRegistrations)
     .values({
-      userId: user?.id,
+      userId: user.id,
       sessionId: parsed.sessionId,
       fullName: parsed.fullName,
-      email: parsed.email,
+      email: user.email,
       sportChoices: parsed.sportChoices,
       excursionChoices: parsed.excursionChoices,
       funActivityChoice: parsed.funActivityChoice,
@@ -166,7 +165,7 @@ export async function createCampRegistration(input: CreateCampRegistrationInput)
     .onConflictDoUpdate({
       target: [campRegistrations.sessionId, campRegistrations.email],
       set: {
-        userId: user?.id,
+        userId: user.id,
         fullName: parsed.fullName,
         sportChoices: parsed.sportChoices,
         excursionChoices: parsed.excursionChoices,
@@ -184,7 +183,7 @@ export async function createCampRegistration(input: CreateCampRegistrationInput)
 
 /**
  * Placeholder pour le paiement : aucun fournisseur n'est encore branché sur
- * le camp (contrairement à l'abonnement, qui passe par Whop — lib/whop.ts).
+ * le camp (seul produit payant de Lock In, le club étant gratuit).
  * À remplacer par un vrai lien de checkout quand le moment sera venu ; la
  * pré-inscription reste valable (statut "pending") en attendant.
  */

@@ -86,7 +86,7 @@ export function buildDailyMotivationContent(params: {
  * Sends the daily motivation email via Resend's HTTP API directly (no SDK
  * dependency) — a no-op returning `false` until RESEND_API_KEY is set, same
  * graceful-degradation pattern as the other optional integrations
- * (`isWhopConfigured`, `isResendConfigured`).
+ * (`isResendConfigured`).
  */
 export async function sendDailyMotivationEmail(params: {
   to: string;

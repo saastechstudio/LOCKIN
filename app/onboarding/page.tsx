@@ -1,18 +1,12 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { ArrowRight, HeartPulse, Rocket, Sparkle } from "lucide-react";
 
 import { getOrCreateDbUser } from "@/lib/auth";
-import { hasPremiumAccess, requiresSubscription } from "@/lib/premium";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function OnboardingWelcomePage() {
   const user = await getOrCreateDbUser();
-
-  if (requiresSubscription() && !hasPremiumAccess(user)) {
-    redirect("/subscribe");
-  }
 
   const firstName = user.name?.split(" ")[0] ?? "Membre";
 

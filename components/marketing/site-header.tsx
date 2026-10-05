@@ -8,7 +8,6 @@ const NAV_LINKS = [
   { href: "/#mouvement", label: "Le Club" },
   { href: "/camp", label: "Lock-In Camp" },
   { href: "/methode", label: "La Méthode" },
-  { href: "/methode#pricing", label: "Tarifs" },
 ];
 
 export function SiteHeader() {

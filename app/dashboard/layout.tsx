@@ -4,7 +4,6 @@ import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { onboardingAudits } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
-import { hasPremiumAccess, requiresSubscription } from "@/lib/premium";
 import {
   getRecentNotifications,
   getUnreadNotificationsCount,
@@ -20,10 +19,6 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }) {
   const user = await getOrCreateDbUser();
-
-  if (requiresSubscription() && !hasPremiumAccess(user)) {
-    redirect("/subscribe");
-  }
 
   // The audit is the mandatory first step of La Méthode Lock In — a member
   // landing here (deep link, back button, bookmarked URL) without having
