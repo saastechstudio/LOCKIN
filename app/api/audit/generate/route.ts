@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { onboardingAudits } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { getModelCandidates, markProviderBroken } from "@/lib/ai/model";
+import { consumeRateLimit, RATE_LIMITS } from "@/lib/rate-limit";
 import {
   auditInputSchema,
   auditResultSchema,
@@ -19,7 +20,21 @@ export const maxDuration = 60;
 export async function POST(req: Request) {
   const user = await getOrCreateDbUser();
 
-  const body = await req.json();
+  // Chaque génération coûte un appel IA : 5 par heure et par membre.
+  const retryAfter = consumeRateLimit(`aiAudit:${user.id}`, RATE_LIMITS.aiAudit);
+  if (retryAfter > 0) {
+    return NextResponse.json(
+      { error: "Trop de générations en peu de temps. Réessaie plus tard." },
+      { status: 429, headers: { "Retry-After": String(retryAfter) } },
+    );
+  }
+
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "Requête invalide" }, { status: 400 });
+  }
   const parsed = auditInputSchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(

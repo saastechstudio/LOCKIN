@@ -7,6 +7,7 @@ import { db } from "@/lib/db";
 import { groups, groupMembers } from "@/lib/db/schema";
 import { getOrCreateDbUser, getDbUserOrNull } from "@/lib/auth";
 import { GROUPS_SEED } from "@/lib/social/data";
+import { assertClubMember } from "@/lib/moderation/enforce";
 
 /**
  * Amorce les groupes depuis le catalogue fixe (idempotent via le slug
@@ -42,6 +43,9 @@ export async function getGroup(slug: string) {
     with: { members: { columns: { userId: true } } },
   });
   if (!group) return null;
+  const isMember = viewer ? group.members.some((m) => m.userId === viewer.id) : false;
+  // Un club privé n'existe pas pour qui n'en fait pas partie.
+  if (group.isPrivate && !isMember) return null;
 
   return {
     ...group,
@@ -52,6 +56,13 @@ export async function getGroup(slug: string) {
 
 export async function joinGroup(groupId: number) {
   const user = await getOrCreateDbUser();
+  assertClubMember(user);
+  const group = await db.query.groups.findFirst({
+    columns: { isPrivate: true },
+    where: eq(groups.id, groupId),
+  });
+  // Les clubs privés se rejoignent sur invitation, jamais par leur identifiant.
+  if (!group || group.isPrivate) throw new Error("Club introuvable.");
   await db
     .insert(groupMembers)
     .values({ groupId, userId: user.id })

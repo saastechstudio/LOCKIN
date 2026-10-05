@@ -7,6 +7,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
+import { moderateOrThrow } from "@/lib/moderation/enforce";
 
 const profileSchema = z.object({
   sector: z.string().max(80).optional(),
@@ -22,6 +23,12 @@ export async function updateProfile(formData: FormData) {
     skills: formData.get("skills") || undefined,
     bio: formData.get("bio") || undefined,
   });
+  // Visible dans l'annuaire Réseau : même filtre que le reste du club.
+  await moderateOrThrow(
+    user,
+    [parsed.sector, parsed.skills, parsed.bio].filter(Boolean).join("\n"),
+    { allowNonMember: true },
+  );
 
   await db
     .update(users)

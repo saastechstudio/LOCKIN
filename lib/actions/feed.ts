@@ -5,9 +5,11 @@ import { and, desc, eq, isNull } from "drizzle-orm";
 import { z } from "zod";
 
 import { db } from "@/lib/db";
-import { postComments, postLikes, posts } from "@/lib/db/schema";
+import { groupMembers, postComments, postLikes, posts } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
-import { moderateOrThrow } from "@/lib/moderation/enforce";
+import { assertClubMember, moderateOrThrow } from "@/lib/moderation/enforce";
+import { enforceRateLimit } from "@/lib/rate-limit";
+import { isHttpsUrl } from "@/lib/safe-url";
 
 export type FeedFilters = {
   tag?: string;
@@ -62,7 +64,13 @@ export async function getFeedPosts(filters: FeedFilters = {}) {
 
 const createPostSchema = z.object({
   content: z.string().trim().min(1).max(2000),
-  imageUrl: z.string().url().max(500).optional().or(z.literal("")),
+  // https uniquement : pas de javascript:, data: ni http en clair dans un <img>.
+  imageUrl: z
+    .string()
+    .trim()
+    .max(500)
+    .refine((v) => v === "" || isHttpsUrl(v), "L'image doit être une adresse https.")
+    .optional(),
   tag: z.string().max(40).optional(),
   sport: z.string().max(40).optional(),
   country: z.string().max(80).optional(),
@@ -74,7 +82,15 @@ export type CreatePostInput = z.infer<typeof createPostSchema>;
 export async function createPost(input: CreatePostInput) {
   const user = await getOrCreateDbUser();
   const parsed = createPostSchema.parse(input);
+  enforceRateLimit("post", user.id);
   await moderateOrThrow(user, parsed.content);
+  if (parsed.groupId !== undefined) {
+    // On ne publie que dans un club dont on est membre.
+    const membership = await db.query.groupMembers.findFirst({
+      where: and(eq(groupMembers.groupId, parsed.groupId), eq(groupMembers.userId, user.id)),
+    });
+    if (!membership) throw new Error("Rejoins ce club pour y publier.");
+  }
 
   await db.insert(posts).values({
     userId: user.id,
@@ -96,6 +112,8 @@ export async function createPost(input: CreatePostInput) {
  */
 export async function toggleRespect(postId: number) {
   const user = await getOrCreateDbUser();
+  assertClubMember(user);
+  enforceRateLimit("reaction", user.id);
 
   const existing = await db.query.postLikes.findFirst({
     where: and(eq(postLikes.postId, postId), eq(postLikes.userId, user.id)),
@@ -120,7 +138,10 @@ const commentSchema = z.object({
 export async function addComment(input: z.infer<typeof commentSchema>) {
   const user = await getOrCreateDbUser();
   const parsed = commentSchema.parse(input);
+  enforceRateLimit("comment", user.id);
   await moderateOrThrow(user, parsed.content);
+  const post = await db.query.posts.findFirst({ columns: { id: true }, where: eq(posts.id, parsed.postId) });
+  if (!post) throw new Error("Ce post n'existe plus.");
 
   await db.insert(postComments).values({
     postId: parsed.postId,

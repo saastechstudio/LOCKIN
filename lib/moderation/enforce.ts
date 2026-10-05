@@ -17,6 +17,18 @@ function actionForStrikeCount(count: number): StrikeAction {
 
 export class ModerationBlockedError extends Error {}
 export class AccountSuspendedError extends Error {}
+export class NotClubMemberError extends Error {}
+
+/**
+ * Le club est réservé aux membres qui ont fait le rituel d'inscription.
+ * Les pages le vérifient, mais une Server Action s'appelle directement :
+ * chaque écriture sociale le revérifie ici.
+ */
+export function assertClubMember(user: User): void {
+  if (!user.lockinOnboardingCompletedAt) {
+    throw new NotClubMemberError("Termine ton rituel d'inscription pour participer au club.");
+  }
+}
 
 /** Barrière d'entrée : un compte banni ou suspendu ne peut rien publier. */
 export function assertNotSuspended(user: User): void {
@@ -85,7 +97,13 @@ export async function applyStrike(
  * avec le message Lockin — si le contenu est bloqué ou le compte
  * sanctionné ; ne lève rien et ne fait rien si tout est en ordre.
  */
-export async function moderateOrThrow(user: User, text: string): Promise<void> {
+export async function moderateOrThrow(
+  user: User,
+  text: string,
+  { allowNonMember = false }: { allowNonMember?: boolean } = {},
+): Promise<void> {
+  // Seul le rituel d'inscription publie avant que l'adhésion soit acquise.
+  if (!allowNonMember) assertClubMember(user);
   assertNotSuspended(user);
 
   const verdict = checkContent(text);

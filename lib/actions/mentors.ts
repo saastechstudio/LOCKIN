@@ -8,7 +8,7 @@ import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { LOCKIN_TAGS } from "@/lib/social/data";
-import { moderateOrThrow } from "@/lib/moderation/enforce";
+import { assertClubMember, moderateOrThrow } from "@/lib/moderation/enforce";
 
 /** Annuaire des mentors : membres qui se déclarent disponibles pour guider, filtrable par domaine. */
 export async function getMentors(domain?: string) {
@@ -40,6 +40,7 @@ const mentorSchema = z.object({
 
 export async function updateMentorProfile(input: z.infer<typeof mentorSchema>) {
   const me = await getOrCreateDbUser();
+  assertClubMember(me);
   const parsed = mentorSchema.parse(input);
   if (parsed.isMentor && parsed.domains.length === 0) {
     throw new Error("Choisis au moins un domaine dans lequel tu peux guider.");

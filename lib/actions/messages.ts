@@ -8,6 +8,7 @@ import { db } from "@/lib/db";
 import { messages, users } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { moderateOrThrow } from "@/lib/moderation/enforce";
+import { enforceRateLimit } from "@/lib/rate-limit";
 
 /**
  * Boîte de réception — une ligne par interlocuteur, avec le dernier
@@ -93,7 +94,14 @@ const sendMessageSchema = z.object({
 export async function sendMessage(input: z.infer<typeof sendMessageSchema>) {
   const user = await getOrCreateDbUser();
   const parsed = sendMessageSchema.parse(input);
+  if (parsed.recipientId === user.id) throw new Error("Tu ne peux pas t'écrire à toi-même.");
+  enforceRateLimit("message", user.id);
   await moderateOrThrow(user, parsed.content);
+  const recipient = await db.query.users.findFirst({
+    columns: { id: true },
+    where: eq(users.id, parsed.recipientId),
+  });
+  if (!recipient) throw new Error("Ce membre n'existe pas.");
 
   await db.insert(messages).values({
     senderId: user.id,
