@@ -5,14 +5,12 @@ export default function CguPage() {
     <LegalPage title="Conditions générales d'utilisation — Lockin Social Club">
       <p>
         Les présentes CGU encadrent l&apos;utilisation du Lockin Social Club,
-        le réseau social gratuit intégré à Lock In. Elles s&apos;appliquent en
-        complément des{" "}
+        entièrement gratuit. Seuls les Lock-In Camp sont payants : leur
+        réservation, réservée aux membres du club, relève en plus des{" "}
         <a href="/legal/cgv" className="text-brand-blue hover:underline">
           CGV
-        </a>{" "}
-        pour les membres qui souscrivent également à l&apos;abonnement
-        coaching ; en cas de contradiction sur le volet social, les présentes
-        CGU prévalent.
+        </a>
+        .
       </p>
 
       <h2>1. Objet du service</h2>

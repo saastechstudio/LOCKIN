@@ -31,18 +31,18 @@ const TOTAL_STEPS = 5;
 
 type BookingFlowProps = {
   session: CampSessionWithAvailability;
-  initialFullName?: string;
-  initialEmail?: string;
+  initialFullName: string;
+  /** Email du compte membre — affiché, pas modifiable (la réservation y est rattachée). */
+  email: string;
 };
 
 const fieldClassName =
   "rounded-none border-2 border-camp-charcoal bg-camp-white text-camp-charcoal shadow-none placeholder:text-camp-charcoal/40 focus-visible:border-camp-gold focus-visible:ring-0";
 
-export function BookingFlow({ session, initialFullName, initialEmail }: BookingFlowProps) {
+export function BookingFlow({ session, initialFullName, email }: BookingFlowProps) {
   const router = useRouter();
   const [step, setStep] = useState<Step>(1);
-  const [fullName, setFullName] = useState(initialFullName ?? "");
-  const [email, setEmail] = useState(initialEmail ?? "");
+  const [fullName, setFullName] = useState(initialFullName);
   const [sportChoices, setSportChoices] = useState<CampSportChoice[]>([]);
   const [excursionChoices, setExcursionChoices] = useState<string[]>([]);
   const [funActivityChoice, setFunActivityChoice] = useState<string | null>(null);
@@ -73,7 +73,7 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
     );
   }
 
-  const step1Valid = fullName.trim().length > 1 && /\S+@\S+\.\S+/.test(email);
+  const step1Valid = fullName.trim().length > 1;
   const step2Valid = sportChoices.length === days.length;
   const step3Valid = excursionChoices.length === EXCURSIONS_TO_CHOOSE;
   const step4Valid = funActivityChoice !== null;
@@ -86,7 +86,6 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
         await createCampRegistration({
           sessionId: session.id,
           fullName: fullName.trim(),
-          email: email.trim(),
           sportChoices,
           excursionChoices,
           funActivityChoice,
@@ -149,10 +148,10 @@ export function BookingFlow({ session, initialFullName, initialEmail }: BookingF
               id="email"
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="toi@exemple.com"
-              className={fieldClassName}
+              readOnly
+              className={`${fieldClassName} cursor-default opacity-70`}
             />
+            <p className="text-xs text-camp-charcoal/50">L&apos;email de ton compte Lockin.</p>
           </div>
         </div>
       )}

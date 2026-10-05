@@ -34,7 +34,8 @@ const INITIAL_STATE: WizardState = {
 
 const STEP_LABELS = ["Motivation", "Objectif", "Sport", "Routine", "Confirmation"];
 
-export function LockinOnboardingWizard() {
+/** `next` : où aller une fois le rituel enregistré (déjà validé côté serveur, cf. safeNextPath). */
+export function LockinOnboardingWizard({ next }: { next: string }) {
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [state, setState] = useState<WizardState>(INITIAL_STATE);
@@ -79,7 +80,7 @@ export function LockinOnboardingWizard() {
           morningRoutine: state.morningRoutine!,
           eveningRoutine: state.eveningRoutine!,
         });
-        router.push("/dashboard/feed");
+        router.push(next);
       } catch {
         setError("Impossible d'enregistrer ton rituel. Réessaie.");
       }
@@ -87,7 +88,7 @@ export function LockinOnboardingWizard() {
   }
 
   return (
-    <div className="camp-scope -m-4 min-h-[calc(100vh-5rem)] border border-camp-hairline p-6 sm:-m-6 sm:p-10">
+    <div className="camp-scope min-h-screen px-5 py-12 sm:px-10 sm:py-16">
       <div className="mx-auto max-w-xl">
         <div className="mb-8 flex items-center justify-between">
           <span className="inline-flex items-center gap-2 font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">

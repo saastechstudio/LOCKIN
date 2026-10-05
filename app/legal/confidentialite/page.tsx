@@ -46,9 +46,9 @@ export default function ConfidentialitePage() {
           score de respect) liés à votre compte.
         </li>
         <li>
-          <strong>Données de facturation :</strong> statut d&apos;abonnement
-          et identifiant de membre, gérés par Whop (Lock In ne stocke aucune
-          donnée bancaire).
+          <strong>Réservations Lock-In Camp :</strong> nom, email, session
+          choisie et choix d&apos;activités. Le club étant gratuit, aucune
+          donnée de paiement n&apos;est collectée pour son utilisation.
         </li>
         <li>
           <strong>Données techniques :</strong> journaux de connexion et
@@ -61,15 +61,16 @@ export default function ConfidentialitePage() {
       <p>
         Ces données sont utilisées pour fournir et améliorer le service
         (suivi d&apos;objectifs, coach IA, mise en relation entre membres),
-        gérer l&apos;abonnement et la facturation, assurer la sécurité du
+        gérer les réservations des Lock-In Camp, assurer la sécurité du
         compte, et, lorsque vous y consentez, vous adresser des
         communications relatives au service.
       </p>
 
       <h2>4. Base légale</h2>
       <p>
-        Le traitement repose sur l&apos;exécution du contrat d&apos;abonnement
-        (accès au service), l&apos;intérêt légitime de Lock In (sécurité,
+        Le traitement repose sur l&apos;exécution des conditions
+        d&apos;utilisation (accès au club) et, pour les Lock-In Camp, du
+        contrat de réservation, sur l&apos;intérêt légitime de Lock In (sécurité,
         amélioration du produit) et, le cas échéant, votre consentement
         (communications optionnelles).
       </p>
@@ -78,7 +79,7 @@ export default function ConfidentialitePage() {
       <p>
         Vos données sont traitées par Lock In et par les prestataires
         strictement nécessaires au fonctionnement du service : Clerk
-        (authentification), Whop (paiement), Neon (hébergement de la base
+        (authentification), Neon (hébergement de la base
         de données), Railway (hébergement de l&apos;application), ainsi que
         le ou les fournisseurs d&apos;intelligence artificielle utilisés par
         le coach IA (Anthropic, OpenAI ou Google selon la configuration).

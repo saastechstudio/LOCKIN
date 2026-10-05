@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
-/** Les étapes réelles du rituel d'inscription (/dashboard/rituel-lockin). */
+import { JOIN_HREF } from "@/components/landing/landing-layout";
+
+/** Les étapes réelles du rituel d'inscription (/rejoindre). */
 const STEPS = ["Ta motivation", "Tes objectifs", "Ton sport", "Ta routine"];
 
 export function SectionMotivation() {
@@ -41,7 +43,7 @@ export function SectionMotivation() {
           </ol>
 
           <Link
-            href="/sign-up"
+            href={JOIN_HREF}
             className="mt-10 inline-flex items-center gap-3 bg-camp-charcoal px-8 py-4 text-sm font-medium text-camp-white transition-opacity hover:opacity-85"
           >
             Commencer mon engagement Lockin <ArrowRight className="size-4" strokeWidth={1.5} />

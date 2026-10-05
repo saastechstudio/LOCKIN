@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import { JOIN_HREF } from "@/components/landing/landing-layout";
+
 const ACTIONS = [
   "Fixer tes objectifs",
   "Suivre tes routines",
@@ -32,7 +34,7 @@ export function SectionInside() {
             </div>
           ))}
           <Link
-            href="/sign-up"
+            href={JOIN_HREF}
             className="group flex min-h-28 items-end justify-between sm:min-h-40 bg-camp-charcoal p-8 text-camp-white transition-opacity hover:opacity-90"
           >
             <span className="text-xl font-semibold tracking-tight">Entrer dans le club</span>

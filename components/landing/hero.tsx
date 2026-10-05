@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import { JOIN_HREF } from "@/components/landing/landing-layout";
+
 const PILLARS = [
   "Objectifs personnels",
   "Objectifs professionnels",
@@ -26,7 +28,7 @@ export function Hero() {
 
           <div className="mt-12 flex flex-col gap-6 sm:flex-row sm:items-center">
             <Link
-              href="/sign-up"
+              href={JOIN_HREF}
               className="inline-flex items-center justify-center gap-3 bg-camp-charcoal px-8 py-4 text-sm font-medium text-camp-white transition-opacity hover:opacity-85"
             >
               Entrer dans le club <ArrowRight className="size-4" strokeWidth={1.5} />

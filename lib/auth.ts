@@ -51,15 +51,26 @@ export async function getOrCreateDbUser(): Promise<User> {
 }
 
 /**
- * Porte d'entrée du Lockin Social Club — un membre qui n'a pas encore fait
- * le rituel d'inscription (motivation + objectif + sport + routine) est
- * renvoyé vers /dashboard/rituel-lockin avant de pouvoir voir le feed, un
- * profil, un groupe, l'entraide ou ses messages.
+ * N'accepte qu'un chemin interne ("/..."), jamais "//domaine" ni une URL
+ * absolue : `next` vient de la query string, donc d'une source non fiable.
  */
-export async function requireLockinOnboarded(): Promise<User> {
+export function safeNextPath(next: string | undefined): string | null {
+  if (!next || !next.startsWith("/") || next.startsWith("//") || next.includes("\\")) {
+    return null;
+  }
+  return next;
+}
+
+/**
+ * Porte d'entrée du Lockin Social Club — être "inscrit au club", c'est avoir
+ * fait le rituel d'inscription (motivation + objectif + sport + routine).
+ * Sinon : renvoi vers /rejoindre, avec `next` pour revenir ensuite là où le
+ * membre allait (une réservation de camp, par exemple).
+ */
+export async function requireLockinOnboarded(next?: string): Promise<User> {
   const user = await getOrCreateDbUser();
   if (!user.lockinOnboardingCompletedAt) {
-    redirect("/dashboard/rituel-lockin");
+    redirect(next ? `/rejoindre?next=${encodeURIComponent(next)}` : "/rejoindre");
   }
   return user;
 }

@@ -3,6 +3,13 @@ import Link from "next/link";
 import { Footer } from "@/components/landing/footer";
 
 /**
+ * Entrer dans le club = créer son compte puis faire le rituel (/rejoindre),
+ * comme la landing le promet ; sans ce redirect_url, l'inscription
+ * enverrait vers l'audit coaching (/onboarding).
+ */
+export const JOIN_HREF = "/sign-up?redirect_url=%2Frejoindre";
+
+/**
  * Coque de la landing Lockin Social Club — fond blanc imposé (camp-scope,
  * indépendant du thème clair/sombre du reste du site), en-tête minimal :
  * le logo typographique et deux portes d'entrée, rien d'autre.
@@ -27,7 +34,7 @@ export function LandingLayout({ children }: { children: React.ReactNode }) {
               Connexion
             </Link>
             <Link
-              href="/sign-up"
+              href={JOIN_HREF}
               className="border border-camp-charcoal px-4 py-2 font-medium text-camp-charcoal transition-colors hover:bg-camp-charcoal hover:text-camp-white"
             >
               Entrer

@@ -3,15 +3,12 @@ import { SiteFooter } from "@/components/marketing/site-footer";
 import { PillarsSection } from "@/components/marketing/pillars-section";
 import { Pillars } from "@/components/marketing/pillars";
 import { MethodologySection } from "@/components/marketing/methodology-section";
-import { Pricing } from "@/components/marketing/pricing";
-import { Faq } from "@/components/marketing/faq";
 import { DiscordCta } from "@/components/marketing/discord-cta";
 
 /**
- * L'accompagnement individuel payant (audit, feuille de route, Coach IA,
- * suivi quotidien) — distinct du Lockin Social Club gratuit qui vit sur
- * la page d'accueil. Anciennement sur "/", déplacé ici pour laisser la
- * home entièrement dédiée au Social Club.
+ * La Méthode Lock In (audit, feuille de route, Coach IA, suivi quotidien)
+ * — incluse gratuitement pour chaque membre du club, comme tout le reste :
+ * seuls les Lock-In Camp sont payants.
  */
 export default function MethodePage() {
   return (
@@ -26,16 +23,14 @@ export default function MethodePage() {
             L&apos;accompagnement individuel pour passer au niveau supérieur
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Au-delà du Social Club gratuit, La Méthode Lock In est notre
-            programme de coaching structuré : audit d&apos;entrée, feuille
-            de route personnalisée, Coach IA et suivi quotidien.
+            Incluse gratuitement pour chaque membre du club : audit
+            d&apos;entrée, feuille de route personnalisée, Coach IA et suivi
+            quotidien.
           </p>
         </section>
         <PillarsSection />
         <Pillars />
         <MethodologySection />
-        <Pricing />
-        <Faq />
         <DiscordCta />
       </main>
       <SiteFooter />

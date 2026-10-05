@@ -4,7 +4,9 @@ const isProtectedRoute = createRouteMatcher([
   "/dashboard(.*)",
   "/onboarding(.*)",
   "/api/audit(.*)",
-  "/subscribe(.*)",
+  "/rejoindre(.*)",
+  // La page /camp reste publique ; réserver exige un compte membre.
+  "/camp/(.*)/reserver(.*)",
 ]);
 
 export default clerkMiddleware(async (auth, req) => {
