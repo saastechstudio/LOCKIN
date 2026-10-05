@@ -9,6 +9,7 @@ import { businessOffers } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { moderateOrThrow } from "@/lib/moderation/enforce";
 import { BUSINESS_KINDS } from "@/lib/business-data";
+import { enforceRateLimit } from "@/lib/rate-limit";
 
 /** Mode Business : annonces entre membres — offres, recherches, partenariats. */
 export async function getBusinessOffers(kind?: string) {
@@ -34,6 +35,7 @@ const offerSchema = z.object({
 export async function createBusinessOffer(input: z.infer<typeof offerSchema>) {
   const me = await getOrCreateDbUser();
   const parsed = offerSchema.parse(input);
+  enforceRateLimit("businessOffer", me.id);
   await moderateOrThrow(me, `${parsed.title}\n${parsed.body}`);
 
   await db.insert(businessOffers).values({

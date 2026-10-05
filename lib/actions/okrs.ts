@@ -44,6 +44,9 @@ export async function createOkr(formData: FormData) {
 
 export async function updateOkrProgress(okrId: number, currentValue: number) {
   const user = await getOrCreateDbUser();
+  if (!Number.isFinite(currentValue) || currentValue < 0 || currentValue > 1e9) {
+    throw new Error("Valeur invalide");
+  }
 
   const okr = await db.query.okrs.findFirst({
     where: and(eq(okrs.id, okrId), eq(okrs.userId, user.id)),

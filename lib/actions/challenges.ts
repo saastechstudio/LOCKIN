@@ -7,6 +7,7 @@ import { db } from "@/lib/db";
 import { challengeCheckins, challengeParticipants, challenges } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { CHALLENGES_SEED, challengeDayIndex, startOfDay } from "@/lib/challenges-data";
+import { assertClubMember } from "@/lib/moderation/enforce";
 
 async function seedChallenges() {
   for (const seed of CHALLENGES_SEED) {
@@ -116,6 +117,7 @@ export async function getChallenge(slug: string) {
 /** Rejoindre = jour 1 aujourd'hui. Rejoindre à nouveau un challenge fini le relance de zéro. */
 export async function joinChallenge(challengeId: number) {
   const me = await getOrCreateDbUser();
+  assertClubMember(me);
   const challenge = await db.query.challenges.findFirst({ where: eq(challenges.id, challengeId) });
   if (!challenge) throw new Error("Challenge introuvable.");
 
@@ -147,6 +149,7 @@ export async function leaveChallenge(challengeId: number) {
 /** Valider sa journée : une seule fois par jour, et seulement pendant la durée du challenge. */
 export async function checkInChallenge(challengeId: number) {
   const me = await getOrCreateDbUser();
+  assertClubMember(me);
   const participant = await db.query.challengeParticipants.findFirst({
     where: and(eq(challengeParticipants.challengeId, challengeId), eq(challengeParticipants.userId, me.id)),
     with: { challenge: { columns: { slug: true, durationDays: true } } },

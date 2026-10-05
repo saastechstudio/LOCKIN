@@ -8,6 +8,8 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { users, goals, routineItems, type ProfileLink } from "@/lib/db/schema";
 import { getOrCreateDbUser, getDbUserOrNull } from "@/lib/auth";
+import { moderateOrThrow } from "@/lib/moderation/enforce";
+import { isHttpsUrl } from "@/lib/safe-url";
 
 /**
  * Profil public Lockin Social Club. `viewerIsOwner` dit si l'appelant peut
@@ -51,7 +53,8 @@ export async function getSocialProfile(userId: number) {
 
 const linkSchema = z.object({
   label: z.string().trim().min(1).max(40),
-  url: z.string().trim().url().max(300),
+  // https uniquement : un lien « javascript: » ou « data: » sur un profil public serait une faille XSS.
+  url: z.string().trim().max(300).refine(isHttpsUrl, "Le lien doit commencer par https://"),
 });
 
 const updateSchema = z.object({
@@ -68,6 +71,11 @@ export type UpdateSocialProfileInput = z.infer<typeof updateSchema>;
 export async function updateSocialProfile(input: UpdateSocialProfileInput) {
   const user = await getOrCreateDbUser();
   const parsed = updateSchema.parse(input);
+  // Le profil est public : bio et libellés de liens passent par le même filtre que le feed.
+  await moderateOrThrow(
+    user,
+    [parsed.bio, parsed.city, parsed.sector, ...parsed.links.map((l) => l.label)].filter(Boolean).join("\n"),
+  );
 
   await db
     .update(users)

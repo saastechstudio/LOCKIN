@@ -8,7 +8,8 @@ import { db } from "@/lib/db";
 import { helpAnswers, helpQuestions, helpUpvotes } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { LOCKIN_TAGS } from "@/lib/social/data";
-import { moderateOrThrow } from "@/lib/moderation/enforce";
+import { assertClubMember, moderateOrThrow } from "@/lib/moderation/enforce";
+import { enforceRateLimit } from "@/lib/rate-limit";
 
 export async function getQuestions(tag?: string) {
   const rows = await db.query.helpQuestions.findMany({
@@ -76,6 +77,7 @@ const createQuestionSchema = z.object({
 export async function createQuestion(input: z.infer<typeof createQuestionSchema>) {
   const user = await getOrCreateDbUser();
   const parsed = createQuestionSchema.parse(input);
+  enforceRateLimit("question", user.id);
   await moderateOrThrow(user, `${parsed.title}\n${parsed.body}`);
 
   const [question] = await db
@@ -95,7 +97,13 @@ const addAnswerSchema = z.object({
 export async function addAnswer(input: z.infer<typeof addAnswerSchema>) {
   const user = await getOrCreateDbUser();
   const parsed = addAnswerSchema.parse(input);
+  enforceRateLimit("answer", user.id);
   await moderateOrThrow(user, parsed.body);
+  const question = await db.query.helpQuestions.findFirst({
+    columns: { id: true },
+    where: eq(helpQuestions.id, parsed.questionId),
+  });
+  if (!question) throw new Error("Cette question n'existe plus.");
 
   await db.insert(helpAnswers).values({
     questionId: parsed.questionId,
@@ -109,6 +117,8 @@ export async function addAnswer(input: z.infer<typeof addAnswerSchema>) {
 /** « Utile » : on signale qu'une réponse aide, sans compteur public. Pas sur ses propres réponses. */
 export async function toggleUseful(answerId: number, questionId: number) {
   const user = await getOrCreateDbUser();
+  assertClubMember(user);
+  enforceRateLimit("reaction", user.id);
 
   const answer = await db.query.helpAnswers.findFirst({
     columns: { userId: true, questionId: true },

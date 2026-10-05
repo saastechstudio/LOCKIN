@@ -1,3 +1,4 @@
+import { createHash, timingSafeEqual } from "node:crypto";
 import { NextResponse } from "next/server";
 import { desc } from "drizzle-orm";
 
@@ -27,8 +28,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "CRON_SECRET is not set" }, { status: 503 });
   }
 
-  const authHeader = req.headers.get("authorization");
-  if (authHeader !== `Bearer ${cronSecret}`) {
+  // Comparaison en temps constant (sur des empreintes de même longueur) :
+  // le temps de réponse ne révèle rien du secret.
+  const digest = (value: string) => createHash("sha256").update(value).digest();
+  const authHeader = req.headers.get("authorization") ?? "";
+  if (!timingSafeEqual(digest(authHeader), digest(`Bearer ${cronSecret}`))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

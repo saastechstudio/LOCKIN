@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { z } from "zod";
 
 import { db } from "@/lib/db";
@@ -16,6 +16,7 @@ import {
 } from "@/lib/db/schema";
 import { getOrCreateDbUser, requireAdmin } from "@/lib/auth";
 import { applyStrike } from "@/lib/moderation/enforce";
+import { enforceRateLimit } from "@/lib/rate-limit";
 
 const ADMIN_PATH = "/dashboard/admin/moderation";
 
@@ -72,9 +73,34 @@ export async function reportContent(input: z.infer<typeof reportSchema>) {
   const reporter = await getOrCreateDbUser();
   const parsed = reportSchema.parse(input);
 
+  enforceRateLimit("report", reporter.id);
+
+  // Un message privé ne se signale que par son destinataire : sinon, en
+  // devinant des identifiants, on ferait lire à la modération des
+  // conversations auxquelles on n'appartient pas.
+  if (parsed.targetType === "message") {
+    const message = await db.query.messages.findFirst({
+      where: eq(messages.id, parsed.targetId),
+      columns: { recipientId: true },
+    });
+    if (!message || message.recipientId !== reporter.id) throw new Error("Ce contenu n'existe plus.");
+  }
+
   const reportedUserId = await resolveContentAuthor(parsed.targetType, parsed.targetId);
   if (!reportedUserId) throw new Error("Ce contenu n'existe plus.");
   if (reportedUserId === reporter.id) throw new Error("Tu ne peux pas te signaler toi-même.");
+
+  // Un seul signalement en attente par membre et par contenu.
+  const duplicate = await db.query.moderationReports.findFirst({
+    columns: { id: true },
+    where: and(
+      eq(moderationReports.reporterId, reporter.id),
+      eq(moderationReports.targetType, parsed.targetType),
+      eq(moderationReports.targetId, parsed.targetId),
+      eq(moderationReports.status, "pending"),
+    ),
+  });
+  if (duplicate) return { ok: true as const };
 
   await db.insert(moderationReports).values({
     reporterId: reporter.id,

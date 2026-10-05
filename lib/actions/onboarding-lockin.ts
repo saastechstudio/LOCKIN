@@ -1,12 +1,13 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { eq } from "drizzle-orm";
+import { and, eq, isNull } from "drizzle-orm";
 import { z } from "zod";
 
 import { db } from "@/lib/db";
 import { goals, posts, routineItems, users } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
+import { moderateOrThrow } from "@/lib/moderation/enforce";
 import {
   GOAL_DOMAINS,
   LOCKIN_TAGS,
@@ -44,9 +45,32 @@ export async function completeLockinOnboarding(input: CompleteLockinOnboardingIn
   }
 
   const parsed = completeOnboardingSchema.parse(input);
+  // La motivation devient un post public : même filtrage que le feed.
+  await moderateOrThrow(
+    user,
+    [parsed.motivation, parsed.subGoal, parsed.morningRoutine, parsed.eveningRoutine]
+      .filter(Boolean)
+      .join("\n"),
+    {
+      allowNonMember: true,
+    },
+  );
   const sport = SPORT_ACTIVITIES.find((s) => s.id === parsed.mainSport);
   const isProfessional = PROFESSIONAL_GOAL_DOMAINS.includes(parsed.goalDomain);
   const tag = LOCKIN_TAGS.includes(parsed.goalDomain) ? parsed.goalDomain : "Discipline";
+
+  // On « réserve » le rituel d'abord : un double envoi (double clic, deux
+  // onglets) ne crée qu'un seul objectif, une seule routine, un seul post.
+  const [claimed] = await db
+    .update(users)
+    .set({
+      mainSport: parsed.mainSport,
+      motivationInitiale: parsed.motivation,
+      lockinOnboardingCompletedAt: new Date(),
+    })
+    .where(and(eq(users.id, user.id), isNull(users.lockinOnboardingCompletedAt)))
+    .returning({ id: users.id });
+  if (!claimed) return { ok: true as const };
 
   await db.insert(goals).values({
     userId: user.id,
@@ -68,14 +92,6 @@ export async function completeLockinOnboarding(input: CompleteLockinOnboardingIn
     sport: sport?.id,
   });
 
-  await db
-    .update(users)
-    .set({
-      mainSport: parsed.mainSport,
-      motivationInitiale: parsed.motivation,
-      lockinOnboardingCompletedAt: new Date(),
-    })
-    .where(eq(users.id, user.id));
 
   revalidatePath("/dashboard/feed");
   revalidatePath("/dashboard/profil");

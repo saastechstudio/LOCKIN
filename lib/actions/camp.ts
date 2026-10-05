@@ -14,7 +14,10 @@ import {
   EXCURSIONS_TO_CHOOSE,
   EXCURSIONS,
   FUN_ACTIVITIES,
+  SPORT_ACTIVITIES,
+  sessionDurationDays,
 } from "@/lib/camp/data";
+import { enforceRateLimit } from "@/lib/rate-limit";
 
 export type CampSessionWithAvailability = {
   id: number;
@@ -101,14 +104,16 @@ async function withAvailability(session: {
 }
 
 const sportChoiceSchema = z.object({
-  day: z.number().int().min(1),
-  activityId: z.string().min(1),
+  day: z.number().int().min(1).max(60),
+  activityId: z
+    .string()
+    .refine((id) => SPORT_ACTIVITIES.some((s) => s.id === id), "Sport inconnu"),
 });
 
 const createRegistrationSchema = z.object({
   sessionId: z.number().int(),
-  fullName: z.string().min(2).max(140),
-  sportChoices: z.array(sportChoiceSchema),
+  fullName: z.string().trim().min(2).max(140),
+  sportChoices: z.array(sportChoiceSchema).max(60),
   excursionChoices: z
     .array(z.string())
     .length(EXCURSIONS_TO_CHOOSE)
@@ -144,12 +149,31 @@ export async function createCampRegistration(input: CreateCampRegistrationInput)
   if (!user.lockinOnboardingCompletedAt) {
     throw new Error("Les Lock-In Camp sont réservés aux membres du Lockin Social Club.");
   }
+  enforceRateLimit("camp", user.id);
   const parsed = createRegistrationSchema.parse(input);
 
   const session = await db.query.campSessions.findFirst({
     where: eq(campSessions.id, parsed.sessionId),
   });
   if (!session) throw new Error("Session introuvable");
+
+  // Un choix de sport par jour du séjour, pas plus, et chaque jour une seule fois.
+  const days = sessionDurationDays(session.startDate, session.endDate);
+  const seenDays = new Set<number>();
+  for (const choice of parsed.sportChoices) {
+    if (choice.day > days || seenDays.has(choice.day)) throw new Error("Choix de sports invalide.");
+    seenDays.add(choice.day);
+  }
+
+  // Places limitées : une nouvelle réservation n'entre que s'il reste de la place.
+  const alreadyBooked = await db.query.campRegistrations.findFirst({
+    columns: { id: true },
+    where: and(eq(campRegistrations.sessionId, session.id), eq(campRegistrations.email, user.email)),
+  });
+  if (!alreadyBooked) {
+    const { remainingSpots } = await withAvailability(session);
+    if (remainingSpots <= 0) throw new Error("Cette session est complète.");
+  }
 
   const [registration] = await db
     .insert(campRegistrations)
