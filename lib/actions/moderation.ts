@@ -6,6 +6,7 @@ import { z } from "zod";
 
 import { db } from "@/lib/db";
 import {
+  businessOffers,
   helpAnswers,
   messages,
   moderationEvents,
@@ -19,7 +20,7 @@ import { applyStrike } from "@/lib/moderation/enforce";
 const ADMIN_PATH = "/dashboard/admin/moderation";
 
 const reportSchema = z.object({
-  targetType: z.enum(["post", "comment", "message", "help_answer"]),
+  targetType: z.enum(["post", "comment", "message", "help_answer", "business_offer"]),
   targetId: z.number().int(),
   reason: z.enum(["insulte", "harcelement", "discrimination", "spam", "autre"]),
   details: z.string().trim().max(500).optional(),
@@ -52,6 +53,13 @@ async function resolveContentAuthor(
     case "help_answer": {
       const row = await db.query.helpAnswers.findFirst({
         where: eq(helpAnswers.id, targetId),
+        columns: { userId: true },
+      });
+      return row?.userId ?? null;
+    }
+    case "business_offer": {
+      const row = await db.query.businessOffers.findFirst({
+        where: eq(businessOffers.id, targetId),
         columns: { userId: true },
       });
       return row?.userId ?? null;
@@ -123,6 +131,9 @@ async function deleteReportedContent(
       return;
     case "help_answer":
       await db.delete(helpAnswers).where(eq(helpAnswers.id, targetId));
+      return;
+    case "business_offer":
+      await db.delete(businessOffers).where(eq(businessOffers.id, targetId));
   }
 }
 

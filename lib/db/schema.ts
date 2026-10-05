@@ -124,6 +124,7 @@ export const reportTargetTypeEnum = pgEnum("report_target_type", [
   "comment",
   "message",
   "help_answer",
+  "business_offer",
 ]);
 
 export const reportReasonEnum = pgEnum("report_reason", [
@@ -189,6 +190,10 @@ export const users = pgTable("users", {
   suspendedUntil: timestamp("suspended_until", { mode: "date" }),
   bannedAt: timestamp("banned_at", { mode: "date" }),
   isAdmin: boolean("is_admin").notNull().default(false),
+  // Mode Mentor : un membre se déclare disponible pour guider dans ses domaines.
+  isMentor: boolean("is_mentor").notNull().default(false),
+  mentorDomains: jsonb("mentor_domains").$type<string[]>().notNull().default([]),
+  mentorPitch: text("mentor_pitch"),
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
@@ -549,6 +554,67 @@ export const moderationEvents = pgTable("moderation_events", {
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
+// ---------------------------------------------------------------------------
+// Challenges (7 ou 30 jours), Mode Business — tables additives.
+// ---------------------------------------------------------------------------
+
+/** Catalogue fixe de challenges, amorcé de façon idempotente (slug unique). */
+export const challenges = pgTable("challenges", {
+  id: serial("id").primaryKey(),
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  durationDays: integer("duration_days").notNull(),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const challengeParticipants = pgTable(
+  "challenge_participants",
+  {
+    id: serial("id").primaryKey(),
+    challengeId: integer("challenge_id")
+      .notNull()
+      .references(() => challenges.id, { onDelete: "cascade" }),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    /** Jour 1 du challenge pour ce membre (minuit, heure serveur). */
+    startedOn: timestamp("started_on", { mode: "date" }).notNull(),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("challenge_participants_challenge_user_idx").on(table.challengeId, table.userId),
+  ],
+);
+
+/** Une validation par jour et par participation. */
+export const challengeCheckins = pgTable(
+  "challenge_checkins",
+  {
+    id: serial("id").primaryKey(),
+    participantId: integer("participant_id")
+      .notNull()
+      .references(() => challengeParticipants.id, { onDelete: "cascade" }),
+    day: timestamp("day", { mode: "date" }).notNull(),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("challenge_checkins_participant_day_idx").on(table.participantId, table.day)],
+);
+
+/** Mode Business : offres, recherches et partenariats entre membres, modérés. */
+export const businessOffers = pgTable("business_offers", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  /** "offre" | "recherche" | "partenariat" — validé par zod côté action. */
+  kind: text("kind").notNull(),
+  title: text("title").notNull(),
+  body: text("body").notNull(),
+  location: text("location"),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
 export const moderationReports = pgTable("moderation_reports", {
   id: serial("id").primaryKey(),
   reporterId: integer("reporter_id")
@@ -682,6 +748,30 @@ export const helpUpvotesRelations = relations(helpUpvotes, ({ one }) => ({
   user: one(users, { fields: [helpUpvotes.userId], references: [users.id] }),
 }));
 
+export const challengesRelations = relations(challenges, ({ many }) => ({
+  participants: many(challengeParticipants),
+}));
+
+export const challengeParticipantsRelations = relations(challengeParticipants, ({ one, many }) => ({
+  challenge: one(challenges, {
+    fields: [challengeParticipants.challengeId],
+    references: [challenges.id],
+  }),
+  user: one(users, { fields: [challengeParticipants.userId], references: [users.id] }),
+  checkins: many(challengeCheckins),
+}));
+
+export const challengeCheckinsRelations = relations(challengeCheckins, ({ one }) => ({
+  participant: one(challengeParticipants, {
+    fields: [challengeCheckins.participantId],
+    references: [challengeParticipants.id],
+  }),
+}));
+
+export const businessOffersRelations = relations(businessOffers, ({ one }) => ({
+  user: one(users, { fields: [businessOffers.userId], references: [users.id] }),
+}));
+
 export const campSessionsRelations = relations(campSessions, ({ many }) => ({
   registrations: many(campRegistrations),
 }));
@@ -778,3 +868,6 @@ export type ModerationEvent = typeof moderationEvents.$inferSelect;
 export type NewModerationEvent = typeof moderationEvents.$inferInsert;
 export type ModerationReport = typeof moderationReports.$inferSelect;
 export type NewModerationReport = typeof moderationReports.$inferInsert;
+
+export type Challenge = typeof challenges.$inferSelect;
+export type BusinessOffer = typeof businessOffers.$inferSelect;

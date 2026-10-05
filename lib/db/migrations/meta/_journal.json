@@ -113,6 +113,13 @@
       "when": 1791182203110,
       "tag": "0015_new_the_initiative",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "7",
+      "when": 1791182416865,
+      "tag": "0016_daily_vermin",
+      "breakpoints": true
     }
   ]
 }

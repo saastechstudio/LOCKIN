@@ -1,6 +1,9 @@
 import {
   BrainCircuit,
+  Briefcase,
   Building2,
+  ChartColumn,
+  GraduationCap,
   CalendarCheck,
   LayoutGrid,
   LifeBuoy,
@@ -10,6 +13,7 @@ import {
   Rows3,
   Settings,
   SquareUser,
+  Swords,
   Target,
   type LucideIcon,
 } from "lucide-react";
@@ -44,7 +48,9 @@ export const DASHBOARD_NAV_GROUPS: DashboardNavGroup[] = [
   {
     label: "Discipline",
     items: [
-      { href: "/dashboard/objectifs", label: "Objectifs", icon: Target },
+      { href: "/dashboard/objectifs", label: "Objectifs & routines", icon: Target },
+      { href: "/dashboard/progression", label: "Progression", icon: ChartColumn },
+      { href: "/dashboard/challenges", label: "Challenges", icon: Swords },
       { href: "/dashboard/planning", label: "Planning", icon: CalendarCheck },
       { href: "/dashboard/coach", label: "Coach IA", icon: BrainCircuit },
     ],
@@ -52,6 +58,8 @@ export const DASHBOARD_NAV_GROUPS: DashboardNavGroup[] = [
   {
     label: "Réseau",
     items: [
+      { href: "/dashboard/mentors", label: "Mentors", icon: GraduationCap },
+      { href: "/dashboard/business", label: "Business", icon: Briefcase },
       { href: "/dashboard/network", label: "Réseau", icon: Network },
       { href: "/camp", label: "Lock-In Camp", icon: Plane },
     ],
