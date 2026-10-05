@@ -22,17 +22,17 @@ export function ConfirmationScreen({ data }: ConfirmationScreenProps) {
       label: "Objectif 30 jours",
       value: [data.goalDomain, data.subGoal].filter(Boolean).join(" · ") || "—",
     },
-    { label: "Sport principal", value: sport ? `${sport.emoji} ${sport.name}` : "—" },
+    { label: "Sport principal", value: sport?.name ?? "—" },
     { label: "Routine matin", value: data.morningRoutine ?? "—" },
     { label: "Routine soir", value: data.eveningRoutine ?? "—" },
   ];
 
   return (
     <div>
-      <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
         Écran 05 — Confirmation
       </p>
-      <h1 className="font-display mt-3 text-2xl font-bold text-camp-charcoal uppercase sm:text-3xl">
+      <h1 className="font-display mt-3 text-3xl text-lk-black sm:text-4xl sm:text-3xl">
         Ton rituel Lockin
       </h1>
       <p className="mt-2 text-sm text-camp-charcoal/60">
@@ -44,7 +44,7 @@ export function ConfirmationScreen({ data }: ConfirmationScreenProps) {
       <dl className="mt-6 divide-y divide-camp-hairline border border-camp-hairline">
         {rows.map((row) => (
           <div key={row.label} className="flex flex-col gap-1 px-4 py-3.5 sm:flex-row sm:items-start sm:justify-between">
-            <dt className="font-mono text-[11px] font-bold tracking-[0.08em] text-camp-charcoal/50 uppercase">
+            <dt className="text-[11px] font-semibold tracking-[0.08em] text-camp-charcoal/50 uppercase">
               {row.label}
             </dt>
             <dd className="text-sm text-camp-charcoal sm:max-w-[60%] sm:text-right">{row.value}</dd>

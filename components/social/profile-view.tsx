@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { MapPin, Briefcase } from "lucide-react";
 
-import { cn } from "@/lib/utils";
-import { LOCKIN_LEVELS } from "@/lib/social/data";
+import { LockIcon } from "@/components/lockin/lock-icon";
+import { LEVEL_MAX, levelName } from "@/lib/lockin-level";
 import type { Goal, ProfileLink, RoutineItem } from "@/lib/db/schema";
 
 type ProfileViewProps = {
@@ -31,9 +31,9 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col gap-5 border-b-2 border-camp-charcoal pb-6 sm:flex-row sm:items-start sm:justify-between">
+      <div className="flex flex-col gap-5 border-b border-lk-black pb-8 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-start gap-4">
-          <div className="flex size-16 shrink-0 items-center justify-center border border-camp-hairline bg-camp-cream font-mono text-xl font-bold text-camp-charcoal">
+          <div className="flex size-16 shrink-0 items-center justify-center border border-camp-hairline bg-camp-cream text-xl font-bold text-camp-charcoal">
             {profile.avatarUrl ? (
               // eslint-disable-next-line @next/next/no-img-element -- avatar Clerk externe, cf. components/ui/avatar.tsx
               <img src={profile.avatarUrl} alt="" className="size-full object-cover" />
@@ -42,13 +42,13 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
             )}
           </div>
           <div>
-            <h1 className="font-display text-2xl font-bold text-camp-charcoal uppercase">
+            <h1 className="font-display text-3xl text-lk-black">
               {profile.name ?? "Membre Lockin"}
             </h1>
             {profile.bio ? (
               <p className="mt-1 max-w-md text-sm text-camp-charcoal/70">{profile.bio}</p>
             ) : null}
-            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 font-mono text-xs text-camp-charcoal/60">
+            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-lk-black/60">
               {profile.city || profile.country ? (
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="size-3.5" />
@@ -65,20 +65,18 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
           </div>
         </div>
 
-        <div className="shrink-0 text-left sm:text-right">
-          <p className="font-mono text-[11px] font-bold tracking-[0.15em] text-camp-charcoal/50 uppercase">
-            Niveau Lockin
-          </p>
-          <div className="mt-1 flex gap-1 sm:justify-end">
-            {LOCKIN_LEVELS.map((n) => (
-              <span
-                key={n}
-                className={cn(
-                  "size-3 border border-camp-charcoal",
-                  n <= profile.lockinLevel ? "bg-camp-gold" : "bg-camp-white",
-                )}
-              />
-            ))}
+        <div className="flex shrink-0 items-center gap-4 border border-lk-black px-5 py-4">
+          <LockIcon
+            level={profile.lockinLevel}
+            max={LEVEL_MAX}
+            className="h-12 w-9"
+            title={`Niveau ${profile.lockinLevel} sur ${LEVEL_MAX}`}
+          />
+          <div>
+            <p className="text-[10px] font-semibold tracking-[0.2em] text-lk-black/50 uppercase">
+              Niveau {profile.lockinLevel}/{LEVEL_MAX}
+            </p>
+            <p className="font-display text-lg text-lk-black">{levelName(profile.lockinLevel)}</p>
           </div>
         </div>
       </div>
@@ -91,7 +89,7 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
               href={l.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-camp-hairline px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal uppercase hover:border-camp-charcoal"
+              className="border border-camp-hairline px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase hover:border-camp-charcoal"
             >
               {l.label}
             </a>
@@ -111,7 +109,7 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
 
       <Link
         href="/dashboard/objectifs"
-        className="inline-block font-mono text-xs font-bold text-camp-charcoal/60 uppercase underline-offset-4 hover:text-camp-charcoal hover:underline"
+        className="inline-block text-xs font-bold text-camp-charcoal/60 uppercase underline-offset-4 hover:text-camp-charcoal hover:underline"
       >
         Gérer dans le module Objectifs →
       </Link>
@@ -122,7 +120,7 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
 function GoalColumn({ title, goals }: { title: string; goals: Goal[] }) {
   return (
     <div>
-      <p className="font-mono text-[11px] font-bold tracking-[0.15em] text-camp-gold uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-gold uppercase">
         {title}
       </p>
       {goals.length === 0 ? (
@@ -133,10 +131,10 @@ function GoalColumn({ title, goals }: { title: string; goals: Goal[] }) {
             <li key={g.id} className="border-t border-camp-hairline pt-2 first:border-t-0 first:pt-0">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-camp-charcoal">{g.title}</span>
-                <span className="font-mono text-xs text-camp-charcoal/50">{g.progress}%</span>
+                <span className="text-xs text-camp-charcoal/50">{g.progress}%</span>
               </div>
               {g.horizonDays ? (
-                <span className="font-mono text-[10px] text-camp-charcoal/40 uppercase">
+                <span className="text-[10px] text-camp-charcoal/40 uppercase">
                   {g.horizonDays} jours
                 </span>
               ) : null}
@@ -151,7 +149,7 @@ function GoalColumn({ title, goals }: { title: string; goals: Goal[] }) {
 function RoutineColumn({ title, items }: { title: string; items: RoutineItem[] }) {
   return (
     <div>
-      <p className="font-mono text-[11px] font-bold tracking-[0.15em] text-camp-gold uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-gold uppercase">
         {title}
       </p>
       {items.length === 0 ? (

@@ -93,7 +93,7 @@ export function LockinOnboardingWizard({ next }: { next: string }) {
       <div className="mx-auto max-w-xl">
         <div className="mb-8 flex items-center justify-between">
           <Logo size="sm" href={null} />
-          <span className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal/50 uppercase">
+          <span className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal/50 uppercase">
             0{step + 1} / 0{STEP_LABELS.length}
           </span>
         </div>
@@ -147,7 +147,7 @@ export function LockinOnboardingWizard({ next }: { next: string }) {
             onClick={goBack}
             disabled={step === 0 || isPending}
             className={cn(
-              "inline-flex items-center gap-1.5 font-mono text-xs font-bold tracking-[0.08em] uppercase",
+              "inline-flex items-center gap-1.5 text-xs font-semibold tracking-[0.08em] uppercase",
               step === 0 ? "pointer-events-none opacity-0" : "text-camp-charcoal/60 hover:text-camp-charcoal",
             )}
           >
@@ -159,7 +159,7 @@ export function LockinOnboardingWizard({ next }: { next: string }) {
               type="button"
               onClick={goNext}
               disabled={!canAdvance}
-              className="inline-flex items-center gap-2 border-2 border-camp-charcoal bg-camp-charcoal px-6 py-3 font-mono text-xs font-bold tracking-[0.08em] text-camp-white uppercase disabled:opacity-30"
+              className="inline-flex items-center gap-2 border border-camp-charcoal bg-camp-charcoal px-6 py-3 text-xs font-semibold tracking-[0.08em] text-camp-white uppercase disabled:opacity-30"
             >
               Suivant <ArrowRight className="size-3.5" />
             </button>
@@ -168,7 +168,7 @@ export function LockinOnboardingWizard({ next }: { next: string }) {
               type="button"
               onClick={handleSubmit}
               disabled={isPending}
-              className="inline-flex items-center gap-2 border-2 border-camp-charcoal bg-camp-gold px-6 py-3 font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+              className="inline-flex items-center gap-2 border border-camp-charcoal bg-camp-gold px-6 py-3 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
             >
               {isPending ? "Création…" : "Entrer dans le Lockin Social Club"}
             </button>

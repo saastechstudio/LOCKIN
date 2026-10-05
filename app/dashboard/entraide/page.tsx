@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
-import { MessageCircle } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 
 import { requireLockinOnboarded } from "@/lib/auth";
 import { getQuestions } from "@/lib/actions/help";
@@ -21,12 +21,12 @@ export default async function EntraidePage({
   const questions = await getQuestions(tag);
 
   return (
-    <div className="camp-scope -m-4 min-h-[calc(100vh-5rem)] border border-camp-hairline p-6 sm:-m-6 sm:p-8">
+    <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
-        <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
           Lockin Social Club
         </p>
-        <h1 className="font-display mb-1 text-2xl font-bold text-camp-charcoal uppercase">
+        <h1 className="font-display mb-1 text-3xl text-lk-black sm:text-4xl">
           Entraide
         </h1>
         <p className="mb-6 text-sm text-camp-charcoal/60">
@@ -48,7 +48,7 @@ export default async function EntraidePage({
 
         <div className="divide-y divide-camp-hairline">
           {questions.length === 0 ? (
-            <p className="py-10 text-center font-mono text-xs text-camp-charcoal/50 uppercase">
+            <p className="py-10 text-center text-xs text-camp-charcoal/50 uppercase">
               Aucune question pour l&apos;instant.
             </p>
           ) : (
@@ -63,18 +63,23 @@ export default async function EntraidePage({
                   {q.tags.map((t) => (
                     <span
                       key={t}
-                      className="font-mono text-[10px] font-bold tracking-[0.06em] text-camp-gold uppercase"
+                      className="text-[10px] font-semibold tracking-[0.06em] text-camp-gold uppercase"
                     >
                       {t}
                     </span>
                   ))}
-                  <span className="font-mono text-[11px] text-camp-charcoal/40">
+                  <span className="text-[11px] text-camp-charcoal/40">
                     {q.user.name ?? "Membre Lockin"} ·{" "}
                     {formatDistanceToNow(q.createdAt, { addSuffix: true, locale: fr })}
                   </span>
-                  <span className="inline-flex items-center gap-1 font-mono text-[11px] text-camp-charcoal/40">
-                    <MessageCircle className="size-3.5" /> {q.answerCount}
+                  <span className="inline-flex items-center gap-1 text-[11px] text-camp-charcoal/40">
+                    <MessageSquare className="size-3.5" /> {q.answerCount}
                   </span>
+                  {q.acceptedAnswerId ? (
+                    <span className="text-[10px] font-semibold tracking-[0.2em] text-lk-gold uppercase">
+                      Résolue
+                    </span>
+                  ) : null}
                 </div>
               </Link>
             ))
@@ -98,7 +103,7 @@ function FilterPill({
     <Link
       href={href}
       className={cn(
-        "border px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] uppercase transition-colors",
+        "border px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] uppercase transition-colors",
         active
           ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
           : "border-camp-hairline text-camp-charcoal/70 hover:border-camp-charcoal hover:text-camp-charcoal",

@@ -16,6 +16,7 @@ import { CoachRecommendations } from "@/components/dashboard/coach-recommendatio
 import { ModulesGrid } from "@/components/dashboard/modules-grid";
 import { AppHero } from "@/components/dashboard/app-hero";
 import { getTodayFocus } from "@/lib/actions/daily-focus";
+import { disciplineScore } from "@/lib/lockin-level";
 
 function average(values: number[]): number {
   if (values.length === 0) return 0;
@@ -54,7 +55,7 @@ export default async function DashboardPage() {
   const disciplineRatings = recentFocus
     .map((f) => f.disciplineRating)
     .filter((v): v is number => v !== null);
-  const discipline = Math.round(average(disciplineRatings) * 10); // 1–10 -> %
+  const discipline = disciplineScore(disciplineRatings);
   const motivation =
     recentFocus.length === 0
       ? 0

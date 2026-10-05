@@ -95,7 +95,7 @@ export function PostComposer({ groupId, placeholder = "Quoi de neuf ?" }: PostCo
         <select
           value={tag}
           onChange={(e) => setTag(e.target.value)}
-          className="border border-camp-hairline bg-camp-white px-2.5 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal uppercase outline-none"
+          className="border border-camp-hairline bg-camp-white px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase outline-none"
         >
           <option value="">Tag</option>
           {LOCKIN_TAGS.map((t) => (
@@ -108,7 +108,7 @@ export function PostComposer({ groupId, placeholder = "Quoi de neuf ?" }: PostCo
         <select
           value={sport}
           onChange={(e) => setSport(e.target.value)}
-          className="border border-camp-hairline bg-camp-white px-2.5 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal uppercase outline-none"
+          className="border border-camp-hairline bg-camp-white px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase outline-none"
         >
           <option value="">Sport</option>
           {SPORT_ACTIVITIES.map((s) => (
@@ -122,13 +122,13 @@ export function PostComposer({ groupId, placeholder = "Quoi de neuf ?" }: PostCo
           value={country}
           onChange={(e) => setCountry(e.target.value)}
           placeholder="Pays"
-          className="w-28 border border-camp-hairline bg-camp-white px-2.5 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal uppercase outline-none placeholder:text-camp-charcoal/40"
+          className="w-28 border border-camp-hairline bg-camp-white px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase outline-none placeholder:text-camp-charcoal/40"
         />
 
         <button
           type="button"
           onClick={() => setShowImageField((s) => !s)}
-          className="border border-camp-hairline px-2.5 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal/70 uppercase hover:text-camp-charcoal"
+          className="border border-camp-hairline px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal/70 uppercase hover:text-camp-charcoal"
         >
           + Image
         </button>
@@ -137,7 +137,7 @@ export function PostComposer({ groupId, placeholder = "Quoi de neuf ?" }: PostCo
           type="button"
           onClick={handleSubmit}
           disabled={isPending || !content.trim()}
-          className="ml-auto border-2 border-camp-charcoal bg-camp-gold px-5 py-1.5 font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          className="ml-auto border border-camp-charcoal bg-camp-gold px-5 py-1.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
         >
           Publier
         </button>

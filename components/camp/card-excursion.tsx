@@ -25,7 +25,6 @@ export function CardExcursion({ excursion, selected, disabled, onToggle }: CardE
           : "border-camp-hairline bg-camp-white text-camp-charcoal hover:border-camp-charcoal",
       )}
     >
-      <span className="text-xl">{excursion.emoji}</span>
       <span className="flex-1 font-mono text-xs font-bold tracking-[0.04em] uppercase">
         {excursion.name}
       </span>

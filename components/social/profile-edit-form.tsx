@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { updateSocialProfile } from "@/lib/actions/social-profile";
-import { LOCKIN_LEVELS, SPORT_ACTIVITIES } from "@/lib/social/data";
+import { SPORT_ACTIVITIES } from "@/lib/social/data";
 import type { ProfileLink } from "@/lib/db/schema";
 
 type ProfileEditFormProps = {
@@ -31,7 +31,6 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
   const [city, setCity] = useState(initial.city ?? "");
   const [sector, setSector] = useState(initial.sector ?? "");
   const [mainSport, setMainSport] = useState(initial.mainSport ?? "");
-  const [lockinLevel, setLockinLevel] = useState(initial.lockinLevel);
   const [links, setLinks] = useState<ProfileLink[]>(initial.links);
   const [isPending, startTransition] = useTransition();
 
@@ -47,7 +46,6 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
         city: city.trim() || undefined,
         sector: sector.trim() || undefined,
         mainSport: mainSport || undefined,
-        lockinLevel,
         links: links.filter((l) => l.label.trim() && l.url.trim()),
       });
       onDone();
@@ -57,7 +55,7 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
   return (
     <div className="space-y-5 border-b-2 border-camp-charcoal pb-6">
       <div className="space-y-1.5">
-        <label className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase">
+        <label className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase">
           Bio
         </label>
         <textarea
@@ -71,13 +69,13 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
 
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1.5">
-          <label className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase">
+          <label className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase">
             Ville
           </label>
           <input value={city} onChange={(e) => setCity(e.target.value)} className={fieldClassName} />
         </div>
         <div className="space-y-1.5">
-          <label className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase">
+          <label className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase">
             Pays
           </label>
           <input
@@ -90,7 +88,7 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
 
       <div className="grid grid-cols-2 gap-3">
         <div className="space-y-1.5">
-          <label className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase">
+          <label className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase">
             Métier / domaine
           </label>
           <input
@@ -101,7 +99,7 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
           />
         </div>
         <div className="space-y-1.5">
-          <label className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase">
+          <label className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase">
             Sport principal
           </label>
           <select
@@ -119,31 +117,12 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
         </div>
       </div>
 
-      <div className="space-y-1.5">
-        <label className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase">
-          Niveau Lockin
-        </label>
-        <div className="flex gap-2">
-          {LOCKIN_LEVELS.map((n) => (
-            <button
-              key={n}
-              type="button"
-              onClick={() => setLockinLevel(n)}
-              className={cn(
-                "size-9 border-2 font-mono text-sm font-bold",
-                n <= lockinLevel
-                  ? "border-camp-charcoal bg-camp-gold text-camp-charcoal"
-                  : "border-camp-hairline text-camp-charcoal/40",
-              )}
-            >
-              {n}
-            </button>
-          ))}
-        </div>
-      </div>
+      <p className="border-l-2 border-lk-gold pl-3 text-xs text-lk-black/60">
+        Ton niveau Lockin ne se déclare pas : il se gagne, chaque jour, avec ta note de discipline.
+      </p>
 
       <div className="space-y-1.5">
-        <label className="font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase">
+        <label className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase">
           Liens
         </label>
         <div className="space-y-2">
@@ -174,7 +153,7 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
             <button
               type="button"
               onClick={() => setLinks((prev) => [...prev, { label: "", url: "" }])}
-              className="font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal/60 uppercase hover:text-camp-charcoal"
+              className="text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal/60 uppercase hover:text-camp-charcoal"
             >
               + Ajouter un lien
             </button>
@@ -187,14 +166,14 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
           type="button"
           onClick={handleSave}
           disabled={isPending}
-          className="border-2 border-camp-charcoal bg-camp-gold px-5 py-2 font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          className="border border-camp-charcoal bg-camp-gold px-5 py-2 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
         >
           Enregistrer
         </button>
         <button
           type="button"
           onClick={onDone}
-          className="border-2 border-camp-charcoal px-5 py-2 font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase"
+          className="border border-camp-charcoal px-5 py-2 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase"
         >
           Annuler
         </button>

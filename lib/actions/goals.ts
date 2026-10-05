@@ -68,7 +68,7 @@ export async function shareGoalToFeed(goalId: number) {
 
   await db.insert(posts).values({
     userId: user.id,
-    content: `🎯 Nouvel objectif ${goal.category === "personal" ? "personnel" : "professionnel"} : ${goal.title}`,
+    content: `Nouvel objectif ${goal.category === "personal" ? "personnel" : "professionnel"} : ${goal.title}`,
     tag: "Discipline",
   });
 

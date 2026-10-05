@@ -37,7 +37,7 @@ export function OwnProfile({ profile, goals, routine }: OwnProfileProps) {
       <button
         type="button"
         onClick={() => setEditing(true)}
-        className="mb-4 inline-flex items-center gap-1.5 border border-camp-hairline px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal/70 uppercase hover:border-camp-charcoal hover:text-camp-charcoal"
+        className="mb-4 inline-flex items-center gap-1.5 border border-camp-hairline px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal/70 uppercase hover:border-camp-charcoal hover:text-camp-charcoal"
       >
         <Pencil className="size-3.5" /> Modifier mon profil
       </button>

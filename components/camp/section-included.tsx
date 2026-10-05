@@ -41,7 +41,7 @@ export function SectionIncluded() {
                           key={a.id}
                           className="border border-camp-hairline px-3 py-1 font-mono text-[11px] font-semibold tracking-[0.08em] text-camp-charcoal/70 uppercase"
                         >
-                          {a.emoji} {a.name}
+                          {a.name}
                         </span>
                       ))}
                     </div>

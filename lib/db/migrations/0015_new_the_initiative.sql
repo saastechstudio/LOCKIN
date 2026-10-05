@@ -1,0 +1,1 @@
+ALTER TABLE "help_questions" ADD COLUMN "accepted_answer_id" integer;

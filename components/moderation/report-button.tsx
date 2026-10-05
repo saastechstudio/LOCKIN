@@ -31,7 +31,7 @@ export function ReportButton({ targetType, targetId, className }: ReportButtonPr
 
   if (sent) {
     return (
-      <span className={cn("font-mono text-[11px] text-camp-charcoal/40 uppercase", className)}>
+      <span className={cn("text-[11px] text-camp-charcoal/40 uppercase", className)}>
         Signalement envoyé
       </span>
     );
@@ -43,7 +43,7 @@ export function ReportButton({ targetType, targetId, className }: ReportButtonPr
         type="button"
         onClick={() => setOpen(true)}
         className={cn(
-          "inline-flex items-center gap-1 font-mono text-[11px] text-camp-charcoal/40 uppercase hover:text-camp-charcoal",
+          "inline-flex items-center gap-1 text-[11px] text-camp-charcoal/40 uppercase hover:text-camp-charcoal",
           className,
         )}
       >
@@ -66,13 +66,13 @@ export function ReportButton({ targetType, targetId, className }: ReportButtonPr
 
   return (
     <div className={cn("border border-camp-hairline bg-camp-cream p-3", className)}>
-      <p className="mb-2 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal uppercase">
+      <p className="mb-2 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase">
         Signaler ce contenu
       </p>
       <select
         value={reason}
         onChange={(e) => setReason(e.target.value as typeof reason)}
-        className="w-full border border-camp-hairline bg-camp-white px-2.5 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal uppercase outline-none"
+        className="w-full border border-camp-hairline bg-camp-white px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase outline-none"
       >
         {REASONS.map((r) => (
           <option key={r.value} value={r.value}>
@@ -94,14 +94,14 @@ export function ReportButton({ targetType, targetId, className }: ReportButtonPr
           type="button"
           onClick={handleSubmit}
           disabled={isPending}
-          className="border-2 border-camp-charcoal bg-camp-charcoal px-3 py-1.5 font-mono text-[11px] font-bold text-camp-white uppercase disabled:opacity-40"
+          className="border border-camp-charcoal bg-camp-charcoal px-3 py-1.5 text-[11px] font-bold text-camp-white uppercase disabled:opacity-40"
         >
           Envoyer
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="font-mono text-[11px] text-camp-charcoal/50 uppercase hover:text-camp-charcoal"
+          className="text-[11px] text-camp-charcoal/50 uppercase hover:text-camp-charcoal"
         >
           Annuler
         </button>

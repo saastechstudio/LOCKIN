@@ -4,10 +4,11 @@ import { useState, useTransition } from "react";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
-import { Heart, MessageCircle } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { addComment, toggleLike } from "@/lib/actions/feed";
+import { addComment, toggleRespect } from "@/lib/actions/feed";
+import { LockIcon } from "@/components/lockin/lock-icon";
 import { ReportButton } from "@/components/moderation/report-button";
 
 type PostCardUser = {
@@ -35,8 +36,9 @@ type PostCardProps = {
     createdAt: Date;
     user: PostCardUser;
     comments: PostCardComment[];
-    likeCount: number;
-    likedByMe: boolean;
+    respectCount: number;
+    respectedByMe: boolean;
+    isMine: boolean;
   };
 };
 
@@ -51,7 +53,7 @@ function MiniAvatar({
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center justify-center border border-camp-hairline bg-camp-cream font-mono text-xs font-bold text-camp-charcoal",
+        "flex shrink-0 items-center justify-center border border-camp-hairline bg-camp-cream text-xs font-bold text-camp-charcoal",
         size === "md" ? "size-9" : "size-7",
       )}
     >
@@ -65,15 +67,15 @@ function MiniAvatar({
   );
 }
 
-/** Carte de post brutaliste — pas de coins arrondis, pas d'ombre, filet fin en séparation. */
+/** Carte de post Lockin — angles droits, aucune ombre, filet fin en séparation, « Respect » au lieu du like. */
 export function PostCard({ post }: PostCardProps) {
   const [showComments, setShowComments] = useState(false);
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
-  function handleLike() {
-    startTransition(() => toggleLike(post.id));
+  function handleRespect() {
+    startTransition(() => toggleRespect(post.id));
   }
 
   function handleComment() {
@@ -100,14 +102,18 @@ export function PostCard({ post }: PostCardProps) {
           <div className="flex flex-wrap items-baseline gap-x-2">
             <Link
               href={`/dashboard/u/${post.user.id}`}
-              className="font-mono text-xs font-bold tracking-[0.04em] text-camp-charcoal uppercase hover:text-camp-gold"
+              className="text-xs font-semibold tracking-[0.04em] text-camp-charcoal uppercase hover:text-camp-gold"
             >
               {post.user.name ?? "Membre Lockin"}
             </Link>
-            <span className="font-mono text-[11px] text-camp-charcoal/40">
-              Niveau {post.user.lockinLevel}
+            <span
+              className="inline-flex items-center gap-1 text-[11px] text-lk-black/50"
+              title={`Niveau Lockin ${post.user.lockinLevel}`}
+            >
+              <LockIcon level={post.user.lockinLevel} className="h-3.5 w-[10.5px]" />
+              Niv. {post.user.lockinLevel}
             </span>
-            <span className="font-mono text-[11px] text-camp-charcoal/40">
+            <span className="text-[11px] text-camp-charcoal/40">
               · {formatDistanceToNow(post.createdAt, { addSuffix: true, locale: fr })}
             </span>
           </div>
@@ -128,7 +134,7 @@ export function PostCard({ post }: PostCardProps) {
               {[post.tag, post.sport, post.country].filter(Boolean).map((t) => (
                 <span
                   key={t}
-                  className="border border-camp-hairline px-2 py-0.5 font-mono text-[10px] font-semibold tracking-[0.06em] text-camp-charcoal/70 uppercase"
+                  className="border border-camp-hairline px-2 py-0.5 text-[10px] font-semibold tracking-[0.06em] text-camp-charcoal/70 uppercase"
                 >
                   {t}
                 </span>
@@ -137,24 +143,36 @@ export function PostCard({ post }: PostCardProps) {
           )}
 
           <div className="mt-4 flex items-center gap-6">
-            <button
-              type="button"
-              onClick={handleLike}
-              disabled={isPending}
-              className={cn(
-                "inline-flex items-center gap-1.5 font-mono text-xs font-semibold uppercase transition-colors",
-                post.likedByMe ? "text-camp-gold" : "text-camp-charcoal/50 hover:text-camp-charcoal",
-              )}
-            >
-              <Heart className={cn("size-4", post.likedByMe && "fill-camp-gold")} />
-              {post.likeCount}
-            </button>
+            {/* Respect, pas de like : aucun cœur, aucun compteur public. Seul l'auteur
+                voit combien de membres ont salué son effort. */}
+            {post.isMine ? (
+              <span className="text-xs text-lk-black/50">
+                {post.respectCount === 0
+                  ? "Aucun respect pour l'instant"
+                  : `${post.respectCount} respect${post.respectCount > 1 ? "s" : ""}`}
+              </span>
+            ) : (
+              <button
+                type="button"
+                onClick={handleRespect}
+                disabled={isPending}
+                aria-pressed={post.respectedByMe}
+                className={cn(
+                  "border px-3 py-1.5 text-xs font-medium transition-colors",
+                  post.respectedByMe
+                    ? "border-lk-black bg-lk-black text-lk-white"
+                    : "border-lk-line text-lk-black hover:border-lk-black",
+                )}
+              >
+                {post.respectedByMe ? "Respect donné" : "Respect"}
+              </button>
+            )}
             <button
               type="button"
               onClick={() => setShowComments((s) => !s)}
-              className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-camp-charcoal/50 uppercase hover:text-camp-charcoal"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-camp-charcoal/50 uppercase hover:text-camp-charcoal"
             >
-              <MessageCircle className="size-4" />
+              <MessageSquare className="size-4" />
               {post.comments.length}
             </button>
             <ReportButton targetType="post" targetId={post.id} className="ml-auto" />
@@ -167,7 +185,7 @@ export function PostCard({ post }: PostCardProps) {
                   <MiniAvatar user={c.user} size="sm" />
                   <div className="min-w-0 flex-1">
                     <div className="flex items-baseline justify-between gap-2">
-                      <p className="font-mono text-[11px] font-bold text-camp-charcoal uppercase">
+                      <p className="text-[11px] font-bold text-camp-charcoal uppercase">
                         {c.user.name ?? "Membre Lockin"}
                       </p>
                       <ReportButton targetType="comment" targetId={c.id} />
@@ -196,7 +214,7 @@ export function PostCard({ post }: PostCardProps) {
                   type="button"
                   onClick={handleComment}
                   disabled={isPending || !comment.trim()}
-                  className="border-2 border-camp-charcoal px-3 py-2 font-mono text-xs font-bold text-camp-charcoal uppercase disabled:opacity-40"
+                  className="border border-camp-charcoal px-3 py-2 text-xs font-bold text-camp-charcoal uppercase disabled:opacity-40"
                 >
                   Envoyer
                 </button>

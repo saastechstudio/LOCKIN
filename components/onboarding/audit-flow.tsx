@@ -385,7 +385,7 @@ function AuditResultView({
                   <p className="mt-0.5 text-sm text-muted-foreground">{phase.focus}</p>
                   {phase.objective && (
                     <p className="mt-2 text-sm font-medium text-foreground">
-                      🎯 {phase.objective}
+                      Objectif : {phase.objective}
                     </p>
                   )}
                   {phase.steps && phase.steps.length > 0 && (

@@ -12,11 +12,12 @@ import {
 import { setTodayMood, type Mood } from "@/lib/actions/daily-focus";
 import { cn } from "@/lib/utils";
 
-const MOOD_OPTIONS: { value: Mood; emoji: string; label: string }[] = [
-  { value: "motive", emoji: "🔥", label: "Motivé" },
-  { value: "normal", emoji: "🙂", label: "Normal" },
-  { value: "fatigue", emoji: "😐", label: "Fatigué" },
-  { value: "stresse", emoji: "😔", label: "Stressé" },
+/** Pas d'emoji : une jauge de quatre barres verticales indique l'énergie. */
+const MOOD_OPTIONS: { value: Mood; energy: number; label: string }[] = [
+  { value: "motive", energy: 4, label: "Motivé" },
+  { value: "normal", energy: 3, label: "Normal" },
+  { value: "fatigue", energy: 2, label: "Fatigué" },
+  { value: "stresse", energy: 1, label: "Stressé" },
 ];
 
 /**
@@ -67,12 +68,20 @@ export function MoodGate({
               disabled={pending}
               onClick={() => choose(option.value)}
               className={cn(
-                "flex flex-col items-center gap-2 rounded-xl border border-border/60 bg-background/60 px-4 py-5 text-center transition hover:border-brand-blue/60 hover:bg-brand-blue/5 disabled:opacity-60",
-                selecting === option.value && pending && "border-brand-blue/60 bg-brand-blue/5",
+                "flex flex-col items-center gap-3 border border-lk-line bg-lk-white px-4 py-5 text-center transition-colors hover:border-lk-black disabled:opacity-60",
+                selecting === option.value && pending && "border-lk-black bg-lk-mist",
               )}
             >
-              <span className="text-3xl">{option.emoji}</span>
-              <span className="text-sm font-medium text-foreground">
+              <span className="flex h-8 items-end gap-1" aria-hidden>
+                {[1, 2, 3, 4].map((bar) => (
+                  <span
+                    key={bar}
+                    className={cn("w-2", bar <= option.energy ? "bg-lk-black" : "bg-lk-line")}
+                    style={{ height: `${bar * 25}%` }}
+                  />
+                ))}
+              </span>
+              <span className="text-sm font-medium text-lk-black">
                 {option.label}
               </span>
             </button>

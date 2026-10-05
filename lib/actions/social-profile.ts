@@ -60,7 +60,6 @@ const updateSchema = z.object({
   city: z.string().max(80).optional(),
   sector: z.string().max(80).optional(),
   mainSport: z.string().max(40).optional(),
-  lockinLevel: z.number().int().min(1).max(5),
   links: z.array(linkSchema).max(6),
 });
 
@@ -78,7 +77,6 @@ export async function updateSocialProfile(input: UpdateSocialProfileInput) {
       city: parsed.city || null,
       sector: parsed.sector || null,
       mainSport: parsed.mainSport || null,
-      lockinLevel: parsed.lockinLevel,
       links: parsed.links as ProfileLink[],
     })
     .where(eq(users.id, user.id));

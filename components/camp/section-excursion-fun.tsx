@@ -28,7 +28,7 @@ export function SectionExcursionFun() {
                   key={e.id}
                   className="flex items-center gap-3 border-t border-camp-hairline py-3 first:border-t-0"
                 >
-                  <span className="text-lg">{e.emoji}</span>
+                  <span className="size-1.5 shrink-0 bg-camp-gold" aria-hidden />
                   <span className="text-sm text-camp-charcoal/80">{e.name}</span>
                 </li>
               ))}
@@ -45,7 +45,7 @@ export function SectionExcursionFun() {
                   key={a.id}
                   className="flex items-center gap-3 border-t border-camp-hairline py-3 first:border-t-0"
                 >
-                  <span className="text-lg">{a.emoji}</span>
+                  <span className="size-1.5 shrink-0 bg-camp-gold" aria-hidden />
                   <span className="text-sm text-camp-charcoal/80">{a.name}</span>
                 </li>
               ))}

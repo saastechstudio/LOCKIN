@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MessageCircle } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 
 import { requireLockinOnboarded } from "@/lib/auth";
 import { getSocialProfile } from "@/lib/actions/social-profile";
@@ -22,18 +22,18 @@ export default async function PublicProfilePage({
   if (!data) notFound();
 
   return (
-    <div className="camp-scope -m-4 min-h-[calc(100vh-5rem)] border border-camp-hairline p-6 sm:-m-6 sm:p-8">
+    <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
         <div className="mb-6 flex items-center justify-between">
-          <p className="font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
             Lockin Social Club · Profil
           </p>
           {!data.viewerIsOwner ? (
             <Link
               href={`/dashboard/messages/${id}`}
-              className="inline-flex items-center gap-1.5 border-2 border-camp-charcoal px-3 py-1.5 font-mono text-[11px] font-bold tracking-[0.06em] text-camp-charcoal uppercase hover:bg-camp-charcoal hover:text-camp-white"
+              className="inline-flex items-center gap-1.5 border border-camp-charcoal px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase hover:bg-camp-charcoal hover:text-camp-white"
             >
-              <MessageCircle className="size-3.5" /> Message
+              <MessageSquare className="size-3.5" /> Message
             </Link>
           ) : null}
         </div>

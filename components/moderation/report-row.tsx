@@ -49,10 +49,10 @@ export function ReportRow({ report }: ReportRowProps) {
   return (
     <div className="border-b border-camp-hairline py-4">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <p className="font-mono text-xs font-bold tracking-[0.06em] text-camp-charcoal uppercase">
+        <p className="text-xs font-semibold tracking-[0.06em] text-camp-charcoal uppercase">
           {TARGET_LABELS[report.targetType]} #{report.targetId} · {REASON_LABELS[report.reason]}
         </p>
-        <span className="font-mono text-[11px] text-camp-charcoal/40 uppercase">
+        <span className="text-[11px] text-camp-charcoal/40 uppercase">
           {formatDistanceToNow(report.createdAt, { addSuffix: true, locale: fr })}
         </span>
       </div>
@@ -71,7 +71,7 @@ export function ReportRow({ report }: ReportRowProps) {
       ) : null}
 
       {resolved ? (
-        <p className="mt-2 font-mono text-[11px] font-bold text-camp-gold uppercase">
+        <p className="mt-2 text-[11px] font-bold text-camp-gold uppercase">
           {resolved === "uphold" ? "Confirmé — strike appliqué" : "Rejeté"}
         </p>
       ) : (
@@ -80,7 +80,7 @@ export function ReportRow({ report }: ReportRowProps) {
             type="button"
             onClick={() => handle("uphold")}
             disabled={isPending}
-            className="border-2 border-camp-charcoal bg-camp-charcoal px-4 py-1.5 font-mono text-[11px] font-bold text-camp-white uppercase disabled:opacity-40"
+            className="border border-camp-charcoal bg-camp-charcoal px-4 py-1.5 text-[11px] font-bold text-camp-white uppercase disabled:opacity-40"
           >
             Confirmer
           </button>
@@ -88,7 +88,7 @@ export function ReportRow({ report }: ReportRowProps) {
             type="button"
             onClick={() => handle("dismiss")}
             disabled={isPending}
-            className="border border-camp-hairline px-4 py-1.5 font-mono text-[11px] font-bold text-camp-charcoal/70 uppercase hover:border-camp-charcoal disabled:opacity-40"
+            className="border border-camp-hairline px-4 py-1.5 text-[11px] font-bold text-camp-charcoal/70 uppercase hover:border-camp-charcoal disabled:opacity-40"
           >
             Rejeter
           </button>

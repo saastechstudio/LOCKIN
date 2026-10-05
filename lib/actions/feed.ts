@@ -20,7 +20,7 @@ export type FeedFilters = {
 /**
  * Feed global (groupId omis — posts sans groupe, filtrables par tag/sport/
  * pays) ou feed d'un groupe précis (groupId fourni — pas d'autres filtres,
- * le groupe est déjà le filtre). Charge likes et commentaires en même
+ * le groupe est déjà le filtre). Charge respects et commentaires en même
  * temps que les posts — pas de pagination pour l'instant, le volume reste
  * gérable au lancement.
  */
@@ -54,8 +54,9 @@ export async function getFeedPosts(filters: FeedFilters = {}) {
 
   return rows.map((post) => ({
     ...post,
-    likeCount: post.likes.length,
-    likedByMe: post.likes.some((l) => l.userId === currentUser.id),
+    respectCount: post.likes.length,
+    respectedByMe: post.likes.some((l) => l.userId === currentUser.id),
+    isMine: post.userId === currentUser.id,
   }));
 }
 
@@ -89,12 +90,18 @@ export async function createPost(input: CreatePostInput) {
   if (parsed.groupId) revalidatePath(`/dashboard/groupes`);
 }
 
-export async function toggleLike(postId: number) {
+/**
+ * « Respect » : la reconnaissance d'un effort, pas un like. Stocké dans
+ * post_likes (table historique) ; on ne respecte pas son propre post.
+ */
+export async function toggleRespect(postId: number) {
   const user = await getOrCreateDbUser();
 
   const existing = await db.query.postLikes.findFirst({
     where: and(eq(postLikes.postId, postId), eq(postLikes.userId, user.id)),
   });
+  const post = await db.query.posts.findFirst({ columns: { userId: true }, where: eq(posts.id, postId) });
+  if (!post || post.userId === user.id) return;
 
   if (existing) {
     await db.delete(postLikes).where(eq(postLikes.id, existing.id));

@@ -1,26 +1,33 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { ArrowUp } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { addAnswer, toggleUpvote } from "@/lib/actions/help";
+import { addAnswer, toggleAcceptedAnswer, toggleUseful } from "@/lib/actions/help";
 import { ReportButton } from "@/components/moderation/report-button";
 
 type AnswerSectionProps = {
   questionId: number;
+  /** L'auteur de la question est seul à pouvoir retenir une réponse. */
+  isQuestionAuthor: boolean;
   answers: {
     id: number;
     body: string;
     createdAt: Date;
     user: { id: number; name: string | null };
-    upvoteCount: number;
-    upvotedByMe: boolean;
+    usefulByMe: boolean;
+    accepted: boolean;
+    isMine: boolean;
   }[];
 };
 
-/** Liste des réponses (triées par upvotes côté serveur) + composeur de nouvelle réponse. */
-export function AnswerSection({ questionId, answers }: AnswerSectionProps) {
+/**
+ * Réponses d'entraide, sans vote public : chacun peut dire qu'une réponse
+ * est utile (le nombre n'est jamais affiché), et l'auteur de la question
+ * retient celle qui l'a aidé. Triées côté serveur : retenue, puis utiles.
+ */
+export function AnswerSection({ questionId, isQuestionAuthor, answers }: AnswerSectionProps) {
   const [body, setBody] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -39,73 +46,98 @@ export function AnswerSection({ questionId, answers }: AnswerSectionProps) {
     });
   }
 
+  function handleAccept(answerId: number) {
+    setError(null);
+    startTransition(async () => {
+      try {
+        await toggleAcceptedAnswer(answerId, questionId);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Action impossible.");
+      }
+    });
+  }
+
   return (
     <div className="space-y-6">
-      <p className="font-mono text-[11px] font-bold tracking-[0.15em] text-camp-gold uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-black/50 uppercase">
         {answers.length} réponse{answers.length > 1 ? "s" : ""}
       </p>
 
-      <div className="space-y-5">
-        {answers.map((answer, i) => (
+      <div>
+        {answers.map((answer) => (
           <div
             key={answer.id}
-            className={cn("flex gap-4 border-b border-camp-hairline pb-5", i === 0 && answer.upvoteCount > 0 && "bg-camp-cream/50")}
+            className={cn(
+              "border-b border-lk-line py-5",
+              answer.accepted && "border-l-2 border-l-lk-gold pl-4",
+            )}
           >
-            <button
-              type="button"
-              onClick={() => startTransition(() => toggleUpvote(answer.id, questionId))}
-              disabled={isPending}
-              className={cn(
-                "flex w-10 shrink-0 flex-col items-center gap-0.5 border py-2 font-mono text-xs font-bold",
-                answer.upvotedByMe
-                  ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
-                  : "border-camp-hairline text-camp-charcoal/60 hover:border-camp-charcoal",
-              )}
-            >
-              <ArrowUp className="size-3.5" />
-              {answer.upvoteCount}
-            </button>
-            <div className="min-w-0 flex-1">
-              {i === 0 && answer.upvoteCount > 0 ? (
-                <p className="mb-1 font-mono text-[10px] font-bold tracking-[0.1em] text-camp-gold uppercase">
-                  Meilleure réponse
-                </p>
-              ) : null}
-              <p className="text-sm leading-relaxed whitespace-pre-wrap text-camp-charcoal">
-                {answer.body}
+            {answer.accepted ? (
+              <p className="mb-2 inline-flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.2em] text-lk-gold uppercase">
+                <Check className="size-3" /> Réponse retenue
               </p>
-              <div className="mt-1.5 flex items-baseline justify-between gap-2">
-                <p className="font-mono text-[11px] text-camp-charcoal/40 uppercase">
-                  {answer.user.name ?? "Membre Lockin"}
-                </p>
-                <ReportButton targetType="help_answer" targetId={answer.id} />
-              </div>
+            ) : null}
+            <p className="text-sm leading-relaxed whitespace-pre-wrap text-lk-black">{answer.body}</p>
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <p className="mr-auto text-[11px] tracking-[0.06em] text-lk-black/50 uppercase">
+                {answer.user.name ?? "Membre Lockin"}
+              </p>
+              {isQuestionAuthor && !answer.isMine ? (
+                <button
+                  type="button"
+                  onClick={() => handleAccept(answer.id)}
+                  disabled={isPending}
+                  className={cn(
+                    "border px-3 py-1.5 text-xs font-medium transition-colors",
+                    answer.accepted
+                      ? "border-lk-gold text-lk-black hover:bg-lk-mist"
+                      : "border-lk-black text-lk-black hover:bg-lk-black hover:text-lk-white",
+                  )}
+                >
+                  {answer.accepted ? "Ne plus retenir" : "Retenir cette réponse"}
+                </button>
+              ) : null}
+              {!answer.isMine ? (
+                <button
+                  type="button"
+                  onClick={() => startTransition(() => toggleUseful(answer.id, questionId))}
+                  disabled={isPending}
+                  aria-pressed={answer.usefulByMe}
+                  className={cn(
+                    "border px-3 py-1.5 text-xs font-medium transition-colors",
+                    answer.usefulByMe
+                      ? "border-lk-black bg-lk-black text-lk-white"
+                      : "border-lk-line text-lk-black hover:border-lk-black",
+                  )}
+                >
+                  {answer.usefulByMe ? "Utile, noté" : "Utile"}
+                </button>
+              ) : null}
+              <ReportButton targetType="help_answer" targetId={answer.id} />
             </div>
           </div>
         ))}
         {answers.length === 0 ? (
-          <p className="text-sm text-camp-charcoal/40">Aucune réponse pour l&apos;instant.</p>
+          <p className="text-sm text-lk-black/40">Aucune réponse pour l&apos;instant.</p>
         ) : null}
       </div>
 
-      <div className="space-y-2 border-t-2 border-camp-charcoal pt-5">
+      <div className="space-y-3 border-t border-lk-black pt-6">
         {error ? (
-          <p className="border border-camp-charcoal bg-camp-cream px-4 py-2.5 text-sm text-camp-charcoal">
-            {error}
-          </p>
+          <p className="border-l-2 border-lk-black pl-3 text-sm text-lk-black">{error}</p>
         ) : null}
         <textarea
           value={body}
           onChange={(e) => setBody(e.target.value)}
           rows={3}
           placeholder="Proposer une réponse…"
-          className="w-full resize-none border border-camp-hairline bg-camp-white px-4 py-3 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
+          className="w-full resize-none border border-lk-line bg-lk-white px-4 py-3 text-sm text-lk-black outline-none placeholder:text-lk-black/40 focus:border-lk-black"
         />
         <button
           type="button"
           onClick={handleSubmit}
           disabled={isPending || !body.trim()}
-          className="border-2 border-camp-charcoal bg-camp-gold px-5 py-2 font-mono text-xs font-bold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          className="bg-lk-black px-6 py-3 text-sm font-medium text-lk-white transition-opacity hover:opacity-85 disabled:opacity-40"
         >
           Répondre
         </button>

@@ -10,9 +10,9 @@ export default async function OwnProfilePage() {
   if (!data) return null;
 
   return (
-    <div className="camp-scope -m-4 min-h-[calc(100vh-5rem)] border border-camp-hairline p-6 sm:-m-6 sm:p-8">
+    <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
-        <p className="mb-6 font-mono text-xs font-bold tracking-[0.25em] text-camp-gold uppercase">
+        <p className="mb-6 text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
           Lockin Social Club · Mon profil
         </p>
         <OwnProfile profile={data.profile} goals={data.goals} routine={data.routine} />
