@@ -6,6 +6,14 @@ import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { users, type User } from "@/lib/db/schema";
 
+function readSignUpMetadata(metadata: Record<string, unknown> | undefined) {
+  const text = (key: string) => {
+    const value = metadata?.[key];
+    return typeof value === "string" && value.trim() ? value.trim().slice(0, 120) : undefined;
+  };
+  return { firstName: text("firstName"), lastName: text("lastName"), country: text("country") };
+}
+
 /**
  * Ensures a `users` row exists for the signed-in Clerk user and returns it.
  * Clerk owns identity; this table mirrors just what the app needs (billing,
@@ -24,8 +32,12 @@ export async function getOrCreateDbUser(): Promise<User> {
 
   const clerkUser = await currentUser();
   const email = clerkUser?.emailAddresses[0]?.emailAddress ?? "";
+  // Le formulaire d'inscription Lockin envoie prénom, nom et pays dans
+  // unsafeMetadata (accepté quelle que soit la config de l'instance Clerk).
+  const signUpData = readSignUpMetadata(clerkUser?.unsafeMetadata);
   const name =
     [clerkUser?.firstName, clerkUser?.lastName].filter(Boolean).join(" ") ||
+    [signUpData.firstName, signUpData.lastName].filter(Boolean).join(" ") ||
     clerkUser?.username ||
     "Membre Lock In";
 
@@ -35,6 +47,7 @@ export async function getOrCreateDbUser(): Promise<User> {
       clerkId: userId,
       email,
       name,
+      country: signUpData.country,
       avatarUrl: clerkUser?.imageUrl,
     })
     .onConflictDoNothing({ target: users.clerkId })
@@ -48,17 +61,6 @@ export async function getOrCreateDbUser(): Promise<User> {
   });
   if (!fallback) throw new Error("Failed to resolve user record");
   return fallback;
-}
-
-/**
- * N'accepte qu'un chemin interne ("/..."), jamais "//domaine" ni une URL
- * absolue : `next` vient de la query string, donc d'une source non fiable.
- */
-export function safeNextPath(next: string | undefined): string | null {
-  if (!next || !next.startsWith("/") || next.startsWith("//") || next.includes("\\")) {
-    return null;
-  }
-  return next;
 }
 
 /**

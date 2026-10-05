@@ -22,8 +22,11 @@ export function CoachRecommendations({ actions }: { actions: string[] }) {
       <CardContent>
         {topActions.length === 0 ? (
           <p className="text-sm text-muted-foreground">
-            Termine ton audit d&apos;entrée pour recevoir tes premières
-            recommandations personnalisées.
+            L&apos;audit d&apos;entrée est facultatif.{" "}
+            <Link href="/onboarding" className="text-brand-blue hover:underline">
+              Fais-le
+            </Link>{" "}
+            pour recevoir tes premières recommandations personnalisées.
           </p>
         ) : (
           <ul className="space-y-3">

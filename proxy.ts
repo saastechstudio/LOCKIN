@@ -9,11 +9,15 @@ const isProtectedRoute = createRouteMatcher([
   "/camp/(.*)/reserver(.*)",
 ]);
 
-export default clerkMiddleware(async (auth, req) => {
-  if (isProtectedRoute(req)) {
-    await auth.protect();
-  }
-});
+export default clerkMiddleware(
+  async (auth, req) => {
+    if (isProtectedRoute(req)) {
+      await auth.protect();
+    }
+  },
+  // Redirection des pages protégées vers nos formulaires, pas ceux hébergés par Clerk.
+  { signInUrl: "/sign-in", signUpUrl: "/sign-up" },
+);
 
 export const config = {
   matcher: [

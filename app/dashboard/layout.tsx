@@ -1,8 +1,3 @@
-import { redirect } from "next/navigation";
-import { eq } from "drizzle-orm";
-
-import { db } from "@/lib/db";
-import { onboardingAudits } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import {
   getRecentNotifications,
@@ -18,19 +13,9 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // L'audit d'entrée est facultatif : pas de porte ici. Les pages qui
+  // s'en servent (accueil, planning, focus du jour) tolèrent son absence.
   const user = await getOrCreateDbUser();
-
-  // The audit is the mandatory first step of La Méthode Lock In — a member
-  // landing here (deep link, back button, bookmarked URL) without having
-  // completed it yet gets sent back to the real onboarding flow rather
-  // than seeing an empty/broken dashboard.
-  const completedAudit = await db.query.onboardingAudits.findFirst({
-    where: eq(onboardingAudits.userId, user.id),
-    columns: { id: true },
-  });
-  if (!completedAudit) {
-    redirect("/onboarding");
-  }
 
   const [notifications, unreadCount, todayFocus] = await Promise.all([
     getRecentNotifications(),
