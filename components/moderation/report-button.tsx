@@ -15,7 +15,7 @@ const REASONS = [
 ] as const;
 
 type ReportButtonProps = {
-  targetType: "post" | "comment" | "message" | "help_answer" | "business_offer";
+  targetType: "post" | "comment" | "message" | "help_answer" | "business_offer" | "formation";
   targetId: number;
   className?: string;
 };

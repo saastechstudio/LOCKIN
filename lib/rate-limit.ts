@@ -1,5 +1,7 @@
 import "server-only";
 
+import { UserFacingError } from "@/lib/action-result";
+
 /**
  * Limitation de débit en mémoire, fenêtre glissante, par membre et par
  * usage. Suffisant pour une seule instance (Railway, 1 réplique) : chaque
@@ -26,9 +28,14 @@ export const RATE_LIMITS = {
   report: { limit: 20, windowMs: HOUR },
   reaction: { limit: 120, windowMs: 10 * MINUTE },
   camp: { limit: 10, windowMs: HOUR },
+  formationCreate: { limit: 5, windowMs: HOUR },
+  formationEdit: { limit: 150, windowMs: 10 * MINUTE },
+  formationProgress: { limit: 200, windowMs: 10 * MINUTE },
+  formationQuestion: { limit: 10, windowMs: HOUR },
+  formationAnswer: { limit: 40, windowMs: 10 * MINUTE },
 } satisfies Record<string, RateLimitRule>;
 
-export class RateLimitError extends Error {
+export class RateLimitError extends UserFacingError {
   constructor(public readonly retryAfterSeconds: number) {
     super("Trop de tentatives en peu de temps. Réessaie dans quelques minutes.");
   }

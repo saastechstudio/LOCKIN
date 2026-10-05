@@ -7,6 +7,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import {
   businessOffers,
+  formations,
   helpAnswers,
   messages,
   moderationEvents,
@@ -21,7 +22,7 @@ import { enforceRateLimit } from "@/lib/rate-limit";
 const ADMIN_PATH = "/dashboard/admin/moderation";
 
 const reportSchema = z.object({
-  targetType: z.enum(["post", "comment", "message", "help_answer", "business_offer"]),
+  targetType: z.enum(["post", "comment", "message", "help_answer", "business_offer", "formation"]),
   targetId: z.number().int(),
   reason: z.enum(["insulte", "harcelement", "discrimination", "spam", "autre"]),
   details: z.string().trim().max(500).optional(),
@@ -64,6 +65,13 @@ async function resolveContentAuthor(
         columns: { userId: true },
       });
       return row?.userId ?? null;
+    }
+    case "formation": {
+      const row = await db.query.formations.findFirst({
+        where: eq(formations.id, targetId),
+        columns: { creatorId: true },
+      });
+      return row?.creatorId ?? null;
     }
   }
 }
@@ -160,6 +168,9 @@ async function deleteReportedContent(
       return;
     case "business_offer":
       await db.delete(businessOffers).where(eq(businessOffers.id, targetId));
+      return;
+    case "formation":
+      await db.delete(formations).where(eq(formations.id, targetId));
   }
 }
 
