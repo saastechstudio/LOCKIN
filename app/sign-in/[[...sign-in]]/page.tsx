@@ -18,10 +18,10 @@ export default function SignInPage() {
           fallbackRedirectUrl="/dashboard"
           appearance={{
             elements: {
-              card: "border border-lk-line shadow-none",
-              cardBox: "shadow-none rounded-lg",
+              card: "border border-lk-line shadow-md rounded-2xl",
+              cardBox: "shadow-none rounded-2xl",
               headerTitle: "font-display text-lk-black",
-              formButtonPrimary: "bg-lk-black text-lk-white rounded-lg shadow-none hover:opacity-85",
+              formButtonPrimary: "bg-lk-blue text-white rounded-xl shadow-none hover:bg-lk-blue-soft",
               footer: "bg-lk-white",
             },
           }}
