@@ -9,6 +9,7 @@ import { action, UserFacingError } from "@/lib/action-result";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
+import { moderateImageOrThrow } from "@/lib/moderation/image";
 import { enforceRateLimit } from "@/lib/rate-limit";
 
 /** Le navigateur réduit déjà la photo (512 px, JPEG) : 1 Mo laisse une large marge. */
@@ -32,7 +33,7 @@ function revalidateProfile(userId: number) {
 }
 
 /**
- * Photo de profil : stockée par Clerk (CDN inclus), l'URL publique est
+ * Photo de profil : modérée (lib/moderation/image.ts) puis stockée par Clerk (CDN inclus), l'URL publique est
  * recopiée dans users.avatar_url, que le feed, les messages et l'annuaire
  * lisent déjà. Aucun stockage de fichiers à gérer côté Lockin.
  */
@@ -49,6 +50,8 @@ export const updateAvatar = action(async (formData: FormData): Promise<{ avatarU
   const bytes = new Uint8Array(await file.arrayBuffer());
   const type = sniffImageType(bytes);
   if (!type) throw new UserFacingError("Format non pris en charge : JPEG, PNG ou WebP.");
+
+  await moderateImageOrThrow(user, bytes, type);
 
   const clerk = await clerkClient();
   const updated = await clerk.users.updateUserProfileImage(user.clerkId, {
