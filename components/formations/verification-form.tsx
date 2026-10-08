@@ -55,7 +55,7 @@ export function VerificationForm({
           required
           placeholder="Ce que tu sais faire, depuis quand, avec quels résultats. Ce que tu enseignes doit venir de ce que tu as vécu."
         />
-        <p className="mt-2 text-xs text-lk-black/50 tabular-nums">
+        <p className="mt-2 text-xs text-lk-stone-3 tabular-nums">
           {presentation.trim().length}/{L.presentation} · {L.presentationMin} caractères minimum
         </p>
       </div>
@@ -70,7 +70,7 @@ export function VerificationForm({
           required
           placeholder="https://linkedin.com/in/… ou ton site, ton portfolio"
         />
-        <p className="mt-2 text-xs text-lk-black/50">Un profil public où l&apos;on peut vérifier qui tu es et ce que tu fais.</p>
+        <p className="mt-2 text-xs text-lk-stone-3">Un profil public où l&apos;on peut vérifier qui tu es et ce que tu fais.</p>
       </div>
 
       <label className="flex items-start gap-3 text-sm leading-relaxed">

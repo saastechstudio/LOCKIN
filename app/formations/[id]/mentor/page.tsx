@@ -20,7 +20,7 @@ export default async function MentorPage({ params }: { params: Promise<{ id: str
   if (!view) notFound();
 
   const back = (
-    <Link href={`/formations/${formationId}`} className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-black/60 hover:text-lk-black">
+    <Link href={`/formations/${formationId}`} className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-stone-3 hover:text-lk-black">
       <ArrowLeft className="size-3.5" /> {view.formation.title}
     </Link>
   );
@@ -57,7 +57,7 @@ export default async function MentorPage({ params }: { params: Promise<{ id: str
       <section className="space-y-10">
         <Eyebrow>{isMentor ? "Questions" : "Mes questions"}</Eyebrow>
         {view.questions.length === 0 ? (
-          <p className="border border-dashed border-lk-black p-8 text-center text-sm text-lk-black/60">
+          <p className="border border-dashed border-lk-line p-8 text-center text-sm text-lk-stone-3">
             {isMentor ? "Aucune question pour l'instant." : "Tu n'as pas encore posé de question."}
           </p>
         ) : (

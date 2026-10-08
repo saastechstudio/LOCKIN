@@ -10,13 +10,13 @@ type SportScreenProps = {
 export function SportScreen({ value, onChange }: SportScreenProps) {
   return (
     <div>
-      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
         Écran 03 — Sport Lockin
       </p>
       <h1 className="font-display mt-3 text-3xl text-lk-black sm:text-4xl sm:text-3xl">
         Quel est ton sport principal ?
       </h1>
-      <p className="mt-2 text-sm text-camp-charcoal/60">
+      <p className="mt-2 text-sm text-lk-stone-3">
         Le même que celui du Lock-In Camp et des groupes sport.
       </p>
 
@@ -29,8 +29,8 @@ export function SportScreen({ value, onChange }: SportScreenProps) {
             className={cn(
               "flex flex-col items-center gap-2 border border-camp-hairline bg-camp-white px-3 py-5 text-center transition-colors",
               value === sport.id
-                ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
-                : "text-camp-charcoal hover:border-camp-charcoal",
+                ? "border-lk-line bg-camp-charcoal text-camp-white"
+                : "text-camp-charcoal hover:border-lk-line",
             )}
           >
             <span className="text-xs font-semibold tracking-[0.06em] uppercase">

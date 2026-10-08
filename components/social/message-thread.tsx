@@ -48,7 +48,7 @@ export function MessageThread({ recipientId, currentUserId, thread }: MessageThr
     <div className="flex flex-col">
       <div className="space-y-3 pb-6">
         {thread.length === 0 ? (
-          <p className="py-10 text-center text-xs text-camp-charcoal/50 uppercase">
+          <p className="py-10 text-center text-xs text-lk-stone-3 uppercase">
             Aucun message — commence la conversation.
           </p>
         ) : (
@@ -60,7 +60,7 @@ export function MessageThread({ recipientId, currentUserId, thread }: MessageThr
                   className={cn(
                     "max-w-[80%] border px-3.5 py-2.5",
                     isMine
-                      ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
+                      ? "border-lk-line bg-camp-charcoal text-camp-white"
                       : "border-camp-hairline text-camp-charcoal",
                   )}
                 >
@@ -86,18 +86,18 @@ export function MessageThread({ recipientId, currentUserId, thread }: MessageThr
       </div>
 
       {respectWarning ? (
-        <p className="mb-2 border border-camp-charcoal bg-camp-cream px-3.5 py-2 text-sm text-camp-charcoal">
+        <p className="mb-2 border border-lk-line bg-camp-cream px-3.5 py-2 text-sm text-camp-charcoal">
           Ce message semble agressif. Souhaites-tu le reformuler ? Appuie à nouveau sur
           Envoyer pour l&apos;envoyer tel quel.
         </p>
       ) : null}
       {error ? (
-        <p className="mb-2 border border-camp-charcoal bg-camp-cream px-3.5 py-2 text-sm text-camp-charcoal">
+        <p className="mb-2 border border-lk-line bg-camp-cream px-3.5 py-2 text-sm text-camp-charcoal">
           {error}
         </p>
       ) : null}
 
-      <div className="flex gap-2 border-t border-camp-charcoal pt-4">
+      <div className="flex gap-2 border-t border-lk-line pt-4">
         <input
           value={content}
           onChange={(e) => {
@@ -107,13 +107,13 @@ export function MessageThread({ recipientId, currentUserId, thread }: MessageThr
           }}
           onKeyDown={(e) => e.key === "Enter" && handleSend()}
           placeholder="Écrire un message…"
-          className="flex-1 border border-camp-hairline bg-camp-white px-3.5 py-2.5 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
+          className="flex-1 border border-camp-hairline bg-camp-white px-3.5 py-2.5 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-lk-line"
         />
         <button
           type="button"
           onClick={handleSend}
           disabled={isPending || !content.trim()}
-          className="border border-camp-charcoal bg-camp-gold px-5 py-2.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          className="border border-lk-line bg-camp-gold px-5 py-2.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
         >
           Envoyer
         </button>

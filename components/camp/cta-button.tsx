@@ -15,8 +15,8 @@ const ctaButtonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "border-lk-black bg-lk-black text-lk-white hover:opacity-85",
-        secondary: "border-lk-black bg-transparent text-lk-black hover:bg-lk-black hover:text-lk-white",
+        primary: "border-lk-line bg-lk-black text-lk-white hover:opacity-85",
+        secondary: "border-lk-line bg-transparent text-lk-black hover:bg-lk-black hover:text-lk-white",
       },
     },
     defaultVariants: { variant: "primary" },

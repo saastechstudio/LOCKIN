@@ -37,7 +37,7 @@ export function AskQuestionForm({
           },
         );
       }}
-      className="space-y-5 border border-lk-black p-6"
+      className="space-y-5 border border-lk-line p-6"
     >
       <p className="font-display text-lg">Poser une question au mentor</p>
       <div>
@@ -86,7 +86,7 @@ export function AnswerForm({ questionId }: { questionId: number }) {
         e.preventDefault();
         run(() => answerMentorQuestion({ questionId, answer, nextAction }));
       }}
-      className="space-y-4 border border-lk-black p-5"
+      className="space-y-4 border border-lk-line p-5"
     >
       <div>
         <LockinLabel htmlFor={`a-${questionId}`}>Réponse</LockinLabel>

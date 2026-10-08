@@ -31,7 +31,7 @@ export function ChapterCheck({ chapterId, done, disabled }: { chapterId: number;
           });
         }}
         className={cn(
-          "flex size-6 items-center justify-center border border-lk-black transition-colors disabled:opacity-40",
+          "flex size-6 items-center justify-center border border-lk-line transition-colors disabled:opacity-40",
           done ? "bg-lk-black text-lk-white" : "bg-lk-white text-transparent hover:bg-lk-mist",
         )}
       >

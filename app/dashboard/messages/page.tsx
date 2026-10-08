@@ -15,7 +15,7 @@ export default async function MessagesInboxPage() {
   return (
     <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
-        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
           Lockin Social Club
         </p>
         <h1 className="font-display mb-6 text-3xl text-lk-black sm:text-4xl">
@@ -23,7 +23,7 @@ export default async function MessagesInboxPage() {
         </h1>
 
         {conversations.length === 0 ? (
-          <p className="py-10 text-center text-xs text-camp-charcoal/50 uppercase">
+          <p className="py-10 text-center text-xs text-lk-stone-3 uppercase">
             Aucune conversation — démarre-en une depuis le profil d&apos;un membre.
           </p>
         ) : (
@@ -43,7 +43,7 @@ export default async function MessagesInboxPage() {
                   >
                     {counterpart.name ?? "Membre Lockin"}
                   </p>
-                  <p className="truncate text-sm text-camp-charcoal/60">{lastMessage.content}</p>
+                  <p className="truncate text-sm text-lk-stone-3">{lastMessage.content}</p>
                 </div>
                 <div className="flex shrink-0 flex-col items-end gap-1">
                   <span className="text-[10px] text-camp-charcoal/40 uppercase">

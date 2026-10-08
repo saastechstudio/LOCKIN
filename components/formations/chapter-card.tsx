@@ -28,7 +28,7 @@ export function ChapterCard({ chapter, index, canTrack, defaultOpen }: ChapterCa
       <details open={defaultOpen} className="group min-w-0 flex-1">
         <summary className="flex cursor-pointer list-none items-baseline gap-3 marker:hidden">
           <span className="text-xs text-lk-gold tabular-nums">{String(index + 1).padStart(2, "0")}</span>
-          <span className={cn("font-display text-base text-lk-black", chapter.done && "text-lk-black/50 line-through")}>
+          <span className={cn("font-display text-base text-lk-black", chapter.done && "text-lk-stone-3 line-through")}>
             {chapter.title}
           </span>
           <span className="ml-auto text-xs text-lk-black/40 tabular-nums">
@@ -37,7 +37,7 @@ export function ChapterCard({ chapter, index, canTrack, defaultOpen }: ChapterCa
         </summary>
         <div className="mt-4 space-y-3">
           {chapter.resources.length === 0 ? (
-            <p className="text-sm text-lk-black/50">Aucune ressource dans ce chapitre pour l&apos;instant.</p>
+            <p className="text-sm text-lk-stone-3">Aucune ressource dans ce chapitre pour l&apos;instant.</p>
           ) : (
             chapter.resources.map((r) => <ResourceCard key={r.id} resource={r} />)
           )}

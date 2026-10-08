@@ -33,7 +33,7 @@ export function useAction() {
 export function FormError({ message }: { message: string | null }) {
   if (!message) return null;
   return (
-    <p role="alert" className="border-l-2 border-lk-black pl-3 text-sm text-lk-black">
+    <p role="alert" className="border-l-2 border-lk-line pl-3 text-sm text-lk-black">
       {message}
     </p>
   );

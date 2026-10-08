@@ -148,7 +148,7 @@ export function FormationForm({
           onChange={(e) => set("priceEuros", e.target.value)}
           placeholder="Vide = gratuite"
         />
-        <p className="mt-2 text-xs leading-relaxed text-lk-black/50">
+        <p className="mt-2 text-xs leading-relaxed text-lk-stone-3">
           Le paiement n&apos;est pas encore activé sur Lockin : une formation payante reste visible, mais fermée aux
           inscriptions tant qu&apos;il ne l&apos;est pas.
         </p>
@@ -159,7 +159,7 @@ export function FormationForm({
         <LockinButton type="submit" disabled={pending}>
           {pending ? "Enregistrement…" : formationId === undefined ? "Créer le squelette" : "Enregistrer"}
         </LockinButton>
-        {saved ? <span className="text-sm text-lk-black/60">Enregistré.</span> : null}
+        {saved ? <span className="text-sm text-lk-stone-3">Enregistré.</span> : null}
       </div>
     </form>
   );

@@ -17,14 +17,14 @@ export function MobileNav() {
         <button
           type="button"
           aria-label="Ouvrir le menu"
-          className="flex size-9 items-center justify-center border border-lk-black text-lk-black md:hidden"
+          className="flex size-9 items-center justify-center border border-lk-line text-lk-black md:hidden"
         >
           <Menu className="size-4" />
         </button>
       </DialogPrimitive.Trigger>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-lk-black/40 md:hidden" />
-        <DialogPrimitive.Content className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-lk-black bg-lk-white duration-200 md:hidden">
+        <DialogPrimitive.Content className="data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-lk-line bg-lk-white duration-200 md:hidden">
           <DialogPrimitive.Title className="sr-only">Menu de navigation</DialogPrimitive.Title>
           <div className="flex h-16 items-center justify-between border-b border-lk-line px-6">
             <Logo size="sm" href="/dashboard" />

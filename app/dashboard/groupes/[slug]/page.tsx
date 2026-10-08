@@ -26,16 +26,16 @@ export default async function GroupDetailPage({
   return (
     <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
-        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
           {GROUP_TYPE_LABELS[group.type as GroupSeed["type"]]}
         </p>
-        <div className="mb-6 flex flex-col gap-4 border-b border-camp-charcoal pb-6 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-6 flex flex-col gap-4 border-b border-lk-line pb-6 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <h1 className="font-display text-3xl text-lk-black sm:text-4xl">
               {group.name}
             </h1>
             {group.description ? (
-              <p className="mt-1 text-sm text-camp-charcoal/60">{group.description}</p>
+              <p className="mt-1 text-sm text-lk-stone-3">{group.description}</p>
             ) : null}
             <p className="mt-1 text-[11px] text-camp-charcoal/40">
               {group.memberCount} membre{group.memberCount > 1 ? "s" : ""}
@@ -48,7 +48,7 @@ export default async function GroupDetailPage({
 
         <div>
           {posts.length === 0 ? (
-            <p className="py-10 text-center text-xs text-camp-charcoal/50 uppercase">
+            <p className="py-10 text-center text-xs text-lk-stone-3 uppercase">
               Aucun post dans ce groupe pour l&apos;instant.
             </p>
           ) : (

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { LandingLayout } from "@/components/landing/landing-layout";
 import { Hero } from "@/components/landing/hero";
-import { SectionWhatIsLockin } from "@/components/landing/section-what-is-lockin";
+import { Features } from "@/sections/features";
 import { SectionInside } from "@/components/landing/section-inside";
 import { SectionMotivation } from "@/components/landing/section-motivation";
 import { SectionEthics } from "@/components/landing/section-ethics";
@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <LandingLayout>
       <Hero />
-      <SectionWhatIsLockin />
+      <Features />
       <SectionInside />
       <SectionMotivation />
       <SectionEthics />

@@ -11,7 +11,7 @@ export function DashboardSidebar() {
 
       <NavList />
 
-      <div className="border-t border-lk-black px-6 py-5 text-xs leading-relaxed text-lk-black/60">
+      <div className="border-t border-lk-line px-6 py-5 text-xs leading-relaxed text-lk-stone-3">
         {SLOGAN_LINE_1}
         <br />
         <span className="font-medium text-lk-black">{SLOGAN_LINE_2}</span>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { JOIN_HREF } from "@/components/landing/landing-layout";
+import { Button } from "@/components/ui/button";
 
 /** Les étapes réelles du rituel d'inscription (/rejoindre). */
 const STEPS = ["Ta motivation", "Tes objectifs", "Ton sport", "Ta routine"];
@@ -11,7 +12,7 @@ export function SectionMotivation() {
     <section className="border-b border-camp-hairline">
       <div className="mx-auto grid w-full max-w-6xl gap-16 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-7">
-          <p className="text-[11px] font-semibold tracking-[0.25em] text-camp-charcoal/50 uppercase">
+          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
             Inscription par motivation
           </p>
           <h2 className="mt-8 text-4xl leading-[1.02] font-semibold tracking-tight text-camp-charcoal sm:text-6xl">
@@ -22,7 +23,7 @@ export function SectionMotivation() {
         </div>
 
         <div className="lg:col-span-5 lg:pt-16">
-          <p className="text-lg leading-relaxed text-camp-charcoal/70">
+          <p className="text-lg leading-relaxed text-lk-stone-3">
             Pour entrer dans le Lockin Social Club, tu écris ta motivation, tu
             choisis tes objectifs, ton sport, ta routine. C&apos;est ton premier
             acte de discipline.
@@ -42,12 +43,12 @@ export function SectionMotivation() {
             ))}
           </ol>
 
-          <Link
-            href={JOIN_HREF}
-            className="mt-10 inline-flex items-center gap-3 bg-camp-charcoal px-8 py-4 text-sm font-medium text-camp-white transition-opacity hover:opacity-85"
-          >
-            Commencer mon engagement Lockin <ArrowRight className="size-4" strokeWidth={1.5} />
-          </Link>
+          <Button asChild size="lg" className="group mt-10">
+            <Link href={JOIN_HREF}>
+              Commencer mon engagement Lockin
+              <ArrowRight className="transition-transform duration-300 ease-premium group-hover:translate-x-1" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

@@ -11,14 +11,15 @@ const LINKS = [
   { href: "/legal/mentions", label: "Contact" },
 ];
 
+/** Pied de page minimaliste : marque, slogan, quatre liens, mention légale. */
 export function Footer() {
   return (
-    <footer className="border-t border-camp-charcoal">
+    <footer className="border-t border-lk-line bg-lk-mist">
       <div className="mx-auto w-full max-w-6xl px-5 py-16 sm:px-8">
         <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
           <div>
             <Logo size="lg" />
-            <p className="mt-4 text-sm text-camp-charcoal/60">{SLOGAN}</p>
+            <p className="mt-4 text-sm text-lk-stone-3">{SLOGAN}</p>
           </div>
 
           <nav className="flex flex-wrap gap-x-8 gap-y-3 text-sm">
@@ -26,7 +27,7 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-camp-charcoal/60 transition-colors hover:text-camp-charcoal"
+                className="text-lk-stone-3 transition-colors hover:text-lk-blue"
               >
                 {link.label}
               </Link>
@@ -34,9 +35,9 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-16 flex flex-wrap justify-between gap-4 border-t border-camp-hairline pt-6 text-xs text-camp-charcoal/40">
+        <div className="mt-16 flex flex-wrap justify-between gap-4 border-t border-lk-line pt-6 text-xs text-lk-stone-3">
           <span>© {new Date().getFullYear()} Lockin Social Club</span>
-          <Link href="/legal/mentions" className="transition-colors hover:text-camp-charcoal">
+          <Link href="/legal/mentions" className="transition-colors hover:text-lk-blue">
             Mentions légales
           </Link>
         </div>

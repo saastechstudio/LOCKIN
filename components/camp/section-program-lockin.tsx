@@ -19,7 +19,7 @@ export function SectionProgramLockIn() {
           className="mb-12"
         />
 
-        <div className="border border-camp-charcoal">
+        <div className="border border-lk-line">
           {CAMP_PROGRAM_PARTS.map((part) => (
             <div
               key={part.number}
@@ -36,7 +36,7 @@ export function SectionProgramLockIn() {
                   {part.items.map((item) => (
                     <li
                       key={item}
-                      className="border-t border-camp-hairline pt-2 text-sm leading-relaxed text-camp-charcoal/70 first:border-t-0 first:pt-0"
+                      className="border-t border-camp-hairline pt-2 text-sm leading-relaxed text-lk-stone-3 first:border-t-0 first:pt-0"
                     >
                       {item}
                     </li>

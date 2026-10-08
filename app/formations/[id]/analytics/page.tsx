@@ -23,7 +23,7 @@ export default async function AnalyticsPage({ params }: { params: Promise<{ id: 
 
   return (
     <div className="mx-auto max-w-5xl space-y-12">
-      <Link href={`/formations/${formationId}/builder`} className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-black/60 hover:text-lk-black">
+      <Link href={`/formations/${formationId}/builder`} className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-stone-3 hover:text-lk-black">
         <ArrowLeft className="size-3.5" /> Éditeur
       </Link>
       <PageHeader
@@ -42,9 +42,9 @@ export default async function AnalyticsPage({ params }: { params: Promise<{ id: 
       <section>
         <Eyebrow>Complétion par chapitre</Eyebrow>
         {chapters.length === 0 ? (
-          <p className="mt-4 text-sm text-lk-black/60">Aucun chapitre pour l&apos;instant.</p>
+          <p className="mt-4 text-sm text-lk-stone-3">Aucun chapitre pour l&apos;instant.</p>
         ) : stats.learnerCount === 0 ? (
-          <p className="mt-4 text-sm text-lk-black/60">Aucun apprenant inscrit : rien à mesurer pour l&apos;instant.</p>
+          <p className="mt-4 text-sm text-lk-stone-3">Aucun apprenant inscrit : rien à mesurer pour l&apos;instant.</p>
         ) : (
           <div className="mt-6">
             <VerticalBars
@@ -61,7 +61,7 @@ export default async function AnalyticsPage({ params }: { params: Promise<{ id: 
                 <li key={c.id} className="flex gap-3 border-t border-lk-line pt-2">
                   <span className="text-xs text-lk-gold tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                   <span className="min-w-0 flex-1 truncate">{c.title}</span>
-                  <span className="text-xs text-lk-black/50 tabular-nums">{stats.perChapter[i].percent} %</span>
+                  <span className="text-xs text-lk-stone-3 tabular-nums">{stats.perChapter[i].percent} %</span>
                 </li>
               ))}
             </ol>
@@ -82,7 +82,7 @@ export default async function AnalyticsPage({ params }: { params: Promise<{ id: 
               accent: d.label === "100 %",
             }))}
           />
-          <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-xs text-lk-black/50">
+          <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-xs text-lk-stone-3">
             {stats.distribution.map((d) => (
               <li key={d.label} className="tabular-nums">
                 {d.label} : {d.learners}

@@ -57,7 +57,7 @@ function RoutineColumn({
               className={cn(
                 "flex size-6 shrink-0 items-center justify-center border",
                 item.checkedToday
-                  ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
+                  ? "border-lk-line bg-camp-charcoal text-camp-white"
                   : "border-camp-hairline text-transparent",
               )}
             >
@@ -91,13 +91,13 @@ function RoutineColumn({
           onChange={(e) => setLabel(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleAdd()}
           placeholder="Nouvelle routine"
-          className="flex-1 border border-camp-hairline bg-camp-white px-3 py-2 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
+          className="flex-1 border border-camp-hairline bg-camp-white px-3 py-2 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-lk-line"
         />
         <button
           type="button"
           onClick={handleAdd}
           disabled={isPending || !label.trim()}
-          className="border border-camp-charcoal px-3 py-2 text-xs font-bold text-camp-charcoal uppercase disabled:opacity-40"
+          className="border border-lk-line px-3 py-2 text-xs font-bold text-camp-charcoal uppercase disabled:opacity-40"
         >
           +
         </button>

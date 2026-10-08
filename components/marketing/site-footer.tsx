@@ -7,7 +7,7 @@ import { SLOGAN } from "@/components/lockin/primitives";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-lk-black py-12">
+    <footer className="border-t border-lk-line py-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-6 text-center md:flex-row md:justify-between md:text-left">
         <Logo size="sm" />
 
@@ -36,7 +36,7 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Rejoindre le Discord"
-            className="flex size-9 items-center justify-center border border-lk-black text-lk-black transition-colors hover:bg-lk-black hover:text-lk-white"
+            className="flex size-9 items-center justify-center border border-lk-line text-lk-black transition-colors hover:bg-lk-black hover:text-lk-white"
           >
             <DiscordIcon className="size-4" />
           </a>

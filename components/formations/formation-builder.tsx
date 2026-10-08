@@ -34,7 +34,7 @@ type BuilderModule = { id: number; title: string; position: number; chapters: Bu
 const listKey = (items: { id: number; position: number }[]) => items.map((i) => `${i.id}:${i.position}`).join(",");
 
 const iconButton =
-  "flex size-7 shrink-0 items-center justify-center border border-lk-black text-lk-black transition-colors hover:bg-lk-black hover:text-lk-white disabled:opacity-40";
+  "flex size-7 shrink-0 items-center justify-center border border-lk-line text-lk-black transition-colors hover:bg-lk-black hover:text-lk-white disabled:opacity-40";
 
 /** Champ d'ajout en une ligne : « Nouveau module… » + bouton rectangulaire. */
 function AddInline({
@@ -70,7 +70,7 @@ function AddInline({
           <Plus className="size-4" /> Ajouter
         </LockinButton>
       </div>
-      {disabledReason ? <p className="text-xs text-lk-black/50">{disabledReason}</p> : null}
+      {disabledReason ? <p className="text-xs text-lk-stone-3">{disabledReason}</p> : null}
       <FormError message={error} />
     </form>
   );
@@ -134,7 +134,7 @@ function ResourceForm({
           },
         );
       }}
-      className="space-y-3 border border-lk-black p-4"
+      className="space-y-3 border border-lk-line p-4"
     >
       <div className="grid gap-3 sm:grid-cols-3">
         <select
@@ -215,9 +215,9 @@ function ResourceBlock({ resource, controls }: { resource: BuilderResource; cont
     <div className="flex items-start gap-3 border border-lk-line bg-lk-white p-3">
       {controls}
       <div className="min-w-0 flex-1">
-        <p className="text-[10px] font-semibold tracking-[0.2em] text-lk-black/50 uppercase">{RESOURCE_TYPE_LABELS[type]}</p>
+        <p className="text-[10px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">{RESOURCE_TYPE_LABELS[type]}</p>
         <p className="text-sm font-medium text-lk-black">{resource.title}</p>
-        <p className="mt-1 truncate text-xs text-lk-black/50">{resource.content}</p>
+        <p className="mt-1 truncate text-xs text-lk-stone-3">{resource.content}</p>
         <FormError message={error} />
       </div>
       <button type="button" onClick={() => setEditing(true)} className="text-xs text-lk-black underline underline-offset-4">
@@ -263,7 +263,7 @@ function ChapterBlock({ chapter, controls }: { chapter: BuilderChapter; controls
       <div className="space-y-3 p-3">
         <FormError message={error} />
         {chapter.resources.length === 0 ? (
-          <p className="text-xs text-lk-black/50">Aucune ressource. Ajoute un texte, une vidéo, un audio ou un PDF.</p>
+          <p className="text-xs text-lk-stone-3">Aucune ressource. Ajoute un texte, une vidéo, un audio ou un PDF.</p>
         ) : (
           <SortableList
             key={`${listKey(chapter.resources)}:${bump}`}
@@ -301,11 +301,11 @@ function ModuleBlock({ module, index, controls }: { module: BuilderModule; index
   const { run, pending, error } = useAction();
 
   return (
-    <section className="border border-lk-black bg-lk-white">
-      <header className="flex items-start gap-3 border-b border-lk-black bg-lk-mist p-4">
+    <section className="border border-lk-line bg-lk-white">
+      <header className="flex items-start gap-3 border-b border-lk-line bg-lk-mist p-4">
         {controls}
         <div className="min-w-0 flex-1">
-          <p className="mb-2 text-[11px] font-semibold tracking-[0.2em] text-lk-black/50 uppercase">
+          <p className="mb-2 text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">
             Module {String(index + 1).padStart(2, "0")}
           </p>
           <RenameField value={module.title} label="Titre du module" onRename={(t) => renameModule(module.id, t)} />
@@ -325,7 +325,7 @@ function ModuleBlock({ module, index, controls }: { module: BuilderModule; index
       <div className="space-y-4 p-4">
         <FormError message={error} />
         {module.chapters.length === 0 ? (
-          <p className="text-sm text-lk-black/50">Aucun chapitre dans ce module.</p>
+          <p className="text-sm text-lk-stone-3">Aucun chapitre dans ce module.</p>
         ) : (
           <SortableList
             key={listKey(module.chapters)}
@@ -357,7 +357,7 @@ export function FormationBuilder({ formationId, modules }: { formationId: number
     <div className="space-y-6">
       <FormError message={error} />
       {modules.length === 0 ? (
-        <div className="border border-dashed border-lk-black p-8 text-center text-sm text-lk-black/60">
+        <div className="border border-dashed border-lk-line p-8 text-center text-sm text-lk-stone-3">
           Le squelette est vide. Ajoute ton premier module : un grand thème de ta formation.
         </div>
       ) : (

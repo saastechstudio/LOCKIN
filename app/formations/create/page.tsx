@@ -13,7 +13,7 @@ export default async function CreateFormationPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-10">
-      <Link href="/formations" className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-black/60 hover:text-lk-black">
+      <Link href="/formations" className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-stone-3 hover:text-lk-black">
         <ArrowLeft className="size-3.5" /> Formations
       </Link>
       <PageHeader

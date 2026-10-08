@@ -54,7 +54,7 @@ export const LockinTextarea = React.forwardRef<HTMLTextAreaElement, React.Compon
 export function LockinLabel({ className, ...props }: React.ComponentProps<"label">) {
   return (
     <label
-      className={cn("mb-2 block text-[11px] font-semibold tracking-[0.2em] text-lk-black/60 uppercase", className)}
+      className={cn("mb-2 block text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase", className)}
       {...props}
     />
   );

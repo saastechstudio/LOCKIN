@@ -84,7 +84,7 @@ export function PillarsSection() {
     <section id="pillars-values" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-xl text-center">
-          <span className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+          <span className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
             Le socle du club
           </span>
           <h2 className="font-display mt-4 text-3xl text-foreground sm:text-4xl">

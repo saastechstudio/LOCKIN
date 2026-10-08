@@ -25,13 +25,13 @@ export default async function ModerationAdminPage() {
   return (
     <div className="camp-scope">
       <div className="mx-auto max-w-3xl">
-        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
           Lockin Social Club · Admin
         </p>
         <h1 className="font-display mb-2 text-3xl text-lk-black sm:text-4xl">
           Modération
         </h1>
-        <p className="mb-4 text-sm text-camp-charcoal/60">
+        <p className="mb-4 text-sm text-lk-stone-3">
           Respect, discipline, entraide, éthique, focus — charte de modération Lockin.
         </p>
         <Link href="/dashboard/admin/creators" className="lockin-button lockin-button--outline mb-8">

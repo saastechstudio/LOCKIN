@@ -35,7 +35,7 @@ export default async function MentorsPage({
             href={tag ? `/dashboard/mentors?domaine=${encodeURIComponent(tag)}` : "/dashboard/mentors"}
             className={cn(
               "border px-3 py-1.5 text-xs font-medium",
-              domain === tag ? "border-lk-black bg-lk-black text-lk-white" : "border-lk-line hover:border-lk-black",
+              domain === tag ? "border-lk-line bg-lk-black text-lk-white" : "border-lk-line hover:border-lk-line",
             )}
           >
             {tag ?? "Tous"}
@@ -46,11 +46,11 @@ export default async function MentorsPage({
       <div className="grid gap-10 lg:grid-cols-3">
         <section className="lg:col-span-2">
           {mentors.length === 0 ? (
-            <p className="text-sm text-lk-black/60">
+            <p className="text-sm text-lk-stone-3">
               Aucun mentor {domain ? `en ${domain} ` : ""}pour l&apos;instant. Sois le premier.
             </p>
           ) : (
-            <ul className="border-t border-lk-black">
+            <ul className="border-t border-lk-line">
               {mentors.map((m) => (
                 <li key={m.id} className="flex flex-col gap-3 border-b border-lk-line py-5 sm:flex-row sm:items-start">
                   <LockIcon level={m.lockinLevel} className="h-8 w-6" title={`Niveau ${m.lockinLevel}`} />
@@ -58,7 +58,7 @@ export default async function MentorsPage({
                     <Link href={`/dashboard/u/${m.id}`} className="font-display text-lg hover:underline">
                       {m.name ?? "Membre Lockin"}
                     </Link>
-                    <p className="text-xs text-lk-black/50">
+                    <p className="text-xs text-lk-stone-3">
                       {[m.sector, [m.city, m.country].filter(Boolean).join(", ")].filter(Boolean).join(" · ")}
                     </p>
                     {m.mentorPitch ? <p className="mt-2 text-sm leading-relaxed">{m.mentorPitch}</p> : null}
@@ -69,7 +69,7 @@ export default async function MentorsPage({
                   {m.isMe ? null : (
                     <Link
                       href={`/dashboard/messages/${m.id}`}
-                      className="shrink-0 border border-lk-black px-4 py-2 text-xs font-medium hover:bg-lk-black hover:text-lk-white"
+                      className="shrink-0 border border-lk-line px-4 py-2 text-xs font-medium hover:bg-lk-black hover:text-lk-white"
                     >
                       Écrire
                     </Link>

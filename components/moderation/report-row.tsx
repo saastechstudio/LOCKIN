@@ -59,7 +59,7 @@ export function ReportRow({ report }: ReportRowProps) {
         </span>
       </div>
 
-      <p className="mt-1 text-sm text-camp-charcoal/70">
+      <p className="mt-1 text-sm text-lk-stone-3">
         Signalé par {report.reporter.name ?? "Membre Lockin"} · visant{" "}
         <span className="font-semibold text-camp-charcoal">{report.reportedUser.name ?? "Membre Lockin"}</span>{" "}
         ({report.reportedUser.strikeCount} strike{report.reportedUser.strikeCount > 1 ? "s" : ""}, score{" "}
@@ -82,7 +82,7 @@ export function ReportRow({ report }: ReportRowProps) {
             type="button"
             onClick={() => handle("uphold")}
             disabled={isPending}
-            className="border border-camp-charcoal bg-camp-charcoal px-4 py-1.5 text-[11px] font-bold text-camp-white uppercase disabled:opacity-40"
+            className="border border-lk-line bg-camp-charcoal px-4 py-1.5 text-[11px] font-bold text-camp-white uppercase disabled:opacity-40"
           >
             Confirmer
           </button>
@@ -90,7 +90,7 @@ export function ReportRow({ report }: ReportRowProps) {
             type="button"
             onClick={() => handle("dismiss")}
             disabled={isPending}
-            className="border border-camp-hairline px-4 py-1.5 text-[11px] font-bold text-camp-charcoal/70 uppercase hover:border-camp-charcoal disabled:opacity-40"
+            className="border border-camp-hairline px-4 py-1.5 text-[11px] font-bold text-lk-stone-3 uppercase hover:border-lk-line disabled:opacity-40"
           >
             Rejeter
           </button>

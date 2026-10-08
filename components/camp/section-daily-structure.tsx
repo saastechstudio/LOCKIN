@@ -17,7 +17,7 @@ export function SectionDailyStructure() {
           className="mb-12"
         />
 
-        <div className="grid grid-cols-1 border border-camp-charcoal sm:grid-cols-4">
+        <div className="grid grid-cols-1 border border-lk-line sm:grid-cols-4">
           {CAMP_DAILY_BLOCKS.map((block, i) => (
             <div
               key={block.label}
@@ -29,7 +29,7 @@ export function SectionDailyStructure() {
               <p className="font-display mt-3 text-lg text-camp-charcoal">
                 {block.label}
               </p>
-              <p className="mt-2 text-sm font-semibold text-camp-charcoal/60">
+              <p className="mt-2 text-sm font-semibold text-lk-stone-3">
                 {block.duration}
               </p>
             </div>

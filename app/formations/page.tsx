@@ -46,7 +46,7 @@ export default async function FormationsPage({
       />
 
       {verification.status !== "approved" ? (
-        <aside className="flex flex-col gap-3 border border-lk-black p-5 sm:flex-row sm:items-center sm:justify-between">
+        <aside className="flex flex-col gap-3 border border-lk-line p-5 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm text-lk-black/70">
             <span className="font-medium text-lk-black">{CREATOR_STATUS_LABELS[verification.status]}.</span> Pour publier une
             formation, ton identité de créateur doit être validée.
@@ -77,7 +77,7 @@ export default async function FormationsPage({
               href={pageHref(t, 1)}
               className={cn(
                 "border px-3 py-1.5 text-xs font-medium",
-                catalog.theme === t ? "border-lk-black bg-lk-black text-lk-white" : "border-lk-line hover:border-lk-black",
+                catalog.theme === t ? "border-lk-line bg-lk-black text-lk-white" : "border-lk-line hover:border-lk-line",
               )}
             >
               {t ?? "Tous"}
@@ -86,7 +86,7 @@ export default async function FormationsPage({
         </nav>
 
         {catalog.items.length === 0 ? (
-          <p className="mt-8 border border-dashed border-lk-black p-8 text-center text-sm text-lk-black/60">
+          <p className="mt-8 border border-dashed border-lk-line p-8 text-center text-sm text-lk-stone-3">
             Aucune formation publiée{catalog.theme ? ` en ${catalog.theme}` : ""} pour l&apos;instant. Sois le premier à transmettre.
           </p>
         ) : (
@@ -106,7 +106,7 @@ export default async function FormationsPage({
             ) : (
               <span />
             )}
-            <span className="text-lk-black/60 tabular-nums">
+            <span className="text-lk-stone-3 tabular-nums">
               Page {catalog.page} / {catalog.pageCount}
             </span>
             {catalog.page < catalog.pageCount ? (

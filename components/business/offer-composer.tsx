@@ -8,7 +8,7 @@ import { BUSINESS_KINDS, BUSINESS_KIND_LABELS, type BusinessKind } from "@/lib/b
 import { Button } from "@/components/ui/button";
 
 const field =
-  "w-full border border-lk-line px-4 py-3 text-sm outline-none placeholder:text-lk-black/40 focus:border-lk-black";
+  "w-full border border-lk-line px-4 py-3 text-sm outline-none placeholder:text-lk-black/40 focus:border-lk-line";
 
 /** Publier une annonce business — modérée à la publication comme tout le club. */
 export function OfferComposer() {
@@ -35,7 +35,7 @@ export function OfferComposer() {
   }
 
   return (
-    <form onSubmit={submit} className="space-y-4 border border-lk-black p-6">
+    <form onSubmit={submit} className="space-y-4 border border-lk-line p-6">
       <p className="font-display text-lg">Publier une annonce</p>
       <div className="grid grid-cols-3 border-t border-l border-lk-line">
         {BUSINESS_KINDS.map((k) => (
@@ -56,11 +56,11 @@ export function OfferComposer() {
       <input value={title} onChange={(e) => setTitle(e.target.value)} maxLength={120} required minLength={3} placeholder="Titre" className={field} />
       <textarea value={body} onChange={(e) => setBody(e.target.value)} maxLength={2000} required minLength={10} rows={4} placeholder="Ce que tu proposes ou cherches, concrètement." className={cn(field, "resize-none")} />
       <input value={location} onChange={(e) => setLocation(e.target.value)} maxLength={80} placeholder="Ville ou « à distance » (facultatif)" className={field} />
-      {error ? <p className="border-l-2 border-lk-black pl-3 text-sm">{error}</p> : null}
+      {error ? <p className="border-l-2 border-lk-line pl-3 text-sm">{error}</p> : null}
       <Button type="submit" disabled={isPending} className="w-full">
         {isPending ? "Publication…" : "Publier"}
       </Button>
-      <p className="text-xs text-lk-black/50">
+      <p className="text-xs text-lk-stone-3">
         Pas de vente forcée, pas de promesse de gains. Les annonces sont modérées selon la charte Lockin.
       </p>
     </form>

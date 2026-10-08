@@ -18,8 +18,8 @@ export function GroupJoinButton({ groupId, isMember }: { groupId: number; isMemb
       disabled={isPending}
       className={
         isMember
-          ? "border border-camp-charcoal px-5 py-2 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
-          : "border border-camp-charcoal bg-camp-gold px-5 py-2 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          ? "border border-lk-line px-5 py-2 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          : "border border-lk-line bg-camp-gold px-5 py-2 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
       }
     >
       {isMember ? "Quitter le club" : "Rejoindre le club"}

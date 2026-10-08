@@ -37,7 +37,7 @@ export default async function NetworkPage() {
 
       <div className="surface mb-6 flex flex-col items-start justify-between gap-4 rounded-xl p-5 sm:flex-row sm:items-center">
         <div className="flex items-center gap-3">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-none border border-brand-blue/25 bg-lk-mist">
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-brand-blue/25 bg-lk-mist">
             <DiscordIcon className="size-5 text-brand-blue" />
           </div>
           <div>

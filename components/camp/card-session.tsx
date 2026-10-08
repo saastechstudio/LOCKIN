@@ -21,8 +21,8 @@ export function CardSession({ session, index }: CardSessionProps) {
   const isFull = session.remainingSpots <= 0;
 
   return (
-    <div className="border border-camp-charcoal bg-camp-white">
-      <div className="flex flex-col gap-6 border-b border-camp-charcoal p-6 sm:flex-row sm:items-start sm:justify-between">
+    <div className="border border-lk-line bg-camp-white">
+      <div className="flex flex-col gap-6 border-b border-lk-line p-6 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-semibold tracking-[0.25em] text-camp-gold uppercase">
             {index} — {session.name}

@@ -5,7 +5,7 @@ export function SectionEthics() {
     <section>
       <div className="mx-auto grid w-full max-w-6xl gap-10 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
-          <p className="text-[11px] font-semibold tracking-[0.25em] text-camp-charcoal/50 uppercase">
+          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
             Éthique &amp; respect
           </p>
           <h2 className="mt-8 text-4xl font-semibold tracking-tight text-camp-charcoal sm:text-5xl">
@@ -13,7 +13,7 @@ export function SectionEthics() {
           </h2>
         </div>
 
-        <div className="border-t border-camp-charcoal pt-10 lg:col-span-7 lg:mt-[4.5rem]">
+        <div className="border-t border-lk-line pt-10 lg:col-span-7 lg:mt-[4.5rem]">
           <p className="text-2xl leading-snug font-medium tracking-tight text-camp-charcoal sm:text-3xl">
             Respect, discipline, entraide, éthique. Aucun manque de respect,
             aucune insulte, aucune toxicité.

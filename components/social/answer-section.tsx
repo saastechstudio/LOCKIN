@@ -59,7 +59,7 @@ export function AnswerSection({ questionId, isQuestionAuthor, answers }: AnswerS
 
   return (
     <div className="space-y-6">
-      <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-black/50 uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">
         {answers.length} réponse{answers.length > 1 ? "s" : ""}
       </p>
 
@@ -79,7 +79,7 @@ export function AnswerSection({ questionId, isQuestionAuthor, answers }: AnswerS
             ) : null}
             <p className="text-sm leading-relaxed whitespace-pre-wrap text-lk-black">{answer.body}</p>
             <div className="mt-3 flex flex-wrap items-center gap-3">
-              <p className="mr-auto text-[11px] tracking-[0.06em] text-lk-black/50 uppercase">
+              <p className="mr-auto text-[11px] tracking-[0.06em] text-lk-stone-3 uppercase">
                 {answer.user.name ?? "Membre Lockin"}
               </p>
               {isQuestionAuthor && !answer.isMine ? (
@@ -91,7 +91,7 @@ export function AnswerSection({ questionId, isQuestionAuthor, answers }: AnswerS
                     "border px-3 py-1.5 text-xs font-medium transition-colors",
                     answer.accepted
                       ? "border-lk-gold text-lk-black hover:bg-lk-mist"
-                      : "border-lk-black text-lk-black hover:bg-lk-black hover:text-lk-white",
+                      : "border-lk-line text-lk-black hover:bg-lk-black hover:text-lk-white",
                   )}
                 >
                   {answer.accepted ? "Ne plus retenir" : "Retenir cette réponse"}
@@ -106,8 +106,8 @@ export function AnswerSection({ questionId, isQuestionAuthor, answers }: AnswerS
                   className={cn(
                     "border px-3 py-1.5 text-xs font-medium transition-colors",
                     answer.usefulByMe
-                      ? "border-lk-black bg-lk-black text-lk-white"
-                      : "border-lk-line text-lk-black hover:border-lk-black",
+                      ? "border-lk-line bg-lk-black text-lk-white"
+                      : "border-lk-line text-lk-black hover:border-lk-line",
                   )}
                 >
                   {answer.usefulByMe ? "Utile, noté" : "Utile"}
@@ -122,16 +122,16 @@ export function AnswerSection({ questionId, isQuestionAuthor, answers }: AnswerS
         ) : null}
       </div>
 
-      <div className="space-y-3 border-t border-lk-black pt-6">
+      <div className="space-y-3 border-t border-lk-line pt-6">
         {error ? (
-          <p className="border-l-2 border-lk-black pl-3 text-sm text-lk-black">{error}</p>
+          <p className="border-l-2 border-lk-line pl-3 text-sm text-lk-black">{error}</p>
         ) : null}
         <textarea
           value={body}
           onChange={(e) => setBody(e.target.value)}
           rows={3}
           placeholder="Proposer une réponse…"
-          className="w-full resize-none border border-lk-line bg-lk-white px-4 py-3 text-sm text-lk-black outline-none placeholder:text-lk-black/40 focus:border-lk-black"
+          className="w-full resize-none border border-lk-line bg-lk-white px-4 py-3 text-sm text-lk-black outline-none placeholder:text-lk-black/40 focus:border-lk-line"
         />
         <button
           type="button"

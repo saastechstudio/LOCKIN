@@ -55,7 +55,7 @@ export function SortableList<T extends { id: number }>({
   }
 
   const buttonClass =
-    "flex size-7 items-center justify-center border border-lk-black text-lk-black transition-colors hover:bg-lk-black hover:text-lk-white disabled:pointer-events-none disabled:opacity-30";
+    "flex size-7 items-center justify-center border border-lk-line text-lk-black transition-colors hover:bg-lk-black hover:text-lk-white disabled:pointer-events-none disabled:opacity-30";
 
   return (
     <div className={cn("space-y-3", className)}>

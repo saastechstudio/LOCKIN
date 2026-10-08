@@ -7,8 +7,8 @@ import { DISCORD_INVITE_URL } from "@/lib/social-links";
 export function DiscordCta() {
   return (
     <section className="px-6 py-16">
-      <div className="mx-auto flex max-w-4xl flex-col items-center gap-5 border border-lk-black px-8 py-12 text-center">
-        <div className="flex size-14 items-center justify-center border border-lk-black">
+      <div className="mx-auto flex max-w-4xl flex-col items-center gap-5 border border-lk-line px-8 py-12 text-center">
+        <div className="flex size-14 items-center justify-center border border-lk-line">
           <DiscordIcon className="size-6 text-lk-black" />
         </div>
         <h2 className="font-display text-2xl text-foreground sm:text-3xl">

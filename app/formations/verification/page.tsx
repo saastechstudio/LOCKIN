@@ -15,7 +15,7 @@ export default async function VerificationPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-10">
-      <Link href="/formations" className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-black/60 hover:text-lk-black">
+      <Link href="/formations" className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-stone-3 hover:text-lk-black">
         <ArrowLeft className="size-3.5" /> Formations
       </Link>
       <PageHeader
@@ -43,16 +43,16 @@ export default async function VerificationPage() {
       ) : (
         <>
           {v.status === "rejected" ? (
-            <div className="space-y-2 border border-lk-black bg-lk-mist p-5">
-              <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-black/60 uppercase">Demande refusée</p>
+            <div className="space-y-2 border border-lk-line bg-lk-mist p-5">
+              <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">Demande refusée</p>
               <p className="text-sm leading-relaxed whitespace-pre-wrap">{v.decisionNote ?? "Aucun motif indiqué."}</p>
-              <p className="text-xs text-lk-black/60">Corrige ta demande ci-dessous et renvoie-la.</p>
+              <p className="text-xs text-lk-stone-3">Corrige ta demande ci-dessous et renvoie-la.</p>
             </div>
           ) : null}
           <LockinSection>
             <VerificationForm initial={{ legalName: v.legalName, presentation: v.presentation, proofUrl: v.proofUrl }} />
           </LockinSection>
-          <p className="text-xs leading-relaxed text-lk-black/50">
+          <p className="text-xs leading-relaxed text-lk-stone-3">
             Ces informations ne sont visibles que des administrateurs de Lockin. Aucun document d&apos;identité n&apos;est
             demandé ni conservé : seule la décision est enregistrée. Voir la{" "}
             <Link href="/legal/confidentialite" className="underline underline-offset-4">

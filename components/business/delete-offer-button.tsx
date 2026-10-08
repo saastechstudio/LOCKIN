@@ -13,7 +13,7 @@ export function DeleteOfferButton({ offerId }: { offerId: number }) {
       onClick={() => {
         if (window.confirm("Retirer cette annonce ?")) startTransition(() => deleteBusinessOffer(offerId));
       }}
-      className="text-xs text-lk-black/50 underline underline-offset-4 hover:text-lk-black"
+      className="text-xs text-lk-stone-3 underline underline-offset-4 hover:text-lk-black"
     >
       Retirer
     </button>

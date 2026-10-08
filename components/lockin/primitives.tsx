@@ -19,7 +19,7 @@ export function Eyebrow({
     <p
       className={cn(
         "text-[11px] font-semibold tracking-[0.25em] uppercase",
-        gold ? "text-lk-gold" : "text-lk-black/50",
+        gold ? "text-lk-gold" : "text-lk-stone-3",
         className,
       )}
     >
@@ -96,7 +96,7 @@ export function Section({
       className={cn(
         "border-b border-lk-line",
         tone === "mist" && "bg-lk-mist",
-        tone === "black" && "border-lk-black bg-lk-black text-lk-white",
+        tone === "black" && "border-lk-line bg-lk-black text-lk-white",
         className,
       )}
     >
@@ -124,7 +124,7 @@ export function PageHeader({
   return (
     <header
       className={cn(
-        "flex flex-col gap-6 border-b border-lk-black pb-8 sm:flex-row sm:items-end sm:justify-between",
+        "flex flex-col gap-6 border-b border-lk-line pb-8 sm:flex-row sm:items-end sm:justify-between",
         className,
       )}
     >
@@ -134,7 +134,7 @@ export function PageHeader({
           {title}
         </Title>
         {description ? (
-          <p className="mt-4 text-sm leading-relaxed text-lk-black/60 sm:text-base">{description}</p>
+          <p className="mt-4 text-sm leading-relaxed text-lk-stone-3 sm:text-base">{description}</p>
         ) : null}
       </div>
       {actions ? <div className="flex shrink-0 flex-wrap gap-3">{actions}</div> : null}
@@ -155,10 +155,10 @@ export function Stat({
   className?: string;
 }) {
   return (
-    <div className={cn("border-t border-lk-black pt-4", className)}>
-      <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-black/50 uppercase">{label}</p>
+    <div className={cn("border-t border-lk-line pt-4", className)}>
+      <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">{label}</p>
       <p className="font-display mt-3 text-4xl text-lk-black tabular-nums">{value}</p>
-      {hint ? <p className="mt-2 text-xs text-lk-black/50">{hint}</p> : null}
+      {hint ? <p className="mt-2 text-xs text-lk-stone-3">{hint}</p> : null}
     </div>
   );
 }

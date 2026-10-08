@@ -53,7 +53,7 @@ function MiniAvatar({
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center justify-center border border-camp-hairline bg-camp-cream text-xs font-bold text-camp-charcoal",
+        "flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-lk-line bg-lk-mist text-xs font-medium text-lk-black",
         size === "md" ? "size-9" : "size-7",
       )}
     >
@@ -107,7 +107,7 @@ export function PostCard({ post }: PostCardProps) {
               {post.user.name ?? "Membre Lockin"}
             </Link>
             <span
-              className="inline-flex items-center gap-1 text-[11px] text-lk-black/50"
+              className="inline-flex items-center gap-1 text-[11px] text-lk-stone-3"
               title={`Niveau Lockin ${post.user.lockinLevel}`}
             >
               <LockIcon level={post.user.lockinLevel} className="h-3.5 w-[10.5px]" />
@@ -134,7 +134,7 @@ export function PostCard({ post }: PostCardProps) {
               {[post.tag, post.sport, post.country].filter(Boolean).map((t) => (
                 <span
                   key={t}
-                  className="border border-camp-hairline px-2 py-0.5 text-[10px] font-semibold tracking-[0.06em] text-camp-charcoal/70 uppercase"
+                  className="border border-camp-hairline px-2 py-0.5 text-[10px] font-semibold tracking-[0.06em] text-lk-stone-3 uppercase"
                 >
                   {t}
                 </span>
@@ -146,7 +146,7 @@ export function PostCard({ post }: PostCardProps) {
             {/* Respect, pas de like : aucun cœur, aucun compteur public. Seul l'auteur
                 voit combien de membres ont salué son effort. */}
             {post.isMine ? (
-              <span className="text-xs text-lk-black/50">
+              <span className="text-xs text-lk-stone-3">
                 {post.respectCount === 0
                   ? "Aucun respect pour l'instant"
                   : `${post.respectCount} respect${post.respectCount > 1 ? "s" : ""}`}
@@ -160,8 +160,8 @@ export function PostCard({ post }: PostCardProps) {
                 className={cn(
                   "border px-3 py-1.5 text-xs font-medium transition-colors",
                   post.respectedByMe
-                    ? "border-lk-black bg-lk-black text-lk-white"
-                    : "border-lk-line text-lk-black hover:border-lk-black",
+                    ? "border-lk-line bg-lk-black text-lk-white"
+                    : "border-lk-line text-lk-black hover:border-lk-line",
                 )}
               >
                 {post.respectedByMe ? "Respect donné" : "Respect"}
@@ -170,7 +170,7 @@ export function PostCard({ post }: PostCardProps) {
             <button
               type="button"
               onClick={() => setShowComments((s) => !s)}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-camp-charcoal/50 uppercase hover:text-camp-charcoal"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-lk-stone-3 uppercase hover:text-camp-charcoal"
             >
               <MessageSquare className="size-4" />
               {post.comments.length}
@@ -195,7 +195,7 @@ export function PostCard({ post }: PostCardProps) {
                 </div>
               ))}
               {commentError ? (
-                <p className="border border-camp-charcoal bg-camp-cream px-3 py-2 text-sm text-camp-charcoal">
+                <p className="border border-lk-line bg-camp-cream px-3 py-2 text-sm text-camp-charcoal">
                   {commentError}
                 </p>
               ) : null}
@@ -208,13 +208,13 @@ export function PostCard({ post }: PostCardProps) {
                   }}
                   onKeyDown={(e) => e.key === "Enter" && handleComment()}
                   placeholder="Répondre…"
-                  className="flex-1 border border-camp-hairline bg-camp-white px-3 py-2 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
+                  className="flex-1 border border-camp-hairline bg-camp-white px-3 py-2 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-lk-line"
                 />
                 <button
                   type="button"
                   onClick={handleComment}
                   disabled={isPending || !comment.trim()}
-                  className="border border-camp-charcoal px-3 py-2 text-xs font-bold text-camp-charcoal uppercase disabled:opacity-40"
+                  className="border border-lk-line px-3 py-2 text-xs font-bold text-camp-charcoal uppercase disabled:opacity-40"
                 >
                   Envoyer
                 </button>

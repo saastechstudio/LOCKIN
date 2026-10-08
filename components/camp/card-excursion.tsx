@@ -21,8 +21,8 @@ export function CardExcursion({ excursion, selected, disabled, onToggle }: CardE
       className={cn(
         "flex items-center gap-3 border px-4 py-3 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-40",
         selected
-          ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
-          : "border-camp-hairline bg-camp-white text-camp-charcoal hover:border-camp-charcoal",
+          ? "border-lk-line bg-camp-charcoal text-camp-white"
+          : "border-camp-hairline bg-camp-white text-camp-charcoal hover:border-lk-line",
       )}
     >
       <span className="flex-1 text-xs font-bold tracking-[0.04em] uppercase">
