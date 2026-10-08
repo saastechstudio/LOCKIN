@@ -10,7 +10,7 @@
  *
  * Concentration d'abord : fonds anti-fatigue (blanc cassé, beige crème),
  * gris chauds pour la structure, un bleu désaturé pour le focus, un corail
- * doux et un doré mat pour le dynamisme, le même bleu pour le texte.
+ * doux et un doré mat pour le dynamisme, une encre bleu nuit (même teinte) pour le texte.
  * Ambiance béton ciré : rayons doux, ombres ultra-diffuses teintées de
  * bleu, mouvements courts (fade + 10 px) qui respectent
  * prefers-reduced-motion. Un seul thème : clair (forcé dans app/layout.tsx).
@@ -35,8 +35,8 @@
   --lk-stone-3: #6a6764; /* texte secondaire — 5,2:1 sur #faf9f7 */
 
   /* ---- Texte / premium ---- */
-  --lk-black: #3e5c8a; /* bleu focus : texte, aplats sombres */
-  --lk-ink-1: #3e5c8a;
+  --lk-black: #1b2a3e; /* encre bleue : le bleu focus assombri, pour texte et aplats sombres */
+  --lk-ink-1: #1b2a3e;
   --lk-ink-2: #6a6764;
   --lk-ink-3: #b8b3ae;
 

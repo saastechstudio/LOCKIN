@@ -14,7 +14,7 @@ const PILLARS = [
 ];
 
 /**
- * Entrée du club. Fond blanc cassé #FAF9F7, titre bleu focus #3E5C8A, sous-titre
+ * Entrée du club. Fond blanc cassé #FAF9F7, titre encre bleu nuit #1B2A3E, sous-titre
  * gris #6A6764, CTA bleu #3E5C8A (survol #4A6FA5 + ombre diffuse).
  * Le panneau de droite flotte très lentement et glisse en parallax léger au
  * défilement (CSS pur, désactivé sous prefers-reduced-motion).
@@ -22,14 +22,10 @@ const PILLARS = [
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden">
-      {/* Halos très doux : de la profondeur sans jamais attirer l'œil. */}
+      {/* Halo très doux : de la profondeur sans jamais attirer l'œil. */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 -right-32 -z-10 size-[34rem] rounded-full bg-lk-gold/15 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-48 -left-40 -z-10 size-[30rem] rounded-full bg-lk-blue-soft/10 blur-3xl"
       />
 
       <div className="mx-auto grid w-full max-w-6xl gap-16 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12 lg:items-center lg:gap-12">

@@ -6,10 +6,10 @@ import { ClerkProvider } from "@clerk/nextjs";
 const LOCKIN_VARIABLES = {
   colorPrimary: "#3E5C8A",
   colorBackground: "#ffffff",
-  colorForeground: "#3E5C8A",
+  colorForeground: "#1B2A3E",
   colorInput: "#ffffff",
-  colorInputForeground: "#3E5C8A",
-  colorNeutral: "#3E5C8A",
+  colorInputForeground: "#1B2A3E",
+  colorNeutral: "#1B2A3E",
   colorMuted: "#F5F2EE",
   colorMutedForeground: "#6A6764",
   colorBorder: "#E7E3DF",
