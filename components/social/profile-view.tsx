@@ -33,7 +33,7 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
     <div className="space-y-8">
       <div className="flex flex-col gap-5 border-b border-lk-line pb-8 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-start gap-4">
-          <div className="flex size-16 shrink-0 items-center justify-center border border-camp-hairline bg-camp-cream text-xl font-bold text-camp-charcoal">
+          <div className="flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-full border border-lk-line bg-lk-mist text-xl font-medium text-camp-charcoal">
             {profile.avatarUrl ? (
               // eslint-disable-next-line @next/next/no-img-element -- avatar Clerk externe, cf. components/ui/avatar.tsx
               <img src={profile.avatarUrl} alt="" className="size-full object-cover" />

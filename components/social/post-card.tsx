@@ -53,7 +53,7 @@ function MiniAvatar({
   return (
     <div
       className={cn(
-        "flex shrink-0 items-center justify-center border border-camp-hairline bg-camp-cream text-xs font-bold text-camp-charcoal",
+        "flex shrink-0 items-center justify-center overflow-hidden rounded-full border border-lk-line bg-lk-mist text-xs font-medium text-lk-black",
         size === "md" ? "size-9" : "size-7",
       )}
     >

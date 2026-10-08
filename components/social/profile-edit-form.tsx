@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { X } from "lucide-react";
 
+import { AvatarUploader } from "@/components/social/avatar-uploader";
 import { cn } from "@/lib/utils";
 import { updateSocialProfile } from "@/lib/actions/social-profile";
 import { SPORT_ACTIVITIES } from "@/lib/social/data";
@@ -10,6 +11,8 @@ import type { ProfileLink } from "@/lib/db/schema";
 
 type ProfileEditFormProps = {
   initial: {
+    name: string | null;
+    avatarUrl: string | null;
     bio: string | null;
     country: string | null;
     city: string | null;
@@ -54,6 +57,8 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
 
   return (
     <div className="space-y-5 border-b border-lk-line pb-6">
+      <AvatarUploader name={initial.name} avatarUrl={initial.avatarUrl} />
+
       <div className="space-y-1.5">
         <label className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase">
           Bio

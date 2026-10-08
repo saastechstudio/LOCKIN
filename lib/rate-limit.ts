@@ -34,6 +34,7 @@ export const RATE_LIMITS = {
   formationQuestion: { limit: 10, windowMs: HOUR },
   formationAnswer: { limit: 40, windowMs: 10 * MINUTE },
   creatorVerification: { limit: 3, windowMs: HOUR },
+  avatar: { limit: 6, windowMs: HOUR },
   creatorDecision: { limit: 120, windowMs: 10 * MINUTE },
 } satisfies Record<string, RateLimitRule>;
 
