@@ -16,7 +16,7 @@ export function SectionProgram() {
           className="mb-12"
         />
 
-        <div className="grid grid-cols-1 border border-camp-charcoal sm:grid-cols-3">
+        <div className="grid grid-cols-1 border border-lk-line sm:grid-cols-3">
           {CAMP_DAY_STRUCTURE.map((block, i) => (
             <div
               key={block.period}
@@ -28,7 +28,7 @@ export function SectionProgram() {
               <p className="font-display mt-3 text-xl text-camp-charcoal">
                 {block.title}
               </p>
-              <p className="mt-2 text-sm leading-relaxed text-camp-charcoal/60">
+              <p className="mt-2 text-sm leading-relaxed text-lk-stone-3">
                 {block.description}
               </p>
             </div>

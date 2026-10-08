@@ -22,17 +22,17 @@ export function ResourceCard({ resource }: ResourceCardProps) {
     <div className="flex gap-4 border border-lk-line p-4">
       <Icon icon={resource.locked ? Lock : ICONS[type]} framed className="size-9" />
       <div className="min-w-0 flex-1">
-        <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-black/50 uppercase">
+        <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">
           {RESOURCE_TYPE_LABELS[type]}
         </p>
         <p className="font-display mt-1 text-base text-lk-black">{resource.title}</p>
 
         {resource.locked ? (
-          <p className="mt-2 text-sm text-lk-black/50">Réservé aux inscrits. Commence la formation pour y accéder.</p>
+          <p className="mt-2 text-sm text-lk-stone-3">Réservé aux inscrits. Commence la formation pour y accéder.</p>
         ) : type === "text" ? (
           <p className="mt-3 text-sm leading-relaxed whitespace-pre-wrap text-lk-black/80">{resource.content}</p>
         ) : media === "video" ? (
-          <video controls preload="none" src={resource.content} className="mt-3 w-full border border-lk-black" />
+          <video controls preload="none" src={resource.content} className="mt-3 w-full border border-lk-line" />
         ) : media === "audio" ? (
           <audio controls preload="none" src={resource.content} className="mt-3 w-full" />
         ) : (

@@ -41,10 +41,10 @@ export function MentorSettings({
   }
 
   return (
-    <div className="space-y-5 border border-lk-black p-6">
+    <div className="space-y-5 border border-lk-line p-6">
       <div>
         <p className="font-display text-lg">{isMentor ? "Tu es mentor" : "Devenir mentor"}</p>
-        <p className="mt-1 text-sm text-lk-black/60">
+        <p className="mt-1 text-sm text-lk-stone-3">
           Bénévole. Tu guides d&apos;autres membres dans les domaines où tu as déjà mené ton combat.
         </p>
       </div>
@@ -59,8 +59,8 @@ export function MentorSettings({
             className={cn(
               "border px-3 py-1.5 text-xs font-medium transition-colors",
               domains.includes(tag)
-                ? "border-lk-black bg-lk-black text-lk-white"
-                : "border-lk-line hover:border-lk-black",
+                ? "border-lk-line bg-lk-black text-lk-white"
+                : "border-lk-line hover:border-lk-line",
             )}
           >
             {tag}
@@ -74,7 +74,7 @@ export function MentorSettings({
         maxLength={400}
         rows={3}
         placeholder="Ce que tu peux apporter, en deux phrases."
-        className="w-full resize-none border border-lk-line px-4 py-3 text-sm outline-none placeholder:text-lk-black/40 focus:border-lk-black"
+        className="w-full resize-none border border-lk-line px-4 py-3 text-sm outline-none placeholder:text-lk-black/40 focus:border-lk-line"
       />
 
       <div className="flex flex-wrap items-center gap-3">
@@ -86,7 +86,7 @@ export function MentorSettings({
             Désactiver
           </Button>
         ) : null}
-        {message ? <p className="text-sm text-lk-black/60">{message}</p> : null}
+        {message ? <p className="text-sm text-lk-stone-3">{message}</p> : null}
       </div>
     </div>
   );

@@ -57,7 +57,7 @@ export function PostComposer({ groupId, placeholder = "Quoi de neuf ?" }: PostCo
   }
 
   return (
-    <div className="border-b border-camp-charcoal pb-6">
+    <div className="border-b border-lk-line pb-6">
       <textarea
         value={content}
         onChange={(e) => {
@@ -67,17 +67,17 @@ export function PostComposer({ groupId, placeholder = "Quoi de neuf ?" }: PostCo
         }}
         placeholder={placeholder}
         rows={3}
-        className="w-full resize-none border border-camp-hairline bg-camp-white px-4 py-3 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
+        className="w-full resize-none border border-camp-hairline bg-camp-white px-4 py-3 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-lk-line"
       />
 
       {respectWarning ? (
-        <p className="mt-2 border border-camp-charcoal bg-camp-cream px-4 py-2.5 text-sm text-camp-charcoal">
+        <p className="mt-2 border border-lk-line bg-camp-cream px-4 py-2.5 text-sm text-camp-charcoal">
           Ce message semble agressif. Souhaites-tu le reformuler ? Clique à nouveau sur
           Publier pour l&apos;envoyer tel quel.
         </p>
       ) : null}
       {error ? (
-        <p className="mt-2 border border-camp-charcoal bg-camp-cream px-4 py-2.5 text-sm text-camp-charcoal">
+        <p className="mt-2 border border-lk-line bg-camp-cream px-4 py-2.5 text-sm text-camp-charcoal">
           {error}
         </p>
       ) : null}
@@ -87,7 +87,7 @@ export function PostComposer({ groupId, placeholder = "Quoi de neuf ?" }: PostCo
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
           placeholder="URL de l'image"
-          className="mt-2 w-full border border-camp-hairline bg-camp-white px-4 py-2.5 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
+          className="mt-2 w-full border border-camp-hairline bg-camp-white px-4 py-2.5 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-lk-line"
         />
       ) : null}
 
@@ -128,7 +128,7 @@ export function PostComposer({ groupId, placeholder = "Quoi de neuf ?" }: PostCo
         <button
           type="button"
           onClick={() => setShowImageField((s) => !s)}
-          className="border border-camp-hairline px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal/70 uppercase hover:text-camp-charcoal"
+          className="border border-camp-hairline px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-lk-stone-3 uppercase hover:text-camp-charcoal"
         >
           + Image
         </button>
@@ -137,7 +137,7 @@ export function PostComposer({ groupId, placeholder = "Quoi de neuf ?" }: PostCo
           type="button"
           onClick={handleSubmit}
           disabled={isPending || !content.trim()}
-          className="ml-auto border border-camp-charcoal bg-camp-gold px-5 py-1.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          className="ml-auto border border-lk-line bg-camp-gold px-5 py-1.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
         >
           Publier
         </button>

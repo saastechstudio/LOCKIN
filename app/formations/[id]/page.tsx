@@ -29,29 +29,29 @@ export default async function FormationPage({ params }: { params: Promise<{ id: 
 
   return (
     <div className="mx-auto max-w-4xl space-y-10">
-      <Link href="/formations" className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-black/60 hover:text-lk-black">
+      <Link href="/formations" className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-stone-3 hover:text-lk-black">
         <ArrowLeft className="size-3.5" /> Formations
       </Link>
 
       {formation.status !== "published" ? (
-        <p className="border border-lk-black bg-lk-mist p-4 text-sm">
+        <p className="border border-lk-line bg-lk-mist p-4 text-sm">
           Brouillon : cette formation n&apos;est visible que de toi. Publie-la depuis l&apos;éditeur.
         </p>
       ) : null}
 
-      <header className="border-b border-lk-black pb-8">
+      <header className="border-b border-lk-line pb-8">
         <Eyebrow>
           {formation.theme} · {FORMATION_LEVEL_LABELS[formation.level as FormationLevel] ?? formation.level} · {formation.durationHours} h
         </Eyebrow>
         <h1 className="lockin-title mt-4">{formation.title}</h1>
         <p className="mt-5 max-w-2xl text-base leading-relaxed whitespace-pre-wrap text-lk-black/70">{formation.description}</p>
-        <p className="mt-5 text-sm text-lk-black/60">
+        <p className="mt-5 text-sm text-lk-stone-3">
           Par{" "}
           <Link href={`/dashboard/u/${formation.creator.id}`} className="font-medium text-lk-black underline underline-offset-4">
             {formation.creator.name ?? "Membre Lockin"}
           </Link>
           {formation.creatorVerified ? (
-            <span className="ml-3 border border-lk-black px-2 py-0.5 text-[10px] font-semibold tracking-[0.15em] uppercase">
+            <span className="ml-3 border border-lk-line px-2 py-0.5 text-[10px] font-semibold tracking-[0.15em] uppercase">
               Créateur vérifié
             </span>
           ) : null}
@@ -85,7 +85,7 @@ export default async function FormationPage({ params }: { params: Promise<{ id: 
           <>
             <ProgressBarRect done={viewer.doneCount} total={formation.chapterCount} />
             {finished ? (
-              <div className="space-y-4 border-t border-lk-black pt-5">
+              <div className="space-y-4 border-t border-lk-line pt-5">
                 <p className="font-display text-xl">Formation terminée.</p>
                 <Slogan as="p" size="md" />
               </div>
@@ -117,7 +117,7 @@ export default async function FormationPage({ params }: { params: Promise<{ id: 
 
       <section className="space-y-6" aria-label="Contenu de la formation">
         {formation.modules.length === 0 ? (
-          <p className="border border-dashed border-lk-black p-8 text-center text-sm text-lk-black/60">
+          <p className="border border-dashed border-lk-line p-8 text-center text-sm text-lk-stone-3">
             Cette formation n&apos;a pas encore de contenu.
           </p>
         ) : (

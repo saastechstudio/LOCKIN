@@ -22,7 +22,7 @@ type ProfileEditFormProps = {
 };
 
 const fieldClassName =
-  "w-full border border-camp-hairline bg-camp-white px-3 py-2 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal";
+  "w-full border border-camp-hairline bg-camp-white px-3 py-2 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-lk-line";
 
 /** Formulaire d'édition du profil — angles droits, pas d'ombre, cohérent avec le reste du Social Club. */
 export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
@@ -53,7 +53,7 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
   }
 
   return (
-    <div className="space-y-5 border-b border-camp-charcoal pb-6">
+    <div className="space-y-5 border-b border-lk-line pb-6">
       <div className="space-y-1.5">
         <label className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase">
           Bio
@@ -117,7 +117,7 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
         </div>
       </div>
 
-      <p className="border-l-2 border-lk-gold pl-3 text-xs text-lk-black/60">
+      <p className="border-l-2 border-lk-gold pl-3 text-xs text-lk-stone-3">
         Ton niveau Lockin ne se déclare pas : il se gagne, chaque jour, avec ta note de discipline.
       </p>
 
@@ -143,7 +143,7 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
               <button
                 type="button"
                 onClick={() => setLinks((prev) => prev.filter((_, idx) => idx !== i))}
-                className="shrink-0 border border-camp-hairline px-2 text-camp-charcoal/60 hover:text-camp-charcoal"
+                className="shrink-0 border border-camp-hairline px-2 text-lk-stone-3 hover:text-camp-charcoal"
               >
                 <X className="size-4" />
               </button>
@@ -153,7 +153,7 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
             <button
               type="button"
               onClick={() => setLinks((prev) => [...prev, { label: "", url: "" }])}
-              className="text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal/60 uppercase hover:text-camp-charcoal"
+              className="text-[11px] font-semibold tracking-[0.06em] text-lk-stone-3 uppercase hover:text-camp-charcoal"
             >
               + Ajouter un lien
             </button>
@@ -166,14 +166,14 @@ export function ProfileEditForm({ initial, onDone }: ProfileEditFormProps) {
           type="button"
           onClick={handleSave}
           disabled={isPending}
-          className="border border-camp-charcoal bg-camp-gold px-5 py-2 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          className="border border-lk-line bg-camp-gold px-5 py-2 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
         >
           Enregistrer
         </button>
         <button
           type="button"
           onClick={onDone}
-          className="border border-camp-charcoal px-5 py-2 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase"
+          className="border border-lk-line px-5 py-2 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase"
         >
           Annuler
         </button>

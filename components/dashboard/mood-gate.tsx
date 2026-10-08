@@ -68,8 +68,8 @@ export function MoodGate({
               disabled={pending}
               onClick={() => choose(option.value)}
               className={cn(
-                "flex flex-col items-center gap-3 border border-lk-line bg-lk-white px-4 py-5 text-center transition-colors hover:border-lk-black disabled:opacity-60",
-                selecting === option.value && pending && "border-lk-black bg-lk-mist",
+                "flex flex-col items-center gap-3 border border-lk-line bg-lk-white px-4 py-5 text-center transition-colors hover:border-lk-line disabled:opacity-60",
+                selecting === option.value && pending && "border-lk-line bg-lk-mist",
               )}
             >
               <span className="flex h-8 items-end gap-1" aria-hidden>

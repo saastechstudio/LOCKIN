@@ -29,13 +29,13 @@ export function ConfirmationScreen({ data }: ConfirmationScreenProps) {
 
   return (
     <div>
-      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
         Écran 05 — Confirmation
       </p>
       <h1 className="font-display mt-3 text-3xl text-lk-black sm:text-4xl sm:text-3xl">
         Ton rituel Lockin
       </h1>
-      <p className="mt-2 text-sm text-camp-charcoal/60">
+      <p className="mt-2 text-sm text-lk-stone-3">
         Dernière vérification avant d&apos;entrer dans le club.
       </p>
 
@@ -44,7 +44,7 @@ export function ConfirmationScreen({ data }: ConfirmationScreenProps) {
       <dl className="mt-6 divide-y divide-camp-hairline border border-camp-hairline">
         {rows.map((row) => (
           <div key={row.label} className="flex flex-col gap-1 px-4 py-3.5 sm:flex-row sm:items-start sm:justify-between">
-            <dt className="text-[11px] font-semibold tracking-[0.08em] text-camp-charcoal/50 uppercase">
+            <dt className="text-[11px] font-semibold tracking-[0.08em] text-lk-stone-3 uppercase">
               {row.label}
             </dt>
             <dd className="text-sm text-camp-charcoal sm:max-w-[60%] sm:text-right">{row.value}</dd>
@@ -52,7 +52,7 @@ export function ConfirmationScreen({ data }: ConfirmationScreenProps) {
         ))}
       </dl>
 
-      <p className="mt-6 text-sm text-camp-charcoal/60">
+      <p className="mt-6 text-sm text-lk-stone-3">
         Ta motivation devient ton premier post, visible par toute la
         communauté Lockin.
       </p>

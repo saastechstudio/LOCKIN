@@ -26,10 +26,10 @@ export default async function ProgressionPage() {
       />
 
       <section className="grid gap-8 sm:grid-cols-4">
-        <div className="flex items-center gap-4 border-t border-lk-black pt-4 sm:col-span-1">
+        <div className="flex items-center gap-4 border-t border-lk-line pt-4 sm:col-span-1">
           <LockIcon level={data.level} max={LEVEL_MAX} className="h-14 w-[42px]" />
           <div>
-            <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-black/50 uppercase">
+            <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">
               Niveau {data.level}/{LEVEL_MAX}
             </p>
             <p className="font-display text-xl">{levelName(data.level)}</p>
@@ -46,7 +46,7 @@ export default async function ProgressionPage() {
 
       <section>
         <Eyebrow>Discipline · 30 jours</Eyebrow>
-        <p className="mt-2 mb-6 text-sm text-lk-black/60">
+        <p className="mt-2 mb-6 text-sm text-lk-stone-3">
           Ta note de discipline quotidienne. Aujourd&apos;hui en bleu-vert ; un tiret = journée non notée.
         </p>
         <VerticalBars
@@ -64,7 +64,7 @@ export default async function ProgressionPage() {
       <section>
         <Eyebrow>Objectifs</Eyebrow>
         {data.goals.length === 0 ? (
-          <p className="mt-4 text-sm text-lk-black/60">
+          <p className="mt-4 text-sm text-lk-stone-3">
             Aucun objectif.{" "}
             <Link href="/dashboard/objectifs" className="underline underline-offset-4">
               Fixe ton premier objectif à 30, 60 ou 90 jours
@@ -88,7 +88,7 @@ export default async function ProgressionPage() {
                 <li key={g.id} className="flex gap-3 border-t border-lk-line pt-2">
                   <span className="text-xs text-lk-gold tabular-nums">{String(i + 1).padStart(2, "0")}</span>
                   <span className="flex-1">{g.title}</span>
-                  <span className="text-xs text-lk-black/50">
+                  <span className="text-xs text-lk-stone-3">
                     {g.horizonDays ? `${g.horizonDays} j` : ""}
                   </span>
                 </li>
@@ -101,7 +101,7 @@ export default async function ProgressionPage() {
       <section>
         <Eyebrow>Challenges</Eyebrow>
         {data.challenges.length === 0 ? (
-          <p className="mt-4 text-sm text-lk-black/60">
+          <p className="mt-4 text-sm text-lk-stone-3">
             Aucun challenge en cours.{" "}
             <Link href="/dashboard/challenges" className="underline underline-offset-4">
               Choisis un challenge de 7 ou 30 jours
@@ -126,7 +126,7 @@ export default async function ProgressionPage() {
                   <Link href={`/dashboard/challenges/${c.slug}`} className="hover:underline">
                     {c.title}
                   </Link>{" "}
-                  <span className="text-xs text-lk-black/50">· {c.durationDays} jours</span>
+                  <span className="text-xs text-lk-stone-3">· {c.durationDays} jours</span>
                 </li>
               ))}
             </ol>

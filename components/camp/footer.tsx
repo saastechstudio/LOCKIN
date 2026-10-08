@@ -8,17 +8,17 @@ import { Logo } from "@/components/lockin/logo";
  */
 export function Footer() {
   return (
-    <footer className="border-t border-camp-charcoal bg-camp-cream px-6 py-10">
+    <footer className="border-t border-lk-line bg-camp-cream px-6 py-10">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
         <Logo size="sm" />
 
-        <p className="text-[11px] tracking-[0.1em] text-camp-charcoal/50 uppercase">
+        <p className="text-[11px] tracking-[0.1em] text-lk-stone-3 uppercase">
           Édition Phuket 2027 · Groupe limité à 20 participants
         </p>
 
         <Link
           href="/legal/mentions"
-          className="text-[11px] font-semibold tracking-[0.1em] text-camp-charcoal/70 uppercase hover:text-camp-charcoal"
+          className="text-[11px] font-semibold tracking-[0.1em] text-lk-stone-3 uppercase hover:text-camp-charcoal"
         >
           Mentions légales
         </Link>

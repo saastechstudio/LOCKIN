@@ -18,7 +18,7 @@ export function SectionIncluded() {
           className="mb-12"
         />
 
-        <div className="border border-camp-charcoal">
+        <div className="border border-lk-line">
           {CAMP_INCLUDED_ITEMS.map((item, i) => {
             const n = String(i + 1).padStart(2, "0");
             const isSport = item.startsWith("Activités sportives");
@@ -39,7 +39,7 @@ export function SectionIncluded() {
                       {SPORT_ACTIVITIES.map((a) => (
                         <span
                           key={a.id}
-                          className="border border-camp-hairline px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-camp-charcoal/70 uppercase"
+                          className="border border-camp-hairline px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-lk-stone-3 uppercase"
                         >
                           {a.name}
                         </span>
@@ -51,7 +51,7 @@ export function SectionIncluded() {
                       {CAMP_PROGRAM_BLOCKS.map((b) => (
                         <span
                           key={b}
-                          className="border border-camp-hairline px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-camp-charcoal/70 uppercase"
+                          className="border border-camp-hairline px-3 py-1 text-[11px] font-semibold tracking-[0.08em] text-lk-stone-3 uppercase"
                         >
                           {b}
                         </span>

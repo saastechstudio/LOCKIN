@@ -19,8 +19,8 @@ export function MentorMessage({
   blocks: { label: string; text: string }[];
 }) {
   return (
-    <div className={cn("border p-5", role === "mentor" ? "border-lk-black bg-lk-black text-lk-white" : "border-lk-black bg-lk-white text-lk-black")}>
-      <p className={cn("flex flex-wrap items-baseline gap-x-3 text-[11px] font-semibold tracking-[0.2em] uppercase", role === "mentor" ? "text-lk-white/60" : "text-lk-black/50")}>
+    <div className={cn("border p-5", role === "mentor" ? "border-lk-line bg-lk-black text-lk-white" : "border-lk-line bg-lk-white text-lk-black")}>
+      <p className={cn("flex flex-wrap items-baseline gap-x-3 text-[11px] font-semibold tracking-[0.2em] uppercase", role === "mentor" ? "text-lk-white/60" : "text-lk-stone-3")}>
         <span className={role === "mentor" ? "text-lk-gold" : undefined}>{role === "mentor" ? "Mentor" : "Apprenant"}</span>
         <span className="tracking-normal normal-case">
           {author}

@@ -19,7 +19,7 @@ export function ModulesGrid() {
         >
           <Icon icon={module.icon} framed className="group-hover:bg-lk-black group-hover:text-lk-white" />
           <h3 className="font-display mt-4 text-sm text-lk-black">{module.name}</h3>
-          <p className="mt-1 text-xs leading-relaxed text-lk-black/60">{module.description}</p>
+          <p className="mt-1 text-xs leading-relaxed text-lk-stone-3">{module.description}</p>
         </Link>
       ))}
     </div>

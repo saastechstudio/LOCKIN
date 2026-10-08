@@ -16,7 +16,7 @@ export function SectionSessions({ sessions }: SectionSessionsProps) {
           title="Choisis ta session"
           className="mb-6"
         />
-        <p className="mb-12 max-w-xl border-l-2 border-camp-gold pl-4 text-sm leading-relaxed text-camp-charcoal/70">
+        <p className="mb-12 max-w-xl border-l-2 border-camp-gold pl-4 text-sm leading-relaxed text-lk-stone-3">
           Les Lock-In Camp sont réservés aux membres du Lockin Social Club.
           L&apos;inscription au club est gratuite : si tu n&apos;es pas encore
           membre, on te la propose au moment de réserver.

@@ -80,7 +80,7 @@ function GoalColumn({
           value={title_}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Nouvel objectif"
-          className="w-full border border-camp-hairline bg-camp-white px-3 py-2 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
+          className="w-full border border-camp-hairline bg-camp-white px-3 py-2 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-lk-line"
         />
         <div className="flex flex-wrap items-center gap-2">
           <select
@@ -95,7 +95,7 @@ function GoalColumn({
               </option>
             ))}
           </select>
-          <label className="inline-flex items-center gap-1.5 text-[11px] font-bold text-camp-charcoal/70 uppercase">
+          <label className="inline-flex items-center gap-1.5 text-[11px] font-bold text-lk-stone-3 uppercase">
             <input
               type="checkbox"
               checked={isPublic}
@@ -108,7 +108,7 @@ function GoalColumn({
             type="button"
             onClick={handleAdd}
             disabled={isPending || !title_.trim()}
-            className="ml-auto border border-camp-charcoal bg-camp-gold px-4 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase disabled:opacity-40"
+            className="ml-auto border border-lk-line bg-camp-gold px-4 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase disabled:opacity-40"
           >
             Ajouter
           </button>
@@ -170,7 +170,7 @@ function GoalRow({ goal }: { goal: Goal }) {
           onChange={(e) => setProgress(Number(e.target.value))}
           className="w-14 border border-camp-hairline bg-camp-white px-1.5 py-0.5 text-right text-xs text-camp-charcoal outline-none"
         />
-        <span className="text-xs text-camp-charcoal/50">%</span>
+        <span className="text-xs text-lk-stone-3">%</span>
       </div>
     </div>
   );

@@ -38,22 +38,22 @@ export default async function CreatorsAdminPage() {
       />
 
       {sorted.length === 0 ? (
-        <p className="border border-dashed border-lk-black p-8 text-center text-sm text-lk-black/60">Aucune demande pour l&apos;instant.</p>
+        <p className="border border-dashed border-lk-line p-8 text-center text-sm text-lk-stone-3">Aucune demande pour l&apos;instant.</p>
       ) : (
         <ul className="space-y-6">
           {sorted.map((v) => (
-            <li key={v.id} className="border border-lk-black">
-              <header className="flex flex-wrap items-baseline justify-between gap-3 border-b border-lk-black bg-lk-mist px-5 py-3">
+            <li key={v.id} className="border border-lk-line">
+              <header className="flex flex-wrap items-baseline justify-between gap-3 border-b border-lk-line bg-lk-mist px-5 py-3">
                 <div>
                   <p className="font-display text-lg">{v.legalName}</p>
-                  <p className="text-xs text-lk-black/60">
+                  <p className="text-xs text-lk-stone-3">
                     Compte : {v.user.name ?? "—"} · {v.user.email} ·{" "}
                     <Link href={`/dashboard/messages/${v.user.id}`} className="underline underline-offset-4">
                       Écrire
                     </Link>
                   </p>
                 </div>
-                <span className="border border-lk-black px-2 py-1 text-[10px] font-semibold tracking-[0.15em] uppercase">
+                <span className="border border-lk-line px-2 py-1 text-[10px] font-semibold tracking-[0.15em] uppercase">
                   {CREATOR_STATUS_LABELS[v.status as CreatorStatus] ?? v.status}
                 </span>
               </header>
@@ -74,13 +74,13 @@ export default async function CreatorsAdminPage() {
                       {v.proofUrl}
                     </a>
                   ) : (
-                    <p className="mt-2 text-sm text-lk-black/60">Lien invalide.</p>
+                    <p className="mt-2 text-sm text-lk-stone-3">Lien invalide.</p>
                   )}
                 </div>
                 {v.decisionNote ? (
-                  <p className="border-l-2 border-lk-black pl-3 text-sm text-lk-black/70">Motif : {v.decisionNote}</p>
+                  <p className="border-l-2 border-lk-line pl-3 text-sm text-lk-black/70">Motif : {v.decisionNote}</p>
                 ) : null}
-                <p className="text-xs text-lk-black/50">
+                <p className="text-xs text-lk-stone-3">
                   Demande {formatDistanceToNow(v.createdAt, { addSuffix: true, locale: fr })}
                 </p>
                 <CreatorDecision verificationId={v.id} status={v.status} />

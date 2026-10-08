@@ -43,7 +43,7 @@ export function QuestionComposer() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="mb-6 border border-camp-charcoal bg-camp-gold px-5 py-2.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase"
+        className="mb-6 border border-lk-line bg-camp-gold px-5 py-2.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase"
       >
         Poser une question
       </button>
@@ -51,22 +51,22 @@ export function QuestionComposer() {
   }
 
   return (
-    <div className="mb-6 space-y-3 border-b border-camp-charcoal pb-6">
+    <div className="mb-6 space-y-3 border-b border-lk-line pb-6">
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Ta question en une phrase"
-        className="w-full border border-camp-hairline bg-camp-white px-4 py-2.5 text-sm font-medium text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
+        className="w-full border border-camp-hairline bg-camp-white px-4 py-2.5 text-sm font-medium text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-lk-line"
       />
       <textarea
         value={body}
         onChange={(e) => setBody(e.target.value)}
         rows={4}
         placeholder="Détaille le contexte…"
-        className="w-full resize-none border border-camp-hairline bg-camp-white px-4 py-3 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
+        className="w-full resize-none border border-camp-hairline bg-camp-white px-4 py-3 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-lk-line"
       />
       {error ? (
-        <p className="border border-camp-charcoal bg-camp-cream px-4 py-2.5 text-sm text-camp-charcoal">
+        <p className="border border-lk-line bg-camp-cream px-4 py-2.5 text-sm text-camp-charcoal">
           {error}
         </p>
       ) : null}
@@ -80,8 +80,8 @@ export function QuestionComposer() {
             className={cn(
               "border px-2.5 py-1 text-[11px] font-semibold tracking-[0.06em] uppercase",
               tags.includes(tag)
-                ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
-                : "border-camp-hairline text-camp-charcoal/70",
+                ? "border-lk-line bg-camp-charcoal text-camp-white"
+                : "border-camp-hairline text-lk-stone-3",
             )}
           >
             {tag}
@@ -91,7 +91,7 @@ export function QuestionComposer() {
           type="button"
           onClick={handleSubmit}
           disabled={isPending || !title.trim() || !body.trim()}
-          className="ml-auto border border-camp-charcoal bg-camp-gold px-5 py-1.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+          className="ml-auto border border-lk-line bg-camp-gold px-5 py-1.5 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
         >
           Publier
         </button>

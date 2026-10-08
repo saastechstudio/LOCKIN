@@ -3,9 +3,9 @@ import type { LucideIcon, LucideProps } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
- * Icône Lockin : une icône lucide dans le style maison — trait fin 1.5,
- * extrémités carrées, angles vifs (voir svg.lucide dans globals.css).
- * `framed` l'enferme dans un carré à filet : la case géométrique Lockin.
+ * Icône Lockin : une icône lucide dans le style maison — trait fin 1.5, arrondi
+ * (voir svg.lucide dans globals.css).
+ * `framed` l'enferme dans une pastille à filet chaud.
  */
 export function Icon({
   icon: IconComponent,
@@ -26,7 +26,7 @@ export function Icon({
   return (
     <span
       className={cn(
-        "inline-flex size-10 shrink-0 items-center justify-center border border-lk-black text-lk-black",
+        "inline-flex size-10 shrink-0 items-center justify-center rounded-xl border border-lk-line bg-lk-surface text-lk-black shadow-xs",
         className,
       )}
     >

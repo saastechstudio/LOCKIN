@@ -38,7 +38,7 @@ export default async function BusinessPage({
             href={k ? `/dashboard/business?type=${k}` : "/dashboard/business"}
             className={cn(
               "border px-3 py-1.5 text-xs font-medium",
-              kind === k ? "border-lk-black bg-lk-black text-lk-white" : "border-lk-line hover:border-lk-black",
+              kind === k ? "border-lk-line bg-lk-black text-lk-white" : "border-lk-line hover:border-lk-line",
             )}
           >
             {k ? BUSINESS_KIND_LABELS[k] : "Toutes"}
@@ -49,9 +49,9 @@ export default async function BusinessPage({
       <div className="grid gap-10 lg:grid-cols-3">
         <section className="lg:col-span-2">
           {offers.length === 0 ? (
-            <p className="text-sm text-lk-black/60">Aucune annonce pour l&apos;instant.</p>
+            <p className="text-sm text-lk-stone-3">Aucune annonce pour l&apos;instant.</p>
           ) : (
-            <ul className="border-t border-lk-black">
+            <ul className="border-t border-lk-line">
               {offers.map((o) => (
                 <li key={o.id} className="border-b border-lk-line py-5">
                   <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-gold uppercase">
@@ -61,7 +61,7 @@ export default async function BusinessPage({
                   <p className="font-display mt-2 text-lg">{o.title}</p>
                   <p className="mt-2 text-sm leading-relaxed whitespace-pre-wrap text-lk-black/80">{o.body}</p>
                   <div className="mt-4 flex flex-wrap items-center gap-4 text-xs">
-                    <Link href={`/dashboard/u/${o.user.id}`} className="mr-auto text-lk-black/60 hover:underline">
+                    <Link href={`/dashboard/u/${o.user.id}`} className="mr-auto text-lk-stone-3 hover:underline">
                       {o.user.name ?? "Membre Lockin"}
                       {o.user.sector ? ` · ${o.user.sector}` : ""} ·{" "}
                       {formatDistanceToNow(o.createdAt, { addSuffix: true, locale: fr })}
@@ -72,7 +72,7 @@ export default async function BusinessPage({
                       <>
                         <Link
                           href={`/dashboard/messages/${o.user.id}`}
-                          className="border border-lk-black px-3 py-1.5 font-medium hover:bg-lk-black hover:text-lk-white"
+                          className="border border-lk-line px-3 py-1.5 font-medium hover:bg-lk-black hover:text-lk-white"
                         >
                           Répondre en privé
                         </Link>

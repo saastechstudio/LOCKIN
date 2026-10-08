@@ -25,13 +25,13 @@ export default async function PublicProfilePage({
     <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
         <div className="mb-6 flex items-center justify-between">
-          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
             Lockin Social Club · Profil
           </p>
           {!data.viewerIsOwner ? (
             <Link
               href={`/dashboard/messages/${id}`}
-              className="inline-flex items-center gap-1.5 border border-camp-charcoal px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase hover:bg-camp-charcoal hover:text-camp-white"
+              className="inline-flex items-center gap-1.5 border border-lk-line px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase hover:bg-camp-charcoal hover:text-camp-white"
             >
               <MessageSquare className="size-3.5" /> Message
             </Link>

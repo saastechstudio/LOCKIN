@@ -13,7 +13,7 @@ export function MobileTabBar() {
   return (
     <nav
       aria-label="Navigation principale"
-      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-lk-black bg-lk-white pb-[env(safe-area-inset-bottom)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-lk-line bg-lk-white pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       {DASHBOARD_TABS.map((tab) => {
         const active = isNavActive(pathname, tab.href);
@@ -24,7 +24,7 @@ export function MobileTabBar() {
             aria-current={active ? "page" : undefined}
             className={cn(
               "flex h-14 flex-col items-center justify-center gap-1 border-t-2 text-[10px] font-medium tracking-wide uppercase",
-              active ? "border-lk-teal bg-lk-black text-lk-white" : "border-transparent text-lk-black/60",
+              active ? "border-lk-teal bg-lk-black text-lk-white" : "border-transparent text-lk-stone-3",
             )}
           >
             <tab.icon className="size-4" />

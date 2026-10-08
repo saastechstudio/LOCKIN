@@ -42,12 +42,12 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
   };
 
   return (
-    <div className="flex h-[calc(100vh-12rem)] flex-col overflow-hidden border border-lk-black bg-lk-white md:h-[calc(100vh-10rem)]">
+    <div className="flex h-[calc(100vh-12rem)] flex-col overflow-hidden border border-lk-line bg-lk-white md:h-[calc(100vh-10rem)]">
       <ScrollArea className="flex-1 px-6 py-6">
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-4 py-16 text-center">
             <LockIcon className="h-10 w-[30px]" />
-            <p className="max-w-sm text-sm text-lk-black/60">
+            <p className="max-w-sm text-sm text-lk-stone-3">
               Pose ta question au Coach Lock In. Direct, exigeant, orienté
               exécution.
             </p>
@@ -92,7 +92,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
               key={prompt}
               onClick={() => submit(prompt)}
               disabled={isLoading}
-              className="border border-lk-line px-3 py-1.5 text-xs text-lk-black transition-colors hover:border-lk-black disabled:opacity-50"
+              className="border border-lk-line px-3 py-1.5 text-xs text-lk-black transition-colors hover:border-lk-line disabled:opacity-50"
             >
               {prompt}
             </button>
@@ -104,7 +104,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
             e.preventDefault();
             submit(input);
           }}
-          className="flex items-center gap-2 border border-lk-black bg-lk-white p-1.5 pl-5"
+          className="flex items-center gap-2 border border-lk-line bg-lk-white p-1.5 pl-5"
         >
           <input
             value={input}

@@ -20,13 +20,13 @@ export default async function GroupesPage() {
   return (
     <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
-        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
           Lockin Social Club
         </p>
         <h1 className="font-display mb-8 text-3xl text-lk-black sm:text-4xl">
           Clubs
         </h1>
-        <p className="-mt-4 mb-10 max-w-lg text-sm text-lk-black/60">
+        <p className="-mt-4 mb-10 max-w-lg text-sm text-lk-stone-3">
           Les clubs locaux réunissent les membres d&apos;une même ville : Paris, Dakar, Colombo,
           Bali, Montréal… Les autres clubs se forment autour d&apos;un sport, d&apos;un métier ou
           d&apos;un thème.
@@ -35,7 +35,7 @@ export default async function GroupesPage() {
         <div className="space-y-10">
           {sections.map((section) => (
             <div key={section.type}>
-              <p className="mb-3 text-[11px] font-semibold tracking-[0.15em] text-camp-charcoal/50 uppercase">
+              <p className="mb-3 text-[11px] font-semibold tracking-[0.15em] text-lk-stone-3 uppercase">
                 {section.label}
               </p>
               <div className="border-t border-l border-camp-hairline sm:grid sm:grid-cols-2">

@@ -54,7 +54,7 @@ export function MentorThread({
           ]}
         />
       ) : (
-        <div className="border border-dashed border-lk-black/40 p-5 text-sm text-lk-black/60">
+        <div className="border border-dashed border-lk-line p-5 text-sm text-lk-stone-3">
           En attente de réponse du mentor.
         </div>
       )}

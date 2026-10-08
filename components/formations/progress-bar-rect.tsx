@@ -27,7 +27,7 @@ export function ProgressBarRect({
         aria-valuemax={100}
         aria-valuenow={percent}
         aria-label={`Progression : ${safeDone} chapitre${safeDone > 1 ? "s" : ""} sur ${safeTotal}`}
-        className="flex h-3 w-full gap-px border border-lk-black bg-lk-white"
+        className="flex h-3 w-full gap-px border border-lk-line bg-lk-white"
       >
         {safeTotal > 0 && safeTotal <= 30 ? (
           Array.from({ length: safeTotal }, (_, i) => (
@@ -38,7 +38,7 @@ export function ProgressBarRect({
         )}
       </div>
       {showLabel ? (
-        <p className="mt-2 text-xs text-lk-black/60 tabular-nums">
+        <p className="mt-2 text-xs text-lk-stone-3 tabular-nums">
           {safeDone}/{safeTotal} chapitre{safeTotal > 1 ? "s" : ""} · {percent} %
         </p>
       ) : null}

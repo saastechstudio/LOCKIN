@@ -34,9 +34,9 @@ export default async function ChallengesPage() {
                 className="flex flex-col border-r border-b border-lk-line p-5 transition-colors hover:bg-lk-mist"
               >
                 <p className="font-display text-lg">{c.title}</p>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-lk-black/60">{c.description}</p>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-lk-stone-3">{c.description}</p>
                 <div className="mt-5 flex items-center justify-between text-xs">
-                  <span className="text-lk-black/50">
+                  <span className="text-lk-stone-3">
                     {c.participantCount} membre{c.participantCount > 1 ? "s" : ""}
                   </span>
                   {c.mine ? (
@@ -46,7 +46,7 @@ export default async function ChallengesPage() {
                         : `Jour ${c.mine.dayIndex}/${c.durationDays}`}
                     </span>
                   ) : (
-                    <span className="border border-lk-black px-2 py-1 font-medium">Rejoindre</span>
+                    <span className="border border-lk-line px-2 py-1 font-medium">Rejoindre</span>
                   )}
                 </div>
               </Link>

@@ -26,12 +26,12 @@ export default async function MessageThreadPage({
       <div className="mx-auto flex w-full max-w-2xl flex-1 flex-col">
         <Link
           href="/dashboard/messages"
-          className="mb-4 inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal/60 uppercase hover:text-camp-charcoal"
+          className="mb-4 inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.06em] text-lk-stone-3 uppercase hover:text-camp-charcoal"
         >
           <ArrowLeft className="size-3.5" /> Messages
         </Link>
 
-        <div className="mb-4 flex items-center gap-3 border-b border-camp-charcoal pb-4">
+        <div className="mb-4 flex items-center gap-3 border-b border-lk-line pb-4">
           <Link
             href={`/dashboard/u/${data.otherUser.id}`}
             className="font-display text-lg text-lk-black hover:text-camp-gold"

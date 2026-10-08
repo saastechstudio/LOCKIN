@@ -23,13 +23,13 @@ export default async function EntraidePage({
   return (
     <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
-        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
           Lockin Social Club
         </p>
         <h1 className="font-display mb-1 text-3xl text-lk-black sm:text-4xl">
           Entraide
         </h1>
-        <p className="mb-6 text-sm text-camp-charcoal/60">
+        <p className="mb-6 text-sm text-lk-stone-3">
           Questions, réponses, feedback — on avance ensemble.
         </p>
 
@@ -48,7 +48,7 @@ export default async function EntraidePage({
 
         <div className="divide-y divide-camp-hairline">
           {questions.length === 0 ? (
-            <p className="py-10 text-center text-xs text-camp-charcoal/50 uppercase">
+            <p className="py-10 text-center text-xs text-lk-stone-3 uppercase">
               Aucune question pour l&apos;instant.
             </p>
           ) : (
@@ -105,8 +105,8 @@ function FilterPill({
       className={cn(
         "border px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] uppercase transition-colors",
         active
-          ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
-          : "border-camp-hairline text-camp-charcoal/70 hover:border-camp-charcoal hover:text-camp-charcoal",
+          ? "border-lk-line bg-camp-charcoal text-camp-white"
+          : "border-camp-hairline text-lk-stone-3 hover:border-lk-line hover:text-camp-charcoal",
       )}
     >
       {children}

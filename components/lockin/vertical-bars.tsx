@@ -31,7 +31,7 @@ export function VerticalBars({
   return (
     <div className={cn("w-full", className)}>
       <div
-        className="relative flex items-end gap-[3px] border-b border-lk-black"
+        className="relative flex items-end gap-[3px] border-b border-lk-line"
         style={{ height }}
         role="img"
         aria-label={bars.map((b) => b.title ?? `${b.label ?? b.key} : ${b.value ?? "—"}`).join(", ")}
@@ -42,7 +42,7 @@ export function VerticalBars({
         {bars.map((bar) => (
           <div key={bar.key} className="relative flex h-full flex-1 items-end" title={bar.title}>
             {bar.value === null ? (
-              <div className="h-1 w-full border-t border-dashed border-lk-black/30" />
+              <div className="h-1 w-full border-t border-dashed border-lk-line" />
             ) : (
               <div
                 className={cn("w-full", bar.live ? "bg-lk-teal" : bar.accent ? "bg-lk-gold" : "bg-lk-black")}
@@ -57,7 +57,7 @@ export function VerticalBars({
           {bars.map((bar) => (
             <span
               key={bar.key}
-              className="flex-1 truncate text-center text-[10px] text-lk-black/50 tabular-nums"
+              className="flex-1 truncate text-center text-[10px] text-lk-stone-3 tabular-nums"
             >
               {bar.label ?? ""}
             </span>

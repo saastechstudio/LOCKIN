@@ -12,7 +12,7 @@ export default async function OwnProfilePage() {
   return (
     <div className="camp-scope">
       <div className="mx-auto max-w-2xl">
-        <p className="mb-6 text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+        <p className="mb-6 text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
           Lockin Social Club · Mon profil
         </p>
         <OwnProfile profile={data.profile} goals={data.goals} routine={data.routine} />

@@ -23,7 +23,7 @@ export default async function ChallengePage({ params }: { params: Promise<{ slug
     <div className="mx-auto max-w-5xl space-y-12">
       <Link
         href="/dashboard/challenges"
-        className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-black/60 hover:text-lk-black"
+        className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-stone-3 hover:text-lk-black"
       >
         <ArrowLeft className="size-3.5" /> Challenges
       </Link>
@@ -54,7 +54,7 @@ export default async function ChallengePage({ params }: { params: Promise<{ slug
                 key={i}
                 className={cn(
                   "flex aspect-square items-end justify-start border p-1 text-[10px] tabular-nums",
-                  done ? "border-lk-black bg-lk-black text-lk-white" : "border-lk-line text-lk-black/40",
+                  done ? "border-lk-line bg-lk-black text-lk-white" : "border-lk-line text-lk-black/40",
                   !mine.finished && i + 1 === mine.dayIndex && !done && "border-2 border-lk-teal text-lk-teal",
                 )}
                 title={`Jour ${i + 1}${done ? " : tenu" : ""}`}
@@ -69,9 +69,9 @@ export default async function ChallengePage({ params }: { params: Promise<{ slug
       <section>
         <Eyebrow>Classement · jours tenus</Eyebrow>
         {challenge.leaderboard.length === 0 ? (
-          <p className="mt-4 text-sm text-lk-black/60">Personne n&apos;a encore relevé ce challenge.</p>
+          <p className="mt-4 text-sm text-lk-stone-3">Personne n&apos;a encore relevé ce challenge.</p>
         ) : (
-          <ol className="mt-4 border-t border-lk-black">
+          <ol className="mt-4 border-t border-lk-line">
             {challenge.leaderboard.map((row, i) => (
               <li
                 key={row.user.id}
@@ -86,7 +86,7 @@ export default async function ChallengePage({ params }: { params: Promise<{ slug
                 <LockIcon level={row.user.lockinLevel} className="h-5 w-[15px]" />
                 <Link href={`/dashboard/u/${row.user.id}`} className="flex-1 text-sm hover:underline">
                   {row.user.name ?? "Membre Lockin"}
-                  {row.isMe ? <span className="text-lk-black/50"> · toi</span> : null}
+                  {row.isMe ? <span className="text-lk-stone-3"> · toi</span> : null}
                 </Link>
                 <span className="pr-2 text-sm tabular-nums">
                   {row.done}/{challenge.durationDays}

@@ -94,14 +94,14 @@ export function ReportButton({ targetType, targetId, className }: ReportButtonPr
           type="button"
           onClick={handleSubmit}
           disabled={isPending}
-          className="border border-camp-charcoal bg-camp-charcoal px-3 py-1.5 text-[11px] font-bold text-camp-white uppercase disabled:opacity-40"
+          className="border border-lk-line bg-camp-charcoal px-3 py-1.5 text-[11px] font-bold text-camp-white uppercase disabled:opacity-40"
         >
           Envoyer
         </button>
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="text-[11px] text-camp-charcoal/50 uppercase hover:text-camp-charcoal"
+          className="text-[11px] text-lk-stone-3 uppercase hover:text-camp-charcoal"
         >
           Annuler
         </button>

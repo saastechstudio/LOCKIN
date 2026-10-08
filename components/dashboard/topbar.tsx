@@ -32,7 +32,7 @@ export function DashboardTopbar({
         <LockIcon className="h-6 w-[18px] md:hidden" />
         <div className="min-w-0">
           <p className="font-display truncate text-base text-lk-black">{firstName}</p>
-          <p className="hidden text-[11px] tracking-[0.2em] text-lk-black/50 uppercase sm:block">
+          <p className="hidden text-[11px] tracking-[0.2em] text-lk-stone-3 uppercase sm:block">
             {today()}
           </p>
         </div>
@@ -40,7 +40,7 @@ export function DashboardTopbar({
 
       <div className="flex shrink-0 items-center gap-2 sm:gap-3">
         <NotificationBell initialNotifications={notifications} initialUnreadCount={unreadCount} />
-        <UserButton appearance={{ elements: { avatarBox: "size-9 rounded-none" } }} />
+        <UserButton appearance={{ elements: { avatarBox: "size-9 rounded-full" } }} />
       </div>
     </header>
   );

@@ -37,7 +37,7 @@ type BookingFlowProps = {
 };
 
 const fieldClassName =
-  "rounded-none border border-camp-charcoal bg-camp-white text-camp-charcoal shadow-none placeholder:text-camp-charcoal/40 focus-visible:border-camp-gold focus-visible:ring-0";
+  "rounded-lg border border-lk-line bg-camp-white text-camp-charcoal shadow-none placeholder:text-camp-charcoal/40 focus-visible:border-camp-gold focus-visible:ring-0";
 
 export function BookingFlow({ session, initialFullName, email }: BookingFlowProps) {
   const router = useRouter();
@@ -114,13 +114,13 @@ export function BookingFlow({ session, initialFullName, email }: BookingFlowProp
   return (
     <div className="mx-auto max-w-xl space-y-8 px-6 py-14">
       <div className="space-y-2">
-        <div className="h-2 w-full border border-camp-charcoal bg-camp-hairline">
+        <div className="h-2 w-full border border-lk-line bg-camp-hairline">
           <div
             className="h-full bg-camp-charcoal transition-all duration-500"
             style={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
           />
         </div>
-        <p className="text-right text-xs font-bold tracking-[0.1em] text-camp-charcoal/60 uppercase">
+        <p className="text-right text-xs font-bold tracking-[0.1em] text-lk-stone-3 uppercase">
           Étape {step} / {TOTAL_STEPS}
         </p>
       </div>
@@ -151,7 +151,7 @@ export function BookingFlow({ session, initialFullName, email }: BookingFlowProp
               readOnly
               className={`${fieldClassName} cursor-default opacity-70`}
             />
-            <p className="text-xs text-camp-charcoal/50">L&apos;email de ton compte Lockin.</p>
+            <p className="text-xs text-lk-stone-3">L&apos;email de ton compte Lockin.</p>
           </div>
         </div>
       )}
@@ -168,7 +168,7 @@ export function BookingFlow({ session, initialFullName, email }: BookingFlowProp
               const current = sportChoices.find((c) => c.day === day)?.activityId;
               return (
                 <div key={day} className="space-y-2">
-                  <p className="text-xs font-bold tracking-[0.08em] text-camp-charcoal/60 uppercase">
+                  <p className="text-xs font-bold tracking-[0.08em] text-lk-stone-3 uppercase">
                     Jour {day}
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -235,20 +235,20 @@ export function BookingFlow({ session, initialFullName, email }: BookingFlowProp
       {step === 5 && (
         <div className="space-y-5">
           <SectionTitle eyebrow="Récapitulatif" title="Vérifie ta réservation" />
-          <div className="space-y-3 border border-camp-charcoal p-5 text-sm">
+          <div className="space-y-3 border border-lk-line p-5 text-sm">
             <div className="flex justify-between border-b border-camp-hairline pb-3">
-              <span className="text-xs text-camp-charcoal/60 uppercase">Session</span>
+              <span className="text-xs text-lk-stone-3 uppercase">Session</span>
               <span className="font-bold text-camp-charcoal">
                 {format(session.startDate, "d MMM", { locale: fr })} –{" "}
                 {format(session.endDate, "d MMM yyyy", { locale: fr })}
               </span>
             </div>
             <div className="flex justify-between border-b border-camp-hairline pb-3">
-              <span className="text-xs text-camp-charcoal/60 uppercase">Participant</span>
+              <span className="text-xs text-lk-stone-3 uppercase">Participant</span>
               <span className="font-bold text-camp-charcoal">{fullName}</span>
             </div>
             <div className="flex justify-between border-b border-camp-hairline pb-3">
-              <span className="text-xs text-camp-charcoal/60 uppercase">Excursion</span>
+              <span className="text-xs text-lk-stone-3 uppercase">Excursion</span>
               <span className="font-bold text-camp-charcoal">
                 {excursionChoices
                   .map((id) => EXCURSIONS.find((e) => e.id === id)?.name)
@@ -257,13 +257,13 @@ export function BookingFlow({ session, initialFullName, email }: BookingFlowProp
               </span>
             </div>
             <div className="flex justify-between border-b border-camp-hairline pb-3">
-              <span className="text-xs text-camp-charcoal/60 uppercase">Activité fun</span>
+              <span className="text-xs text-lk-stone-3 uppercase">Activité fun</span>
               <span className="font-bold text-camp-charcoal">
                 {FUN_ACTIVITIES.find((a) => a.id === funActivityChoice)?.name}
               </span>
             </div>
             <div className="flex justify-between pt-1">
-              <span className="text-xs text-camp-charcoal/60 uppercase">Prix</span>
+              <span className="text-xs text-lk-stone-3 uppercase">Prix</span>
               <span className="font-display text-xl text-camp-charcoal">
                 {session.pricePerPerson.toLocaleString("fr-FR")} €
               </span>

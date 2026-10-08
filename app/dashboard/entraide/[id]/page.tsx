@@ -26,12 +26,12 @@ export default async function QuestionDetailPage({
       <div className="mx-auto max-w-2xl">
         <Link
           href="/dashboard/entraide"
-          className="mb-6 inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal/60 uppercase hover:text-camp-charcoal"
+          className="mb-6 inline-flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.06em] text-lk-stone-3 uppercase hover:text-camp-charcoal"
         >
           <ArrowLeft className="size-3.5" /> Entraide
         </Link>
 
-        <div className="mb-8 border-b border-camp-charcoal pb-6">
+        <div className="mb-8 border-b border-lk-line pb-6">
           <div className="mb-2 flex flex-wrap gap-2">
             {question.tags.map((t) => (
               <span

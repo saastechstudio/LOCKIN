@@ -33,8 +33,8 @@ function frenchError(error: ClerkLikeError): string {
 }
 
 const inputClass =
-  "w-full border border-camp-hairline bg-camp-white px-4 py-3 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/35 focus:border-camp-charcoal";
-const labelClass = "text-[11px] font-semibold tracking-[0.2em] text-camp-charcoal/50 uppercase";
+  "w-full border border-camp-hairline bg-camp-white px-4 py-3 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/35 focus:border-lk-line";
+const labelClass = "text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase";
 
 /**
  * Inscription Lockin : prénom, nom, pays de résidence, email, mot de passe.
@@ -157,7 +157,7 @@ export function SignUpForm() {
           <h1 className="text-3xl font-semibold tracking-tight text-camp-charcoal">
             Vérifie ton email.
           </h1>
-          <p className="mt-3 text-sm leading-relaxed text-camp-charcoal/60">
+          <p className="mt-3 text-sm leading-relaxed text-lk-stone-3">
             Un code à 6 chiffres vient d&apos;être envoyé à{" "}
             <span className="font-medium text-camp-charcoal">{email}</span>.
           </p>
@@ -177,8 +177,8 @@ export function SignUpForm() {
           />
         </label>
 
-        {error ? <p className="border-l-2 border-camp-charcoal pl-3 text-sm text-camp-charcoal">{error}</p> : null}
-        {notice ? <p className="text-sm text-camp-charcoal/60">{notice}</p> : null}
+        {error ? <p className="border-l-2 border-lk-line pl-3 text-sm text-camp-charcoal">{error}</p> : null}
+        {notice ? <p className="text-sm text-lk-stone-3">{notice}</p> : null}
 
         <button
           type="submit"
@@ -191,7 +191,7 @@ export function SignUpForm() {
           type="button"
           onClick={resendCode}
           disabled={busy}
-          className="text-sm text-camp-charcoal/60 underline decoration-camp-hairline underline-offset-4 hover:text-camp-charcoal"
+          className="text-sm text-lk-stone-3 underline decoration-camp-hairline underline-offset-4 hover:text-camp-charcoal"
         >
           Renvoyer le code
         </button>
@@ -205,7 +205,7 @@ export function SignUpForm() {
         <h1 className="text-3xl font-semibold tracking-tight text-camp-charcoal">
           Crée ton compte.
         </h1>
-        <p className="mt-3 text-sm leading-relaxed text-camp-charcoal/60">
+        <p className="mt-3 text-sm leading-relaxed text-lk-stone-3">
           Gratuit. Ensuite, ton rituel d&apos;entrée dans le club.
         </p>
       </div>
@@ -280,7 +280,7 @@ export function SignUpForm() {
         <span className="block text-xs text-camp-charcoal/45">8 caractères minimum.</span>
       </label>
 
-      {error ? <p className="border-l-2 border-camp-charcoal pl-3 text-sm text-camp-charcoal">{error}</p> : null}
+      {error ? <p className="border-l-2 border-lk-line pl-3 text-sm text-camp-charcoal">{error}</p> : null}
 
       {/* Requis par la protection anti-bot de Clerk dans un formulaire personnalisé. */}
       <div id="clerk-captcha" />
@@ -293,7 +293,7 @@ export function SignUpForm() {
         {busy ? "Création du compte…" : "Créer mon compte"}
       </button>
 
-      <p className="text-xs leading-relaxed text-camp-charcoal/50">
+      <p className="text-xs leading-relaxed text-lk-stone-3">
         En créant ton compte, tu acceptes les{" "}
         <Link href="/legal/cgu" className="underline underline-offset-2">
           CGU
@@ -309,7 +309,7 @@ export function SignUpForm() {
         .
       </p>
 
-      <p className="border-t border-camp-hairline pt-6 text-sm text-camp-charcoal/60">
+      <p className="border-t border-camp-hairline pt-6 text-sm text-lk-stone-3">
         Déjà membre ?{" "}
         <Link href={signInHref} className="font-medium text-camp-charcoal underline underline-offset-4">
           Se connecter

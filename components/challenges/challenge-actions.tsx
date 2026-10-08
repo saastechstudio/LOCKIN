@@ -53,7 +53,7 @@ export function ChallengeActions({ challengeId, mine }: { challengeId: number; m
           </Button>
         ) : null}
       </div>
-      {error ? <p className="border-l-2 border-lk-black pl-3 text-sm">{error}</p> : null}
+      {error ? <p className="border-l-2 border-lk-line pl-3 text-sm">{error}</p> : null}
     </div>
   );
 }

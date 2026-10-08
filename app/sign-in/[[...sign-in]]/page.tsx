@@ -13,15 +13,15 @@ export default function SignInPage() {
       </header>
 
       <main className="flex flex-1 flex-col items-center px-5 py-16 sm:py-24">
-        <p className="mb-10 max-w-md text-center text-sm text-lk-black/60">{SLOGAN}</p>
+        <p className="mb-10 max-w-md text-center text-sm text-lk-stone-3">{SLOGAN}</p>
         <SignIn
           fallbackRedirectUrl="/dashboard"
           appearance={{
             elements: {
-              card: "border border-lk-black shadow-none",
-              cardBox: "shadow-none rounded-none",
+              card: "border border-lk-line shadow-none",
+              cardBox: "shadow-none rounded-lg",
               headerTitle: "font-display text-lk-black",
-              formButtonPrimary: "bg-lk-black text-lk-white rounded-none shadow-none hover:opacity-85",
+              formButtonPrimary: "bg-lk-black text-lk-white rounded-lg shadow-none hover:opacity-85",
               footer: "bg-lk-white",
             },
           }}

@@ -21,14 +21,14 @@ export function SectionWhy() {
               <p className="font-display mt-2 text-3xl text-camp-charcoal sm:text-4xl">
                 {p.word}
               </p>
-              <p className="mt-2 max-w-xs text-sm leading-relaxed text-camp-charcoal/60">
+              <p className="mt-2 max-w-xs text-sm leading-relaxed text-lk-stone-3">
                 {p.text}
               </p>
             </div>
           ))}
         </div>
 
-        <div className="mt-10 flex items-center justify-between gap-4 border border-camp-charcoal px-6 py-5">
+        <div className="mt-10 flex items-center justify-between gap-4 border border-lk-line px-6 py-5">
           <p className="font-display text-lg text-camp-charcoal sm:text-xl">
             Groupe limité à 20 participants
           </p>

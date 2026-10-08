@@ -12,13 +12,13 @@ type GoalScreenProps = {
 export function GoalScreen({ domain, onDomainChange, subGoal, onSubGoalChange }: GoalScreenProps) {
   return (
     <div>
-      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
         Écran 02 — Objectif 30 jours
       </p>
       <h1 className="font-display mt-3 text-3xl text-lk-black sm:text-4xl sm:text-3xl">
         Sur quoi tu te concentres ?
       </h1>
-      <p className="mt-2 text-sm text-camp-charcoal/60">
+      <p className="mt-2 text-sm text-lk-stone-3">
         Choisis un domaine. Tu pourras en ajouter d&apos;autres plus tard
         dans Objectifs.
       </p>
@@ -32,8 +32,8 @@ export function GoalScreen({ domain, onDomainChange, subGoal, onSubGoalChange }:
             className={cn(
               "border border-camp-hairline bg-camp-white px-3 py-4 text-center text-xs font-semibold tracking-[0.08em] uppercase transition-colors",
               domain === option
-                ? "border-camp-charcoal bg-camp-charcoal text-camp-white"
-                : "text-camp-charcoal hover:border-camp-charcoal",
+                ? "border-lk-line bg-camp-charcoal text-camp-white"
+                : "text-camp-charcoal hover:border-lk-line",
             )}
           >
             {option}
@@ -42,7 +42,7 @@ export function GoalScreen({ domain, onDomainChange, subGoal, onSubGoalChange }:
       </div>
 
       <label className="mt-6 block">
-        <span className="text-[11px] font-semibold tracking-[0.08em] text-camp-charcoal/60 uppercase">
+        <span className="text-[11px] font-semibold tracking-[0.08em] text-lk-stone-3 uppercase">
           Sous-objectif (optionnel)
         </span>
         <input
@@ -50,7 +50,7 @@ export function GoalScreen({ domain, onDomainChange, subGoal, onSubGoalChange }:
           onChange={(e) => onSubGoalChange(e.target.value)}
           maxLength={140}
           placeholder="Ex. : courir 5 km trois fois par semaine"
-          className="mt-2 w-full border border-camp-hairline bg-camp-white px-4 py-3 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-camp-charcoal"
+          className="mt-2 w-full border border-camp-hairline bg-camp-white px-4 py-3 text-sm text-camp-charcoal outline-none placeholder:text-camp-charcoal/40 focus:border-lk-line"
         />
       </label>
     </div>

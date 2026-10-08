@@ -23,23 +23,23 @@ export default async function ObjectifsPage() {
     <div className="camp-scope">
       <div className="mx-auto max-w-2xl space-y-12">
         <div>
-          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
             Lockin Social Club
           </p>
           <h1 className="font-display text-3xl text-lk-black sm:text-4xl">
             Objectifs
           </h1>
-          <p className="mt-1 text-sm text-lk-black/60">
+          <p className="mt-1 text-sm text-lk-stone-3">
             Objectifs à 30, 60 ou 90 jours, et les routines qui les font tenir.
           </p>
         </div>
 
         {/* Score de discipline : la note quotidienne, moyennée sur 7 jours. */}
         <section className="grid grid-cols-2 gap-6 sm:grid-cols-3">
-          <div className="col-span-2 flex items-center gap-4 border-t border-lk-black pt-4 sm:col-span-1">
+          <div className="col-span-2 flex items-center gap-4 border-t border-lk-line pt-4 sm:col-span-1">
             <LockIcon level={progression.level} max={LEVEL_MAX} className="h-12 w-9" />
             <div>
-              <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-black/50 uppercase">
+              <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">
                 Niveau {progression.level}/{LEVEL_MAX}
               </p>
               <p className="font-display text-lg">{levelName(progression.level)}</p>
@@ -61,7 +61,7 @@ export default async function ObjectifsPage() {
           <GoalsBoard goals={goals} />
         </section>
 
-        <section className="border-t border-lk-black pt-10">
+        <section className="border-t border-lk-line pt-10">
           <RoutineBoard items={routine} />
         </section>
       </div>

@@ -26,7 +26,7 @@ export function SectionTitle({ index, eyebrow, title, description, className }: 
         {title}
       </h2>
       {description ? (
-        <p className="max-w-md text-sm leading-relaxed text-camp-charcoal/60">{description}</p>
+        <p className="max-w-md text-sm leading-relaxed text-lk-stone-3">{description}</p>
       ) : null}
     </div>
   );

@@ -31,7 +31,7 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col gap-5 border-b border-lk-black pb-8 sm:flex-row sm:items-start sm:justify-between">
+      <div className="flex flex-col gap-5 border-b border-lk-line pb-8 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex items-start gap-4">
           <div className="flex size-16 shrink-0 items-center justify-center border border-camp-hairline bg-camp-cream text-xl font-bold text-camp-charcoal">
             {profile.avatarUrl ? (
@@ -46,9 +46,9 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
               {profile.name ?? "Membre Lockin"}
             </h1>
             {profile.bio ? (
-              <p className="mt-1 max-w-md text-sm text-camp-charcoal/70">{profile.bio}</p>
+              <p className="mt-1 max-w-md text-sm text-lk-stone-3">{profile.bio}</p>
             ) : null}
-            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-lk-black/60">
+            <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-lk-stone-3">
               {profile.city || profile.country ? (
                 <span className="inline-flex items-center gap-1">
                   <MapPin className="size-3.5" />
@@ -65,7 +65,7 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
           </div>
         </div>
 
-        <div className="flex shrink-0 items-center gap-4 border border-lk-black px-5 py-4">
+        <div className="flex shrink-0 items-center gap-4 border border-lk-line px-5 py-4">
           <LockIcon
             level={profile.lockinLevel}
             max={LEVEL_MAX}
@@ -73,7 +73,7 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
             title={`Niveau ${profile.lockinLevel} sur ${LEVEL_MAX}`}
           />
           <div>
-            <p className="text-[10px] font-semibold tracking-[0.2em] text-lk-black/50 uppercase">
+            <p className="text-[10px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">
               Niveau {profile.lockinLevel}/{LEVEL_MAX}
             </p>
             <p className="font-display text-lg text-lk-black">{levelName(profile.lockinLevel)}</p>
@@ -89,7 +89,7 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
               href={l.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-camp-hairline px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase hover:border-camp-charcoal"
+              className="border border-camp-hairline px-3 py-1.5 text-[11px] font-semibold tracking-[0.06em] text-camp-charcoal uppercase hover:border-lk-line"
             >
               {l.label}
             </a>
@@ -109,7 +109,7 @@ export function ProfileView({ profile, goals, routine }: ProfileViewProps) {
 
       <Link
         href="/dashboard/objectifs"
-        className="inline-block text-xs font-bold text-camp-charcoal/60 uppercase underline-offset-4 hover:text-camp-charcoal hover:underline"
+        className="inline-block text-xs font-bold text-lk-stone-3 uppercase underline-offset-4 hover:text-camp-charcoal hover:underline"
       >
         Gérer dans le module Objectifs →
       </Link>
@@ -131,7 +131,7 @@ function GoalColumn({ title, goals }: { title: string; goals: Goal[] }) {
             <li key={g.id} className="border-t border-camp-hairline pt-2 first:border-t-0 first:pt-0">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-camp-charcoal">{g.title}</span>
-                <span className="text-xs text-camp-charcoal/50">{g.progress}%</span>
+                <span className="text-xs text-lk-stone-3">{g.progress}%</span>
               </div>
               {g.horizonDays ? (
                 <span className="text-[10px] text-camp-charcoal/40 uppercase">

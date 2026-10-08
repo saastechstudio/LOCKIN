@@ -1,0 +1,132 @@
+/*
+ * LOCKIN — animations « Focus ».
+ *
+ * Règle : le mouvement guide l'œil, il ne le distrait pas. Courses courtes
+ * (10 px), durées < 1 s, courbe douce. Tout est neutralisé sous
+ * prefers-reduced-motion (voir en bas de fichier).
+ *
+ * Utilisation côté Tailwind : animate-fade-up, animate-fade-in,
+ * animate-float, animate-draw (déclarés dans @theme, app/globals.css).
+ */
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Lévitation très lente : 6 px, jamais plus. */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/*
+ * Icônes line-art : le trait se dessine. Les tracés lucide tiennent dans un
+ * viewBox 24 : 120 unités de tiret couvrent n'importe lequel d'entre eux.
+ */
+@keyframes draw {
+  from {
+    stroke-dashoffset: 120;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Halo qui respire derrière le CTA / le plan recommandé. */
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/*
+ * Révélation au scroll (fade + glissement de 10 px) et parallax léger du
+ * hero : CSS pur, piloté par le défilement (animation-timeline). Aucun JS,
+ * aucun flash au chargement ; sans support du navigateur, tout reste
+ * simplement visible et immobile.
+ *
+ *   data-reveal   -> apparaît quand l'élément entre dans l'écran
+ *   data-parallax -> glisse lentement pendant que la page défile
+ */
+@keyframes parallax-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(var(--parallax-distance, 48px));
+  }
+}
+
+@supports (animation-timeline: view()) {
+  [data-reveal] {
+    animation: fade-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 35%;
+  }
+  [data-parallax] {
+    animation: parallax-drift linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 60vh;
+  }
+}
+
+/*
+ * Icônes line-art animées (components/ui/animated-icon.tsx) : chaque tracé
+ * se dessine à l'apparition, puis se redessine au survol de la carte
+ * parente (.group).
+ */
+.lk-draw :is(path, line, polyline, polygon, circle, rect, ellipse) {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 0;
+  animation: draw 1.4s var(--ease-premium) both;
+}
+.group:hover .lk-draw :is(path, line, polyline, polygon, circle, rect, ellipse) {
+  animation: draw 0.9s var(--ease-premium) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+  [data-reveal],
+  [data-parallax] {
+    animation: none !important;
+  }
+  .lk-draw :is(path, line, polyline, polygon, circle, rect, ellipse) {
+    stroke-dasharray: none;
+    animation: none !important;
+  }
+}

@@ -28,14 +28,14 @@ export function Hero() {
           <h1 className="font-display max-w-3xl text-5xl leading-[0.95] text-camp-charcoal sm:text-7xl">
             Lock-In Camp
           </h1>
-          <p className="max-w-lg text-base leading-relaxed text-camp-charcoal/60 sm:text-lg">
+          <p className="max-w-lg text-base leading-relaxed text-lk-stone-3 sm:text-lg">
             10 jours de discipline, sport, mindset et performance.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-px border border-camp-hairline bg-camp-hairline sm:grid-cols-3">
           <div className="bg-camp-white p-5">
-            <p className="text-[11px] font-semibold tracking-[0.2em] text-camp-charcoal/50 uppercase">
+            <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">
               Session 1
             </p>
             <p className="font-display mt-1 text-lg text-camp-charcoal">
@@ -44,7 +44,7 @@ export function Hero() {
             </p>
           </div>
           <div className="bg-camp-white p-5">
-            <p className="text-[11px] font-semibold tracking-[0.2em] text-camp-charcoal/50 uppercase">
+            <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">
               Session 2
             </p>
             <p className="font-display mt-1 text-lg text-camp-charcoal">
@@ -53,7 +53,7 @@ export function Hero() {
             </p>
           </div>
           <div className="bg-camp-white p-5">
-            <p className="text-[11px] font-semibold tracking-[0.2em] text-camp-charcoal/50 uppercase">
+            <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">
               Investissement
             </p>
             <p className="font-display mt-1 text-lg text-camp-charcoal">

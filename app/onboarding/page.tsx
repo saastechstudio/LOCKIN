@@ -13,7 +13,7 @@ export default async function OnboardingWelcomePage() {
   return (
     <div className="mx-auto flex min-h-svh max-w-2xl flex-col justify-center px-6 py-16">
       <div className="space-y-3 text-center">
-        <span className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+        <span className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
           Bienvenue, {firstName}
         </span>
         <h1 className="font-display text-3xl text-foreground sm:text-4xl">

@@ -93,7 +93,7 @@ export function LockinOnboardingWizard({ next }: { next: string }) {
       <div className="mx-auto max-w-xl">
         <div className="mb-8 flex items-center justify-between">
           <Logo size="sm" href={null} />
-          <span className="text-xs font-semibold tracking-[0.08em] text-camp-charcoal/50 uppercase">
+          <span className="text-xs font-semibold tracking-[0.08em] text-lk-stone-3 uppercase">
             0{step + 1} / 0{STEP_LABELS.length}
           </span>
         </div>
@@ -136,19 +136,19 @@ export function LockinOnboardingWizard({ next }: { next: string }) {
         {step === 4 ? <ConfirmationScreen data={state} /> : null}
 
         {error ? (
-          <p className="mt-6 border border-camp-charcoal bg-camp-cream px-4 py-3 text-sm text-camp-charcoal">
+          <p className="mt-6 border border-lk-line bg-camp-cream px-4 py-3 text-sm text-camp-charcoal">
             {error}
           </p>
         ) : null}
 
-        <div className="mt-10 flex items-center justify-between border-t border-camp-charcoal pt-6">
+        <div className="mt-10 flex items-center justify-between border-t border-lk-line pt-6">
           <button
             type="button"
             onClick={goBack}
             disabled={step === 0 || isPending}
             className={cn(
               "inline-flex items-center gap-1.5 text-xs font-semibold tracking-[0.08em] uppercase",
-              step === 0 ? "pointer-events-none opacity-0" : "text-camp-charcoal/60 hover:text-camp-charcoal",
+              step === 0 ? "pointer-events-none opacity-0" : "text-lk-stone-3 hover:text-camp-charcoal",
             )}
           >
             <ArrowLeft className="size-3.5" /> Précédent
@@ -159,7 +159,7 @@ export function LockinOnboardingWizard({ next }: { next: string }) {
               type="button"
               onClick={goNext}
               disabled={!canAdvance}
-              className="inline-flex items-center gap-2 border border-camp-charcoal bg-camp-charcoal px-6 py-3 text-xs font-semibold tracking-[0.08em] text-camp-white uppercase disabled:opacity-30"
+              className="inline-flex items-center gap-2 border border-lk-line bg-camp-charcoal px-6 py-3 text-xs font-semibold tracking-[0.08em] text-camp-white uppercase disabled:opacity-30"
             >
               Suivant <ArrowRight className="size-3.5" />
             </button>
@@ -168,7 +168,7 @@ export function LockinOnboardingWizard({ next }: { next: string }) {
               type="button"
               onClick={handleSubmit}
               disabled={isPending}
-              className="inline-flex items-center gap-2 border border-camp-charcoal bg-camp-gold px-6 py-3 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
+              className="inline-flex items-center gap-2 border border-lk-line bg-camp-gold px-6 py-3 text-xs font-semibold tracking-[0.08em] text-camp-charcoal uppercase disabled:opacity-40"
             >
               {isPending ? "Création…" : "Entrer dans le Lockin Social Club"}
             </button>

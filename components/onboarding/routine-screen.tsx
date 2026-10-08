@@ -43,25 +43,25 @@ function RoutineChoiceList({
 export function RoutineScreen({ morning, onMorningChange, evening, onEveningChange }: RoutineScreenProps) {
   return (
     <div>
-      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-black/50 uppercase">
+      <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
         Écran 04 — Routine
       </p>
       <h1 className="font-display mt-3 text-3xl text-lk-black sm:text-4xl sm:text-3xl">
         Tes deux rituels quotidiens
       </h1>
-      <p className="mt-2 text-sm text-camp-charcoal/60">
+      <p className="mt-2 text-sm text-lk-stone-3">
         Un le matin, un le soir. Tu les coches chaque jour dans Objectifs.
       </p>
 
       <div className="mt-6 grid gap-8 sm:grid-cols-2">
         <div>
-          <p className="mb-2 text-[11px] font-semibold tracking-[0.08em] text-camp-charcoal/60 uppercase">
+          <p className="mb-2 text-[11px] font-semibold tracking-[0.08em] text-lk-stone-3 uppercase">
             Routine du matin
           </p>
           <RoutineChoiceList choices={MORNING_ROUTINE_CHOICES} value={morning} onChange={onMorningChange} />
         </div>
         <div>
-          <p className="mb-2 text-[11px] font-semibold tracking-[0.08em] text-camp-charcoal/60 uppercase">
+          <p className="mb-2 text-[11px] font-semibold tracking-[0.08em] text-lk-stone-3 uppercase">
             Routine du soir
           </p>
           <RoutineChoiceList choices={EVENING_ROUTINE_CHOICES} value={evening} onChange={onEveningChange} />

@@ -30,7 +30,7 @@ export default async function BuilderPage({ params }: { params: Promise<{ id: st
 
   return (
     <div className="mx-auto max-w-4xl space-y-10">
-      <Link href="/formations" className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-black/60 hover:text-lk-black">
+      <Link href="/formations" className="inline-flex items-center gap-1.5 text-xs font-medium text-lk-stone-3 hover:text-lk-black">
         <ArrowLeft className="size-3.5" /> Formations
       </Link>
 
@@ -61,7 +61,7 @@ export default async function BuilderPage({ params }: { params: Promise<{ id: st
             : "Brouillon : visible de toi seul. Publier exige au moins un chapitre et une identité validée."}
         </p>
         {!verified ? (
-          <div className="mb-4 space-y-2 border border-lk-black bg-lk-mist p-4 text-sm">
+          <div className="mb-4 space-y-2 border border-lk-line bg-lk-mist p-4 text-sm">
             <p className="font-medium">{CREATOR_STATUS_LABELS[verification.status]}</p>
             <p className="text-lk-black/70">
               {verification.status === "pending"
@@ -79,7 +79,7 @@ export default async function BuilderPage({ params }: { params: Promise<{ id: st
       </section>
 
       <details className="lockin-section group">
-        <summary className="cursor-pointer list-none text-[11px] font-semibold tracking-[0.2em] text-lk-black/60 uppercase marker:hidden">
+        <summary className="cursor-pointer list-none text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase marker:hidden">
           Informations de la formation
         </summary>
         <div className="mt-6">
