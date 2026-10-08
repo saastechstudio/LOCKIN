@@ -29,14 +29,14 @@ const PALETTE = [
   { group: "Focus", name: "Bleu survol", token: "lk-blue-soft", hex: "#4A6FA5", className: "bg-lk-blue-soft" },
   { group: "Dynamique", name: "Corail doux", token: "lk-coral", hex: "#D97A5A", className: "bg-lk-coral" },
   { group: "Dynamique", name: "Doré mat", token: "lk-gold", hex: "#C9A86A", className: "bg-lk-gold" },
-  { group: "Premium", name: "Marron profond", token: "lk-black", hex: "#2C1E1A", className: "bg-lk-black" },
+  { group: "Texte", name: "Encre bleu nuit", token: "lk-black", hex: "#1B2A3E", className: "bg-lk-black" },
 ];
 
 const RULES = [
   "Fond blanc cassé ou beige crème : jamais de blanc pur en fond de page. Le blanc pur est réservé aux cartes.",
-  "Texte en marron profond, secondaire en gris béton (5,2:1). Le texte courant n'est jamais en corail ni en doré.",
+  "Texte en encre bleu nuit (la teinte du bleu focus, assombrie), secondaire en gris béton (5,2:1). Le texte courant n'est jamais en corail ni en doré.",
   "Un seul bleu pour agir : #3E5C8A, #4A6FA5 au survol. Le corail marque l'énergie, le doré les paliers et le survol des cartes.",
-  "Rayons doux (12 à 24 px), ombres ultra-diffuses teintées de marron. Aucune ombre noire, aucun halo vif.",
+  "Rayons doux (12 à 24 px), ombres ultra-diffuses teintées de bleu. Aucune ombre noire, aucun halo vif.",
   "Mouvement court : fade-in + glissement de 10 px, 0,7 s maximum. Tout s'éteint sous prefers-reduced-motion.",
   "Anti-dopamine : « Respect » au lieu du like, pas de cœur, pas d'emoji, pas de compteur public.",
   "Graphiques en barres verticales uniquement. Pas de camembert.",

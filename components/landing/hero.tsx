@@ -14,7 +14,7 @@ const PILLARS = [
 ];
 
 /**
- * Entrée du club. Fond blanc cassé #FAF9F7, titre marron #2C1E1A, sous-titre
+ * Entrée du club. Fond blanc cassé #FAF9F7, titre encre bleu nuit #1B2A3E, sous-titre
  * gris #6A6764, CTA bleu #3E5C8A (survol #4A6FA5 + ombre diffuse).
  * Le panneau de droite flotte très lentement et glisse en parallax léger au
  * défilement (CSS pur, désactivé sous prefers-reduced-motion).
@@ -22,24 +22,15 @@ const PILLARS = [
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden">
-      {/* Halos très doux : de la profondeur sans jamais attirer l'œil. */}
+      {/* Halo très doux : de la profondeur sans jamais attirer l'œil. */}
       <div
         aria-hidden
         className="pointer-events-none absolute -top-40 -right-32 -z-10 size-[34rem] rounded-full bg-lk-gold/15 blur-3xl"
       />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-48 -left-40 -z-10 size-[30rem] rounded-full bg-lk-blue-soft/10 blur-3xl"
-      />
 
       <div className="mx-auto grid w-full max-w-6xl gap-16 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12 lg:items-center lg:gap-12">
         <div className="lg:col-span-7">
-          <p className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-lk-line bg-lk-surface px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.2em] text-lk-blue uppercase shadow-xs">
-            <span aria-hidden className="size-1.5 rounded-full bg-lk-coral" />
-            Mouvement mondial de discipline
-          </p>
-
-          <Slogan className="animate-fade-up mt-8 [animation-delay:80ms]" />
+          <Slogan className="animate-fade-up" />
 
           <p className="animate-fade-up mt-8 max-w-md text-lg leading-relaxed text-lk-stone-3 [animation-delay:160ms]">
             Rejoins le Lockin Social Club. Discipline, objectifs, routines, progression. Un club

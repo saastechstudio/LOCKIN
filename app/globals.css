@@ -10,9 +10,9 @@
  *
  * Concentration d'abord : fonds anti-fatigue (blanc cassé, beige crème),
  * gris chauds pour la structure, un bleu désaturé pour le focus, un corail
- * doux et un doré mat pour le dynamisme, un marron profond pour le texte.
+ * doux et un doré mat pour le dynamisme, une encre bleu nuit (même teinte) pour le texte.
  * Ambiance béton ciré : rayons doux, ombres ultra-diffuses teintées de
- * marron, mouvements courts (fade + 10 px) qui respectent
+ * bleu, mouvements courts (fade + 10 px) qui respectent
  * prefers-reduced-motion. Un seul thème : clair (forcé dans app/layout.tsx).
  *
  * Vocabulaire de référence : les utilitaires lk-* (bg-lk-white, text-lk-ink-1,
@@ -35,8 +35,8 @@
   --lk-stone-3: #6a6764; /* texte secondaire — 5,2:1 sur #faf9f7 */
 
   /* ---- Texte / premium ---- */
-  --lk-black: #2c1e1a; /* marron profond : texte, aplats sombres */
-  --lk-ink-1: #2c1e1a;
+  --lk-black: #1b2a3e; /* encre bleue : le bleu focus assombri, pour texte et aplats sombres */
+  --lk-ink-1: #1b2a3e;
   --lk-ink-2: #6a6764;
   --lk-ink-3: #b8b3ae;
 
@@ -112,20 +112,20 @@
 }
 
 /*
- * Échelles « béton ciré » : ombres ultra-diffuses teintées de marron
+ * Échelles « béton ciré » : ombres ultra-diffuses teintées de bleu
  * (jamais de noir pur), rayons doux, espacements aérés. Les ombres par
  * défaut de Tailwind sont remplacées pour que shadow-sm…shadow-2xl
  * restent cohérentes avec la palette.
  */
 @theme {
   --shadow-*: initial;
-  --shadow-2xs: 0 1px 1px rgba(44, 30, 26, 0.03);
-  --shadow-xs: 0 1px 2px rgba(44, 30, 26, 0.04);
-  --shadow-sm: 0 1px 2px rgba(44, 30, 26, 0.04), 0 2px 8px rgba(44, 30, 26, 0.04);
-  --shadow-md: 0 2px 4px rgba(44, 30, 26, 0.03), 0 8px 24px rgba(44, 30, 26, 0.06);
-  --shadow-lg: 0 4px 8px rgba(44, 30, 26, 0.03), 0 16px 40px rgba(44, 30, 26, 0.08);
-  --shadow-xl: 0 8px 16px rgba(44, 30, 26, 0.04), 0 28px 64px rgba(44, 30, 26, 0.1);
-  --shadow-2xl: 0 12px 24px rgba(44, 30, 26, 0.05), 0 40px 96px rgba(44, 30, 26, 0.12);
+  --shadow-2xs: 0 1px 1px rgba(62, 92, 138, 0.03);
+  --shadow-xs: 0 1px 2px rgba(62, 92, 138, 0.04);
+  --shadow-sm: 0 1px 2px rgba(62, 92, 138, 0.04), 0 2px 8px rgba(62, 92, 138, 0.04);
+  --shadow-md: 0 2px 4px rgba(62, 92, 138, 0.03), 0 8px 24px rgba(62, 92, 138, 0.06);
+  --shadow-lg: 0 4px 8px rgba(62, 92, 138, 0.03), 0 16px 40px rgba(62, 92, 138, 0.08);
+  --shadow-xl: 0 8px 16px rgba(62, 92, 138, 0.04), 0 28px 64px rgba(62, 92, 138, 0.1);
+  --shadow-2xl: 0 12px 24px rgba(62, 92, 138, 0.05), 0 40px 96px rgba(62, 92, 138, 0.12);
   --shadow-focus: 0 1px 2px rgba(62, 92, 138, 0.2), 0 8px 24px rgba(62, 92, 138, 0.22);
   --shadow-gold: 0 2px 4px rgba(201, 168, 106, 0.1), 0 12px 32px rgba(201, 168, 106, 0.18);
   --font-mono: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
