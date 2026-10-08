@@ -30,12 +30,7 @@ export function Hero() {
 
       <div className="mx-auto grid w-full max-w-6xl gap-16 px-5 py-24 sm:px-8 sm:py-32 lg:grid-cols-12 lg:items-center lg:gap-12">
         <div className="lg:col-span-7">
-          <p className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-lk-line bg-lk-surface px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.2em] text-lk-blue uppercase shadow-xs">
-            <span aria-hidden className="size-1.5 rounded-full bg-lk-coral" />
-            Mouvement mondial de discipline
-          </p>
-
-          <Slogan className="animate-fade-up mt-8 [animation-delay:80ms]" />
+          <Slogan className="animate-fade-up" />
 
           <p className="animate-fade-up mt-8 max-w-md text-lg leading-relaxed text-lk-stone-3 [animation-delay:160ms]">
             Rejoins le Lockin Social Club. Discipline, objectifs, routines, progression. Un club
