@@ -2,15 +2,18 @@
 
 import { ClerkProvider } from "@clerk/nextjs";
 
-/** Les widgets Clerk (connexion, menu compte) dans l'identité Lockin : noir sur blanc, angles droits. */
+/** Les widgets Clerk (connexion, menu compte) dans l'identité Focus : bleu focus, marron profond, rayons doux. */
 const LOCKIN_VARIABLES = {
-  colorPrimary: "#000000",
+  colorPrimary: "#3E5C8A",
   colorBackground: "#ffffff",
-  colorForeground: "#000000",
+  colorForeground: "#2C1E1A",
   colorInput: "#ffffff",
-  colorInputForeground: "#000000",
-  colorNeutral: "#111111",
-  borderRadius: "0",
+  colorInputForeground: "#2C1E1A",
+  colorNeutral: "#2C1E1A",
+  colorMuted: "#F5F2EE",
+  colorMutedForeground: "#6A6764",
+  colorBorder: "#E7E3DF",
+  borderRadius: "0.75rem",
   fontFamily: "var(--font-inter), ui-sans-serif, system-ui, sans-serif",
 };
 
