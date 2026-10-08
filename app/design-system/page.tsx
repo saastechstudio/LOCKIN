@@ -4,6 +4,7 @@ import { ChartColumn, LifeBuoy, Rows3, Swords, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/lockin/icon";
 import { LockIcon } from "@/components/lockin/lock-icon";
+import { LogoMark } from "@/components/lockin/logo-mark";
 import { Logo } from "@/components/lockin/logo";
 import { Eyebrow, Section, Slogan, Stat, Title } from "@/components/lockin/primitives";
 import { VerticalBars } from "@/components/lockin/vertical-bars";
@@ -137,10 +138,9 @@ export default function DesignSystemPage() {
       </Section>
 
       <Section>
-        <Eyebrow>Cadenas · logo et niveau</Eyebrow>
+        <Eyebrow>Logo officiel · icônes de niveau</Eyebrow>
         <div className="mt-6 flex flex-wrap items-end gap-10">
-          <LockIcon className="h-24 w-[72px]" />
-          <LockIcon className="h-24 w-[72px]" solid={false} />
+          <LogoMark className="h-24" title="Lockin" />
           {Array.from({ length: LEVEL_MAX }, (_, i) => i + 1).map((level) => (
             <div key={level} className="text-center">
               <LockIcon level={level} className="h-16 w-12" />

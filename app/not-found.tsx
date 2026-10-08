@@ -3,14 +3,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/marketing/site-header";
 import { SiteFooter } from "@/components/marketing/site-footer";
-import { LockIcon } from "@/components/lockin/lock-icon";
+import { LogoMark } from "@/components/lockin/logo-mark";
 
 export default function NotFound() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <SiteHeader />
       <main className="mx-auto flex max-w-lg flex-1 flex-col items-center justify-center px-6 py-24 text-center">
-        <LockIcon className="h-14 w-[42px]" solid={false} />
+        <LogoMark className="h-14" />
         <h1 className="font-display mt-6 text-3xl text-foreground">
           Page introuvable
         </h1>

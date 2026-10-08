@@ -2,7 +2,7 @@ import { UserButton } from "@clerk/nextjs";
 
 import { MobileNav } from "@/components/dashboard/mobile-nav";
 import { NotificationBell } from "@/components/dashboard/notification-bell";
-import { LockIcon } from "@/components/lockin/lock-icon";
+import { LogoMark } from "@/components/lockin/logo-mark";
 import type { Notification, User } from "@/lib/db/schema";
 
 function today(): string {
@@ -29,7 +29,7 @@ export function DashboardTopbar({
     <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-3 border-b border-lk-line bg-lk-white px-4 sm:px-8">
       <div className="flex min-w-0 items-center gap-3">
         <MobileNav />
-        <LockIcon className="h-6 w-[18px] md:hidden" />
+        <LogoMark className="h-6 md:hidden" />
         <div className="min-w-0">
           <p className="font-display truncate text-base text-lk-black">{firstName}</p>
           <p className="hidden text-[11px] tracking-[0.2em] text-lk-stone-3 uppercase sm:block">

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { JOIN_HREF } from "@/components/landing/landing-layout";
-import { LockIcon } from "@/components/lockin/lock-icon";
+import { LogoMark } from "@/components/lockin/logo-mark";
 import { Slogan } from "@/components/lockin/primitives";
 import { Button } from "@/components/ui/button";
 
@@ -65,7 +65,7 @@ export function Hero() {
         <div className="lg:col-span-5">
           <div data-parallax className="[--parallax-distance:56px]">
             <div className="animate-float rounded-3xl border border-lk-line bg-lk-surface p-8 shadow-xl sm:p-10">
-              <LockIcon className="mb-8 h-20 w-[60px] text-lk-black" />
+              <LogoMark className="mb-8 h-20" />
               <ol>
                 {PILLARS.map((pillar, i) => (
                   <li

@@ -5,7 +5,7 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { ArrowRight } from "lucide-react";
 
-import { LockIcon } from "@/components/lockin/lock-icon";
+import { LogoMark } from "@/components/lockin/logo-mark";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
@@ -46,7 +46,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
       <ScrollArea className="flex-1 px-6 py-6">
         {messages.length === 0 ? (
           <div className="flex h-full flex-col items-center justify-center gap-4 py-16 text-center">
-            <LockIcon className="h-10 w-[30px]" />
+            <LogoMark className="h-10" />
             <p className="max-w-sm text-sm text-lk-stone-3">
               Pose ta question au Coach Lock In. Direct, exigeant, orienté
               exécution.

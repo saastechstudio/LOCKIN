@@ -1,5 +1,6 @@
 export { LockIcon } from "./lock-icon";
 export { Logo } from "./logo";
+export { LogoMark } from "./logo-mark";
 export { Icon } from "./icon";
 export {
   Eyebrow,
