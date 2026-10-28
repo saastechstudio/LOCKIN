@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Logo } from "@/components/lockin/logo";
 
 /**
- * Pied de page premium, propre au Lock-In Camp — pas le footer générique
+ * Pied de page premium, propre au Lockin Trip — pas le footer générique
  * du site. Seul endroit de la page où le beige crème sert de fond plein :
  * un repère de clôture, pas une section de plus.
  */

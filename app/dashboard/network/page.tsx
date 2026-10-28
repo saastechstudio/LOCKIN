@@ -1,14 +1,15 @@
 import { ArrowRight } from "lucide-react";
 
 import { db } from "@/lib/db";
-import { getOrCreateDbUser } from "@/lib/auth";
+import { requireLockinOnboarded } from "@/lib/auth";
 import { NetworkDirectory } from "@/components/dashboard/network-directory";
 import { Button } from "@/components/ui/button";
 import { DiscordIcon } from "@/components/icons/discord-icon";
 import { DISCORD_INVITE_URL } from "@/lib/social-links";
 
 export default async function NetworkPage() {
-  const user = await getOrCreateDbUser();
+  // Annuaire des membres : réservé aux membres du club (numéro du Lockin Trip).
+  const user = await requireLockinOnboarded("/dashboard/network");
 
   const members = await db.query.users.findMany({
     columns: {

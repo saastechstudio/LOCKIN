@@ -5,7 +5,7 @@ import { Logo } from "@/components/lockin/logo";
 
 const NAV_LINKS = [
   { href: "/#mouvement", label: "Le Club" },
-  { href: "/camp", label: "Lock-In Camp" },
+  { href: "/lockintrip", label: "Lockin Trip" },
   { href: "/methode", label: "La Méthode" },
 ];
 

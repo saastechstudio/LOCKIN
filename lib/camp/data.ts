@@ -1,5 +1,5 @@
 /**
- * Lock-In Camp — Édition Phuket 2027. Catalogue statique (sports,
+ * Lockin Trip — Édition Phuket 2027. Catalogue statique (sports,
  * excursions, structure de journée, inclus) et données d'amorçage des
  * sessions. Les sessions elles-mêmes vivent en base (lib/actions/camp.ts
  * les crée si absentes) pour pouvoir compter les places restantes ; le

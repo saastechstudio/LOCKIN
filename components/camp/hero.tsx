@@ -26,7 +26,7 @@ export function Hero() {
             Édition Phuket — {days} jours
           </p>
           <h1 className="font-display max-w-3xl text-5xl leading-[0.95] text-camp-charcoal sm:text-7xl">
-            Lock-In Camp
+            Lockin Trip
           </h1>
           <p className="max-w-lg text-base leading-relaxed text-lk-stone-3 sm:text-lg">
             10 jours de discipline, sport, mindset et performance.

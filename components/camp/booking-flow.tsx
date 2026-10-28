@@ -106,7 +106,7 @@ export function BookingFlow({ session, initialFullName, email }: BookingFlowProp
           title="Pré-inscription confirmée"
           description={`Ta place pour ${session.name} est réservée. Nous te contacterons par email pour la suite.`}
         />
-        <CTAButton onClick={() => router.push("/camp")}>Retour à la page du camp</CTAButton>
+        <CTAButton onClick={() => router.push("/lockintrip")}>Retour à la page du Lockin Trip</CTAButton>
       </div>
     );
   }

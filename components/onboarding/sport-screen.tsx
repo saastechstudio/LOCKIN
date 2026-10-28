@@ -17,7 +17,7 @@ export function SportScreen({ value, onChange }: SportScreenProps) {
         Quel est ton sport principal ?
       </h1>
       <p className="mt-2 text-sm text-lk-stone-3">
-        Le même que celui du Lock-In Camp et des groupes sport.
+        Le même que celui du Lockin Trip et des groupes sport.
       </p>
 
       <div className="mt-6 grid grid-cols-2 gap-px bg-camp-hairline sm:grid-cols-3">

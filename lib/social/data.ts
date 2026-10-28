@@ -1,6 +1,6 @@
 /**
  * Vocabulaire partagé du Lockin Social Club — mêmes tags pour les posts du
- * feed et les questions d'entraide, mêmes sports que le Lock-In Camp (une
+ * feed et les questions d'entraide, mêmes sports que le Lockin Trip (une
  * seule liste canonique, cf. lib/camp/data.ts).
  */
 import { SPORT_ACTIVITIES } from "@/lib/camp/data";

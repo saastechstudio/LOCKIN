@@ -5,8 +5,10 @@ export default function CguPage() {
     <LegalPage title="Conditions générales d'utilisation — Lockin Social Club">
       <p>
         Les présentes CGU encadrent l&apos;utilisation du Lockin Social Club,
-        entièrement gratuit. Seuls les Lock-In Camp sont payants : leur
-        réservation, réservée aux membres du club, relève en plus des{" "}
+        réseau réservé aux membres du Lockin Trip : gratuit pendant un an à
+        compter de l&apos;entrée dans le club, puis 49&nbsp;€ TTC par an. La
+        réservation d&apos;un Lockin Trip, ouverte à toute personne disposant
+        d&apos;un compte, relève des{" "}
         <a href="/legal/cgv" className="text-brand-blue hover:underline">
           CGV
         </a>
@@ -15,12 +17,17 @@ export default function CguPage() {
 
       <h2>1. Objet du service</h2>
       <p>
-        Le Lockin Social Club est un réseau social gratuit orienté discipline,
+        Le Lockin Social Club est un réseau social, réservé aux membres du
+        Lockin Trip, orienté discipline,
         sport, mindset et entraide entre membres. Il propose un feed de
         publications, des profils, des groupes, une messagerie privée, un
         module d&apos;objectifs personnels et professionnels, et un espace
-        d&apos;entraide par questions/réponses. Il est accessible à toute
-        personne disposant d&apos;un compte Lock In.
+        d&apos;entraide par questions/réponses. Il est accessible aux
+        personnes ayant participé au Lockin Trip et disposant d&apos;un
+        compte Lock In. L&apos;entrée se fait avec le numéro de membre remis à la
+        confirmation de la place au Lockin Trip, à partir du début du séjour.
+        L&apos;adhésion est offerte la première année, puis facturée 49&nbsp;€
+        TTC par an.
       </p>
 
       <h2>2. Inscription et rituel Lockin</h2>

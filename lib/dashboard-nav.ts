@@ -63,7 +63,7 @@ export const DASHBOARD_NAV_GROUPS: DashboardNavGroup[] = [
       { href: "/dashboard/mentors", label: "Mentors", icon: GraduationCap },
       { href: "/dashboard/business", label: "Business", icon: Briefcase },
       { href: "/dashboard/network", label: "Réseau", icon: Network },
-      { href: "/camp", label: "Lock-In Camp", icon: Plane },
+      { href: "/lockintrip", label: "Lockin Trip", icon: Plane },
     ],
   },
   {

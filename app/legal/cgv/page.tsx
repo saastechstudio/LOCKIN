@@ -3,27 +3,28 @@ import { CAMP_EDITION, CAMP_PRICE_PER_PERSON } from "@/lib/camp/data";
 
 export default function CgvPage() {
   return (
-    <LegalPage title="Conditions Générales de Vente — Lock-In Camp">
+    <LegalPage title="Conditions Générales de Vente — Lockin Trip">
       <h2>1. Objet</h2>
       <p>
-        Le Lockin Social Club et l&apos;ensemble de ses fonctionnalités sont
-        gratuits ; leur utilisation relève des{" "}
+        Le Lockin Social Club, réservé aux membres du Lockin Trip, est offert la
+        première année, puis facturé 49&nbsp;€ TTC par an ; son utilisation
+        relève des{" "}
         <a href="/legal/cgu" className="text-brand-blue hover:underline">
           CGU
         </a>
-        . Les présentes Conditions Générales de Vente (CGV) s&apos;appliquent
-        uniquement à la réservation des Lock-In Camp, seuls services payants
-        proposés par Lock In. Toute réservation implique l&apos;acceptation
-        pleine et entière des présentes CGV.
+        . Les présentes Conditions Générales de Vente (CGV) s&apos;appliquent à
+        la réservation des Lockin Trip. Toute réservation implique
+        l&apos;acceptation pleine et entière des présentes CGV.
       </p>
 
       <h2>2. Accès à la réservation</h2>
       <p>
-        La réservation d&apos;un Lock-In Camp est réservée aux membres du
-        Lockin Social Club, c&apos;est-à-dire aux personnes disposant
-        d&apos;un compte et ayant complété le rituel d&apos;inscription au
-        club. L&apos;inscription au club est gratuite et peut être faite au
-        moment de la réservation.
+        La réservation d&apos;un Lockin Trip est ouverte à toute personne
+        disposant d&apos;un compte Lock In, sans être membre du Lockin Social
+        Club. L&apos;accès au club est ensuite réservé aux personnes ayant
+        réservé un Lockin Trip : à la confirmation de sa place, le membre
+        reçoit par email un numéro de membre qui ouvre le club à partir du
+        début de son séjour.
       </p>
 
       <h2>3. Prix</h2>
@@ -32,8 +33,8 @@ export default function CgvPage() {
         {CAMP_PRICE_PER_PERSON.toLocaleString("fr-FR")}&nbsp;€ TTC par
         personne. Le détail des prestations incluses (vol, hébergement,
         programme, activités, excursion) figure sur la{" "}
-        <a href="/camp" className="text-brand-blue hover:underline">
-          page du Lock-In Camp
+        <a href="/lockintrip" className="text-brand-blue hover:underline">
+          page du Lockin Trip
         </a>{" "}
         à la date de la réservation.
       </p>

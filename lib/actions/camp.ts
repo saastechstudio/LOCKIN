@@ -135,9 +135,10 @@ export type CreateCampRegistrationInput = {
 };
 
 /**
- * Enregistre une pré-inscription — réservée aux membres du club (compte +
- * rituel d'inscription fait), vérifié ici et pas seulement par la page :
- * une Server Action s'appelle directement. L'email est celui du compte,
+ * Enregistre une pré-inscription — compte requis (getOrCreateDbUser refuse
+ * sinon), vérifié ici et pas seulement par la page : une Server Action
+ * s'appelle directement. Le rituel du club n'est pas exigé : le club est
+ * l'étape qui suit le trip, pas son préalable. L'email est celui du compte,
  * jamais une saisie libre. Une par email et par session (contrainte
  * camp_registrations_session_email_idx) : re-soumettre met à jour la
  * réservation plutôt que d'échouer. Le paiement n'est pas branché ici : la
@@ -146,9 +147,6 @@ export type CreateCampRegistrationInput = {
  */
 export async function createCampRegistration(input: CreateCampRegistrationInput) {
   const user = await getOrCreateDbUser();
-  if (!user.lockinOnboardingCompletedAt) {
-    throw new Error("Les Lock-In Camp sont réservés aux membres du Lockin Social Club.");
-  }
   enforceRateLimit("camp", user.id);
   const parsed = createRegistrationSchema.parse(input);
 
@@ -198,9 +196,9 @@ export async function createCampRegistration(input: CreateCampRegistrationInput)
     })
     .returning();
 
-  revalidatePath("/camp");
-  revalidatePath(`/camp/${session.slug}`);
-  revalidatePath(`/camp/${session.slug}/reserver`);
+  revalidatePath("/lockintrip");
+  revalidatePath(`/lockintrip/${session.slug}`);
+  revalidatePath(`/lockintrip/${session.slug}/reserver`);
 
   return registration;
 }

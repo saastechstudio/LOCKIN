@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" stroke-linecap="round" stroke-width="1.4">
+  <title>Lockin Social Club</title>
+  <path d="M6 26V14a10 10 0 0 1 20 0v12" stroke="#6b1f2b"/>
+  <path d="M11 26V15a5 5 0 0 1 10 0v11" stroke="#6b1f2b" opacity=".55"/>
+  <circle cx="16" cy="21.5" r="1.6" fill="#6b1f2b" stroke="none"/>
+  <path d="M3 26h26" stroke="#6b1f2b"/>
+</svg>
