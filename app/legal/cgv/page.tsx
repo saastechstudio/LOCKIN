@@ -6,24 +6,23 @@ export default function CgvPage() {
     <LegalPage title="Conditions Générales de Vente — Lockin Trip">
       <h2>1. Objet</h2>
       <p>
-        Le Lockin Social Club et l&apos;ensemble de ses fonctionnalités sont
-        gratuits ; leur utilisation relève des{" "}
+        Le Lockin Social Club, réservé aux membres du Lockin Trip, est offert la
+        première année, puis facturé 49&nbsp;€ TTC par an ; son utilisation
+        relève des{" "}
         <a href="/legal/cgu" className="text-brand-blue hover:underline">
           CGU
         </a>
-        . Les présentes Conditions Générales de Vente (CGV) s&apos;appliquent
-        uniquement à la réservation des Lockin Trip, seuls services payants
-        proposés par Lock In. Toute réservation implique l&apos;acceptation
-        pleine et entière des présentes CGV.
+        . Les présentes Conditions Générales de Vente (CGV) s&apos;appliquent à
+        la réservation des Lockin Trip. Toute réservation implique
+        l&apos;acceptation pleine et entière des présentes CGV.
       </p>
 
       <h2>2. Accès à la réservation</h2>
       <p>
-        La réservation d&apos;un Lockin Trip est réservée aux membres du
-        Lockin Social Club, c&apos;est-à-dire aux personnes disposant
-        d&apos;un compte et ayant complété le rituel d&apos;inscription au
-        club. L&apos;inscription au club est gratuite et peut être faite au
-        moment de la réservation.
+        La réservation d&apos;un Lockin Trip est ouverte à toute personne
+        disposant d&apos;un compte Lock In, sans être membre du Lockin Social
+        Club. L&apos;accès au club est ensuite réservé aux personnes ayant
+        participé à un Lockin Trip.
       </p>
 
       <h2>3. Prix</h2>

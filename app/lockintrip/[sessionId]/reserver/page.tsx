@@ -2,13 +2,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 
-import { requireLockinOnboarded } from "@/lib/auth";
+import { getOrCreateDbUser } from "@/lib/auth";
 import { getCampSession } from "@/lib/actions/camp";
 import { BookingFlow } from "@/components/camp/booking-flow";
 
 // Dépend de la base (disponibilité en temps réel) — pas de prérendu
-// statique. Réservé aux membres du club : compte requis (proxy.ts) et
-// rituel d'inscription fait (requireLockinOnboarded, qui ramène ici ensuite).
+// statique. Un compte suffit (proxy.ts) : le club, lui, vient après le trip.
 export const dynamic = "force-dynamic";
 
 export default async function CampReservationPage({
@@ -17,7 +16,7 @@ export default async function CampReservationPage({
   params: Promise<{ sessionId: string }>;
 }) {
   const { sessionId: slug } = await params;
-  const user = await requireLockinOnboarded(`/lockintrip/${slug}/reserver`);
+  const user = await getOrCreateDbUser();
   const session = await getCampSession(slug);
   if (!session) notFound();
 

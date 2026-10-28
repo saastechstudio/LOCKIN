@@ -17,9 +17,9 @@ export function SectionSessions({ sessions }: SectionSessionsProps) {
           className="mb-6"
         />
         <p className="mb-12 max-w-xl border-l-2 border-camp-gold pl-4 text-sm leading-relaxed text-lk-stone-3">
-          Les Lockin Trip sont réservés aux membres du Lockin Social Club.
-          L&apos;inscription au club est gratuite : si tu n&apos;es pas encore
-          membre, on te la propose au moment de réserver.
+          Pas besoin d&apos;être membre du Lockin Social Club pour réserver : un
+          compte suffit. Le club, lui, est réservé aux personnes qui ont fait le
+          Lockin Trip : gratuit la première année, puis 49&nbsp;€ par an.
         </p>
 
         <div className="space-y-6">
