@@ -1,0 +1,189 @@
+/*
+ * LOCKIN SOCIAL CLUB — identité « club » (pages sous /club).
+ *
+ * Béton ciré, travertin, pierre, bordeaux profond. Luxe calme : pas de
+ * doré, pas de néon, pas d'ombre colorée. Une seule courbe de mouvement.
+ * Utilitaires préfixés club- pour ne jamais croiser le design system Focus
+ * (lk-*) du reste de l'app. Importé depuis app/globals.css.
+ */
+
+:root {
+  --club-ivory: #f7f4ef;
+  --club-pierre: #d6c8b8;
+  --club-pierre-soft: #e8e0d6;
+  --club-sand: #ece8e2; /* sections beige texturées */
+  --club-concrete: #a9a39a;
+  --club-concrete-deep: #7c766d;
+  --club-bordeaux: #6b1f2b;
+  --club-bordeaux-light: #7e2b38;
+  --club-bordeaux-deep: #521620;
+  --club-terracotta: #8b3a3a;
+  --club-ink: #1d1d1d;
+  --club-ink-soft: #3a3633;
+  --club-muted: #66605a;
+  --club-night: #1a0c0f; /* fond du hero */
+  --club-intro: #f2eadf; /* fond de l'intro, pour plus tard */
+
+  --club-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Grain béton : bruit fractal, opacité appliquée par .club-grain. */
+  --club-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@theme inline {
+  --color-club-ivory: var(--club-ivory);
+  --color-club-pierre: var(--club-pierre);
+  --color-club-pierre-soft: var(--club-pierre-soft);
+  --color-club-sand: var(--club-sand);
+  --color-club-concrete: var(--club-concrete);
+  --color-club-concrete-deep: var(--club-concrete-deep);
+  --color-club-bordeaux: var(--club-bordeaux);
+  --color-club-bordeaux-light: var(--club-bordeaux-light);
+  --color-club-bordeaux-deep: var(--club-bordeaux-deep);
+  --color-club-terracotta: var(--club-terracotta);
+  --color-club-ink: var(--club-ink);
+  --color-club-ink-soft: var(--club-ink-soft);
+  --color-club-muted: var(--club-muted);
+  --color-club-night: var(--club-night);
+
+  --font-club-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-club-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-club: var(--club-ease);
+}
+
+/* ---- Racine du club ---- */
+.club {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--club-ink);
+  background: var(--club-ivory);
+  overflow-x: clip;
+}
+
+.club ::selection {
+  background: var(--club-bordeaux);
+  color: var(--club-ivory);
+}
+
+.club :focus-visible {
+  outline: 2px solid var(--club-bordeaux);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.club [data-tone="dark"] :focus-visible {
+  outline-color: var(--club-pierre);
+}
+
+/* ---- Typographie ---- */
+.club-display {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  font-optical-sizing: auto;
+}
+
+.club-display em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.club-h1 {
+  font-size: clamp(2.6rem, 6.2vw, 5.4rem);
+}
+
+.club-h2 {
+  font-size: clamp(2rem, 4.4vw, 3.6rem);
+}
+
+.club-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.club-eyebrow::before {
+  content: "";
+  width: 40px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+@media (min-width: 768px) {
+  .club-eyebrow {
+    font-size: 12px;
+  }
+}
+
+/* ---- Mise en page ---- */
+.club-container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+.club-section {
+  padding-block: 112px;
+}
+
+@media (min-width: 1024px) {
+  .club-container {
+    padding-inline: 40px;
+  }
+  .club-section {
+    padding-block: 160px;
+  }
+}
+
+/* ---- Texture béton ---- */
+.club-grain {
+  position: relative;
+  isolation: isolate;
+}
+
+.club-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: var(--club-noise);
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+}
+
+[data-tone="dark"].club-grain::after {
+  mix-blend-mode: screen;
+  opacity: 0.06;
+}
+
+/* ---- Bouton : flèche qui glisse ---- */
+.club-arrow {
+  display: inline-block;
+  transition: transform 0.5s var(--club-ease);
+}
+
+.group:hover .club-arrow,
+.group:focus-visible .club-arrow {
+  transform: translate(2px, -2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .club-arrow {
+    transition: none;
+  }
+  .group:hover .club-arrow,
+  .group:focus-visible .club-arrow {
+    transform: none;
+  }
+}
