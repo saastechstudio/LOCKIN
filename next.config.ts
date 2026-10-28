@@ -30,6 +30,8 @@ const nextConfig: NextConfig = {
   // Ancienne adresse du Lockin Trip (« Lock-In Camp ») : les liens déjà partagés restent valides.
   async redirects() {
     return [
+      // L'ancienne page /club est devenue la page d'accueil.
+      { source: "/club", destination: "/", permanent: true },
       { source: "/camp", destination: "/lockintrip", permanent: true },
       { source: "/camp/:path*", destination: "/lockintrip/:path*", permanent: true },
     ];

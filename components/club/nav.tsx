@@ -14,7 +14,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const LINKS = [
   { href: "#club", label: "Le club" },
   { href: "#manifeste", label: "Manifeste" },
-  { href: "#lieux", label: "Lieux" },
+  { href: "#parcours", label: "Parcours" },
   { href: "#adhesion", label: "Adhésion" },
   { href: "#faq", label: "FAQ" },
 ];
@@ -51,7 +51,7 @@ export function ClubNav() {
         )}
       >
         <Link
-          href="/club"
+          href="/"
           aria-label="Lockin Social Club, accueil"
           className={cn(
             "transition-colors duration-700 ease-club",
@@ -78,6 +78,15 @@ export function ClubNav() {
         </ul>
 
         <div className="flex items-center gap-2">
+          <Link
+            href="/sign-in"
+            className={cn(
+              "hidden px-3 text-[13px] tracking-[0.04em] underline-offset-[6px] transition-colors duration-500 ease-club hover:underline sm:inline",
+              scrolled ? "text-club-ink-soft hover:text-club-ink" : "text-club-ivory/80 hover:text-club-ivory",
+            )}
+          >
+            Connexion
+          </Link>
           <ClubButton href={JOIN_HREF} size="sm" arrow className="hidden sm:inline-flex">
             Rejoindre
           </ClubButton>
@@ -133,6 +142,13 @@ export function ClubNav() {
                 </li>
               ))}
             </ul>
+            <Link
+              href="/sign-in"
+              onClick={() => setOpen(false)}
+              className="mt-5 block text-center text-[14px] text-club-ink-soft underline underline-offset-[6px]"
+            >
+              Connexion
+            </Link>
             <ClubButton href={JOIN_HREF} size="lg" arrow className="mt-6 w-full">
               Rejoindre
             </ClubButton>
