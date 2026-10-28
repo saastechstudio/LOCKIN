@@ -3,14 +3,12 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 
-import { FOUNDING_CIRCLE, foundingSeatsLeft } from "@/lib/club/founding";
+import { JOIN_HREF, LOCKIN_TRIP_HREF, PRICE_LABEL } from "@/lib/club/membership";
 import { ClubButton } from "./button";
-import { APPLY_HREF } from "./nav";
 import { PhotoFrame } from "./photo-frame";
 import { Reveal } from "./reveal";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
-const BADGES = ["Sur candidature", "Entrepreneurs & ambitieux", "Rencontres · Événements · Réseau"];
+const BADGES = ["Réservé aux membres Lockin Trip", "1re année offerte", "Rencontres · Événements · Réseau"];
 
 export function ClubHero() {
   const ref = useRef<HTMLElement>(null);
@@ -23,9 +21,6 @@ export function ClubHero() {
   const yFront = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -140]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : 80]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.7], [1, reduce ? 1 : 0.2]);
-
-  const left = foundingSeatsLeft();
-  const filled = FOUNDING_CIRCLE.taken / FOUNDING_CIRCLE.total;
 
   return (
     <section
@@ -66,43 +61,35 @@ export function ClubHero() {
 
           <Reveal immediate delay={0.4}>
             <p className="mt-6 max-w-[34rem] text-[17px] text-club-ivory/75">
-              Un cercle privé d&apos;entrepreneurs et de personnes ambitieuses. Des rencontres choisies, des
-              événements, un réseau qui t&apos;élève. On y entre sur candidature.
+              Le réseau privé des membres du Lockin Trip. Ce que tu as commencé pendant le trip continue
+              ici : des rencontres, des événements, un réseau qui t&apos;élève.
             </p>
           </Reveal>
 
           <Reveal immediate delay={0.52} className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <ClubButton href={APPLY_HREF} size="lg" arrow>
-              Postuler
+            <ClubButton href={JOIN_HREF} size="lg" arrow>
+              Rejoindre le club
             </ClubButton>
-            <ClubButton href="#club" variant="glass" size="lg">
-              Découvrir le club
+            <ClubButton href={LOCKIN_TRIP_HREF} variant="glass" size="lg">
+              Découvrir le Lockin Trip
             </ClubButton>
           </Reveal>
 
-          <Reveal immediate delay={0.66} className="mt-10 max-w-sm">
-            <div className="flex items-baseline justify-between text-[12px] tracking-[0.04em] text-club-ivory/70">
-              <span className="text-[11px] tracking-[0.26em] text-club-pierre uppercase">Cercle fondateur</span>
-              <span>
-                <span className="text-club-ivory">{left}</span> places sur {FOUNDING_CIRCLE.total}
-              </span>
-            </div>
-            <div
-              role="meter"
-              aria-label="Places du cercle fondateur déjà attribuées"
-              aria-valuemin={0}
-              aria-valuemax={FOUNDING_CIRCLE.total}
-              aria-valuenow={FOUNDING_CIRCLE.taken}
-              aria-valuetext={`${left} places restantes sur ${FOUNDING_CIRCLE.total}`}
-              className="mt-3 h-px w-full bg-club-ivory/15"
-            >
-              <motion.div
-                className="h-px origin-left bg-club-pierre"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: filled }}
-                transition={{ duration: reduce ? 0 : 1.8, delay: 0.9, ease: EASE }}
-              />
-            </div>
+          <Reveal immediate delay={0.66} className="mt-10 max-w-md border-t border-club-ivory/15 pt-5">
+            <dl className="grid grid-cols-2 gap-6">
+              <div>
+                <dt className="text-[11px] tracking-[0.26em] text-club-pierre uppercase">Première année</dt>
+                <dd className="club-display mt-2 text-[1.9rem]">Offerte</dd>
+              </div>
+              <div>
+                <dt className="text-[11px] tracking-[0.26em] text-club-pierre uppercase">Ensuite</dt>
+                <dd className="club-display mt-2 text-[1.9rem]">
+                  {PRICE_LABEL}
+                  <span className="ml-1 font-sans text-[13px] tracking-normal text-club-ivory/60">/ an</span>
+                </dd>
+              </div>
+            </dl>
+            <p className="mt-4 text-[13px] text-club-ivory/55">Accès réservé aux personnes ayant fait le Lockin Trip.</p>
           </Reveal>
         </motion.div>
 

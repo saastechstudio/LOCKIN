@@ -14,7 +14,7 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   title: "Lockin Social Club — Le cercle",
   description:
-    "Un cercle privé d'entrepreneurs et de personnes ambitieuses : rencontres, événements, réseau. Accès sur candidature.",
+    "Le réseau privé des membres du Lockin Trip : rencontres, événements, réseau. Première année offerte, puis 49 € par an.",
 };
 
 export default function ClubLayout({ children }: LayoutProps<"/club">) {

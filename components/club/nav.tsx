@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 import { cn } from "@/lib/utils";
+import { JOIN_HREF } from "@/lib/club/membership";
 import { ClubButton } from "./button";
 import { ClubLogo } from "./logo";
 
@@ -17,8 +18,6 @@ const LINKS = [
   { href: "#adhesion", label: "Adhésion" },
   { href: "#faq", label: "FAQ" },
 ];
-
-export const APPLY_HREF = "/rejoindre";
 
 /** Barre flottante arrondie : beige translucide et flou, plus dense une fois la page défilée. */
 export function ClubNav() {
@@ -79,8 +78,8 @@ export function ClubNav() {
         </ul>
 
         <div className="flex items-center gap-2">
-          <ClubButton href={APPLY_HREF} size="sm" arrow className="hidden sm:inline-flex">
-            Postuler
+          <ClubButton href={JOIN_HREF} size="sm" arrow className="hidden sm:inline-flex">
+            Rejoindre
           </ClubButton>
           <button
             type="button"
@@ -134,8 +133,8 @@ export function ClubNav() {
                 </li>
               ))}
             </ul>
-            <ClubButton href={APPLY_HREF} size="lg" arrow className="mt-6 w-full">
-              Postuler
+            <ClubButton href={JOIN_HREF} size="lg" arrow className="mt-6 w-full">
+              Rejoindre
             </ClubButton>
           </motion.div>
         ) : null}
