@@ -32,7 +32,7 @@ export function ClubProblem() {
           </Reveal>
           <Reveal delay={0.3}>
             <p className="club-display text-[1.6rem] text-club-bordeaux">
-              Le Lockin Social Club garde cette pièce ouverte.
+              Le Lockin Social Club n&apos;est pas un réseau de plus : c&apos;est la pièce, gardée fermée à ceux qui n&apos;y ont pas leur place.
             </p>
           </Reveal>
         </div>

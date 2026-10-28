@@ -11,7 +11,7 @@ const TEXT: Token[] = [
   ..."Les gens avec qui tu passes ton temps décident de ce que tu oses.".split(" ").map((w) => ({ w })),
   ..."Le Lockin Trip t'a mis dans une pièce avec des personnes qui".split(" ").map((w) => ({ w })),
   { w: "avancent.", em: true },
-  ..."Le club garde cette pièce ouverte, toute l'année.".split(" ").map((w) => ({ w })),
+  ..."Le club garde cette pièce, toute l'année, pour eux seuls.".split(" ").map((w) => ({ w })),
 ];
 
 function Word({ token, progress, range }: { token: Token; progress: MotionValue<number>; range: [number, number] }) {

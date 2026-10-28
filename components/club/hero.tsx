@@ -8,7 +8,7 @@ import { ClubButton } from "./button";
 import { PhotoFrame } from "./photo-frame";
 import { Reveal } from "./reveal";
 
-const BADGES = ["Réservé aux membres Lockin Trip", "1re année offerte", "Rencontres · Événements · Réseau"];
+const BADGES = ["Cercle fermé", "Accès par numéro de membre", "Membres du Lockin Trip"];
 
 export function ClubHero() {
   const ref = useRef<HTMLElement>(null);
@@ -50,7 +50,7 @@ export function ClubHero() {
           </Reveal>
 
           <Reveal immediate delay={0.12} className="mt-8">
-            <p className="club-eyebrow text-club-pierre">Lockin Social Club</p>
+            <p className="club-eyebrow text-club-pierre">Lockin Social Club · Cercle privé</p>
           </Reveal>
 
           <Reveal immediate blur delay={0.2} as="h1">
@@ -61,17 +61,17 @@ export function ClubHero() {
 
           <Reveal immediate delay={0.4}>
             <p className="mt-6 max-w-[34rem] text-[17px] text-club-ivory/75">
-              Le réseau privé des membres du Lockin Trip. Ce que tu as commencé pendant le trip continue
-              ici : des rencontres, des événements, un réseau qui t&apos;élève.
+              Un cercle fermé. On n&apos;y entre pas en s&apos;inscrivant : on y entre en ayant fait le Lockin
+              Trip. Ton numéro de membre en est la clé.
             </p>
           </Reveal>
 
           <Reveal immediate delay={0.52} className="mt-8 flex flex-col gap-3 sm:flex-row">
             <ClubButton href={JOIN_HREF} size="lg" arrow>
-              Rejoindre le club
+              Entrer avec mon numéro
             </ClubButton>
             <ClubButton href={LOCKIN_TRIP_HREF} variant="glass" size="lg">
-              Découvrir le Lockin Trip
+              Le Lockin Trip
             </ClubButton>
           </Reveal>
 

@@ -9,7 +9,7 @@ const FOR = [
 const NOT_FOR = [
   "Tu cherches un carnet d'adresses à exploiter.",
   "Tu veux observer sans jamais participer.",
-  "Tu n'as pas réservé de Lockin Trip : le club n'a pas d'entrée libre.",
+  "Tu n'as pas fait le Lockin Trip : le club n'a pas d'entrée libre, et aucune exception.",
   "Tu attends que les résultats arrivent sans rien changer.",
 ];
 const ROWS: [string, string, string][] = [
@@ -28,7 +28,7 @@ export function ClubFit() {
         </Reveal>
         <Reveal blur delay={0.1} as="h2">
           <span className="club-display club-h2 mt-6 block max-w-3xl text-balance">
-            Un cercle, donc <em className="text-club-bordeaux">des critères</em>.
+            Pas pour <em className="text-club-bordeaux">tout le monde</em>.
           </span>
         </Reveal>
 

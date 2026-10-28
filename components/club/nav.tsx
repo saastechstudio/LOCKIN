@@ -88,7 +88,7 @@ export function ClubNav() {
             Connexion
           </Link>
           <ClubButton href={JOIN_HREF} size="sm" arrow className="hidden sm:inline-flex">
-            Rejoindre
+            Entrer
           </ClubButton>
           <button
             type="button"
@@ -150,7 +150,7 @@ export function ClubNav() {
               Connexion
             </Link>
             <ClubButton href={JOIN_HREF} size="lg" arrow className="mt-6 w-full">
-              Rejoindre
+              Entrer
             </ClubButton>
           </motion.div>
         ) : null}
