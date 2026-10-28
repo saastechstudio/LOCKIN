@@ -3,6 +3,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { moderationEvents, users, type User } from "@/lib/db/schema";
 import { UserFacingError } from "@/lib/action-result";
+import { isClubMember } from "@/lib/club/access";
 import { checkContent, LOCKIN_MODERATION_MESSAGE } from "./filter";
 
 const HOUR = 60 * 60 * 1000;
@@ -21,13 +22,16 @@ export class AccountSuspendedError extends UserFacingError {}
 export class NotClubMemberError extends UserFacingError {}
 
 /**
- * Le club est réservé aux membres qui ont fait le rituel d'inscription.
+ * Le club est réservé aux personnes du Lockin Trip (numéro de membre) qui
+ * ont fait le rituel d'inscription.
  * Les pages le vérifient, mais une Server Action s'appelle directement :
  * chaque écriture sociale le revérifie ici.
  */
 export function assertClubMember(user: User): void {
-  if (!user.lockinOnboardingCompletedAt) {
-    throw new NotClubMemberError("Termine ton rituel d'inscription pour participer au club.");
+  if (!isClubMember(user)) {
+    throw new NotClubMemberError(
+      "Le club est réservé aux personnes du Lockin Trip : entre avec ton numéro de membre pour participer.",
+    );
   }
 }
 

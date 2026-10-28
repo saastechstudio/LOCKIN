@@ -34,9 +34,14 @@ export default async function ModerationAdminPage() {
         <p className="mb-4 text-sm text-lk-stone-3">
           Respect, discipline, entraide, éthique, focus — charte de modération Lockin.
         </p>
-        <Link href="/dashboard/admin/creators" className="lockin-button lockin-button--outline mb-8">
-          Vérification des créateurs
-        </Link>
+        <div className="mb-8 flex flex-wrap gap-3">
+          <Link href="/dashboard/admin/creators" className="lockin-button lockin-button--outline">
+            Vérification des créateurs
+          </Link>
+          <Link href="/dashboard/admin/trip" className="lockin-button lockin-button--outline">
+            Places du Lockin Trip
+          </Link>
+        </div>
 
         <section className="mb-12">
           <h2 className="mb-3 text-xs font-semibold tracking-[0.15em] text-camp-charcoal uppercase">

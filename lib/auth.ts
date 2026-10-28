@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/lib/db";
 import { users, type User } from "@/lib/db/schema";
+import { isClubMember } from "@/lib/club/access";
 
 function readSignUpMetadata(metadata: Record<string, unknown> | undefined) {
   const text = (key: string) => {
@@ -75,7 +76,7 @@ export async function getOrCreateDbUser(): Promise<User> {
  */
 export async function requireLockinOnboarded(next?: string): Promise<User> {
   const user = await getOrCreateDbUser();
-  if (!user.lockinOnboardingCompletedAt) {
+  if (!isClubMember(user)) {
     redirect(next ? `/rejoindre?next=${encodeURIComponent(next)}` : "/rejoindre");
   }
   return user;

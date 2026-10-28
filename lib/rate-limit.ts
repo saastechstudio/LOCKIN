@@ -28,6 +28,8 @@ export const RATE_LIMITS = {
   report: { limit: 20, windowMs: HOUR },
   reaction: { limit: 120, windowMs: 10 * MINUTE },
   camp: { limit: 10, windowMs: HOUR },
+  // Le numéro de membre est une clé d'entrée : peu d'essais, pour qu'on ne puisse pas le deviner.
+  clubNumber: { limit: 5, windowMs: HOUR },
   formationCreate: { limit: 5, windowMs: HOUR },
   formationEdit: { limit: 150, windowMs: 10 * MINUTE },
   formationProgress: { limit: 200, windowMs: 10 * MINUTE },

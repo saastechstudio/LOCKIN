@@ -7,6 +7,8 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { goals, posts, routineItems, users } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
+import { hasClubEntry } from "@/lib/club/access";
+import { UserFacingError } from "@/lib/action-result";
 import { moderateOrThrow } from "@/lib/moderation/enforce";
 import {
   GOAL_DOMAINS,
@@ -15,10 +17,13 @@ import {
   SPORT_ACTIVITIES,
 } from "@/lib/social/data";
 
-/** Si le membre a déjà fait le rituel, la page le renvoie direct vers le feed. */
+/**
+ * Où en est la personne : numéro de membre saisi (`entered`) puis rituel fait
+ * (`completed`). Si tout est fait, la page la renvoie direct vers le feed.
+ */
 export async function getLockinOnboardingStatus() {
   const user = await getOrCreateDbUser();
-  return { completed: Boolean(user.lockinOnboardingCompletedAt) };
+  return { entered: hasClubEntry(user), completed: Boolean(user.lockinOnboardingCompletedAt) };
 }
 
 const completeOnboardingSchema = z.object({
@@ -42,6 +47,10 @@ export async function completeLockinOnboarding(input: CompleteLockinOnboardingIn
   const user = await getOrCreateDbUser();
   if (user.lockinOnboardingCompletedAt) {
     return { ok: true as const };
+  }
+  // Server Action appelable directement : le numéro de membre se revérifie ici.
+  if (!hasClubEntry(user)) {
+    throw new UserFacingError("Entre d'abord avec ton numéro de membre du Lockin Trip.");
   }
 
   const parsed = completeOnboardingSchema.parse(input);

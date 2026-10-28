@@ -10,6 +10,7 @@ import {
   boolean,
   jsonb,
   uniqueIndex,
+  type AnyPgColumn,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -169,6 +170,15 @@ export const users = pgTable("users", {
   lockinOnboardingCompletedAt: timestamp("lockin_onboarding_completed_at", {
     mode: "date",
   }),
+  // Entrée dans le club : réservée aux personnes du Lockin Trip, après le
+  // début de leur séjour, via leur numéro de membre (cf. lib/actions/club-access.ts).
+  // La pré-inscription qui a servi d'entrée est unique : un numéro = un compte.
+  clubRegistrationId: integer("club_registration_id")
+    .unique()
+    .references((): AnyPgColumn => campRegistrations.id, { onDelete: "set null" }),
+  clubActivatedAt: timestamp("club_activated_at", { mode: "date" }),
+  // Fin de la première année offerte ; au-delà, 49 € TTC par an (paiement à brancher).
+  clubFreeUntil: timestamp("club_free_until", { mode: "date" }),
   whopMembershipId: text("whop_membership_id").unique(),
   whopPlanId: text("whop_plan_id"),
   whopMembershipStatus: text("whop_membership_status"),
@@ -338,6 +348,9 @@ export const campRegistrations = pgTable(
     // en base.
     funActivityChoice: text("fun_activity_choice"),
     status: campRegistrationStatusEnum("status").notNull().default("pending"),
+    // Numéro de membre, attribué à la confirmation de la place. Aléatoire :
+    // c'est la clé d'entrée du club, il ne doit pas se deviner.
+    memberNumber: text("member_number").unique(),
     createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
   },
   (table) => [

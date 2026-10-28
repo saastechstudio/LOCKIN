@@ -89,7 +89,9 @@ export function ClubHero() {
                 </dd>
               </div>
             </dl>
-            <p className="mt-4 text-[13px] text-club-ivory/55">Accès réservé aux personnes ayant fait le Lockin Trip.</p>
+            <p className="mt-4 text-[13px] text-club-ivory/55">
+              Le club s&apos;ouvre au début de ton séjour, avec ton numéro de membre.
+            </p>
           </Reveal>
         </motion.div>
 

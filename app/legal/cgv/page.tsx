@@ -22,7 +22,9 @@ export default function CgvPage() {
         La réservation d&apos;un Lockin Trip est ouverte à toute personne
         disposant d&apos;un compte Lock In, sans être membre du Lockin Social
         Club. L&apos;accès au club est ensuite réservé aux personnes ayant
-        participé à un Lockin Trip.
+        réservé un Lockin Trip : à la confirmation de sa place, le membre
+        reçoit par email un numéro de membre qui ouvre le club à partir du
+        début de son séjour.
       </p>
 
       <h2>3. Prix</h2>
