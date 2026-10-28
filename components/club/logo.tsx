@@ -25,8 +25,19 @@ export function ClubMonogram({ className, title }: { className?: string; title?:
   );
 }
 
-/** Monogramme + « LOCKIN / SOCIAL CLUB ». La couleur suit currentColor. */
-export function ClubLogo({ className, compact = false }: { className?: string; compact?: boolean }) {
+/**
+ * Monogramme + « LOCKIN / SOCIAL CLUB ». La couleur suit currentColor ; sur fond clair
+ * (onLight), « SOCIAL CLUB » passe en gris chaud, comme le logo officiel (public/brand/).
+ */
+export function ClubLogo({
+  className,
+  compact = false,
+  onLight = false,
+}: {
+  className?: string;
+  compact?: boolean;
+  onLight?: boolean;
+}) {
   return (
     <span className={cn("inline-flex items-center gap-3", className)}>
       <ClubMonogram className="size-8 shrink-0" />
@@ -35,7 +46,9 @@ export function ClubLogo({ className, compact = false }: { className?: string; c
       ) : (
         <span className="flex flex-col leading-none">
           <span className="text-[13px] font-medium tracking-[0.34em]">LOCKIN</span>
-          <span className="mt-1.5 text-[8.5px] tracking-[0.5em] opacity-70">SOCIAL CLUB</span>
+          <span className={cn("mt-1.5 text-[8.5px] tracking-[0.5em] transition-colors duration-700", onLight ? "text-club-muted" : "opacity-70")}>
+            SOCIAL CLUB
+          </span>
         </span>
       )}
     </span>

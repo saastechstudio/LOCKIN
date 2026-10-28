@@ -59,7 +59,7 @@ export function ClubNav() {
             scrolled || open ? "text-club-bordeaux" : "text-club-ivory",
           )}
         >
-          <ClubLogo />
+          <ClubLogo onLight={scrolled || open} />
         </Link>
 
         <ul className="hidden items-center gap-8 lg:flex">
