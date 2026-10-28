@@ -1,5 +1,5 @@
 /**
- * Chrome pour tout /camp/** — volontairement nu : pas le header/footer
+ * Chrome pour tout /lockintrip/** — volontairement nu : pas le header/footer
  * générique du site (bleu/corail/or), chaque page porte sa propre identité
  * brutaliste (logo dans le Hero, Footer dédié). `.camp-scope` fixe le fond
  * crème par défaut pour les zones qui ne définissent pas leur propre

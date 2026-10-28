@@ -11,7 +11,7 @@ export const MEMBERSHIP = {
 } as const;
 
 /** Page du Lockin Trip, pour ceux qui ne l'ont pas encore fait. */
-export const LOCKIN_TRIP_HREF = "/camp";
+export const LOCKIN_TRIP_HREF = "/lockintrip";
 
 /** Entrée du club pour un membre du Lockin Trip. */
 export const JOIN_HREF = "/rejoindre";

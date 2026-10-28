@@ -56,7 +56,7 @@ export default function ConfidentialitePage() {
           score de respect) liés à votre compte.
         </li>
         <li>
-          <strong>Réservations Lock-In Camp :</strong> nom, email, session
+          <strong>Réservations Lockin Trip :</strong> nom, email, session
           choisie et choix d&apos;activités. Le club étant gratuit, aucune
           donnée de paiement n&apos;est collectée pour son utilisation.
         </li>
@@ -71,7 +71,7 @@ export default function ConfidentialitePage() {
       <p>
         Ces données sont utilisées pour fournir et améliorer le service
         (suivi d&apos;objectifs, coach IA, mise en relation entre membres),
-        gérer les réservations des Lock-In Camp, assurer la sécurité du
+        gérer les réservations des Lockin Trip, assurer la sécurité du
         compte, et, lorsque vous y consentez, vous adresser des
         communications relatives au service.
       </p>
@@ -79,7 +79,7 @@ export default function ConfidentialitePage() {
       <h2>4. Base légale</h2>
       <p>
         Le traitement repose sur l&apos;exécution des conditions
-        d&apos;utilisation (accès au club) et, pour les Lock-In Camp, du
+        d&apos;utilisation (accès au club) et, pour les Lockin Trip, du
         contrat de réservation, sur l&apos;intérêt légitime de Lock In (sécurité,
         amélioration du produit) et, le cas échéant, votre consentement
         (communications optionnelles).

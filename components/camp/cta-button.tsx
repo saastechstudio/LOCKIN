@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 /**
- * Bouton brutaliste pour les écrans Lock-In Camp : angles droits, aucune
+ * Bouton brutaliste pour les écrans Lockin Trip : angles droits, aucune
  * ombre (même pas l'ombre "dure" décalée des versions précédentes) — juste
  * un aplat et un contour net. "primary" : aplat noir (le doré reste un
  * accent, jamais un fond d'action) ; "secondary" : simple contour noir.

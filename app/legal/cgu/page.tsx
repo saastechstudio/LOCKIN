@@ -5,7 +5,7 @@ export default function CguPage() {
     <LegalPage title="Conditions générales d'utilisation — Lockin Social Club">
       <p>
         Les présentes CGU encadrent l&apos;utilisation du Lockin Social Club,
-        entièrement gratuit. Seuls les Lock-In Camp sont payants : leur
+        entièrement gratuit. Seuls les Lockin Trip sont payants : leur
         réservation, réservée aux membres du club, relève en plus des{" "}
         <a href="/legal/cgv" className="text-brand-blue hover:underline">
           CGV

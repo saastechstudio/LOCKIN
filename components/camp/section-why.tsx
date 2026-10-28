@@ -1,7 +1,7 @@
 import { SectionTitle } from "@/components/camp/section-title";
 
 const PILLARS = [
-  { word: "Discipline", text: "Un cadre qui ne négocie pas — le camp impose le rythme." },
+  { word: "Discipline", text: "Un cadre qui ne négocie pas — le trip impose le rythme." },
   { word: "Performance", text: "Sport, mindset, business : trois leviers, une seule semaine." },
   { word: "Focus", text: "Coupé du bruit habituel, concentré sur ce qui compte." },
   { word: "Reset", text: "Repartir avec un plan d'action, pas juste des souvenirs." },

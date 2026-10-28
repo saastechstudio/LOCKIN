@@ -7,8 +7,8 @@ const isProtectedRoute = createRouteMatcher([
   "/api/chat(.*)",
   "/formations(.*)",
   "/rejoindre(.*)",
-  // La page /camp reste publique ; réserver exige un compte membre.
-  "/camp/(.*)/reserver(.*)",
+  // La page /lockintrip reste publique ; réserver exige un compte membre.
+  "/lockintrip/(.*)/reserver(.*)",
 ]);
 
 export default clerkMiddleware(

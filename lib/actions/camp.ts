@@ -147,7 +147,7 @@ export type CreateCampRegistrationInput = {
 export async function createCampRegistration(input: CreateCampRegistrationInput) {
   const user = await getOrCreateDbUser();
   if (!user.lockinOnboardingCompletedAt) {
-    throw new Error("Les Lock-In Camp sont réservés aux membres du Lockin Social Club.");
+    throw new Error("Les Lockin Trip sont réservés aux membres du Lockin Social Club.");
   }
   enforceRateLimit("camp", user.id);
   const parsed = createRegistrationSchema.parse(input);
@@ -198,9 +198,9 @@ export async function createCampRegistration(input: CreateCampRegistrationInput)
     })
     .returning();
 
-  revalidatePath("/camp");
-  revalidatePath(`/camp/${session.slug}`);
-  revalidatePath(`/camp/${session.slug}/reserver`);
+  revalidatePath("/lockintrip");
+  revalidatePath(`/lockintrip/${session.slug}`);
+  revalidatePath(`/lockintrip/${session.slug}/reserver`);
 
   return registration;
 }

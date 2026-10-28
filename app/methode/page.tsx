@@ -8,7 +8,7 @@ import { DiscordCta } from "@/components/marketing/discord-cta";
 /**
  * La Méthode Lock In (audit, feuille de route, Coach IA, suivi quotidien)
  * — incluse gratuitement pour chaque membre du club, comme tout le reste :
- * seuls les Lock-In Camp sont payants.
+ * seuls les Lockin Trip sont payants.
  */
 export default function MethodePage() {
   return (

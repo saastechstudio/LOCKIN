@@ -17,7 +17,7 @@ export default async function CampReservationPage({
   params: Promise<{ sessionId: string }>;
 }) {
   const { sessionId: slug } = await params;
-  const user = await requireLockinOnboarded(`/camp/${slug}/reserver`);
+  const user = await requireLockinOnboarded(`/lockintrip/${slug}/reserver`);
   const session = await getCampSession(slug);
   if (!session) notFound();
 
@@ -25,10 +25,10 @@ export default async function CampReservationPage({
     <div>
       <div className="border-b border-lk-line px-6 py-5">
         <Link
-          href="/camp"
+          href="/lockintrip"
           className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.1em] text-camp-charcoal uppercase hover:text-camp-gold"
         >
-          <ArrowLeft className="size-3.5" /> lock-in camp
+          <ArrowLeft className="size-3.5" /> lockin trip
         </Link>
       </div>
 

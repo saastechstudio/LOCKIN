@@ -27,6 +27,13 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Ancienne adresse du Lockin Trip (« Lock-In Camp ») : les liens déjà partagés restent valides.
+  async redirects() {
+    return [
+      { source: "/camp", destination: "/lockintrip", permanent: true },
+      { source: "/camp/:path*", destination: "/lockintrip/:path*", permanent: true },
+    ];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

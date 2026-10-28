@@ -53,7 +53,7 @@ export function CardSession({ session, index }: CardSessionProps) {
         </div>
       ) : (
         <Link
-          href={`/camp/${session.slug}/reserver`}
+          href={`/lockintrip/${session.slug}/reserver`}
           className="group flex items-center justify-between bg-camp-charcoal p-5 text-camp-white transition-colors hover:bg-camp-gold hover:text-camp-charcoal"
         >
           <span className="text-sm font-bold tracking-[0.15em] uppercase">
