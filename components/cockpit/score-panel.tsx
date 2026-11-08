@@ -65,12 +65,12 @@ export function ScorePanel({
 
       <div className="mt-6">
         <p className="text-[10px] font-semibold tracking-[0.3em] text-lk-stone-2 uppercase">7 derniers jours</p>
-        <div className="mt-3 flex h-24 items-end gap-2" role="img" aria-label="Score des 7 derniers jours">
+        <div className="mt-3 flex items-end gap-2" role="img" aria-label="Score des 7 derniers jours">
           {week.map((d, i) => {
             const today = i === week.length - 1;
             return (
               <div key={d.date.toISOString()} className="flex flex-1 flex-col items-center gap-1.5">
-                <div className="relative flex w-full flex-1 items-end">
+                <div className="flex h-[72px] w-full items-end">
                   <div
                     className={cn(
                       "w-full rounded-md transition-[height] duration-1000 ease-premium",
