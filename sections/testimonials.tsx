@@ -24,7 +24,7 @@ export function Testimonials({
     <section className="bg-lk-mist">
       <div className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-28">
         <Reveal className="max-w-xl">
-          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-blue uppercase">
+          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-blue-soft uppercase">
             {eyebrow}
           </p>
           <h2 className="font-display mt-5 text-4xl text-lk-black sm:text-5xl">{title}</h2>
@@ -40,7 +40,7 @@ export function Testimonials({
                 <figcaption className="mt-10 flex items-center gap-3 border-t border-lk-line pt-6">
                   <span
                     aria-hidden
-                    className="flex size-10 items-center justify-center rounded-full bg-lk-blue/10 text-sm font-medium text-lk-blue"
+                    className="flex size-10 items-center justify-center rounded-full bg-lk-blue/10 text-sm font-medium text-lk-blue-soft"
                   >
                     {item.name.charAt(0)}
                   </span>

@@ -5,9 +5,10 @@ import {
   createUIMessageStreamResponse,
   type UIMessage,
 } from "ai";
+import { desc, eq } from "drizzle-orm";
 
 import { db } from "@/lib/db";
-import { aiConversations } from "@/lib/db/schema";
+import { aiConversations, aiMemories } from "@/lib/db/schema";
 import { getOrCreateDbUser } from "@/lib/auth";
 import { getTodayFocus } from "@/lib/actions/daily-focus";
 import { buildCoachSystemPrompt } from "@/lib/ai/coach";
@@ -97,8 +98,16 @@ export async function POST(req: Request) {
     });
   }
 
-  const todayFocus = await getTodayFocus();
-  const system = buildCoachSystemPrompt(user, todayFocus.mood);
+  const [todayFocus, memories] = await Promise.all([
+    getTodayFocus(),
+    db.query.aiMemories.findMany({
+      columns: { kind: true, content: true },
+      where: eq(aiMemories.userId, user.id),
+      orderBy: [desc(aiMemories.updatedAt)],
+      limit: 25,
+    }),
+  ]);
+  const system = buildCoachSystemPrompt(user, todayFocus.mood, memories);
   const modelMessages = await convertToModelMessages(messages);
 
   const candidates = getModelCandidates();

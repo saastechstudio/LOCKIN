@@ -474,6 +474,11 @@ export const goals = pgTable("goals", {
   domain: text("domain"),
   progress: integer("progress").notNull().default(0),
   isPublic: boolean("is_public").notNull().default(false),
+  // Life OS : la vision finale, ce à quoi ressemble « c'est fait ».
+  vision: text("vision"),
+  sphereId: integer("sphere_id").references((): AnyPgColumn => lifeSpheres.id, {
+    onDelete: "set null",
+  }),
   createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
 });
 
@@ -868,8 +873,242 @@ export const messagesRelations = relations(messages, ({ one }) => ({
   }),
 }));
 
-export const goalsRelations = relations(goals, ({ one }) => ({
+// ---------------------------------------------------------------------------
+// Life OS — systèmes de vie pilotés par le copilote. Tables additives :
+// objectifs vivants (jalons, tâches, temps investi), habitudes suivies au
+// jour, mémoire du copilote et briefings matin / soir.
+// ---------------------------------------------------------------------------
+
+export const habitCategoryEnum = pgEnum("habit_category", [
+  "sommeil",
+  "sport",
+  "lecture",
+  "meditation",
+  "travail",
+  "nutrition",
+]);
+
+export const memoryKindEnum = pgEnum("memory_kind", [
+  "objectif",
+  "projet",
+  "habitude",
+  "preference",
+  "difficulte",
+]);
+
+export const briefingPeriodEnum = pgEnum("briefing_period", ["morning", "evening"]);
+
+/**
+ * SphereLife : les domaines de vie du membre (Business, Santé, Famille…),
+ * créés librement, chacun une planète autour du noyau. L'ordre fixe la
+ * priorité (orbite la plus proche), l'angle sa place sur l'orbite.
+ */
+export const lifeSpheres = pgTable("life_spheres", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  color: text("color").notNull(),
+  position: integer("position").notNull().default(0),
+  orbitAngle: numeric("orbit_angle", { precision: 8, scale: 4 }).notNull().default("0"),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+/** Influence d'un domaine sur un autre (« Sport → Santé »), dessinée en flux lumineux. */
+export const lifeSphereLinks = pgTable(
+  "life_sphere_links",
+  {
+    id: serial("id").primaryKey(),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    fromSphereId: integer("from_sphere_id")
+      .notNull()
+      .references(() => lifeSpheres.id, { onDelete: "cascade" }),
+    toSphereId: integer("to_sphere_id")
+      .notNull()
+      .references(() => lifeSpheres.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("life_sphere_links_pair_idx").on(table.fromSphereId, table.toSphereId),
+  ],
+);
+
+export const goalMilestones = pgTable("goal_milestones", {
+  id: serial("id").primaryKey(),
+  goalId: integer("goal_id")
+    .notNull()
+    .references(() => goals.id, { onDelete: "cascade" }),
+  title: text("title").notNull(),
+  position: integer("position").notNull().default(0),
+  completedAt: timestamp("completed_at", { mode: "date" }),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const goalTasks = pgTable("goal_tasks", {
+  id: serial("id").primaryKey(),
+  goalId: integer("goal_id")
+    .notNull()
+    .references(() => goals.id, { onDelete: "cascade" }),
+  milestoneId: integer("milestone_id").references(() => goalMilestones.id, {
+    onDelete: "set null",
+  }),
+  title: text("title").notNull(),
+  dueDate: date("due_date", { mode: "date" }),
+  position: integer("position").notNull().default(0),
+  completedAt: timestamp("completed_at", { mode: "date" }),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+/** Temps investi : une session de focus, rattachée ou non à un objectif. */
+export const focusSessions = pgTable("focus_sessions", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  goalId: integer("goal_id").references(() => goals.id, { onDelete: "set null" }),
+  date: date("date", { mode: "date" }).notNull(),
+  minutes: integer("minutes").notNull(),
+  label: text("label"),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const habits = pgTable("habits", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  category: habitCategoryEnum("category").notNull(),
+  label: text("label").notNull(),
+  // Cible quotidienne dans l'unité de l'habitude (heures, minutes, pages…).
+  target: numeric("target", { precision: 8, scale: 2 }).notNull(),
+  unit: text("unit").notNull(),
+  sphereId: integer("sphere_id").references(() => lifeSpheres.id, { onDelete: "set null" }),
+  position: integer("position").notNull().default(0),
+  archivedAt: timestamp("archived_at", { mode: "date" }),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export const habitLogs = pgTable(
+  "habit_logs",
+  {
+    id: serial("id").primaryKey(),
+    habitId: integer("habit_id")
+      .notNull()
+      .references(() => habits.id, { onDelete: "cascade" }),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    date: date("date", { mode: "date" }).notNull(),
+    value: numeric("value", { precision: 8, scale: 2 }).notNull(),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("habit_logs_habit_date_idx").on(table.habitId, table.date)],
+);
+
+/** Mémoire du copilote : ce qu'il a appris du membre, et que le membre peut corriger. */
+export const aiMemories = pgTable("ai_memories", {
+  id: serial("id").primaryKey(),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  kind: memoryKindEnum("kind").notNull(),
+  content: text("content").notNull(),
+  // « copilot » : déduit par l'IA ; « member » : écrit par le membre.
+  source: text("source").notNull().default("copilot"),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: "date" }).notNull().defaultNow(),
+});
+
+export type MorningBriefing = {
+  headline: string;
+  summary: string;
+  priorities: { title: string; why: string }[];
+  habits: string[];
+  goalMoves: { goal: string; nextStep: string }[];
+  alerts: { level: "info" | "warning" | "critical"; message: string }[];
+};
+
+export type EveningBriefing = {
+  headline: string;
+  summary: string;
+  disciplineScore: number;
+  disciplineComment: string;
+  wins: string[];
+  misses: string[];
+  tomorrow: string[];
+};
+
+export type BriefingContent =
+  | ({ period: "morning" } & MorningBriefing)
+  | ({ period: "evening" } & EveningBriefing);
+
+/** Briefing du copilote : un matin et un soir par jour, généré une fois puis relu. */
+export const copilotBriefings = pgTable(
+  "copilot_briefings",
+  {
+    id: serial("id").primaryKey(),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    date: date("date", { mode: "date" }).notNull(),
+    period: briefingPeriodEnum("period").notNull(),
+    content: jsonb("content").$type<BriefingContent>().notNull(),
+    // Fournisseur IA qui l'a rédigé, ou « lockin » pour la version calculée sans IA.
+    author: text("author").notNull(),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("copilot_briefings_user_date_period_idx").on(
+      table.userId,
+      table.date,
+      table.period,
+    ),
+  ],
+);
+
+export const lifeSpheresRelations = relations(lifeSpheres, ({ one, many }) => ({
+  user: one(users, { fields: [lifeSpheres.userId], references: [users.id] }),
+  goals: many(goals),
+  habits: many(habits),
+}));
+
+export const goalsRelations = relations(goals, ({ one, many }) => ({
   user: one(users, { fields: [goals.userId], references: [users.id] }),
+  sphere: one(lifeSpheres, { fields: [goals.sphereId], references: [lifeSpheres.id] }),
+  milestones: many(goalMilestones),
+  tasks: many(goalTasks),
+  focusSessions: many(focusSessions),
+}));
+
+export const goalMilestonesRelations = relations(goalMilestones, ({ one, many }) => ({
+  goal: one(goals, { fields: [goalMilestones.goalId], references: [goals.id] }),
+  tasks: many(goalTasks),
+}));
+
+export const goalTasksRelations = relations(goalTasks, ({ one }) => ({
+  goal: one(goals, { fields: [goalTasks.goalId], references: [goals.id] }),
+  milestone: one(goalMilestones, {
+    fields: [goalTasks.milestoneId],
+    references: [goalMilestones.id],
+  }),
+}));
+
+export const focusSessionsRelations = relations(focusSessions, ({ one }) => ({
+  user: one(users, { fields: [focusSessions.userId], references: [users.id] }),
+  goal: one(goals, { fields: [focusSessions.goalId], references: [goals.id] }),
+}));
+
+export const habitsRelations = relations(habits, ({ one, many }) => ({
+  user: one(users, { fields: [habits.userId], references: [users.id] }),
+  sphere: one(lifeSpheres, { fields: [habits.sphereId], references: [lifeSpheres.id] }),
+  logs: many(habitLogs),
+}));
+
+export const habitLogsRelations = relations(habitLogs, ({ one }) => ({
+  habit: one(habits, { fields: [habitLogs.habitId], references: [habits.id] }),
 }));
 
 export const routineItemsRelations = relations(routineItems, ({ one, many }) => ({
@@ -1064,3 +1303,14 @@ export type Challenge = typeof challenges.$inferSelect;
 export type BusinessOffer = typeof businessOffers.$inferSelect;
 export type Formation = typeof formations.$inferSelect;
 export type CreatorVerification = typeof creatorVerifications.$inferSelect;
+export type LifeSphere = typeof lifeSpheres.$inferSelect;
+export type LifeSphereLink = typeof lifeSphereLinks.$inferSelect;
+export type GoalMilestone = typeof goalMilestones.$inferSelect;
+export type GoalTask = typeof goalTasks.$inferSelect;
+export type FocusSession = typeof focusSessions.$inferSelect;
+export type Habit = typeof habits.$inferSelect;
+export type HabitLog = typeof habitLogs.$inferSelect;
+export type AiMemory = typeof aiMemories.$inferSelect;
+export type CopilotBriefing = typeof copilotBriefings.$inferSelect;
+export type HabitCategory = (typeof habitCategoryEnum.enumValues)[number];
+export type MemoryKind = (typeof memoryKindEnum.enumValues)[number];

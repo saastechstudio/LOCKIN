@@ -32,7 +32,7 @@ export function FeatureCard({
       )}
     >
       <div className="flex items-start justify-between">
-        <span className="flex size-12 items-center justify-center rounded-xl bg-lk-mist text-lk-blue transition-colors duration-300 group-hover:bg-lk-gold/15">
+        <span className="flex size-12 items-center justify-center rounded-xl bg-lk-mist text-lk-blue-soft transition-colors duration-300 group-hover:bg-lk-gold/15">
           <AnimatedIcon icon={icon} className="size-6" />
         </span>
         {index !== undefined ? (

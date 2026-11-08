@@ -27,7 +27,7 @@ export function Features() {
     <section id="mouvement" className="scroll-mt-20 bg-lk-mist">
       <div className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-28">
         <Reveal className="max-w-xl">
-          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-blue uppercase">
+          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-blue-soft uppercase">
             Ce qu&apos;est Lockin
           </p>
           <h2 className="font-display mt-5 text-4xl text-lk-black sm:text-5xl">

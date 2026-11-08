@@ -7,47 +7,57 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * LOCKIN — design system « Focus ».
+ * LOCKIN — Life OS. Sombre natif, verre dépoli, lumière douce.
  *
- * Concentration d'abord : fonds anti-fatigue (blanc cassé, beige crème),
- * gris chauds pour la structure, un bleu désaturé pour le focus, un corail
- * doux et un doré mat pour le dynamisme, une encre bleu nuit (même teinte) pour le texte.
- * Ambiance béton ciré : rayons doux, ombres ultra-diffuses teintées de
- * bleu, mouvements courts (fade + 10 px) qui respectent
- * prefers-reduced-motion. Un seul thème : clair (forcé dans app/layout.tsx).
+ * Même palette que l'identité Focus, remise dans la nuit : l'encre bleu
+ * nuit fait la matière, les crèmes font la lumière, le bleu focus agit,
+ * le doré récompense, le corail signale. Verre (.lk-glass), lueurs
+ * (.lk-glow-*), profondeur (shadow-glass), mouvements courts qui
+ * respectent prefers-reduced-motion. Un seul thème : sombre (forcé dans
+ * app/layout.tsx). Les pages du club (app/(club)) gardent leur identité.
  *
- * Vocabulaire de référence : les utilitaires lk-* (bg-lk-white, text-lk-ink-1,
- * border-lk-line, bg-lk-blue…). Les anciens noms (brand-*, camp-*, et les
- * jetons shadcn background/primary/…) restent des alias vers cette palette :
- * tout écran encore écrit avec eux s'aligne automatiquement.
+ * Vocabulaire : les utilitaires lk-* (bg-lk-white = fond, text-lk-black =
+ * texte, border-lk-line, bg-lk-surface = verre, bg-lk-blue…). Les anciens
+ * noms (brand-*, camp-*, jetons shadcn) restent des alias.
  *
  * Tailwind v4 : la config vit ici (@theme), pas dans tailwind.config.js.
  */
 
 :root {
-  /* ---- Fonds anti-fatigue ---- */
-  --lk-white: #faf9f7; /* fond de page (blanc cassé) */
-  --lk-mist: #f5f2ee; /* surface de repos (beige crème) */
-  --lk-surface: #ffffff; /* cartes : seul blanc pur, pour la profondeur */
+  color-scheme: dark;
+
+  /*
+   * Life OS — sombre natif, construit sur la palette Lockin existante :
+   * l'encre bleu nuit (#1B2A3E) devient la matière, les crèmes (#FAF9F7,
+   * #F5F2EE) deviennent la lumière du texte, les gris chauds (#B8B3AE,
+   * #6A6764) gardent la structure, le bleu focus agit, le doré récompense,
+   * le corail signale l'énergie.
+   */
+
+  /* ---- Matière : l'encre bleu nuit, en trois profondeurs ---- */
+  --lk-white: #0f1826; /* fond de page : l'encre bleu nuit au plus profond */
+  --lk-mist: #1b2a3e; /* surface de repos : l'encre bleu nuit */
+  --lk-surface: rgba(250, 249, 247, 0.045); /* verre dépoli des cartes */
+  --lk-panel: #16223a; /* panneaux opaques : menus, dialogues */
 
   /* ---- Gris chauds (structure) ---- */
-  --lk-line: #e7e3df; /* filets et bordures */
-  --lk-stone-2: #b8b3ae; /* texte désactivé, placeholders décoratifs */
-  --lk-stone-3: #6a6764; /* texte secondaire — 5,2:1 sur #faf9f7 */
+  --lk-line: rgba(250, 249, 247, 0.1); /* filets de verre */
+  --lk-stone-2: #6a6764; /* texte désactivé */
+  --lk-stone-3: #b8b3ae; /* texte secondaire — 8,4:1 sur le fond */
 
-  /* ---- Texte / premium ---- */
-  --lk-black: #1b2a3e; /* encre bleue : le bleu focus assombri, pour texte et aplats sombres */
-  --lk-ink-1: #1b2a3e;
-  --lk-ink-2: #6a6764;
-  --lk-ink-3: #b8b3ae;
+  /* ---- Texte : la lumière crème ---- */
+  --lk-black: #faf9f7; /* texte principal (le nom historique désigne « l'encre du texte ») */
+  --lk-ink-1: #faf9f7;
+  --lk-ink-2: #b8b3ae;
+  --lk-ink-3: #6a6764;
 
   /* ---- Accent focus (bleu désaturé) ---- */
-  --lk-blue: #3e5c8a; /* action principale — 6,3:1 sur #faf9f7 */
-  --lk-blue-soft: #4a6fa5; /* survol, anneaux de focus */
+  --lk-blue: #3e5c8a; /* action principale (fond des boutons) */
+  --lk-blue-soft: #4a6fa5; /* survol, anneaux, lueurs */
 
   /* ---- Accents dynamiques ---- */
-  --lk-coral: #d97a5a; /* énergie : badges, puces, jamais en texte courant */
-  --lk-gold: #c9a86a; /* paliers atteints, survol des cartes */
+  --lk-coral: #d97a5a; /* énergie, alertes */
+  --lk-gold: #c9a86a; /* paliers, score, réussites */
   /*
    * « teal » = le mouvement (écran actif, journée en cours). Nom conservé
    * pour les usages existants ; il pointe désormais sur le bleu focus.
@@ -68,7 +78,7 @@
   /* ---- Alias historiques → palette Lockin ---- */
   --brand-bg: var(--lk-white);
   --brand-bg-deep: var(--lk-mist);
-  --brand-card: var(--lk-surface);
+  --brand-card: var(--lk-panel);
   --brand-border: var(--lk-line);
   --brand-blue: var(--lk-blue);
   --brand-blue-soft: var(--lk-line);
@@ -89,7 +99,7 @@
   --foreground: var(--lk-black);
   --card: var(--lk-surface);
   --card-foreground: var(--lk-black);
-  --popover: var(--lk-surface);
+  --popover: var(--lk-panel);
   --popover-foreground: var(--lk-black);
   --primary: var(--lk-blue);
   --primary-foreground: #ffffff;
@@ -99,8 +109,8 @@
   --muted-foreground: var(--lk-stone-3);
   --accent: var(--lk-mist);
   --accent-foreground: var(--lk-black);
-  --destructive: #b4503a;
-  --destructive-foreground: var(--lk-white);
+  --destructive: var(--lk-coral);
+  --destructive-foreground: #0f1826;
   --border: var(--lk-line);
   --input: var(--lk-line);
   --ring: var(--lk-blue-soft);
@@ -113,22 +123,22 @@
 }
 
 /*
- * Échelles « béton ciré » : ombres ultra-diffuses teintées de bleu
- * (jamais de noir pur), rayons doux, espacements aérés. Les ombres par
- * défaut de Tailwind sont remplacées pour que shadow-sm…shadow-2xl
- * restent cohérentes avec la palette.
+ * Profondeur : ombres sombres et diffuses, lueurs bleu et doré pour les
+ * états actifs, reflet interne pour le verre. Les ombres par défaut de
+ * Tailwind sont remplacées pour rester cohérentes avec la palette.
  */
 @theme {
   --shadow-*: initial;
-  --shadow-2xs: 0 1px 1px rgba(62, 92, 138, 0.03);
-  --shadow-xs: 0 1px 2px rgba(62, 92, 138, 0.04);
-  --shadow-sm: 0 1px 2px rgba(62, 92, 138, 0.04), 0 2px 8px rgba(62, 92, 138, 0.04);
-  --shadow-md: 0 2px 4px rgba(62, 92, 138, 0.03), 0 8px 24px rgba(62, 92, 138, 0.06);
-  --shadow-lg: 0 4px 8px rgba(62, 92, 138, 0.03), 0 16px 40px rgba(62, 92, 138, 0.08);
-  --shadow-xl: 0 8px 16px rgba(62, 92, 138, 0.04), 0 28px 64px rgba(62, 92, 138, 0.1);
-  --shadow-2xl: 0 12px 24px rgba(62, 92, 138, 0.05), 0 40px 96px rgba(62, 92, 138, 0.12);
-  --shadow-focus: 0 1px 2px rgba(62, 92, 138, 0.2), 0 8px 24px rgba(62, 92, 138, 0.22);
-  --shadow-gold: 0 2px 4px rgba(201, 168, 106, 0.1), 0 12px 32px rgba(201, 168, 106, 0.18);
+  --shadow-2xs: 0 1px 1px rgba(3, 8, 16, 0.3);
+  --shadow-xs: 0 1px 2px rgba(3, 8, 16, 0.35);
+  --shadow-sm: 0 1px 2px rgba(3, 8, 16, 0.35), 0 4px 14px rgba(3, 8, 16, 0.3);
+  --shadow-md: 0 2px 6px rgba(3, 8, 16, 0.35), 0 12px 32px rgba(3, 8, 16, 0.4);
+  --shadow-lg: 0 4px 10px rgba(3, 8, 16, 0.35), 0 20px 48px rgba(3, 8, 16, 0.45);
+  --shadow-xl: 0 8px 16px rgba(3, 8, 16, 0.4), 0 32px 72px rgba(3, 8, 16, 0.5);
+  --shadow-2xl: 0 12px 24px rgba(3, 8, 16, 0.45), 0 48px 110px rgba(3, 8, 16, 0.55);
+  --shadow-focus: 0 0 0 1px rgba(74, 111, 165, 0.45), 0 10px 32px rgba(74, 111, 165, 0.35);
+  --shadow-gold: 0 0 0 1px rgba(201, 168, 106, 0.35), 0 12px 36px rgba(201, 168, 106, 0.18);
+  --shadow-glass: inset 0 1px 0 rgba(250, 249, 247, 0.08), 0 20px 50px -20px rgba(3, 8, 16, 0.7);
   --font-mono: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   /* Mouvement : courbes douces, durées courtes. */
@@ -142,6 +152,7 @@
 @theme inline {
   --color-lk-white: var(--lk-white);
   --color-lk-surface: var(--lk-surface);
+  --color-lk-panel: var(--lk-panel);
   --color-lk-stone-2: var(--lk-stone-2);
   --color-lk-stone-3: var(--lk-stone-3);
   --color-lk-blue: var(--lk-blue);
@@ -235,7 +246,13 @@
   }
 
   body {
-    background: var(--background);
+    /* Lumière d'ambiance : trois halos fixes, très diffus, sur l'encre. */
+    background:
+      radial-gradient(60rem 40rem at 85% -10%, rgba(74, 111, 165, 0.16), transparent 60%),
+      radial-gradient(50rem 36rem at -10% 110%, rgba(201, 168, 106, 0.07), transparent 60%),
+      radial-gradient(40rem 30rem at 50% 50%, rgba(27, 42, 62, 0.55), transparent 70%),
+      var(--background);
+    background-attachment: fixed;
     color: var(--foreground);
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     text-rendering: optimizeLegibility;
@@ -250,7 +267,7 @@
   }
 
   ::selection {
-    background: var(--lk-blue);
+    background: var(--lk-blue-soft);
     color: #fff;
   }
 
@@ -262,8 +279,8 @@
 }
 
 /*
- * Classes Lockin « maison » (module Formation) : cartes blanches à filet
- * chaud, boutons bleu focus. Dans @layer components : un utilitaire
+ * Classes Lockin « maison » (module Formation) : cartes de verre à filet
+ * clair, boutons bleu focus. Dans @layer components : un utilitaire
  * Tailwind peut toujours les ajuster.
  */
 @layer components {
@@ -287,7 +304,8 @@
     border-radius: var(--radius-2xl);
     padding: 24px;
     background: var(--lk-surface);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: blur(18px) saturate(140%);
   }
 
   .lockin-button {
@@ -352,12 +370,65 @@
   .lockin-input:focus-visible {
     outline: none;
     border-color: var(--lk-blue-soft);
-    box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.18);
+    box-shadow: 0 0 0 3px rgba(74, 111, 165, 0.25);
+  }
+
+  /*
+   * Verre Life OS : fond crème à 4,5 %, flou, reflet interne d'un pixel en
+   * haut, ombre profonde. .lk-glass-strong pour les panneaux au premier plan.
+   */
+  .lk-glass {
+    background: linear-gradient(180deg, rgba(250, 249, 247, 0.06), rgba(250, 249, 247, 0.025));
+    border: 1px solid var(--lk-line);
+    box-shadow: var(--shadow-glass);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+  .lk-glass-strong {
+    background: linear-gradient(180deg, rgba(27, 42, 62, 0.92), rgba(22, 34, 58, 0.88));
+    border: 1px solid rgba(250, 249, 247, 0.12);
+    box-shadow: var(--shadow-glass), var(--shadow-xl);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+  }
+
+  /* Liseré lumineux qui suit le bord haut d'un bloc actif. */
+  .lk-edge {
+    position: relative;
+  }
+  .lk-edge::before {
+    content: "";
+    position: absolute;
+    inset: 0 12% auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(250, 249, 247, 0.35), transparent);
+    pointer-events: none;
+  }
+
+  /* Lueurs : halo coloré très diffus derrière un élément. */
+  .lk-glow-blue {
+    box-shadow: var(--shadow-glass), 0 0 60px -12px rgba(74, 111, 165, 0.55);
+  }
+  .lk-glow-gold {
+    box-shadow: var(--shadow-glass), 0 0 60px -14px rgba(201, 168, 106, 0.45);
+  }
+  .lk-glow-coral {
+    box-shadow: var(--shadow-glass), 0 0 60px -14px rgba(217, 122, 90, 0.45);
+  }
+
+  /* Texte lumineux pour les chiffres clés. */
+  .lk-text-glow {
+    text-shadow: 0 0 28px rgba(74, 111, 165, 0.55);
+  }
+
+  /* Grille de points très discrète, pour les fonds de section. */
+  .lk-grid-bg {
+    background-image: radial-gradient(rgba(250, 249, 247, 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
   }
 }
 
 .camp-scope {
-  background: var(--lk-white);
   color: var(--lk-black);
 }
 
@@ -369,19 +440,20 @@
 }
 
 /*
- * Anciennes surfaces : elles rendent l'identité Focus (carte blanche, filet
- * chaud, ombre ultra-douce) sans réécrire les écrans qui les utilisent.
+ * Anciennes surfaces : elles rendent le verre Life OS sans réécrire les
+ * écrans qui les utilisent.
  */
 .surface {
   background: var(--lk-surface);
   border: 1px solid var(--lk-line);
   border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-glass);
+  backdrop-filter: blur(18px) saturate(140%);
 }
 
 .mesh-card {
-  background: var(--lk-black);
-  color: var(--lk-white);
+  background: linear-gradient(135deg, var(--lk-blue), var(--lk-mist));
+  color: var(--lk-black);
   border-radius: var(--radius-2xl);
 }
 
@@ -391,7 +463,7 @@
 }
 
 .text-gradient-blue {
-  color: var(--lk-blue);
+  color: var(--lk-blue-soft);
 }
 
 /* Interaction premium : soulèvement de 2 px + ombre qui se diffuse. */
@@ -406,8 +478,8 @@
 }
 .card-interactive:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--lk-gold);
+  box-shadow: var(--shadow-gold);
+  border-color: rgba(201, 168, 106, 0.5);
 }
 
 ::-webkit-scrollbar {

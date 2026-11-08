@@ -14,10 +14,10 @@ const buttonVariants = cva(
           "bg-lk-blue text-white hover:-translate-y-0.5 hover:bg-lk-blue-soft hover:shadow-focus active:translate-y-0",
         destructive: "bg-destructive text-white hover:-translate-y-0.5 hover:shadow-md active:translate-y-0",
         outline:
-          "border border-lk-line bg-lk-surface text-lk-black shadow-xs hover:border-lk-stone-2 hover:bg-lk-mist hover:shadow-sm",
+          "border border-lk-line bg-lk-surface text-lk-black backdrop-blur-md hover:border-lk-stone-2/60 hover:bg-lk-mist hover:shadow-sm",
         secondary: "bg-lk-mist text-lk-black hover:bg-lk-line",
         ghost: "text-lk-black hover:bg-lk-mist",
-        link: "rounded-none text-lk-blue underline decoration-lk-line underline-offset-4 hover:decoration-lk-blue active:scale-100",
+        link: "rounded-none text-lk-blue-soft underline decoration-lk-line underline-offset-4 hover:decoration-lk-blue active:scale-100",
       },
       size: {
         default: "h-11 px-6 py-2 has-[>svg]:px-5",

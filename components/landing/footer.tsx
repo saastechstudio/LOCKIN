@@ -27,7 +27,7 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-lk-stone-3 transition-colors hover:text-lk-blue"
+                className="text-lk-stone-3 transition-colors hover:text-lk-blue-soft"
               >
                 {link.label}
               </Link>
@@ -37,7 +37,7 @@ export function Footer() {
 
         <div className="mt-16 flex flex-wrap justify-between gap-4 border-t border-lk-line pt-6 text-xs text-lk-stone-3">
           <span>© {new Date().getFullYear()} Lockin Social Club</span>
-          <Link href="/legal/mentions" className="transition-colors hover:text-lk-blue">
+          <Link href="/legal/mentions" className="transition-colors hover:text-lk-blue-soft">
             Mentions légales
           </Link>
         </div>

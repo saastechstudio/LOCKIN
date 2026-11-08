@@ -26,7 +26,7 @@ export function DashboardTopbar({
   const firstName = user.name?.split(" ")[0] ?? "Membre";
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-3 border-b border-lk-line bg-lk-white px-4 sm:px-8">
+    <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-3 border-b border-lk-line bg-lk-white/60 px-4 backdrop-blur-xl sm:px-8">
       <div className="flex min-w-0 items-center gap-3">
         <MobileNav />
         <LogoMark className="h-6 md:hidden" />

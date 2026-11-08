@@ -92,12 +92,23 @@ const MOOD_MODIFIERS: Record<Mood, string> = {
  * changes; the tone modifier, coach's chosen name, and today's mood are
  * member- and day-specific.
  */
-export function buildCoachSystemPrompt(user: User, mood?: Mood | null): string {
+export function buildCoachSystemPrompt(
+  user: User,
+  mood?: Mood | null,
+  memories: { kind: string; content: string }[] = [],
+): string {
   const toneLine = TONE_MODIFIERS[user.aiCoachTone];
   const nameLine = user.aiCoachName
     ? `Le membre a choisi de t'appeler "${user.aiCoachName}". Présente-toi sous ce nom si on te le demande.`
     : "";
   const moodLine = mood ? MOOD_MODIFIERS[mood] : "";
 
-  return [BASE_PROMPT, toneLine, nameLine, moodLine].filter(Boolean).join("\n\n");
+  // Mémoire du copilote : ce qu'il sait déjà du membre (objectifs, projets,
+  // préférences, difficultés), pour ne jamais repartir de zéro.
+  const memoryLine =
+    memories.length > 0
+      ? `Ce que tu sais déjà de ce membre (mémoire du copilote, à utiliser sans la réciter) :\n${memories.map((m) => `- [${m.kind}] ${m.content}`).join("\n")}`
+      : "";
+
+  return [BASE_PROMPT, toneLine, nameLine, moodLine, memoryLine].filter(Boolean).join("\n\n");
 }
