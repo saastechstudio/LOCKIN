@@ -14,6 +14,8 @@ export type UniverseSphere = {
   effortShare: number;
   goalCount: number;
   habitCount: number;
+  /** Membres avec qui une conversation est liée à cette sphère (satellites). */
+  contacts: { id: number; name: string }[];
 };
 
 export type UniverseLink = { id: number; from: number; to: number };

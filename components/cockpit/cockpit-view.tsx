@@ -23,10 +23,12 @@ export function CockpitView({
   snapshot: s,
   fallback,
   focusRow,
+  contacts,
 }: {
   snapshot: LifeOsSnapshot;
   fallback: { morning: MorningBriefing; evening: EveningBriefing };
   focusRow: DailyFocus | null;
+  contacts: Record<number, { id: number; name: string }[]>;
 }) {
   return (
     <div className="mx-auto max-w-7xl space-y-6">
@@ -47,7 +49,7 @@ export function CockpitView({
 
       <div className="lk-rise" style={{ "--i": 1 } as React.CSSProperties}>
         <SphereLife
-          spheres={toUniverse(s.spheres)}
+          spheres={toUniverse(s.spheres, contacts)}
           links={s.links}
           score={s.score.score}
           tierLabel={s.tier.label}

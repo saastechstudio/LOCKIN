@@ -2,6 +2,7 @@ import { getOrCreateDbUser } from "@/lib/auth";
 import { getTodayFocus } from "@/lib/actions/daily-focus";
 import { loadLifeOs } from "@/lib/life-os/snapshot";
 import { fallbackEvening, fallbackMorning } from "@/lib/copilot/briefing";
+import { sphereContacts } from "@/lib/channel/queries";
 import { CockpitView } from "@/components/cockpit/cockpit-view";
 
 export const dynamic = "force-dynamic";
@@ -11,13 +12,14 @@ export default async function DashboardPage() {
   const user = await getOrCreateDbUser();
   // Crée la priorité du jour si besoin, avant de charger l'instantané qui la lit.
   const focusRow = await getTodayFocus();
-  const snapshot = await loadLifeOs(user);
+  const [snapshot, contacts] = await Promise.all([loadLifeOs(user), sphereContacts(user.id)]);
 
   return (
     <CockpitView
       snapshot={snapshot}
       fallback={{ morning: fallbackMorning(snapshot), evening: fallbackEvening(snapshot) }}
       focusRow={focusRow}
+      contacts={contacts}
     />
   );
 }

@@ -5,6 +5,7 @@ const isProtectedRoute = createRouteMatcher([
   "/onboarding(.*)",
   "/api/audit(.*)",
   "/api/chat(.*)",
+  "/api/channel(.*)",
   "/formations(.*)",
   "/rejoindre(.*)",
   // La page /lockintrip reste publique ; réserver exige un compte membre.

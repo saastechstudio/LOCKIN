@@ -2,7 +2,10 @@ import type { UniverseSphere } from "@/components/spherelife/types";
 import type { SphereView } from "./snapshot";
 
 /** Sphères de l'instantané → planètes de la scène SphereLife. */
-export function toUniverse(spheres: SphereView[]): UniverseSphere[] {
+export function toUniverse(
+  spheres: SphereView[],
+  contacts: Record<number, { id: number; name: string }[]> = {},
+): UniverseSphere[] {
   return spheres.map((s) => ({
     id: s.id,
     name: s.name,
@@ -17,5 +20,6 @@ export function toUniverse(spheres: SphereView[]): UniverseSphere[] {
     effortShare: s.stats.effortShare,
     goalCount: s.goalCount,
     habitCount: s.habitCount,
+    contacts: contacts[s.id] ?? [],
   }));
 }

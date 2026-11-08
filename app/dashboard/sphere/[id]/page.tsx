@@ -4,6 +4,10 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { getOrCreateDbUser } from "@/lib/auth";
 import { isClubMember } from "@/lib/club/access";
+import { db } from "@/lib/db";
+import { conversations } from "@/lib/db/schema";
+import { conversationTitle } from "@/lib/channel/queries";
+import { eq } from "drizzle-orm";
 import { loadLifeOs } from "@/lib/life-os/snapshot";
 import { GoalComposer } from "@/components/goals/goal-composer";
 import { LivingGoal } from "@/components/goals/living-goal";
@@ -33,6 +37,14 @@ export default async function SpherePage({ params }: PageProps<"/dashboard/spher
   const signals = snapshot.sphereSignals.filter((s) => s.sphereId === sphere.id);
   const influences = snapshot.links.filter((l) => l.from === sphere.id);
   const influencedBy = snapshot.links.filter((l) => l.to === sphere.id);
+  const linkedConversations = await db.query.conversations.findMany({
+    where: eq(conversations.sphereId, sphere.id),
+    columns: { id: true, kind: true, title: true },
+    with: { members: { with: { user: { columns: { id: true, name: true, avatarUrl: true } } } } },
+  });
+  const myConversations = linkedConversations
+    .filter((c) => c.members.some((m) => m.userId === user.id))
+    .map((c) => ({ id: c.id, title: conversationTitle(c, c.members.map((m) => m.user), user.id) }));
   const { stats } = sphere;
   const glow = 0.25 + (stats.energy / 100) * 0.75;
 
@@ -113,6 +125,19 @@ export default async function SpherePage({ params }: PageProps<"/dashboard/spher
               <span className="text-lk-black">{sphere.name}</span> <ArrowRight className="size-3" /> {name(l.to)}
             </Link>
           ))}
+        </section>
+      ) : null}
+
+      {myConversations.length > 0 ? (
+        <section className="space-y-2">
+          <p className="text-[10px] font-semibold tracking-[0.35em] text-lk-stone-3 uppercase">Conversations liées</p>
+          <div className="flex flex-wrap gap-2">
+            {myConversations.map((c) => (
+              <Link key={c.id} href={`/dashboard/messages/c/${c.id}`} className="lk-glass lk-lift inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs text-lk-black">
+                {c.title}
+              </Link>
+            ))}
+          </div>
         </section>
       ) : null}
 

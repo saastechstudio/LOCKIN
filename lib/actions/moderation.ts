@@ -7,6 +7,8 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import {
   businessOffers,
+  chatMessages,
+  conversationMembers,
   formations,
   helpAnswers,
   messages,
@@ -22,7 +24,7 @@ import { enforceRateLimit } from "@/lib/rate-limit";
 const ADMIN_PATH = "/dashboard/admin/moderation";
 
 const reportSchema = z.object({
-  targetType: z.enum(["post", "comment", "message", "help_answer", "business_offer", "formation"]),
+  targetType: z.enum(["post", "comment", "message", "help_answer", "business_offer", "formation", "chat_message"]),
   targetId: z.number().int(),
   reason: z.enum(["insulte", "harcelement", "discrimination", "spam", "autre"]),
   details: z.string().trim().max(500).optional(),
@@ -73,6 +75,13 @@ async function resolveContentAuthor(
       });
       return row?.creatorId ?? null;
     }
+    case "chat_message": {
+      const row = await db.query.chatMessages.findFirst({
+        where: eq(chatMessages.id, targetId),
+        columns: { senderId: true },
+      });
+      return row?.senderId ?? null;
+    }
   }
 }
 
@@ -92,6 +101,25 @@ export async function reportContent(input: z.infer<typeof reportSchema>) {
       columns: { recipientId: true },
     });
     if (!message || message.recipientId !== reporter.id) throw new Error("Ce contenu n'existe plus.");
+  }
+
+  // Même règle pour la messagerie : on ne signale que ce qu'on a pu lire, donc
+  // dans une conversation dont on est membre.
+  if (parsed.targetType === "chat_message") {
+    const message = await db.query.chatMessages.findFirst({
+      where: eq(chatMessages.id, parsed.targetId),
+      columns: { conversationId: true },
+    });
+    const membership = message
+      ? await db.query.conversationMembers.findFirst({
+          columns: { id: true },
+          where: and(
+            eq(conversationMembers.conversationId, message.conversationId),
+            eq(conversationMembers.userId, reporter.id),
+          ),
+        })
+      : null;
+    if (!membership) throw new Error("Ce contenu n'existe plus.");
   }
 
   const reportedUserId = await resolveContentAuthor(parsed.targetType, parsed.targetId);
@@ -171,6 +199,9 @@ async function deleteReportedContent(
       return;
     case "formation":
       await db.delete(formations).where(eq(formations.id, targetId));
+      return;
+    case "chat_message":
+      await db.update(chatMessages).set({ deletedAt: new Date() }).where(eq(chatMessages.id, targetId));
   }
 }
 

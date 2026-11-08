@@ -339,6 +339,9 @@ function Planet({
             <meshBasicMaterial color={color.clone().multiplyScalar(1.8)} toneMapped={false} transparent opacity={0.8} />
           </mesh>
         ) : null}
+        {sphere.contacts.slice(0, 6).map((contact, i, all) => (
+          <Satellite key={contact.id} radius={size * 2.1} index={i} total={all.length} color={color} reducedMotion={reducedMotion} />
+        ))}
         {sphere.progress >= 60 ? (
           <Sparkles count={14} scale={size * 4} size={1.6} speed={reducedMotion ? 0 : 0.5} color={sphere.color} />
         ) : null}
@@ -365,6 +368,38 @@ function Planet({
           </div>
         </Html>
       </group>
+    </group>
+  );
+}
+
+/** Un membre lié à la sphère : un point lumineux qui orbite la planète. */
+function Satellite({
+  radius,
+  index,
+  total,
+  color,
+  reducedMotion,
+}: {
+  radius: number;
+  index: number;
+  total: number;
+  color: THREE.Color;
+  reducedMotion: boolean;
+}) {
+  const ref = useRef<THREE.Group>(null);
+  const phase = (index / total) * Math.PI * 2;
+  useFrame((state) => {
+    if (!ref.current) return;
+    const a = phase + (reducedMotion ? 0 : state.clock.elapsedTime * 0.6);
+    ref.current.position.set(Math.cos(a) * radius, Math.sin(a * 0.5) * radius * 0.3, Math.sin(a) * radius);
+  });
+  return (
+    <group ref={ref}>
+      <mesh>
+        <sphereGeometry args={[0.07, 12, 12]} />
+        <meshBasicMaterial color={color.clone().multiplyScalar(2.2)} toneMapped={false} />
+      </mesh>
+      <Halo radius={0.22} color={color} intensity={0.6} />
     </group>
   );
 }
