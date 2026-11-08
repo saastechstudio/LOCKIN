@@ -18,9 +18,9 @@ import type { UniverseLink, UniverseSphere } from "./types";
  * dans une sphère d'un clic.
  */
 
-const INK = new THREE.Color("#12070a");
-const RED = new THREE.Color("#E04B5F");
-const WHITE = new THREE.Color("#FFE9EC");
+const INK = new THREE.Color("#022c22");
+const RED = new THREE.Color("#10b981");
+const WHITE = new THREE.Color("#d1fae5");
 const SYSTEM_SPEED = 0.035;
 
 export type SceneProps = {
@@ -125,7 +125,7 @@ function Core({ score, reducedMotion }: { score: number; reducedMotion: boolean 
   const ringB = useRef<THREE.Mesh>(null);
   const heart = useRef<THREE.Mesh>(null);
   const root = useRef<THREE.Group>(null);
-  // Le score fait la lumière : rouge à bas régime, blanc rosé quand le membre est locked in.
+  // Le score fait la lumière : émeraude à bas régime, blanc menthe quand le membre est locked in.
   const energy = score / 100;
   const heartColor = useMemo(() => RED.clone().lerp(WHITE, Math.max(0, energy - 0.55) / 0.45), [energy]);
   const glow = 0.6 + energy * 2.4;
@@ -164,7 +164,7 @@ function Core({ score, reducedMotion }: { score: number; reducedMotion: boolean 
           distortionScale={0.4}
           temporalDistortion={reducedMotion ? 0 : 0.12}
           color="#ffe4e8"
-          attenuationColor="#E04B5F"
+          attenuationColor="#10b981"
           attenuationDistance={2.4}
         />
       </mesh>
@@ -203,7 +203,7 @@ function OrbitDust({ reducedMotion }: { reducedMotion: boolean }) {
     const count = 1400;
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
-    const palette = [new THREE.Color("#FFFFFF"), RED, WHITE, new THREE.Color("#FF8A96")];
+    const palette = [new THREE.Color("#FFFFFF"), RED, WHITE, new THREE.Color("#6EE7B7")];
     // Générateur déterministe : même nuage à chaque rendu, pas d'aléatoire impur pendant le rendu.
     let seed = 7;
     const random = () => {
@@ -339,6 +339,9 @@ function Planet({
             <meshBasicMaterial color={color.clone().multiplyScalar(1.8)} toneMapped={false} transparent opacity={0.8} />
           </mesh>
         ) : null}
+        {sphere.contacts.slice(0, 6).map((contact, i, all) => (
+          <Satellite key={contact.id} radius={size * 2.1} index={i} total={all.length} color={color} reducedMotion={reducedMotion} />
+        ))}
         {sphere.progress >= 60 ? (
           <Sparkles count={14} scale={size * 4} size={1.6} speed={reducedMotion ? 0 : 0.5} color={sphere.color} />
         ) : null}
@@ -352,8 +355,8 @@ function Planet({
           <div
             className={`whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] font-medium backdrop-blur-md transition-all ${
               hovered
-                ? "border-white/30 bg-[#240d13]/90 text-[#FFFFFF]"
-                : "border-white/10 bg-[#12070a]/60 text-[#D9C9CB]"
+                ? "border-white/30 bg-[#053d30]/90 text-[#FFFFFF]"
+                : "border-white/10 bg-[#022c22]/60 text-[#CFE3DA]"
             }`}
           >
             <span
@@ -365,6 +368,38 @@ function Planet({
           </div>
         </Html>
       </group>
+    </group>
+  );
+}
+
+/** Un membre lié à la sphère : un point lumineux qui orbite la planète. */
+function Satellite({
+  radius,
+  index,
+  total,
+  color,
+  reducedMotion,
+}: {
+  radius: number;
+  index: number;
+  total: number;
+  color: THREE.Color;
+  reducedMotion: boolean;
+}) {
+  const ref = useRef<THREE.Group>(null);
+  const phase = (index / total) * Math.PI * 2;
+  useFrame((state) => {
+    if (!ref.current) return;
+    const a = phase + (reducedMotion ? 0 : state.clock.elapsedTime * 0.6);
+    ref.current.position.set(Math.cos(a) * radius, Math.sin(a * 0.5) * radius * 0.3, Math.sin(a) * radius);
+  });
+  return (
+    <group ref={ref}>
+      <mesh>
+        <sphereGeometry args={[0.07, 12, 12]} />
+        <meshBasicMaterial color={color.clone().multiplyScalar(2.2)} toneMapped={false} />
+      </mesh>
+      <Halo radius={0.22} color={color} intensity={0.6} />
     </group>
   );
 }
@@ -556,7 +591,7 @@ function System(props: SceneProps) {
         {links.map((link) => {
           const from = positions.get(link.from);
           const to = positions.get(link.to);
-          const color = spheres.find((s) => s.id === link.from)?.color ?? "#E04B5F";
+          const color = spheres.find((s) => s.id === link.from)?.color ?? "#10b981";
           if (!from || !to) return null;
           return <Flow key={link.id} from={from} to={to} color={color} reducedMotion={reducedMotion} />;
         })}

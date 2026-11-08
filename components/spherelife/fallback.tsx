@@ -28,9 +28,9 @@ export function SphereFallback({
     <svg viewBox="0 0 800 600" className="size-full" role="img" aria-label="SphereLife, vue simplifiée">
       <defs>
         <radialGradient id="core-glow">
-          <stop offset="0%" stopColor="#FFE9EC" stopOpacity={0.35 + score / 200} />
-          <stop offset="45%" stopColor="#E04B5F" stopOpacity={0.35 + score / 250} />
-          <stop offset="100%" stopColor="#E04B5F" stopOpacity="0" />
+          <stop offset="0%" stopColor="#d1fae5" stopOpacity={0.35 + score / 200} />
+          <stop offset="45%" stopColor="#10b981" stopOpacity={0.35 + score / 250} />
+          <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
         </radialGradient>
       </defs>
       {ordered.map((s, i) => (
@@ -61,7 +61,7 @@ export function SphereFallback({
         );
       })}
       <circle cx="400" cy="300" r="110" fill="url(#core-glow)" />
-      <circle cx="400" cy="300" r="46" fill="#2A0F16" stroke="#FFFFFF" strokeOpacity="0.25" />
+      <circle cx="400" cy="300" r="46" fill="#064e3b" stroke="#FFFFFF" strokeOpacity="0.25" />
       {ordered.map((s) => {
         const p = pos.get(s.id)!;
         const r = 9 + s.level * 3 + s.progress / 20;
@@ -69,7 +69,7 @@ export function SphereFallback({
           <g key={s.id} onClick={() => onSelect(s.id)} className="cursor-pointer">
             <circle cx={p.x} cy={p.y} r={r * 1.8} fill={s.color} opacity={0.06 + s.energy / 600} />
             <circle cx={p.x} cy={p.y} r={r} fill={s.color} opacity={0.25 + (s.energy / 100) * 0.75} />
-            <text x={p.x} y={p.y + r + 16} textAnchor="middle" fill="#D9C9CB" fontSize="12">
+            <text x={p.x} y={p.y + r + 16} textAnchor="middle" fill="#CFE3DA" fontSize="12">
               {s.name} · {s.score}
             </text>
           </g>

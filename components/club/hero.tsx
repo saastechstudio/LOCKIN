@@ -32,7 +32,7 @@ export function ClubHero() {
       {/* Faisceau de lumière bordeaux, très diffus. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-1/3 left-1/2 -z-10 h-[120%] w-[140%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(107,31,43,0.55)_0%,rgba(82,22,32,0.25)_35%,transparent_65%)]"
+        className="pointer-events-none absolute -top-1/3 left-1/2 -z-10 h-[120%] w-[140%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(6,95,70,0.55)_0%,rgba(4,78,56,0.25)_35%,transparent_65%)]"
       />
       <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-club-night" />
 

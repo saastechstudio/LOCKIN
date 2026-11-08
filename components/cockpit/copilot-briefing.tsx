@@ -72,7 +72,7 @@ export function CopilotBriefing({
     <Panel className="lk-glow-blue relative overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-24 -right-24 size-64 rounded-full bg-[radial-gradient(circle,rgba(224,75,95,0.35),transparent_70%)]"
+        className="pointer-events-none absolute -top-24 -right-24 size-64 rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.35),transparent_70%)]"
       />
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">

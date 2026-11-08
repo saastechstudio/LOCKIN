@@ -10,6 +10,7 @@ import {
   boolean,
   jsonb,
   uniqueIndex,
+  index,
   type AnyPgColumn,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
@@ -127,6 +128,7 @@ export const reportTargetTypeEnum = pgEnum("report_target_type", [
   "help_answer",
   "business_offer",
   "formation",
+  "chat_message",
 ]);
 
 export const reportReasonEnum = pgEnum("report_reason", [
@@ -1075,6 +1077,170 @@ export const lifeSpheresRelations = relations(lifeSpheres, ({ one, many }) => ({
   habits: many(habits),
 }));
 
+// ---------------------------------------------------------------------------
+// LockIn Secure Channel — messagerie : conversations privées, groupes, salons
+// thématiques et pactes d'accountability, liables à un objectif, une habitude
+// ou une sphère. Tables additives ; l'ancienne table `messages` est conservée
+// (reprise dans la migration 0022).
+// ---------------------------------------------------------------------------
+
+export const conversationKindEnum = pgEnum("conversation_kind", ["direct", "group", "room", "pact"]);
+export const chatMessageKindEnum = pgEnum("chat_message_kind", ["text", "checkin", "system"]);
+export const pactStatusEnum = pgEnum("pact_status", ["pending", "active", "ended"]);
+
+export type ConversationSummary = {
+  summary: string;
+  decisions: string[];
+  tasks: { title: string; owner: string | null }[];
+  goals: string[];
+  commitments: { who: string; what: string; when: string | null }[];
+};
+
+export const conversations = pgTable(
+  "conversations",
+  {
+    id: serial("id").primaryKey(),
+    kind: conversationKindEnum("kind").notNull(),
+    title: text("title"),
+    // Salons : thème (Business, Fitness, Finance, Développement personnel, Études, Création de contenu…).
+    topic: text("topic"),
+    createdById: integer("created_by_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    // Un seul fil privé par paire de membres : « petit:grand ».
+    directKey: text("direct_key").unique(),
+    goalId: integer("goal_id").references(() => goals.id, { onDelete: "set null" }),
+    habitId: integer("habit_id").references(() => habits.id, { onDelete: "set null" }),
+    sphereId: integer("sphere_id").references(() => lifeSpheres.id, { onDelete: "set null" }),
+    summary: jsonb("summary").$type<ConversationSummary>(),
+    summarizedAt: timestamp("summarized_at", { mode: "date" }),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+    lastMessageAt: timestamp("last_message_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [index("conversations_last_message_idx").on(table.lastMessageAt)],
+);
+
+export const conversationMembers = pgTable(
+  "conversation_members",
+  {
+    id: serial("id").primaryKey(),
+    conversationId: integer("conversation_id")
+      .notNull()
+      .references(() => conversations.id, { onDelete: "cascade" }),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    role: text("role").notNull().default("member"),
+    lastReadAt: timestamp("last_read_at", { mode: "date" }),
+    joinedAt: timestamp("joined_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [
+    uniqueIndex("conversation_members_pair_idx").on(table.conversationId, table.userId),
+    index("conversation_members_user_idx").on(table.userId),
+  ],
+);
+
+export const chatMessages = pgTable(
+  "chat_messages",
+  {
+    id: serial("id").primaryKey(),
+    conversationId: integer("conversation_id")
+      .notNull()
+      .references(() => conversations.id, { onDelete: "cascade" }),
+    senderId: integer("sender_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    kind: chatMessageKindEnum("kind").notNull().default("text"),
+    body: text("body").notNull(),
+    replyToId: integer("reply_to_id").references((): AnyPgColumn => chatMessages.id, {
+      onDelete: "set null",
+    }),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+    deletedAt: timestamp("deleted_at", { mode: "date" }),
+  },
+  (table) => [index("chat_messages_conversation_idx").on(table.conversationId, table.id)],
+);
+
+export const chatReactions = pgTable(
+  "chat_reactions",
+  {
+    id: serial("id").primaryKey(),
+    messageId: integer("message_id")
+      .notNull()
+      .references(() => chatMessages.id, { onDelete: "cascade" }),
+    userId: integer("user_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    emoji: text("emoji").notNull(),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("chat_reactions_unique_idx").on(table.messageId, table.userId, table.emoji)],
+);
+
+export const userBlocks = pgTable(
+  "user_blocks",
+  {
+    id: serial("id").primaryKey(),
+    blockerId: integer("blocker_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    blockedId: integer("blocked_id")
+      .notNull()
+      .references(() => users.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  },
+  (table) => [uniqueIndex("user_blocks_pair_idx").on(table.blockerId, table.blockedId)],
+);
+
+/** Pacte d'accountability : deux membres se suivent mutuellement (objectifs, habitudes, avancées). */
+export const pacts = pgTable("pacts", {
+  id: serial("id").primaryKey(),
+  conversationId: integer("conversation_id")
+    .notNull()
+    .unique()
+    .references(() => conversations.id, { onDelete: "cascade" }),
+  initiatorId: integer("initiator_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  partnerId: integer("partner_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  status: pactStatusEnum("status").notNull().default("pending"),
+  createdAt: timestamp("created_at", { mode: "date" }).notNull().defaultNow(),
+  acceptedAt: timestamp("accepted_at", { mode: "date" }),
+  endedAt: timestamp("ended_at", { mode: "date" }),
+});
+
+export const conversationsRelations = relations(conversations, ({ one, many }) => ({
+  members: many(conversationMembers),
+  messages: many(chatMessages),
+  pact: one(pacts, { fields: [conversations.id], references: [pacts.conversationId] }),
+  goal: one(goals, { fields: [conversations.goalId], references: [goals.id] }),
+  habit: one(habits, { fields: [conversations.habitId], references: [habits.id] }),
+  sphere: one(lifeSpheres, { fields: [conversations.sphereId], references: [lifeSpheres.id] }),
+}));
+
+export const conversationMembersRelations = relations(conversationMembers, ({ one }) => ({
+  conversation: one(conversations, { fields: [conversationMembers.conversationId], references: [conversations.id] }),
+  user: one(users, { fields: [conversationMembers.userId], references: [users.id] }),
+}));
+
+export const chatMessagesRelations = relations(chatMessages, ({ one, many }) => ({
+  conversation: one(conversations, { fields: [chatMessages.conversationId], references: [conversations.id] }),
+  sender: one(users, { fields: [chatMessages.senderId], references: [users.id] }),
+  reactions: many(chatReactions),
+}));
+
+export const chatReactionsRelations = relations(chatReactions, ({ one }) => ({
+  message: one(chatMessages, { fields: [chatReactions.messageId], references: [chatMessages.id] }),
+}));
+
+export const pactsRelations = relations(pacts, ({ one }) => ({
+  conversation: one(conversations, { fields: [pacts.conversationId], references: [conversations.id] }),
+  initiator: one(users, { fields: [pacts.initiatorId], references: [users.id], relationName: "pactInitiator" }),
+  partner: one(users, { fields: [pacts.partnerId], references: [users.id], relationName: "pactPartner" }),
+}));
+
 export const goalsRelations = relations(goals, ({ one, many }) => ({
   user: one(users, { fields: [goals.userId], references: [users.id] }),
   sphere: one(lifeSpheres, { fields: [goals.sphereId], references: [lifeSpheres.id] }),
@@ -1314,3 +1480,9 @@ export type AiMemory = typeof aiMemories.$inferSelect;
 export type CopilotBriefing = typeof copilotBriefings.$inferSelect;
 export type HabitCategory = (typeof habitCategoryEnum.enumValues)[number];
 export type MemoryKind = (typeof memoryKindEnum.enumValues)[number];
+export type Conversation = typeof conversations.$inferSelect;
+export type ConversationMember = typeof conversationMembers.$inferSelect;
+export type ChatMessage = typeof chatMessages.$inferSelect;
+export type ChatReaction = typeof chatReactions.$inferSelect;
+export type Pact = typeof pacts.$inferSelect;
+export type ConversationKind = (typeof conversationKindEnum.enumValues)[number];

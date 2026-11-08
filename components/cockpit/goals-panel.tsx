@@ -10,7 +10,7 @@ import { Panel, PanelHeader, Ring } from "./ring";
 /** Objectifs actifs : anneau de progression, rythme, prochaine action. */
 export function GoalsPanel({ goals, spheres }: { goals: GoalView[]; spheres: SphereView[] }) {
   const active = goals.filter((g) => g.progress < 100).slice(0, 4);
-  const color = (id: number | null) => spheres.find((s) => s.id === id)?.color ?? "#E04B5F";
+  const color = (id: number | null) => spheres.find((s) => s.id === id)?.color ?? "#10b981";
 
   return (
     <Panel>

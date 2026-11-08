@@ -1,64 +1,79 @@
-import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
-import { fr } from "date-fns/locale";
+import { Handshake, Hash, ShieldCheck } from "lucide-react";
 
 import { requireLockinOnboarded } from "@/lib/auth";
-import { getConversations } from "@/lib/actions/messages";
-import { cn } from "@/lib/utils";
+import { listOpenRooms, pendingPactInvites } from "@/lib/channel/queries";
+import { activePactsOf } from "@/lib/channel/pact-view";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 
-export default async function MessagesInboxPage() {
-  await requireLockinOnboarded();
-  const conversations = await getConversations();
+export default async function MessagesHubPage() {
+  const user = await requireLockinOnboarded();
+  const [invites, pacts, rooms] = await Promise.all([pendingPactInvites(user.id), activePactsOf(user.id), listOpenRooms(user.id)]);
 
   return (
-    <div className="camp-scope">
-      <div className="mx-auto max-w-2xl">
-        <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">
-          Lockin Social Club
+    <div className="h-full overflow-y-auto p-6 sm:p-10">
+      <div className="mx-auto max-w-xl">
+        <span className="flex size-14 items-center justify-center rounded-2xl bg-lk-blue/25 text-lk-blue-soft">
+          <ShieldCheck className="size-7" />
+        </span>
+        <h2 className="font-display mt-4 text-2xl text-lk-black">Secure Channel™</h2>
+        <p className="mt-1 text-sm text-lk-stone-3">
+          Échanges privés, groupes, salons thématiques et pactes d&apos;accountability, reliés à tes objectifs et à SphereLife.
         </p>
-        <h1 className="font-display mb-6 text-3xl text-lk-black sm:text-4xl">
-          Messages
-        </h1>
 
-        {conversations.length === 0 ? (
-          <p className="py-10 text-center text-xs text-lk-stone-3 uppercase">
-            Aucune conversation — démarre-en une depuis le profil d&apos;un membre.
-          </p>
-        ) : (
-          <div className="divide-y divide-camp-hairline">
-            {conversations.map(({ counterpart, lastMessage, unreadCount }) => (
-              <Link
-                key={counterpart.id}
-                href={`/dashboard/messages/${counterpart.id}`}
-                className="flex items-center justify-between gap-3 py-4 hover:bg-camp-cream"
-              >
-                <div className="min-w-0">
-                  <p
-                    className={cn(
-                      "text-sm",
-                      unreadCount > 0 ? "font-bold text-camp-charcoal" : "font-medium text-camp-charcoal",
-                    )}
-                  >
-                    {counterpart.name ?? "Membre Lockin"}
-                  </p>
-                  <p className="truncate text-sm text-lk-stone-3">{lastMessage.content}</p>
-                </div>
-                <div className="flex shrink-0 flex-col items-end gap-1">
-                  <span className="text-[10px] text-camp-charcoal/40 uppercase">
-                    {formatDistanceToNow(lastMessage.createdAt, { addSuffix: true, locale: fr })}
+        {invites.length > 0 ? (
+          <section className="mt-8">
+            <h3 className="mb-2 text-[10px] font-semibold tracking-[0.25em] text-lk-gold uppercase">Invitations</h3>
+            <ul className="space-y-1.5">
+              {invites.map((p) => (
+                <li key={p.id}>
+                  <Link href={`/dashboard/messages/c/${p.conversationId}`} className="lk-glass lk-lift flex items-center gap-2 rounded-2xl px-4 py-3 text-sm text-lk-black">
+                    <Handshake className="size-4 text-lk-gold" /> {p.initiator.name ?? "Un membre"} te propose un pacte
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : null}
+
+        {pacts.length > 0 ? (
+          <section className="mt-8">
+            <h3 className="mb-2 text-[10px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">Tes pactes</h3>
+            <ul className="space-y-1.5">
+              {pacts.map((p) => {
+                const other = p.initiatorId === user.id ? p.partner : p.initiator;
+                return (
+                  <li key={p.id}>
+                    <Link href={`/dashboard/messages/c/${p.conversationId}`} className="lk-glass lk-lift flex items-center gap-2 rounded-2xl px-4 py-3 text-sm text-lk-black">
+                      <Handshake className="size-4 text-lk-blue-soft" /> {other.name ?? "Partenaire"}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        ) : null}
+
+        {rooms.length > 0 ? (
+          <section className="mt-8">
+            <h3 className="mb-2 text-[10px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase">Salons ouverts</h3>
+            <ul className="space-y-1.5">
+              {rooms.slice(0, 6).map((r) => (
+                <li key={r.id} className="lk-glass flex items-center justify-between rounded-2xl px-4 py-3 text-sm text-lk-black">
+                  <span>
+                    <Hash className="mr-1.5 inline size-3.5 text-lk-blue-soft" />
+                    {r.title}
                   </span>
-                  {unreadCount > 0 ? (
-                    <span className="flex size-5 items-center justify-center bg-camp-gold text-[10px] font-bold text-camp-charcoal">
-                      {unreadCount}
-                    </span>
-                  ) : null}
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
+                  <span className="text-xs text-lk-stone-3">
+                    {r.topic} · {r.members}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-2 text-xs text-lk-stone-3">Rejoins un salon depuis le bouton +.</p>
+          </section>
+        ) : null}
       </div>
     </div>
   );

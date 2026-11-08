@@ -83,7 +83,7 @@ export function ClubMemberCard() {
               style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
               role="img"
               aria-label={shown ? `Carte de membre de ${shown}` : "Carte de membre du Lockin Social Club"}
-              className="club-grain relative aspect-[1.586/1] w-full overflow-hidden rounded-[22px] border border-club-pierre/25 bg-[linear-gradient(135deg,#7e2b38_0%,#6b1f2b_45%,#521620_100%)] p-6 shadow-[0_50px_90px_-45px_rgba(0,0,0,0.9)] sm:p-8"
+              className="club-grain relative aspect-[1.586/1] w-full overflow-hidden rounded-[22px] border border-club-pierre/25 bg-[linear-gradient(135deg,#0F6B50_0%,#065F46_45%,#064E3B_100%)] p-6 shadow-[0_50px_90px_-45px_rgba(0,0,0,0.9)] sm:p-8"
             >
               <motion.div aria-hidden style={{ background: glare }} className="pointer-events-none absolute inset-0" />
               <div className="relative flex h-full flex-col justify-between">

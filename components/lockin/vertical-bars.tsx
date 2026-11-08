@@ -7,9 +7,9 @@ export type VerticalBar = {
   label?: string;
   /** Libellé lisible par lecteur d'écran, ex. « 3 octobre : 70 ». */
   title?: string;
-  /** Palier ou objectif atteint : blanc rosé. */
+  /** Palier ou objectif atteint : blanc menthe. */
   accent?: boolean;
-  /** Ce qui est en cours (aujourd'hui) : rouge. */
+  /** Ce qui est en cours (aujourd'hui) : émeraude. */
   live?: boolean;
 };
 

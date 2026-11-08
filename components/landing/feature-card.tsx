@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Carte « pilier » : fond blanc, filet chaud #FFFFFF, ombre ultra-douce.
- * Au survol : la bordure passe au blanc rosé, la carte se soulève de 2 px, son
+ * Au survol : la bordure passe au blanc menthe, la carte se soulève de 2 px, son
  * ombre se diffuse et l'icône line-art se redessine (`group` + .lk-draw).
  */
 export function FeatureCard({

@@ -127,12 +127,13 @@ export type LifeOsSnapshot = {
 };
 
 /** Crée l'univers de départ la première fois : la SphereLife n'est jamais vide. */
-export async function ensureSpheres(userId: number) {
+export async function ensureSpheres(userId: number, options: { seed?: boolean } = {}) {
   const existing = await db.query.lifeSpheres.findMany({
     where: eq(lifeSpheres.userId, userId),
     orderBy: [asc(lifeSpheres.position)],
   });
-  if (existing.length > 0) return existing;
+  // seed: false = simple lecture (vue d'un partenaire de pacte) : on ne crée rien chez quelqu'un d'autre.
+  if (existing.length > 0 || options.seed === false) return existing;
   const count = DEFAULT_SPHERES.length;
   await db.insert(lifeSpheres).values(
     DEFAULT_SPHERES.map((s, i) => ({
@@ -149,12 +150,12 @@ export async function ensureSpheres(userId: number) {
   });
 }
 
-export async function loadLifeOs(user: User): Promise<LifeOsSnapshot> {
+export async function loadLifeOs(user: User, options: { seed?: boolean } = {}): Promise<LifeOsSnapshot> {
   const today = startOfDay();
   const historyFrom = subDays(today, HISTORY_DAYS - 1);
   const effortFrom = subDays(today, EFFORT_DAYS - 1);
 
-  const spheres = await ensureSpheres(user.id);
+  const spheres = await ensureSpheres(user.id, options);
 
   const [
     myGoals,

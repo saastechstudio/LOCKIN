@@ -7,12 +7,12 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * LOCKIN — Life OS. Un seul code couleur : le rouge et le blanc.
+ * LOCKIN — Life OS. Un seul code couleur : le émeraude et le blanc.
  *
- * Rouge profond pour la matière, blanc pour la lumière, verre dépoli pour
- * tout ce qui informe (chiffres, scores, tableaux de bord). Le rouge agit
- * (boutons, états actifs), le blanc rosé récompense (score, séries,
- * réussites), le rouge clair signale (alertes). Verre (.lk-glass), lueurs
+ * Émeraude profond pour la matière, blanc pour la lumière, verre dépoli pour
+ * tout ce qui informe (chiffres, scores, tableaux de bord). L'émeraude agit
+ * (boutons, états actifs), le blanc menthe récompense (score, séries,
+ * réussites), la menthe signale (alertes). Verre (.lk-glass), lueurs
  * (.lk-glow-*), profondeur (shadow-glass), mouvements courts qui
  * respectent prefers-reduced-motion. Un seul thème : sombre (forcé dans
  * app/layout.tsx). Les pages du club (app/(club)) gardent leur identité.
@@ -20,7 +20,7 @@
  * Vocabulaire : les utilitaires lk-* (bg-lk-white = fond, text-lk-black =
  * texte, border-lk-line, bg-lk-surface = verre, bg-lk-blue = action…). Les
  * noms historiques (lk-blue, lk-gold…) désignent des rôles, plus des
- * teintes : lk-blue = rouge d'action, lk-gold = blanc rosé. Les anciens noms
+ * teintes : lk-blue = émeraude d'action, lk-gold = blanc menthe. Les anciens noms
  * (brand-*, camp-*, jetons shadcn) restent des alias.
  *
  * Tailwind v4 : la config vit ici (@theme), pas dans tailwind.config.js.
@@ -29,33 +29,33 @@
 :root {
   color-scheme: dark;
 
-  /* ---- Matière : le rouge nuit, en trois profondeurs ---- */
-  --lk-white: #12070a; /* fond de page : rouge nuit */
-  --lk-mist: #2a0f16; /* surface de repos */
+  /* ---- Matière : le vert nuit, en trois profondeurs ---- */
+  --lk-white: #022c22; /* fond de page : vert nuit */
+  --lk-mist: #064e3b; /* surface de repos */
   --lk-surface: rgba(255, 255, 255, 0.05); /* verre dépoli des cartes */
-  --lk-panel: #240d13; /* panneaux opaques : menus, dialogues */
+  --lk-panel: #053d30; /* panneaux opaques : menus, dialogues */
 
   /* ---- Structure : filets de verre et textes atténués ---- */
   --lk-line: rgba(255, 255, 255, 0.12);
-  --lk-stone-2: #a98a8f; /* texte désactivé */
-  --lk-stone-3: #e6d6d8; /* texte secondaire */
+  --lk-stone-2: #7fbfa5; /* texte désactivé */
+  --lk-stone-3: #c9f0de; /* texte secondaire */
 
   /* ---- Lumière : le blanc ---- */
   --lk-black: #ffffff; /* texte principal (le nom historique désigne « l'encre du texte ») */
   --lk-ink-1: #ffffff;
-  --lk-ink-2: #e6d6d8;
-  --lk-ink-3: #a98a8f;
+  --lk-ink-2: #c9f0de;
+  --lk-ink-3: #7fbfa5;
 
   /* ---- Action : le rouge ---- */
-  --lk-blue: #b3283b; /* fond des boutons, états actifs */
-  --lk-blue-soft: #e04b5f; /* survol, anneaux, lueurs */
+  --lk-blue: #047857; /* fond des boutons, états actifs */
+  --lk-blue-soft: #10b981; /* survol, anneaux, lueurs */
 
   /* ---- Signaux ---- */
-  --lk-coral: #ff6b7a; /* alertes, retards */
-  --lk-gold: #ffe9ec; /* récompense : score, séries, réussites (blanc rosé) */
+  --lk-coral: #34d399; /* alertes, retards */
+  --lk-gold: #d1fae5; /* récompense : score, séries, réussites (blanc menthe) */
   /*
    * « teal » = le mouvement (écran actif, journée en cours). Nom conservé
-   * pour les usages existants ; il pointe désormais sur le rouge d'action.
+   * pour les usages existants ; il pointe désormais sur le émeraude d'action.
    */
   --lk-teal: var(--lk-blue);
 
@@ -105,7 +105,7 @@
   --accent: var(--lk-mist);
   --accent-foreground: var(--lk-black);
   --destructive: var(--lk-coral);
-  --destructive-foreground: #12070a;
+  --destructive-foreground: #022c22;
   --border: var(--lk-line);
   --input: var(--lk-line);
   --ring: var(--lk-blue-soft);
@@ -124,16 +124,16 @@
  */
 @theme {
   --shadow-*: initial;
-  --shadow-2xs: 0 1px 1px rgba(8, 2, 4, 0.3);
-  --shadow-xs: 0 1px 2px rgba(8, 2, 4, 0.35);
-  --shadow-sm: 0 1px 2px rgba(8, 2, 4, 0.35), 0 4px 14px rgba(8, 2, 4, 0.3);
-  --shadow-md: 0 2px 6px rgba(8, 2, 4, 0.35), 0 12px 32px rgba(8, 2, 4, 0.4);
-  --shadow-lg: 0 4px 10px rgba(8, 2, 4, 0.35), 0 20px 48px rgba(8, 2, 4, 0.45);
-  --shadow-xl: 0 8px 16px rgba(8, 2, 4, 0.4), 0 32px 72px rgba(8, 2, 4, 0.5);
-  --shadow-2xl: 0 12px 24px rgba(8, 2, 4, 0.45), 0 48px 110px rgba(8, 2, 4, 0.55);
-  --shadow-focus: 0 0 0 1px rgba(224, 75, 95, 0.45), 0 10px 32px rgba(224, 75, 95, 0.35);
-  --shadow-gold: 0 0 0 1px rgba(255, 233, 236, 0.35), 0 12px 36px rgba(255, 233, 236, 0.18);
-  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 24px 56px -24px rgba(8, 2, 4, 0.8);
+  --shadow-2xs: 0 1px 1px rgba(2,10,7, 0.3);
+  --shadow-xs: 0 1px 2px rgba(2,10,7, 0.35);
+  --shadow-sm: 0 1px 2px rgba(2,10,7, 0.35), 0 4px 14px rgba(2,10,7, 0.3);
+  --shadow-md: 0 2px 6px rgba(2,10,7, 0.35), 0 12px 32px rgba(2,10,7, 0.4);
+  --shadow-lg: 0 4px 10px rgba(2,10,7, 0.35), 0 20px 48px rgba(2,10,7, 0.45);
+  --shadow-xl: 0 8px 16px rgba(2,10,7, 0.4), 0 32px 72px rgba(2,10,7, 0.5);
+  --shadow-2xl: 0 12px 24px rgba(2,10,7, 0.45), 0 48px 110px rgba(2,10,7, 0.55);
+  --shadow-focus: 0 0 0 1px rgba(16,185,129, 0.45), 0 10px 32px rgba(16,185,129, 0.35);
+  --shadow-gold: 0 0 0 1px rgba(209,250,229, 0.35), 0 12px 36px rgba(209,250,229, 0.18);
+  --shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 24px 56px -24px rgba(2,10,7, 0.8);
   --font-mono: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   /* Mouvement : courbes douces, durées courtes. */
@@ -243,8 +243,8 @@
   body {
     /* Lumière d'ambiance : trois halos fixes, très diffus, sur l'encre. */
     background:
-      radial-gradient(60rem 40rem at 85% -10%, rgba(224, 75, 95, 0.24), transparent 60%),
-      radial-gradient(50rem 36rem at -10% 110%, rgba(179, 40, 59, 0.22), transparent 60%),
+      radial-gradient(60rem 40rem at 85% -10%, rgba(16,185,129, 0.24), transparent 60%),
+      radial-gradient(50rem 36rem at -10% 110%, rgba(4,120,87, 0.22), transparent 60%),
       radial-gradient(40rem 30rem at 50% 45%, rgba(255, 255, 255, 0.035), transparent 70%),
       var(--background);
     background-attachment: fixed;
@@ -274,7 +274,7 @@
     height: 44rem;
     top: -14rem;
     right: -10rem;
-    background: rgba(224, 75, 95, 0.2);
+    background: rgba(16,185,129, 0.2);
     animation: aurora-a 28s ease-in-out infinite alternate;
   }
   body::after {
@@ -282,7 +282,7 @@
     height: 36rem;
     bottom: -12rem;
     left: -8rem;
-    background: rgba(179, 40, 59, 0.22);
+    background: rgba(4,120,87, 0.22);
     animation: aurora-b 34s ease-in-out infinite alternate;
   }
 
@@ -397,7 +397,7 @@
   .lockin-input:focus-visible {
     outline: none;
     border-color: var(--lk-blue-soft);
-    box-shadow: 0 0 0 3px rgba(224, 75, 95, 0.25);
+    box-shadow: 0 0 0 3px rgba(16,185,129, 0.25);
   }
 
   /*
@@ -414,8 +414,8 @@
     position: relative;
     isolation: isolate;
     background:
-      linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03) 52%, rgba(224, 75, 95, 0.07)),
-      rgba(42, 15, 22, 0.35);
+      linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03) 52%, rgba(16,185,129, 0.07)),
+      rgba(6,78,59, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.16);
     box-shadow: var(--shadow-glass);
     backdrop-filter: blur(26px) saturate(170%);
@@ -436,7 +436,7 @@
     background: radial-gradient(
       420px circle at var(--mx, 50%) var(--my, 0%),
       rgba(255, 255, 255, 0.13),
-      rgba(224, 75, 95, 0.08) 38%,
+      rgba(16,185,129, 0.08) 38%,
       transparent 65%
     );
     transition: opacity 0.5s var(--ease-premium);
@@ -456,7 +456,7 @@
     transform: translateY(-3px);
     box-shadow:
       var(--shadow-glass),
-      0 18px 40px -18px rgba(224, 75, 95, 0.55);
+      0 18px 40px -18px rgba(16,185,129, 0.55);
   }
   .lk-lift:active {
     transform: translateY(-1px) scale(0.99);
@@ -491,7 +491,7 @@
   }
 
   .lk-glass-strong {
-    background: linear-gradient(180deg, rgba(42, 15, 22, 0.92), rgba(36, 13, 19, 0.88));
+    background: linear-gradient(180deg, rgba(6,78,59, 0.92), rgba(36, 13, 19, 0.88));
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: var(--shadow-glass), var(--shadow-xl);
     backdrop-filter: blur(24px) saturate(150%);
@@ -513,18 +513,18 @@
 
   /* Lueurs : halo coloré très diffus derrière un élément. */
   .lk-glow-blue {
-    box-shadow: var(--shadow-glass), 0 0 60px -12px rgba(224, 75, 95, 0.55);
+    box-shadow: var(--shadow-glass), 0 0 60px -12px rgba(16,185,129, 0.55);
   }
   .lk-glow-gold {
-    box-shadow: var(--shadow-glass), 0 0 60px -14px rgba(255, 233, 236, 0.45);
+    box-shadow: var(--shadow-glass), 0 0 60px -14px rgba(209,250,229, 0.45);
   }
   .lk-glow-coral {
-    box-shadow: var(--shadow-glass), 0 0 60px -14px rgba(255, 107, 122, 0.45);
+    box-shadow: var(--shadow-glass), 0 0 60px -14px rgba(52,211,153, 0.45);
   }
 
   /* Texte lumineux pour les chiffres clés. */
   .lk-text-glow {
-    text-shadow: 0 0 28px rgba(224, 75, 95, 0.55);
+    text-shadow: 0 0 28px rgba(16,185,129, 0.55);
   }
 
   /* Grille de points très discrète, pour les fonds de section. */
@@ -585,7 +585,7 @@
 .card-interactive:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-gold);
-  border-color: rgba(255, 233, 236, 0.5);
+  border-color: rgba(209,250,229, 0.5);
 }
 
 ::-webkit-scrollbar {
