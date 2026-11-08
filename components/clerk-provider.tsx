@@ -2,17 +2,17 @@
 
 import { ClerkProvider } from "@clerk/nextjs";
 
-/** Les widgets Clerk (connexion, menu compte) dans l'identité Focus : bleu focus partout, rayons doux. */
+/** Les widgets Clerk (connexion, menu compte) dans le Life OS : encre bleu nuit, texte crème, bleu focus. */
 const LOCKIN_VARIABLES = {
-  colorPrimary: "#3E5C8A",
-  colorBackground: "#ffffff",
-  colorForeground: "#1B2A3E",
-  colorInput: "#ffffff",
-  colorInputForeground: "#1B2A3E",
-  colorNeutral: "#1B2A3E",
-  colorMuted: "#F5F2EE",
-  colorMutedForeground: "#6A6764",
-  colorBorder: "#E7E3DF",
+  colorPrimary: "#4A6FA5",
+  colorBackground: "#1B2A3E",
+  colorForeground: "#FAF9F7",
+  colorInput: "#16223A",
+  colorInputForeground: "#FAF9F7",
+  colorNeutral: "#FAF9F7",
+  colorMuted: "#16223A",
+  colorMutedForeground: "#B8B3AE",
+  colorBorder: "rgba(250, 249, 247, 0.12)",
   borderRadius: "0.75rem",
   fontFamily: "var(--font-inter), ui-sans-serif, system-ui, sans-serif",
 };

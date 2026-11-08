@@ -1,11 +1,12 @@
 import {
-  BrainCircuit,
+  Gauge,
+  Repeat,
+  Sparkles,
   Briefcase,
   Building2,
   ChartColumn,
   GraduationCap,
   CalendarCheck,
-  LayoutGrid,
   LifeBuoy,
   MessageSquare,
   Network,
@@ -31,30 +32,30 @@ export type DashboardNavGroup = {
 };
 
 /**
- * Navigation de l'espace membre, rangée par usage : le club (la
- * communauté), la discipline (soi), les outils, le compte. Icônes lucide
- * aux formes carrées, rendues en trait fin à angles vifs (globals.css).
+ * Navigation de l'espace membre. Le Life OS d'abord (le cockpit, les
+ * systèmes de vie, le copilote), puis le club et le réseau, au second plan.
  */
 export const DASHBOARD_NAV_GROUPS: DashboardNavGroup[] = [
   {
+    label: "Life OS",
+    items: [
+      { href: "/dashboard", label: "Cockpit", icon: Gauge },
+      { href: "/dashboard/objectifs", label: "Objectifs", icon: Target },
+      { href: "/dashboard/habitudes", label: "Habitudes", icon: Repeat },
+      { href: "/dashboard/coach", label: "Copilote", icon: Sparkles },
+      { href: "/dashboard/planning", label: "Planning", icon: CalendarCheck },
+      { href: "/dashboard/progression", label: "Progression", icon: ChartColumn },
+    ],
+  },
+  {
     label: "Club",
     items: [
-      { href: "/dashboard", label: "Accueil", icon: LayoutGrid },
       { href: "/dashboard/feed", label: "Feed", icon: Rows3 },
       { href: "/dashboard/groupes", label: "Clubs", icon: Building2 },
       { href: "/dashboard/entraide", label: "Entraide", icon: LifeBuoy },
       { href: "/dashboard/messages", label: "Messages", icon: MessageSquare },
-    ],
-  },
-  {
-    label: "Discipline",
-    items: [
-      { href: "/dashboard/objectifs", label: "Objectifs & routines", icon: Target },
-      { href: "/dashboard/progression", label: "Progression", icon: ChartColumn },
       { href: "/dashboard/challenges", label: "Challenges", icon: Swords },
       { href: "/formations", label: "Formations", icon: BookOpen },
-      { href: "/dashboard/planning", label: "Planning", icon: CalendarCheck },
-      { href: "/dashboard/coach", label: "Coach IA", icon: BrainCircuit },
     ],
   },
   {
@@ -77,13 +78,13 @@ export const DASHBOARD_NAV_GROUPS: DashboardNavGroup[] = [
 
 export const DASHBOARD_NAV: DashboardNavItem[] = DASHBOARD_NAV_GROUPS.flatMap((g) => g.items);
 
-/** Barre d'onglets mobile : les cinq écrans du quotidien. */
+/** Barre d'onglets mobile : les cinq écrans du quotidien, le club en dernier. */
 export const DASHBOARD_TABS: DashboardNavItem[] = [
-  { href: "/dashboard", label: "Accueil", icon: LayoutGrid },
-  { href: "/dashboard/feed", label: "Feed", icon: Rows3 },
+  { href: "/dashboard", label: "Cockpit", icon: Gauge },
   { href: "/dashboard/objectifs", label: "Objectifs", icon: Target },
-  { href: "/dashboard/entraide", label: "Entraide", icon: LifeBuoy },
-  { href: "/dashboard/profil", label: "Profil", icon: SquareUser },
+  { href: "/dashboard/habitudes", label: "Habitudes", icon: Repeat },
+  { href: "/dashboard/coach", label: "Copilote", icon: Sparkles },
+  { href: "/dashboard/feed", label: "Club", icon: Rows3 },
 ];
 
 export function isNavActive(pathname: string, href: string): boolean {

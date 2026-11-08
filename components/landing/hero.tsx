@@ -46,7 +46,7 @@ export function Hero() {
             </Button>
             <a
               href="#mouvement"
-              className="text-sm font-medium text-lk-black underline decoration-lk-line underline-offset-8 transition-colors hover:text-lk-blue hover:decoration-lk-blue"
+              className="text-sm font-medium text-lk-black underline decoration-lk-line underline-offset-8 transition-colors hover:text-lk-blue-soft hover:decoration-lk-blue"
             >
               Découvrir le mouvement
             </a>

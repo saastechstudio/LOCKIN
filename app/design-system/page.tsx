@@ -20,24 +20,24 @@ export const metadata: Metadata = {
 };
 
 const PALETTE = [
-  { group: "Fonds anti-fatigue", name: "Blanc cassé", token: "lk-white", hex: "#FAF9F7", className: "bg-lk-white border border-lk-line" },
-  { group: "Fonds anti-fatigue", name: "Beige crème", token: "lk-mist", hex: "#F5F2EE", className: "bg-lk-mist border border-lk-line" },
-  { group: "Gris chauds", name: "Filet", token: "lk-line", hex: "#E7E3DF", className: "bg-lk-line" },
-  { group: "Gris chauds", name: "Pierre", token: "lk-stone-2", hex: "#B8B3AE", className: "bg-lk-stone-2" },
-  { group: "Gris chauds", name: "Béton", token: "lk-stone-3", hex: "#6A6764", className: "bg-lk-stone-3" },
+  { group: "Matière", name: "Encre profonde (fond)", token: "lk-white", hex: "#0F1826", className: "bg-lk-white border border-lk-line" },
+  { group: "Matière", name: "Encre bleu nuit", token: "lk-mist", hex: "#1B2A3E", className: "bg-lk-mist border border-lk-line" },
+  { group: "Matière", name: "Verre", token: "lk-surface", hex: "crème 4,5 %", className: "lk-glass" },
+  { group: "Gris chauds", name: "Pierre (texte secondaire)", token: "lk-stone-3", hex: "#B8B3AE", className: "bg-lk-stone-3" },
+  { group: "Gris chauds", name: "Béton (désactivé)", token: "lk-stone-2", hex: "#6A6764", className: "bg-lk-stone-2" },
   { group: "Focus", name: "Bleu focus", token: "lk-blue", hex: "#3E5C8A", className: "bg-lk-blue" },
-  { group: "Focus", name: "Bleu survol", token: "lk-blue-soft", hex: "#4A6FA5", className: "bg-lk-blue-soft" },
+  { group: "Focus", name: "Bleu lumière", token: "lk-blue-soft", hex: "#4A6FA5", className: "bg-lk-blue-soft" },
   { group: "Dynamique", name: "Corail doux", token: "lk-coral", hex: "#D97A5A", className: "bg-lk-coral" },
   { group: "Dynamique", name: "Doré mat", token: "lk-gold", hex: "#C9A86A", className: "bg-lk-gold" },
-  { group: "Texte", name: "Encre bleu nuit", token: "lk-black", hex: "#1B2A3E", className: "bg-lk-black" },
+  { group: "Lumière", name: "Crème (texte)", token: "lk-black", hex: "#FAF9F7", className: "bg-lk-black" },
 ];
 
 const RULES = [
-  "Fond blanc cassé ou beige crème : jamais de blanc pur en fond de page. Le blanc pur est réservé aux cartes.",
-  "Texte en encre bleu nuit (la teinte du bleu focus, assombrie), secondaire en gris béton (5,2:1). Le texte courant n'est jamais en corail ni en doré.",
-  "Un seul bleu pour agir : #3E5C8A, #4A6FA5 au survol. Le corail marque l'énergie, le doré les paliers et le survol des cartes.",
-  "Rayons doux (12 à 24 px), ombres ultra-diffuses teintées de bleu. Aucune ombre noire, aucun halo vif.",
-  "Mouvement court : fade-in + glissement de 10 px, 0,7 s maximum. Tout s'éteint sous prefers-reduced-motion.",
+  "Sombre natif : l'encre bleu nuit fait la matière, les crèmes font la lumière du texte.",
+  "Verre dépoli (.lk-glass) pour les panneaux, reflet d'un pixel en haut, ombre profonde.",
+  "Un seul bleu pour agir : #3E5C8A, #4A6FA5 en lumière. Le doré récompense, le corail signale.",
+  "Lueurs (.lk-glow-*) seulement sur ce qui est actif : la session en cours, l'objectif ouvert, le score.",
+  "Mouvement court et doux, éteint sous prefers-reduced-motion. La SphereLife s'arrête de tourner aussi.",
   "Anti-dopamine : « Respect » au lieu du like, pas de cœur, pas d'emoji, pas de compteur public.",
   "Graphiques en barres verticales uniquement. Pas de camembert.",
 ];

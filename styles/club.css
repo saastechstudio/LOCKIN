@@ -59,6 +59,8 @@
   line-height: 1.7;
   color: var(--club-ink);
   background: var(--club-ivory);
+  /* Le reste du site est sombre : le club garde ses contrôles clairs. */
+  color-scheme: light;
   overflow-x: clip;
 }
 

@@ -53,6 +53,23 @@
   }
 }
 
+/* Entrée dans une sphère : on arrive du zoom de l'univers. */
+@keyframes sphere-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+.lk-sphere-enter {
+  animation: sphere-enter 0.9s var(--ease-premium) both;
+}
+
 /* Halo qui respire derrière le CTA / le plan recommandé. */
 @keyframes soft-pulse {
   0%,
@@ -122,7 +139,8 @@
     transition-delay: 0ms !important;
   }
   [data-reveal],
-  [data-parallax] {
+  [data-parallax],
+  .lk-sphere-enter {
     animation: none !important;
   }
   .lk-draw :is(path, line, polyline, polygon, circle, rect, ellipse) {

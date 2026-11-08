@@ -11,13 +11,13 @@ export function NavList({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   return (
-    <nav className="flex-1 space-y-8 overflow-y-auto px-3 py-6">
+    <nav className="flex-1 space-y-7 overflow-y-auto px-4 py-6">
       {DASHBOARD_NAV_GROUPS.map((group) => (
         <div key={group.label}>
-          <p className="px-3 pb-2 text-[10px] font-semibold tracking-[0.25em] text-lk-black/40 uppercase">
+          <p className="px-3 pb-2 text-[10px] font-semibold tracking-[0.25em] text-lk-stone-2 uppercase">
             {group.label}
           </p>
-          <ul className="space-y-px">
+          <ul className="space-y-0.5">
             {group.items.map((item) => {
               const active = isNavActive(pathname, item.href);
               return (
@@ -27,13 +27,19 @@ export function NavList({ onNavigate }: { onNavigate?: () => void }) {
                     onClick={onNavigate}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "flex items-center gap-3 border-l-2 px-3 py-2 text-sm transition-colors",
+                      "relative flex items-center gap-3 rounded-xl px-3 py-2 text-sm transition-all duration-200",
                       active
-                        ? "border-lk-teal bg-lk-black font-medium text-lk-white"
-                        : "border-transparent text-lk-black/70 hover:bg-lk-mist hover:text-lk-black",
+                        ? "lk-glass font-medium text-lk-black"
+                        : "text-lk-stone-3 hover:bg-lk-surface hover:text-lk-black",
                     )}
                   >
-                    <item.icon className="size-4" />
+                    {active ? (
+                      <span
+                        aria-hidden
+                        className="absolute top-1/2 -left-4 h-5 w-[3px] -translate-y-1/2 rounded-full bg-lk-blue-soft shadow-[0_0_12px_rgba(74,111,165,0.9)]"
+                      />
+                    ) : null}
+                    <item.icon className={cn("size-4", active && "text-lk-blue-soft")} />
                     {item.label}
                   </Link>
                 </li>

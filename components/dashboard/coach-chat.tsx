@@ -48,7 +48,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
           <div className="flex h-full flex-col items-center justify-center gap-4 py-16 text-center">
             <LogoMark className="h-10" />
             <p className="max-w-sm text-sm text-lk-stone-3">
-              Pose ta question au Coach Lock In. Direct, exigeant, orienté
+              Pose ta question à ton copilote. Direct, exigeant, orienté
               exécution.
             </p>
           </div>
@@ -77,7 +77,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-secondary rounded-2xl px-4 py-2.5 text-sm text-muted-foreground">
-                  Le coach réfléchit...
+                  Le copilote réfléchit...
                 </div>
               </div>
             )}
@@ -109,7 +109,7 @@ export function CoachChat({ initialMessages }: { initialMessages: UIMessage[] })
           <input
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Demande n'importe quoi au coach..."
+            placeholder="Demande n'importe quoi à ton copilote..."
             className="h-9 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
           />
           <button

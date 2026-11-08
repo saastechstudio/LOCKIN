@@ -37,7 +37,7 @@ export function Pricing({
     <section id="tarifs" className="scroll-mt-20">
       <div className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-28">
         <Reveal className="max-w-xl">
-          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-blue uppercase">
+          <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-blue-soft uppercase">
             {eyebrow}
           </p>
           <h2 className="font-display mt-5 text-4xl text-lk-black sm:text-5xl">{title}</h2>
@@ -84,7 +84,7 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
         {plan.features.map((feature) => (
           <li key={feature} className="flex items-start gap-3">
             <Check
-              className={cn("mt-0.5 size-4 shrink-0", plan.recommended ? "text-lk-blue" : "text-lk-gold")}
+              className={cn("mt-0.5 size-4 shrink-0", plan.recommended ? "text-lk-blue-soft" : "text-lk-gold")}
               aria-hidden
             />
             {feature}

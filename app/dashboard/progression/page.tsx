@@ -1,11 +1,17 @@
 import Link from "next/link";
+import { desc, eq, gte } from "drizzle-orm";
+import { subDays } from "date-fns";
 
-import { requireLockinOnboarded } from "@/lib/auth";
+import { getOrCreateDbUser } from "@/lib/auth";
+import { db } from "@/lib/db";
+import { dailyCheckins } from "@/lib/db/schema";
 import { getProgression } from "@/lib/actions/progression";
 import { LEVEL_MAX, levelName, pointsToNextLevel } from "@/lib/lockin-level";
 import { LockIcon } from "@/components/lockin/lock-icon";
 import { Eyebrow, PageHeader, SLOGAN, Stat } from "@/components/lockin/primitives";
 import { VerticalBars } from "@/components/lockin/vertical-bars";
+import { CheckinForm } from "@/components/dashboard/checkin-form";
+import { CheckinHistory } from "@/components/dashboard/checkin-history";
 
 export const dynamic = "force-dynamic";
 
@@ -13,8 +19,14 @@ const dayFormat = new Intl.DateTimeFormat("fr-FR", { day: "numeric" });
 const fullFormat = new Intl.DateTimeFormat("fr-FR", { day: "numeric", month: "long" });
 
 export default async function ProgressionPage() {
-  await requireLockinOnboarded("/dashboard/progression");
-  const data = await getProgression();
+  const user = await getOrCreateDbUser();
+  const [data, recentCheckins] = await Promise.all([
+    getProgression(),
+    db.query.dailyCheckins.findMany({
+      where: (fields, { and }) => and(eq(fields.userId, user.id), gte(fields.date, subDays(new Date(), 7))),
+      orderBy: [desc(dailyCheckins.date)],
+    }),
+  ]);
   const toNext = pointsToNextLevel(data.score7);
 
   return (
@@ -132,6 +144,21 @@ export default async function ProgressionPage() {
             </ol>
           </div>
         )}
+      </section>
+
+      <section className="grid gap-6 lg:grid-cols-2">
+        <div className="lk-glass rounded-3xl p-6">
+          <Eyebrow>Réflexion du jour</Eyebrow>
+          <div className="mt-4">
+            <CheckinForm />
+          </div>
+        </div>
+        <div className="lk-glass rounded-3xl p-6">
+          <Eyebrow>Tes 7 derniers jours</Eyebrow>
+          <div className="mt-4">
+            <CheckinHistory checkins={recentCheckins} />
+          </div>
+        </div>
       </section>
     </div>
   );

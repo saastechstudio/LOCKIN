@@ -17,7 +17,7 @@ export function MobileNav() {
         <button
           type="button"
           aria-label="Ouvrir le menu"
-          className="flex size-9 items-center justify-center border border-lk-line text-lk-black md:hidden"
+          className="flex size-9 items-center justify-center rounded-xl border border-lk-line text-lk-black md:hidden"
         >
           <Menu className="size-4" />
         </button>

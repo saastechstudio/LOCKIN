@@ -30,8 +30,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
-        {/* Identité Lockin : un seul thème, fond blanc pur. */}
-        <ThemeProvider attribute="class" forcedTheme="light" disableTransitionOnChange>
+        {/* Life OS : un seul thème, sombre natif (le club garde son identité claire). */}
+        <ThemeProvider attribute="class" forcedTheme="dark" disableTransitionOnChange>
           <BrandedClerkProvider>{children}</BrandedClerkProvider>
         </ThemeProvider>
       </body>
