@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ChevronDown, Flame, TrendingDown, TrendingUp } from "lucide-react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 import { endPact, respondPact } from "@/lib/actions/channel";
 import type { PactCard, PactView } from "@/lib/channel/pact-view";
@@ -73,7 +73,7 @@ function Card({ card, mine }: { card: PactCard; mine: boolean }) {
 /** Suivi mutuel d'un pacte actif : les deux avancées côte à côte et les signaux du copilote. */
 export function PactPanel({ view }: { view: PactView }) {
   const router = useRouter();
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [pending, startTransition] = useTransition();
 
   return (
@@ -82,6 +82,13 @@ export function PactPanel({ view }: { view: PactView }) {
         <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} className="flex items-center gap-1.5 text-[11px] font-semibold tracking-[0.25em] text-lk-stone-3 uppercase hover:text-lk-black">
           Suivi mutuel
           <ChevronDown className={cn("size-3.5 transition-transform", open && "rotate-180")} />
+          {!open ? (
+            <span className="ml-2 flex items-center gap-2 text-xs tracking-normal text-lk-black normal-case tabular-nums">
+              Toi <b className="font-display text-base">{view.me.score}</b>
+              <span className="text-lk-stone-2">·</span>
+              {view.partner.name.split(" ")[0]} <b className="font-display text-base">{view.partner.score}</b>
+            </span>
+          ) : null}
         </button>
         <button
           type="button"
@@ -111,12 +118,22 @@ export function PactPanel({ view }: { view: PactView }) {
           ))}
         </ul>
       ) : null}
-      {open ? (
-        <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} className="mt-3 flex flex-col gap-2 sm:flex-row">
-          <Card card={view.me} mine />
-          <Card card={view.partner} mine={false} />
-        </motion.div>
-      ) : null}
+      <AnimatePresence initial={false}>
+        {open ? (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ type: "spring", stiffness: 300, damping: 32 }}
+            className="overflow-hidden"
+          >
+            <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+              <Card card={view.me} mine />
+              <Card card={view.partner} mine={false} />
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

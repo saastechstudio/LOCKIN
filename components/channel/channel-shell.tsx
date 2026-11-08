@@ -120,7 +120,13 @@ export function ChannelShell({
               const active = item.id === activeId;
               const Icon = KIND_ICON[item.kind];
               return (
-                <li key={item.id}>
+                <motion.li
+                  key={item.id}
+                  layout="position"
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                >
                   <Link
                     href={`/dashboard/messages/c/${item.id}`}
                     aria-current={active ? "page" : undefined}
@@ -156,7 +162,7 @@ export function ChannelShell({
                       </span>
                     </span>
                   </Link>
-                </li>
+                </motion.li>
               );
             })}
           </ul>

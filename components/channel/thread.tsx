@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowDown,
   ArrowLeft,
@@ -105,6 +106,8 @@ export function Thread({
   const textarea = useRef<HTMLTextAreaElement>(null);
   const lastId = useRef(initialMessages.at(-1)?.id ?? 0);
   const stick = useRef(true);
+  // Seuls les messages arrivés après l'ouverture s'animent : l'historique apparaît d'un bloc.
+  const [initialIds] = useState(() => new Set(initialMessages.map((m) => m.id)));
 
   const canWrite = meta.kind !== "pact" || meta.pactStatus === "active";
   const others = meta.people.filter((p) => p.id !== meta.meId);
@@ -245,7 +248,7 @@ export function Thread({
   const KindIcon = meta.kind === "room" ? Hash : meta.kind === "pact" ? Handshake : meta.kind === "group" ? Users : null;
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
+    <div className="lk-aurora relative isolate flex h-full min-h-0 flex-col overflow-hidden">
       <header className="flex items-center gap-3 border-b border-lk-line px-4 py-3 sm:px-5">
         <Link href="/dashboard/messages" aria-label="Retour aux conversations" className="lk-press -ml-1 rounded-xl p-2 text-lk-stone-3 hover:bg-lk-surface hover:text-lk-black md:hidden">
           <ArrowLeft className="size-5" />
@@ -295,7 +298,7 @@ export function Thread({
         <div ref={scroller} onScroll={onScroll} className="h-full overflow-y-auto px-3 py-4 sm:px-5" role="log" aria-live="polite" aria-label="Messages">
           {rows.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center text-center">
-              <span className="flex size-14 items-center justify-center rounded-2xl bg-lk-blue/25 text-lk-blue-soft">
+              <span className="animate-float flex size-14 items-center justify-center rounded-2xl bg-lk-blue/25 text-lk-blue-soft shadow-[0_0_40px_rgba(224,75,95,0.45)]">
                 <Sparkles className="size-6" />
               </span>
               <p className="font-display mt-4 text-lg text-lk-black">Commence l&apos;échange</p>
@@ -313,6 +316,7 @@ export function Thread({
                 message={row.message}
                 first={row.first}
                 last={row.last}
+                fresh={!initialIds.has(row.message.id)}
                 showName={meta.kind !== "direct" && meta.kind !== "pact"}
                 onReply={() => {
                   setReplyTo(row.message);
@@ -358,8 +362,16 @@ export function Thread({
             </p>
           ) : null}
           <div className="relative">
+            <AnimatePresence>
             {emojiOpen ? (
-              <div className="lk-glass-strong lk-rise absolute bottom-full left-0 z-10 mb-2 w-72 rounded-2xl p-3">
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.94 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                transition={{ type: "spring", stiffness: 460, damping: 32 }}
+                style={{ transformOrigin: "0% 100%" }}
+                className="lk-glass-strong absolute bottom-full left-0 z-10 mb-2 w-72 rounded-2xl p-3"
+              >
                 {EMOJI_GROUPS.map((g) => (
                   <div key={g.label} className="mb-2 last:mb-0">
                     <p className="mb-1 text-[10px] tracking-[0.2em] text-lk-stone-2 uppercase">{g.label}</p>
@@ -380,8 +392,9 @@ export function Thread({
                     </div>
                   </div>
                 ))}
-              </div>
+              </motion.div>
             ) : null}
+            </AnimatePresence>
             <div className="flex items-end gap-2 rounded-2xl border border-lk-line bg-lk-surface p-1.5 transition-colors focus-within:border-lk-blue-soft focus-within:shadow-focus">
               <button
                 type="button"
@@ -422,15 +435,20 @@ export function Thread({
                   Check-in
                 </button>
               ) : null}
-              <button
+              <motion.button
                 type="button"
                 onClick={() => send("text")}
                 disabled={!body.trim() || isSending}
                 aria-label="Envoyer"
-                className="lk-press lk-shine flex size-10 shrink-0 items-center justify-center rounded-xl bg-lk-blue text-white transition-all hover:bg-lk-blue-soft hover:shadow-focus disabled:opacity-30"
+                animate={body.trim() ? { scale: 1, boxShadow: "0 0 22px rgba(224,75,95,0.55)" } : { scale: 0.92, boxShadow: "0 0 0px rgba(224,75,95,0)" }}
+                whileTap={{ scale: 0.8, rotate: -12 }}
+                transition={{ type: "spring", stiffness: 500, damping: 24 }}
+                className="lk-shine flex size-10 shrink-0 items-center justify-center rounded-xl bg-lk-blue text-white hover:bg-lk-blue-soft disabled:opacity-30"
               >
-                <Send className="size-4" />
-              </button>
+                <motion.span animate={isSending ? { x: [0, 6, -2, 0], y: [0, -6, 0, 0] } : { x: 0, y: 0 }} transition={{ duration: 0.5 }}>
+                  <Send className="size-4" />
+                </motion.span>
+              </motion.button>
             </div>
             {body.length > MAX_BODY - 400 ? (
               <p className="mt-1 text-right text-[11px] text-lk-stone-2 tabular-nums">
@@ -452,6 +470,7 @@ function Bubble({
   message,
   first,
   last,
+  fresh,
   showName,
   onReply,
   onReact,
@@ -460,6 +479,7 @@ function Bubble({
   message: ChannelMessage;
   first: boolean;
   last: boolean;
+  fresh: boolean;
   showName: boolean;
   onReply: () => void;
   onReact: (emoji: string) => void;
@@ -478,7 +498,13 @@ function Bubble({
   }
 
   return (
-    <div className={cn("group relative flex", mine ? "justify-end" : "justify-start", first ? "mt-3" : "mt-0.5")}>
+    <motion.div
+      initial={fresh ? { opacity: 0, y: 14, scale: 0.9 } : false}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ type: "spring", stiffness: 520, damping: 32, mass: 0.7 }}
+      style={{ transformOrigin: mine ? "100% 100%" : "0% 100%" }}
+      className={cn("group relative flex", mine ? "justify-end" : "justify-start", first ? "mt-3" : "mt-0.5")}
+    >
       <div className={cn("flex max-w-[82%] flex-col sm:max-w-[68%]", mine ? "items-end" : "items-start")}>
         {showName && !mine && first ? <span className="mb-0.5 ml-3 text-[11px] text-lk-stone-3">{message.sender.name ?? "Membre"}</span> : null}
 
@@ -499,6 +525,7 @@ function Bubble({
               mine ? (last ? "rounded-bl-[20px] rounded-br-[6px]" : "rounded-b-[8px]") : last ? "rounded-br-[20px] rounded-bl-[6px]" : "rounded-b-[8px]",
               message.kind === "checkin" && "ring-1 ring-lk-gold/60",
               pending && "opacity-60",
+              fresh && !mine && "lk-fresh-glow",
             )}
           >
             {message.kind === "checkin" && !message.deleted ? (
@@ -513,25 +540,35 @@ function Bubble({
             {message.deleted ? "Message supprimé" : message.body}
           </button>
 
+          <AnimatePresence>
           {open && !message.deleted && !pending ? (
-            <div
+            <motion.div
+              initial={{ opacity: 0, y: 8, scale: 0.85 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 6, scale: 0.9 }}
+              transition={{ type: "spring", stiffness: 480, damping: 30 }}
               className={cn(
-                "lk-glass-strong lk-rise absolute -top-12 z-20 flex items-center gap-0.5 rounded-full px-1.5 py-1",
+                "lk-glass-strong absolute -top-12 z-20 flex items-center gap-0.5 rounded-full px-1.5 py-1",
                 mine ? "right-0" : "left-0",
               )}
             >
-              {REACTIONS.map((emoji) => (
-                <button
+              {REACTIONS.map((emoji, idx) => (
+                <motion.button
+                  initial={{ opacity: 0, y: 6, scale: 0.6 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ delay: idx * 0.025, type: "spring", stiffness: 600, damping: 22 }}
+                  whileHover={{ scale: 1.35, y: -3 }}
+                  whileTap={{ scale: 0.85 }}
                   key={emoji}
                   type="button"
                   onClick={() => {
                     onReact(emoji);
                     setOpen(false);
                   }}
-                  className="lk-press flex size-8 items-center justify-center rounded-full text-lg transition-transform hover:scale-125"
+                  className="flex size-8 items-center justify-center rounded-full text-lg"
                 >
                   {emoji}
-                </button>
+                </motion.button>
               ))}
               <span className="mx-1 h-5 w-px bg-lk-line" />
               <button
@@ -562,8 +599,9 @@ function Bubble({
                   <ReportButton targetType="chat_message" targetId={message.id} className="[&>svg]:size-4 [&]:text-lk-stone-3 [&]:normal-case" />
                 </span>
               )}
-            </div>
+            </motion.div>
           ) : null}
+          </AnimatePresence>
         </div>
 
         {message.reactions.length > 0 && !message.deleted ? (
@@ -590,7 +628,7 @@ function Bubble({
           </span>
         ) : null}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
