@@ -166,7 +166,7 @@ export function SphereLife({ spheres, links, score, tierLabel, balance, signals,
               className={cn(
                 "size-2 shrink-0 rounded-full",
                 signal.tone === "critical" || signal.tone === "warning"
-                  ? "bg-lk-coral shadow-[0_0_10px_rgba(255,138,101,0.9)]"
+                  ? "bg-lk-coral shadow-[0_0_10px_rgba(52,211,153,0.9)]"
                   : signal.tone === "positive"
                     ? "bg-lk-gold shadow-[0_0_10px_rgba(209,250,229,0.9)]"
                     : "bg-lk-blue-soft shadow-[0_0_10px_rgba(16,185,129,0.9)]",

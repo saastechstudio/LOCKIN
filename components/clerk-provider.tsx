@@ -5,12 +5,12 @@ import { ClerkProvider } from "@clerk/nextjs";
 /** Les widgets Clerk (connexion, menu compte) dans le Life OS : vert nuit, texte blanc, émeraude d'action. */
 const LOCKIN_VARIABLES = {
   colorPrimary: "#10b981",
-  colorBackground: "#0b2a20",
+  colorBackground: "#064e3b",
   colorForeground: "#FFFFFF",
-  colorInput: "#08201a",
+  colorInput: "#053d30",
   colorInputForeground: "#FFFFFF",
   colorNeutral: "#FFFFFF",
-  colorMuted: "#08201a",
+  colorMuted: "#053d30",
   colorMutedForeground: "#CFE3DA",
   colorBorder: "rgba(255, 255, 255, 0.12)",
   borderRadius: "0.75rem",

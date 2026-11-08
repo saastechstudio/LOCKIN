@@ -12,7 +12,7 @@
  * Émeraude profond pour la matière, blanc pour la lumière, verre dépoli pour
  * tout ce qui informe (chiffres, scores, tableaux de bord). L'émeraude agit
  * (boutons, états actifs), le blanc menthe récompense (score, séries,
- * réussites), le corail signale (alertes). Verre (.lk-glass), lueurs
+ * réussites), la menthe signale (alertes). Verre (.lk-glass), lueurs
  * (.lk-glow-*), profondeur (shadow-glass), mouvements courts qui
  * respectent prefers-reduced-motion. Un seul thème : sombre (forcé dans
  * app/layout.tsx). Les pages du club (app/(club)) gardent leur identité.
@@ -30,28 +30,28 @@
   color-scheme: dark;
 
   /* ---- Matière : le vert nuit, en trois profondeurs ---- */
-  --lk-white: #04130e; /* fond de page : vert nuit */
-  --lk-mist: #0b2a20; /* surface de repos */
+  --lk-white: #022c22; /* fond de page : vert nuit */
+  --lk-mist: #064e3b; /* surface de repos */
   --lk-surface: rgba(255, 255, 255, 0.05); /* verre dépoli des cartes */
-  --lk-panel: #08201a; /* panneaux opaques : menus, dialogues */
+  --lk-panel: #053d30; /* panneaux opaques : menus, dialogues */
 
   /* ---- Structure : filets de verre et textes atténués ---- */
   --lk-line: rgba(255, 255, 255, 0.12);
-  --lk-stone-2: #86a89a; /* texte désactivé */
-  --lk-stone-3: #d3e6dd; /* texte secondaire */
+  --lk-stone-2: #7fbfa5; /* texte désactivé */
+  --lk-stone-3: #c9f0de; /* texte secondaire */
 
   /* ---- Lumière : le blanc ---- */
   --lk-black: #ffffff; /* texte principal (le nom historique désigne « l'encre du texte ») */
   --lk-ink-1: #ffffff;
-  --lk-ink-2: #d3e6dd;
-  --lk-ink-3: #86a89a;
+  --lk-ink-2: #c9f0de;
+  --lk-ink-3: #7fbfa5;
 
   /* ---- Action : le rouge ---- */
   --lk-blue: #047857; /* fond des boutons, états actifs */
   --lk-blue-soft: #10b981; /* survol, anneaux, lueurs */
 
   /* ---- Signaux ---- */
-  --lk-coral: #ff8a65; /* alertes, retards */
+  --lk-coral: #34d399; /* alertes, retards */
   --lk-gold: #d1fae5; /* récompense : score, séries, réussites (blanc menthe) */
   /*
    * « teal » = le mouvement (écran actif, journée en cours). Nom conservé
@@ -105,7 +105,7 @@
   --accent: var(--lk-mist);
   --accent-foreground: var(--lk-black);
   --destructive: var(--lk-coral);
-  --destructive-foreground: #04130e;
+  --destructive-foreground: #022c22;
   --border: var(--lk-line);
   --input: var(--lk-line);
   --ring: var(--lk-blue-soft);
@@ -415,7 +415,7 @@
     isolation: isolate;
     background:
       linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03) 52%, rgba(16,185,129, 0.07)),
-      rgba(11,42,32, 0.35);
+      rgba(6,78,59, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.16);
     box-shadow: var(--shadow-glass);
     backdrop-filter: blur(26px) saturate(170%);
@@ -491,7 +491,7 @@
   }
 
   .lk-glass-strong {
-    background: linear-gradient(180deg, rgba(11,42,32, 0.92), rgba(36, 13, 19, 0.88));
+    background: linear-gradient(180deg, rgba(6,78,59, 0.92), rgba(36, 13, 19, 0.88));
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: var(--shadow-glass), var(--shadow-xl);
     backdrop-filter: blur(24px) saturate(150%);
@@ -519,7 +519,7 @@
     box-shadow: var(--shadow-glass), 0 0 60px -14px rgba(209,250,229, 0.45);
   }
   .lk-glow-coral {
-    box-shadow: var(--shadow-glass), 0 0 60px -14px rgba(255,138,101, 0.45);
+    box-shadow: var(--shadow-glass), 0 0 60px -14px rgba(52,211,153, 0.45);
   }
 
   /* Texte lumineux pour les chiffres clés. */

@@ -30,11 +30,11 @@ export default function GlobalError({
           padding: "1.5rem",
           textAlign: "center",
           fontFamily: "ui-sans-serif, system-ui, sans-serif",
-          background: "#04130e",
+          background: "#022c22",
           color: "#FFFFFF",
         }}
       >
-        <AlertTriangle size={40} color="#ff8a65" />
+        <AlertTriangle size={40} color="#34d399" />
         <h1 style={{ fontSize: "1.5rem", fontWeight: 600 }}>
           Lock In est momentanément indisponible
         </h1>

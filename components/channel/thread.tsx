@@ -613,7 +613,7 @@ function Bubble({
                 onClick={() => onReact(r.emoji)}
                 className={cn(
                   "lk-press lk-pop flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-xs backdrop-blur-md transition-colors",
-                  r.mine ? "border-lk-blue-soft bg-lk-blue/40 text-white" : "border-lk-line bg-[#0b2a20]/80 text-lk-black",
+                  r.mine ? "border-lk-blue-soft bg-lk-blue/40 text-white" : "border-lk-line bg-[#064e3b]/80 text-lk-black",
                 )}
               >
                 {r.emoji} <span className="tabular-nums">{r.count}</span>

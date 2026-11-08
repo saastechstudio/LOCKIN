@@ -61,7 +61,7 @@ export function SphereFallback({
         );
       })}
       <circle cx="400" cy="300" r="110" fill="url(#core-glow)" />
-      <circle cx="400" cy="300" r="46" fill="#0b2a20" stroke="#FFFFFF" strokeOpacity="0.25" />
+      <circle cx="400" cy="300" r="46" fill="#064e3b" stroke="#FFFFFF" strokeOpacity="0.25" />
       {ordered.map((s) => {
         const p = pos.get(s.id)!;
         const r = 9 + s.level * 3 + s.progress / 20;

@@ -18,7 +18,7 @@ import type { UniverseLink, UniverseSphere } from "./types";
  * dans une sphère d'un clic.
  */
 
-const INK = new THREE.Color("#04130e");
+const INK = new THREE.Color("#022c22");
 const RED = new THREE.Color("#10b981");
 const WHITE = new THREE.Color("#d1fae5");
 const SYSTEM_SPEED = 0.035;
@@ -355,8 +355,8 @@ function Planet({
           <div
             className={`whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] font-medium backdrop-blur-md transition-all ${
               hovered
-                ? "border-white/30 bg-[#08201a]/90 text-[#FFFFFF]"
-                : "border-white/10 bg-[#04130e]/60 text-[#CFE3DA]"
+                ? "border-white/30 bg-[#053d30]/90 text-[#FFFFFF]"
+                : "border-white/10 bg-[#022c22]/60 text-[#CFE3DA]"
             }`}
           >
             <span
