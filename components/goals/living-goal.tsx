@@ -65,7 +65,7 @@ export function LivingGoal({
   const [message, setMessage] = useState<string | null>(null);
   const [editingVision, setEditingVision] = useState(false);
   const sphere = spheres.find((s) => s.id === goal.sphereId);
-  const color = sphere?.color ?? "#4A6FA5";
+  const color = sphere?.color ?? "#E04B5F";
   const looseTasks = goal.tasks.filter((t) => t.milestoneId === null);
 
   function run(task: () => Promise<ActionResult<unknown>>, success?: string) {

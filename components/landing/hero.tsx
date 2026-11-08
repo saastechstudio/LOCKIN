@@ -14,8 +14,8 @@ const PILLARS = [
 ];
 
 /**
- * Entrée du club. Fond blanc cassé #FAF9F7, titre encre bleu nuit #1B2A3E, sous-titre
- * gris #6A6764, CTA bleu #3E5C8A (survol #4A6FA5 + ombre diffuse).
+ * Entrée du club. Fond rouge nuit, titre blanc, CTA rouge (survol rouge clair +
+ * ombre diffuse).
  * Le panneau de droite flotte très lentement et glisse en parallax léger au
  * défilement (CSS pur, désactivé sous prefers-reduced-motion).
  */

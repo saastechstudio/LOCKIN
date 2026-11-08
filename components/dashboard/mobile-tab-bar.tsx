@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { DASHBOARD_TABS, isNavActive } from "@/lib/dashboard-nav";
 
-/** Barre d'onglets mobile : verre flottant, l'onglet actif s'allume en bleu focus. */
+/** Barre d'onglets mobile : verre flottant, l'onglet actif s'allume en rouge. */
 export function MobileTabBar() {
   const pathname = usePathname();
 
@@ -30,7 +30,7 @@ export function MobileTabBar() {
             <tab.icon
               className={cn(
                 "size-[18px] transition-all",
-                active && "text-lk-blue-soft drop-shadow-[0_0_8px_rgba(74,111,165,0.9)]",
+                active && "text-lk-blue-soft drop-shadow-[0_0_8px_rgba(224, 75, 95,0.9)]",
               )}
             />
             {tab.label}

@@ -21,8 +21,8 @@ export function Ring({
   const clamped = Math.max(0, Math.min(100, value));
   return (
     <div className={cn("relative inline-flex shrink-0 items-center justify-center", className)} style={{ width: size, height: size }}>
-      <svg width={size} height={size} className="-rotate-90" aria-hidden>
-        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="rgba(250,249,247,0.08)" strokeWidth={stroke} />
+      <svg width={size} height={size} className="-rotate-90 overflow-visible" style={{ filter: `drop-shadow(0 0 6px ${color})` }} aria-hidden>
+        <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="rgba(255, 255, 255,0.08)" strokeWidth={stroke} />
         <circle
           cx={size / 2}
           cy={size / 2}
@@ -33,7 +33,7 @@ export function Ring({
           strokeLinecap="round"
           strokeDasharray={c}
           strokeDashoffset={c * (1 - clamped / 100)}
-          style={{ filter: `drop-shadow(0 0 6px ${color})`, transition: "stroke-dashoffset 1s cubic-bezier(0.22,1,0.36,1)" }}
+          style={{ transition: "stroke-dashoffset 1s cubic-bezier(0.22,1,0.36,1)" }}
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">{children}</div>

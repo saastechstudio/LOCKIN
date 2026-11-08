@@ -20,22 +20,22 @@ export const metadata: Metadata = {
 };
 
 const PALETTE = [
-  { group: "Matière", name: "Encre profonde (fond)", token: "lk-white", hex: "#0F1826", className: "bg-lk-white border border-lk-line" },
-  { group: "Matière", name: "Encre bleu nuit", token: "lk-mist", hex: "#1B2A3E", className: "bg-lk-mist border border-lk-line" },
-  { group: "Matière", name: "Verre", token: "lk-surface", hex: "crème 4,5 %", className: "lk-glass" },
-  { group: "Gris chauds", name: "Pierre (texte secondaire)", token: "lk-stone-3", hex: "#B8B3AE", className: "bg-lk-stone-3" },
-  { group: "Gris chauds", name: "Béton (désactivé)", token: "lk-stone-2", hex: "#6A6764", className: "bg-lk-stone-2" },
-  { group: "Focus", name: "Bleu focus", token: "lk-blue", hex: "#3E5C8A", className: "bg-lk-blue" },
-  { group: "Focus", name: "Bleu lumière", token: "lk-blue-soft", hex: "#4A6FA5", className: "bg-lk-blue-soft" },
-  { group: "Dynamique", name: "Corail doux", token: "lk-coral", hex: "#D97A5A", className: "bg-lk-coral" },
-  { group: "Dynamique", name: "Doré mat", token: "lk-gold", hex: "#C9A86A", className: "bg-lk-gold" },
-  { group: "Lumière", name: "Crème (texte)", token: "lk-black", hex: "#FAF9F7", className: "bg-lk-black" },
+  { group: "Matière", name: "Rouge nuit (fond)", token: "lk-white", hex: "#12070A", className: "bg-lk-white border border-lk-line" },
+  { group: "Matière", name: "Rouge sombre", token: "lk-mist", hex: "#2A0F16", className: "bg-lk-mist border border-lk-line" },
+  { group: "Matière", name: "Verre dépoli", token: "lk-glass", hex: "blanc 5 % + flou", className: "lk-glass" },
+  { group: "Structure", name: "Texte secondaire", token: "lk-stone-3", hex: "#E6D6D8", className: "bg-lk-stone-3" },
+  { group: "Structure", name: "Texte désactivé", token: "lk-stone-2", hex: "#A98A8F", className: "bg-lk-stone-2" },
+  { group: "Action", name: "Rouge d'action", token: "lk-blue", hex: "#B3283B", className: "bg-lk-blue" },
+  { group: "Action", name: "Rouge lumière", token: "lk-blue-soft", hex: "#E04B5F", className: "bg-lk-blue-soft" },
+  { group: "Signal", name: "Rouge alerte", token: "lk-coral", hex: "#FF6B7A", className: "bg-lk-coral" },
+  { group: "Récompense", name: "Blanc rosé", token: "lk-gold", hex: "#FFE9EC", className: "bg-lk-gold" },
+  { group: "Lumière", name: "Blanc (texte)", token: "lk-black", hex: "#FFFFFF", className: "bg-lk-black" },
 ];
 
 const RULES = [
-  "Sombre natif : l'encre bleu nuit fait la matière, les crèmes font la lumière du texte.",
+  "Un seul code couleur : le rouge et le blanc. Le rouge nuit fait la matière, le blanc fait la lumière.",
   "Verre dépoli (.lk-glass) pour les panneaux, reflet d'un pixel en haut, ombre profonde.",
-  "Un seul bleu pour agir : #3E5C8A, #4A6FA5 en lumière. Le doré récompense, le corail signale.",
+  "Le rouge agit (#B3283B, #E04B5F en lumière), le blanc rosé récompense, le rouge clair signale. Aucune autre teinte.",
   "Lueurs (.lk-glow-*) seulement sur ce qui est actif : la session en cours, l'objectif ouvert, le score.",
   "Mouvement court et doux, éteint sous prefers-reduced-motion. La SphereLife s'arrête de tourner aussi.",
   "Anti-dopamine : « Respect » au lieu du like, pas de cœur, pas d'emoji, pas de compteur public.",
@@ -54,7 +54,7 @@ const SAMPLE_TESTIMONIALS = [
 
 const SAMPLE_PLANS: PricingPlan[] = [
   { name: "Plan A", price: "0 €", description: "Description d'exemple.", features: ["Fonctionnalité un", "Fonctionnalité deux"], cta: "Choisir", href: "#tarifs" },
-  { name: "Plan B", price: "00 €", period: "/ mois", description: "Plan recommandé : accent bleu.", features: ["Tout du plan A", "Fonctionnalité trois", "Fonctionnalité quatre"], cta: "Choisir", href: "#tarifs", recommended: true },
+  { name: "Plan B", price: "00 €", period: "/ mois", description: "Plan recommandé : accent rouge.", features: ["Tout du plan A", "Fonctionnalité trois", "Fonctionnalité quatre"], cta: "Choisir", href: "#tarifs", recommended: true },
   { name: "Plan C", price: "00 €", period: "/ mois", description: "Description d'exemple.", features: ["Tout du plan B", "Fonctionnalité cinq"], cta: "Choisir", href: "#tarifs" },
 ];
 
@@ -129,11 +129,11 @@ export default function DesignSystemPage() {
       </Section>
 
       <Section>
-        <Eyebrow>Cartes · survol doré, icône line-art animée</Eyebrow>
+        <Eyebrow>Cartes de verre · survol blanc rosé, icône line-art animée</Eyebrow>
         <div className="mt-6 grid gap-5 sm:grid-cols-3">
           <FeatureCard icon={Target} index={0} title="Carte premium" description="Fond blanc, filet chaud, ombre ultra-douce. Survole-la." />
           <FeatureCard icon={Rows3} index={1} title="Icône animée" description="Le trait de l'icône se redessine au survol de la carte." />
-          <FeatureCard icon={ChartColumn} index={2} title="Hiérarchie" description="Chiffre discret en gris pierre, doré au survol." />
+          <FeatureCard icon={ChartColumn} index={2} title="Hiérarchie" description="Chiffre discret, blanc rosé au survol." />
         </div>
       </Section>
 

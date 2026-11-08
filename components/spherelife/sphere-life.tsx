@@ -20,7 +20,7 @@ const Scene = dynamic(() => import("./scene"), {
 function CoreLoading() {
   return (
     <div className="flex h-full items-center justify-center">
-      <div className="size-40 animate-pulse rounded-full bg-[radial-gradient(circle,rgba(74,111,165,0.45),transparent_70%)]" />
+      <div className="size-40 animate-pulse rounded-full bg-[radial-gradient(circle,rgba(224, 75, 95,0.45),transparent_70%)]" />
     </div>
   );
 }
@@ -104,7 +104,7 @@ export function SphereLife({ spheres, links, score, tierLabel, balance, signals,
       {/* Lumière d'ambiance derrière le globe. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(74,111,165,0.22),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(224, 75, 95,0.22),transparent_60%)]"
       />
 
       <div className="absolute inset-0">
@@ -163,10 +163,10 @@ export function SphereLife({ spheres, links, score, tierLabel, balance, signals,
               className={cn(
                 "size-2 shrink-0 rounded-full",
                 signal.tone === "critical" || signal.tone === "warning"
-                  ? "bg-lk-coral shadow-[0_0_10px_rgba(217,122,90,0.9)]"
+                  ? "bg-lk-coral shadow-[0_0_10px_rgba(255, 107, 122,0.9)]"
                   : signal.tone === "positive"
-                    ? "bg-lk-gold shadow-[0_0_10px_rgba(201,168,106,0.9)]"
-                    : "bg-lk-blue-soft shadow-[0_0_10px_rgba(74,111,165,0.9)]",
+                    ? "bg-lk-gold shadow-[0_0_10px_rgba(255, 233, 236,0.9)]"
+                    : "bg-lk-blue-soft shadow-[0_0_10px_rgba(224, 75, 95,0.9)]",
               )}
             />
             <span>

@@ -5,22 +5,23 @@
  * de l'énergie entre les domaines. Module pur, testé dans spheres.test.ts.
  */
 
+/** Nuances de rouge et de blanc : un seul code couleur, les planètes se distinguent par leur clarté. */
 export const SPHERE_PALETTE = [
-  { name: "Bleu focus", value: "#4A6FA5" },
-  { name: "Corail", value: "#D97A5A" },
-  { name: "Doré mat", value: "#C9A86A" },
-  { name: "Crème", value: "#F5F2EE" },
-  { name: "Bleu profond", value: "#3E5C8A" },
-  { name: "Pierre", value: "#B8B3AE" },
+  { name: "Rouge lumière", value: "#E04B5F" },
+  { name: "Rouge profond", value: "#B3283B" },
+  { name: "Bordeaux", value: "#7E1D2B" },
+  { name: "Rose", value: "#FF8A96" },
+  { name: "Blanc rosé", value: "#FFD9DE" },
+  { name: "Blanc", value: "#FFFFFF" },
 ] as const;
 
 /** Univers de départ : de quoi voir sa vie dès la première ouverture, tout se renomme ou se supprime. */
 export const DEFAULT_SPHERES = [
-  { name: "Business", color: "#4A6FA5" },
-  { name: "Santé", color: "#D97A5A" },
-  { name: "Finance", color: "#C9A86A" },
-  { name: "Relations", color: "#F5F2EE" },
-  { name: "Développement personnel", color: "#3E5C8A" },
+  { name: "Business", color: "#E04B5F" },
+  { name: "Santé", color: "#FF8A96" },
+  { name: "Finance", color: "#FFFFFF" },
+  { name: "Relations", color: "#FFD9DE" },
+  { name: "Développement personnel", color: "#B3283B" },
 ] as const;
 
 export const SPHERE_SUGGESTIONS = [

@@ -4,8 +4,8 @@ import { AnimatedIcon } from "@/components/ui/animated-icon";
 import { cn } from "@/lib/utils";
 
 /**
- * Carte « pilier » : fond blanc, filet chaud #E7E3DF, ombre ultra-douce.
- * Au survol : la bordure passe au doré mat, la carte se soulève de 2 px, son
+ * Carte « pilier » : fond blanc, filet chaud #FFFFFF, ombre ultra-douce.
+ * Au survol : la bordure passe au blanc rosé, la carte se soulève de 2 px, son
  * ombre se diffuse et l'icône line-art se redessine (`group` + .lk-draw).
  */
 export function FeatureCard({
