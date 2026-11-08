@@ -9,7 +9,7 @@ import { DASHBOARD_TABS, isNavActive } from "@/lib/dashboard-nav";
 
 /**
  * Barre d'onglets mobile : verre flottant. La pastille de l'onglet actif
- * glisse d'un onglet à l'autre ; l'icône s'allume en rouge.
+ * glisse d'un onglet à l'autre ; l'icône s'allume en émeraude.
  */
 export function MobileTabBar() {
   const pathname = usePathname();
@@ -41,7 +41,7 @@ export function MobileTabBar() {
             <tab.icon
               className={cn(
                 "relative size-[18px] transition-all duration-300",
-                active && "-translate-y-0.5 scale-110 text-lk-blue-soft drop-shadow-[0_0_8px_rgba(224,75,95,0.9)]",
+                active && "-translate-y-0.5 scale-110 text-lk-blue-soft drop-shadow-[0_0_8px_rgba(16,185,129,0.9)]",
               )}
             />
             <span className="relative">{tab.label}</span>

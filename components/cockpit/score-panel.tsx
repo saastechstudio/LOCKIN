@@ -75,7 +75,7 @@ export function ScorePanel({
                   <div
                     className={cn(
                       "lk-grow-y w-full rounded-md",
-                      today ? "bg-lk-gold shadow-[0_0_16px_rgba(255,233,236,0.6)]" : "bg-lk-blue-soft/60",
+                      today ? "bg-lk-gold shadow-[0_0_16px_rgba(209,250,229,0.6)]" : "bg-lk-blue-soft/60",
                     )}
                     style={{ height: `${Math.max(4, (d.score / max) * 100)}%`, "--i": i } as React.CSSProperties}
                     title={`${d.score}`}

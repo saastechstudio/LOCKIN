@@ -65,9 +65,9 @@ export default async function SpherePage({ params }: PageProps<"/dashboard/spher
             <div
               className="absolute inset-0 rounded-full"
               style={{
-                background: `radial-gradient(circle at 32% 28%, #FFFFFF 0%, ${sphere.color} 28%, #2A0F16 78%)`,
+                background: `radial-gradient(circle at 32% 28%, #FFFFFF 0%, ${sphere.color} 28%, #0b2a20 78%)`,
                 opacity: 0.35 + glow * 0.65,
-                boxShadow: `0 0 ${40 + stats.energy}px ${sphere.color}, inset -18px -24px 60px rgba(18, 7, 10,0.85)`,
+                boxShadow: `0 0 ${40 + stats.energy}px ${sphere.color}, inset -18px -24px 60px rgba(4,19,14,0.85)`,
               }}
             />
             <div className="absolute inset-[-14px] rounded-full border" style={{ borderColor: `${sphere.color}55` }} />

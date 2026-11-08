@@ -15,13 +15,13 @@ export type PricingPlan = {
   features: string[];
   cta: string;
   href: string;
-  /** Un seul plan recommandé : accent rouge, ombre rouge, léger agrandissement. */
+  /** Un seul plan recommandé : accent émeraude, ombre émeraude, léger agrandissement. */
   recommended?: boolean;
 };
 
 /**
- * Grille de tarifs : 3 plans. Le plan recommandé porte l'accent rouge
- * (#B3283B) ; les autres restent sobres. Les plans sont passés en props :
+ * Grille de tarifs : 3 plans. Le plan recommandé porte l'accent émeraude
+ * (#047857) ; les autres restent sobres. Les plans sont passés en props :
  * le composant ne contient aucun prix en dur.
  */
 export function Pricing({

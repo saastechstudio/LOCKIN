@@ -59,7 +59,7 @@ export default async function ProgressionPage() {
       <section>
         <Eyebrow>Discipline · 30 jours</Eyebrow>
         <p className="mt-2 mb-6 text-sm text-lk-stone-3">
-          Ta note de discipline quotidienne. Aujourd&apos;hui en rouge ; un tiret = journée non notée.
+          Ta note de discipline quotidienne. Aujourd&apos;hui en émeraude ; un tiret = journée non notée.
         </p>
         <VerticalBars
           height={200}

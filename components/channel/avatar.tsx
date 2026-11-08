@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 type Person = { id: number; name: string | null; avatarUrl: string | null };
 
-/** Pastille de membre : photo, sinon initiale sur fond rouge nuit. */
+/** Pastille de membre : photo, sinon initiale sur fond vert nuit. */
 export function PersonAvatar({ person, size = "md", className }: { person: Person; size?: "sm" | "md" | "lg"; className?: string }) {
   const dim = { sm: "size-7 text-[11px]", md: "size-10 text-sm", lg: "size-12 text-base" }[size];
   return (
@@ -34,7 +34,7 @@ export function AvatarStack({ people, className }: { people: Person[]; className
           key={p.id}
           person={p}
           size="sm"
-          className={cn("absolute ring-2 ring-[#12070a]", i === 0 && "top-0 left-0", i === 1 && "right-0 bottom-0", i === 2 && "top-0 right-0 z-10")}
+          className={cn("absolute ring-2 ring-[#04130e]", i === 0 && "top-0 left-0", i === 1 && "right-0 bottom-0", i === 2 && "top-0 right-0 z-10")}
         />
       ))}
     </span>
