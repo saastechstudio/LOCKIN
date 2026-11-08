@@ -24,10 +24,8 @@ export function FeatureCard({
   return (
     <article
       className={cn(
-        "group relative flex h-full flex-col rounded-2xl border border-lk-line bg-lk-surface p-8 shadow-sm",
-        "transition-[transform,box-shadow,border-color] duration-300 ease-premium",
-        "hover:-translate-y-0.5 hover:border-lk-gold hover:shadow-gold",
-        "focus-within:border-lk-gold",
+        "lk-glass lk-lift group flex h-full flex-col rounded-2xl p-8",
+        "hover:border-lk-gold focus-within:border-lk-gold",
         className,
       )}
     >

@@ -33,7 +33,7 @@ export default async function ObjectifsPage() {
 
   return (
     <div className="mx-auto max-w-4xl space-y-10">
-      <header className="animate-fade-up">
+      <header className="lk-rise">
         <p className="text-[10px] font-semibold tracking-[0.35em] text-lk-stone-3 uppercase">Life OS · Objectifs</p>
         <h1 className="font-display mt-2 text-3xl text-lk-black sm:text-4xl">Des objectifs qui vivent</h1>
         <p className="mt-2 max-w-xl text-sm text-lk-stone-3">
@@ -42,11 +42,11 @@ export default async function ObjectifsPage() {
         </p>
       </header>
 
-      <div className="animate-fade-up [animation-delay:80ms]">
+      <div className="lk-rise" style={{ "--i": 1 } as React.CSSProperties}>
         <GoalComposer spheres={spheres} />
       </div>
 
-      <section className="space-y-4">
+      <section className="lk-stagger space-y-4" style={{ "--base": 2 } as React.CSSProperties}>
         {active.length === 0 ? (
           <p className="rounded-3xl border border-dashed border-lk-line p-8 text-center text-sm text-lk-stone-3">
             Aucun objectif en cours. Écris-en un ci-dessus : le copilote s&apos;occupe du découpage.

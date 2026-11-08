@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useTransition } from "react";
 import { Pause, Play, Square, Timer } from "lucide-react";
 
 import { logFocusSession } from "@/lib/actions/life-os";
+import { CountUp } from "@/components/motion/count-up";
 import { cn } from "@/lib/utils";
 import { Panel, PanelHeader, Ring } from "./ring";
 
@@ -83,7 +84,9 @@ export function FocusPanel({
       <div className="mt-5 flex items-center gap-5">
         <Ring value={focusScore} size={96} stroke={6} color="var(--lk-gold)">
           <div className="text-center">
-            <p className="font-display text-2xl text-lk-black tabular-nums">{focusScore}</p>
+            <p className="font-display text-2xl text-lk-black tabular-nums">
+              <CountUp value={focusScore} />
+            </p>
             <p className="text-[9px] tracking-[0.2em] text-lk-stone-3 uppercase">Focus</p>
           </div>
         </Ring>

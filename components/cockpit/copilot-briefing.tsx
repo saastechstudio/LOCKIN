@@ -72,7 +72,7 @@ export function CopilotBriefing({
     <Panel className="lk-glow-blue relative overflow-hidden">
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-24 -right-24 size-64 rounded-full bg-[radial-gradient(circle,rgba(224, 75, 95,0.35),transparent_70%)]"
+        className="pointer-events-none absolute -top-24 -right-24 size-64 rounded-full bg-[radial-gradient(circle,rgba(224,75,95,0.35),transparent_70%)]"
       />
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2.5">
@@ -118,7 +118,7 @@ export function CopilotBriefing({
 
 function Morning({ b }: { b: MorningBriefing }) {
   return (
-    <div key="morning" className="animate-fade-up mt-5">
+    <div key="morning" className="lk-rise mt-5">
       <h2 className="font-display text-2xl text-lk-black sm:text-3xl">{b.headline}</h2>
       <p className="mt-2 max-w-2xl text-sm leading-relaxed text-lk-stone-3">{b.summary}</p>
 
@@ -194,7 +194,7 @@ function Morning({ b }: { b: MorningBriefing }) {
 
 function Evening({ b }: { b: EveningBriefing }) {
   return (
-    <div key="evening" className="animate-fade-up mt-5">
+    <div key="evening" className="lk-rise mt-5">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h2 className="font-display text-2xl text-lk-black sm:text-3xl">{b.headline}</h2>

@@ -3,14 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
-import {
-  Html,
-  MeshTransmissionMaterial,
-  OrbitControls,
-  QuadraticBezierLine,
-  Sparkles,
-  Stars,
-} from "@react-three/drei";
+import { Html, MeshTransmissionMaterial, OrbitControls, QuadraticBezierLine, Sparkles, Stars } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
@@ -55,6 +48,19 @@ function planetLocalPosition(index: number, angle: number): THREE.Vector3 {
   return new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius * tilt, Math.sin(angle) * radius);
 }
 
+/** Rebond léger en fin d'apparition (0 → 1 avec un dépassement de ~8 %). */
+function easeOutBack(t: number) {
+  const c1 = 1.4;
+  const c3 = c1 + 1;
+  return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+}
+
+/** Échelle d'apparition d'un objet, avec un retard : 0 avant, 1 après son entrée. */
+function appearScale(elapsed: number, delay: number, duration = 0.9) {
+  const t = Math.max(0, Math.min(1, (elapsed - delay) / duration));
+  return t === 0 ? 0.0001 : easeOutBack(t);
+}
+
 function planetSize(s: UniverseSphere) {
   return 0.16 + s.level * 0.045 + (s.progress / 100) * 0.1;
 }
@@ -91,7 +97,10 @@ const fresnelFragment = /* glsl */ `
 
 function Halo({ radius, color, intensity }: { radius: number; color: THREE.Color; intensity: number }) {
   const uniforms = useMemo(
-    () => ({ uColor: { value: color.clone() }, uIntensity: { value: intensity } }),
+    () => ({
+      uColor: { value: color.clone() },
+      uIntensity: { value: intensity },
+    }),
     [color, intensity],
   );
   return (
@@ -115,12 +124,15 @@ function Core({ score, reducedMotion }: { score: number; reducedMotion: boolean 
   const ringA = useRef<THREE.Mesh>(null);
   const ringB = useRef<THREE.Mesh>(null);
   const heart = useRef<THREE.Mesh>(null);
+  const root = useRef<THREE.Group>(null);
   // Le score fait la lumière : rouge à bas régime, blanc rosé quand le membre est locked in.
   const energy = score / 100;
   const heartColor = useMemo(() => RED.clone().lerp(WHITE, Math.max(0, energy - 0.55) / 0.45), [energy]);
   const glow = 0.6 + energy * 2.4;
 
   useFrame((state, delta) => {
+    // Le noyau s'allume en premier : 1,3 s, avec un léger rebond.
+    root.current?.scale.setScalar(reducedMotion ? 1 : appearScale(state.clock.elapsedTime, 0.1, 1.3));
     if (reducedMotion) return;
     const t = state.clock.elapsedTime;
     if (lattice.current) lattice.current.rotation.y += delta * 0.08;
@@ -130,7 +142,7 @@ function Core({ score, reducedMotion }: { score: number; reducedMotion: boolean 
   });
 
   return (
-    <group>
+    <group ref={root}>
       <mesh ref={heart} scale={0.48}>
         <sphereGeometry args={[1, 48, 48]} />
         <meshBasicMaterial color={heartColor.clone().multiplyScalar(glow)} toneMapped={false} />
@@ -163,7 +175,12 @@ function Core({ score, reducedMotion }: { score: number; reducedMotion: boolean 
       </mesh>
       <mesh ref={ringA} rotation={[Math.PI / 2.4, 0, 0]}>
         <torusGeometry args={[1.32, 0.006, 8, 160]} />
-        <meshBasicMaterial color={heartColor.clone().multiplyScalar(1.6)} toneMapped={false} transparent opacity={0.7} />
+        <meshBasicMaterial
+          color={heartColor.clone().multiplyScalar(1.6)}
+          toneMapped={false}
+          transparent
+          opacity={0.7}
+        />
       </mesh>
       <mesh ref={ringB} rotation={[0, Math.PI / 3, Math.PI / 5]}>
         <torusGeometry args={[1.48, 0.004, 8, 160]} />
@@ -244,6 +261,7 @@ function OrbitRing({ index, color }: { index: number; color: string }) {
 
 function Planet({
   sphere,
+  index,
   position,
   mode,
   reducedMotion,
@@ -251,6 +269,7 @@ function Planet({
   onDragStart,
 }: {
   sphere: UniverseSphere;
+  index: number;
   position: THREE.Vector3;
   mode: SceneProps["mode"];
   reducedMotion: boolean;
@@ -259,11 +278,14 @@ function Planet({
 }) {
   const [hovered, setHovered] = useState(false);
   const body = useRef<THREE.Mesh>(null);
+  const appear = useRef<THREE.Group>(null);
   const size = planetSize(sphere);
   const color = useMemo(() => livingColor(sphere.color, sphere.energy), [sphere.color, sphere.energy]);
   const emissive = 0.08 + (sphere.energy / 100) * 0.55 + (sphere.progress / 100) * 0.3;
 
   useFrame((state, delta) => {
+    // Apparition échelonnée : chaque planète naît 0,14 s après la précédente.
+    appear.current?.scale.setScalar(reducedMotion ? 1 : appearScale(state.clock.elapsedTime, 0.7 + index * 0.14));
     if (!body.current) return;
     if (!reducedMotion) body.current.rotation.y += delta * 0.4;
     const target = hovered ? 1.25 : 1;
@@ -277,67 +299,72 @@ function Planet({
 
   return (
     <group position={position}>
-      <mesh
-        ref={body}
-        onPointerOver={(e) => {
-          e.stopPropagation();
-          setHovered(true);
-          document.body.style.cursor = mode === "move" ? "grab" : "pointer";
-        }}
-        onPointerOut={() => {
-          setHovered(false);
-          document.body.style.cursor = "";
-        }}
-        onPointerDown={(e) => {
-          if (mode !== "move") return;
-          e.stopPropagation();
-          onDragStart(sphere.id);
-        }}
-        onClick={(e) => {
-          if (mode !== "explore") return;
-          e.stopPropagation();
-          onSelect(sphere.id);
-        }}
-      >
-        <sphereGeometry args={[size, 48, 48]} />
-        <meshStandardMaterial
-          color={color}
-          emissive={color}
-          emissiveIntensity={emissive}
-          roughness={0.35}
-          metalness={0.2}
-          toneMapped={false}
-        />
-      </mesh>
-      <Halo radius={size * 1.6} color={color} intensity={0.2 + (sphere.energy / 100) * 0.55} />
-      {sphere.level >= 4 ? (
-        <mesh rotation={[Math.PI / 2.3, 0, 0]}>
-          <torusGeometry args={[size * 1.7, size * 0.035, 8, 96]} />
-          <meshBasicMaterial color={color.clone().multiplyScalar(1.8)} toneMapped={false} transparent opacity={0.8} />
-        </mesh>
-      ) : null}
-      {sphere.progress >= 60 ? (
-        <Sparkles count={14} scale={size * 4} size={1.6} speed={reducedMotion ? 0 : 0.5} color={sphere.color} />
-      ) : null}
-      <Html
-        center
-        position={[0, size + 0.32, 0]}
-        distanceFactor={9}
-        zIndexRange={[20, 0]}
-        style={{ pointerEvents: "none" }}
-      >
-        <div
-          className={`whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] font-medium backdrop-blur-md transition-all ${
-            hovered
-              ? "border-white/30 bg-[#240d13]/90 text-[#FFFFFF]"
-              : "border-white/10 bg-[#12070a]/60 text-[#D9C9CB]"
-          }`}
+      <group ref={appear}>
+        <mesh
+          ref={body}
+          onPointerOver={(e) => {
+            e.stopPropagation();
+            setHovered(true);
+            document.body.style.cursor = mode === "move" ? "grab" : "pointer";
+          }}
+          onPointerOut={() => {
+            setHovered(false);
+            document.body.style.cursor = "";
+          }}
+          onPointerDown={(e) => {
+            if (mode !== "move") return;
+            e.stopPropagation();
+            onDragStart(sphere.id);
+          }}
+          onClick={(e) => {
+            if (mode !== "explore") return;
+            e.stopPropagation();
+            onSelect(sphere.id);
+          }}
         >
-          <span className="mr-1.5 inline-block size-1.5 rounded-full align-middle" style={{ background: sphere.color }} />
-          {sphere.name}
-          <span className="ml-1.5 tabular-nums text-[#FFFFFF]">{sphere.score}</span>
-        </div>
-      </Html>
+          <sphereGeometry args={[size, 48, 48]} />
+          <meshStandardMaterial
+            color={color}
+            emissive={color}
+            emissiveIntensity={emissive}
+            roughness={0.35}
+            metalness={0.2}
+            toneMapped={false}
+          />
+        </mesh>
+        <Halo radius={size * 1.6} color={color} intensity={0.2 + (sphere.energy / 100) * 0.55} />
+        {sphere.level >= 4 ? (
+          <mesh rotation={[Math.PI / 2.3, 0, 0]}>
+            <torusGeometry args={[size * 1.7, size * 0.035, 8, 96]} />
+            <meshBasicMaterial color={color.clone().multiplyScalar(1.8)} toneMapped={false} transparent opacity={0.8} />
+          </mesh>
+        ) : null}
+        {sphere.progress >= 60 ? (
+          <Sparkles count={14} scale={size * 4} size={1.6} speed={reducedMotion ? 0 : 0.5} color={sphere.color} />
+        ) : null}
+        <Html
+          center
+          position={[0, size + 0.32, 0]}
+          distanceFactor={9}
+          zIndexRange={[20, 0]}
+          style={{ pointerEvents: "none" }}
+        >
+          <div
+            className={`whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] font-medium backdrop-blur-md transition-all ${
+              hovered
+                ? "border-white/30 bg-[#240d13]/90 text-[#FFFFFF]"
+                : "border-white/10 bg-[#12070a]/60 text-[#D9C9CB]"
+            }`}
+          >
+            <span
+              className="mr-1.5 inline-block size-1.5 rounded-full align-middle"
+              style={{ background: sphere.color }}
+            />
+            {sphere.name}
+            <span className="ml-1.5 tabular-nums text-[#FFFFFF]">{sphere.score}</span>
+          </div>
+        </Html>
+      </group>
     </group>
   );
 }
@@ -367,10 +394,28 @@ function Tether({ to, color, energy }: { to: THREE.Vector3; color: string; energ
 // Flux lumineux
 // ---------------------------------------------------------------------------
 
-function Flow({ from, to, color, reducedMotion }: { from: THREE.Vector3; to: THREE.Vector3; color: string; reducedMotion: boolean }) {
+function Flow({
+  from,
+  to,
+  color,
+  reducedMotion,
+}: {
+  from: THREE.Vector3;
+  to: THREE.Vector3;
+  color: string;
+  reducedMotion: boolean;
+}) {
   const pulse = useRef<THREE.Mesh>(null);
   const line = useRef<{ material: { dashOffset: number } } | null>(null);
-  const mid = useMemo(() => from.clone().add(to).multiplyScalar(0.35).setY(Math.max(from.y, to.y) + 1.1), [from, to]);
+  const mid = useMemo(
+    () =>
+      from
+        .clone()
+        .add(to)
+        .multiplyScalar(0.35)
+        .setY(Math.max(from.y, to.y) + 1.1),
+    [from, to],
+  );
   const curve = useMemo(() => new THREE.QuadraticBezierCurve3(from, mid, to), [from, mid, to]);
 
   useFrame((state, delta) => {
@@ -415,6 +460,7 @@ function System(props: SceneProps) {
   const [angles, setAngles] = useState<Record<number, number>>({});
   const dragging = useRef<number | null>(null);
   const arrival = useRef<{ id: number; startedAt: number } | null>(null);
+  const userTouched = useRef(false);
 
   const ordered = useMemo(() => [...spheres].sort((a, b) => a.position - b.position), [spheres]);
   const positions = useMemo(() => {
@@ -427,9 +473,18 @@ function System(props: SceneProps) {
     if (selectedId !== null) arrival.current = { id: selectedId, startedAt: performance.now() };
   }, [selectedId]);
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     const group = system.current;
     if (!group) return;
+    // Arrivée de la caméra : on glisse depuis plus loin et plus haut pendant 2,4 s,
+    // sans jamais lutter contre le membre qui prend la main avant.
+    if (!reducedMotion && selectedId === null && state.clock.elapsedTime < 2.4 && !userTouched.current) {
+      const k = 1 - Math.pow(1 - Math.min(1, state.clock.elapsedTime / 2.4), 3);
+      const from = new THREE.Vector3(0, 8, 20);
+      const to = new THREE.Vector3(0, 3.8, 9.6);
+      camera.position.lerpVectors(from, to, k);
+      controls.current?.update();
+    }
     if (!reducedMotion && mode === "explore" && selectedId === null) group.rotation.y += delta * SYSTEM_SPEED;
 
     // Plongée : la caméra rejoint la planète choisie, puis on entre dans la sphère.
@@ -439,7 +494,10 @@ function System(props: SceneProps) {
       if (local) {
         const world = group.localToWorld(local.clone());
         const direction = world.clone().normalize();
-        const destination = world.clone().add(direction.multiplyScalar(1.4)).add(new THREE.Vector3(0, 0.35, 0));
+        const destination = world
+          .clone()
+          .add(direction.multiplyScalar(1.4))
+          .add(new THREE.Vector3(0, 0.35, 0));
         camera.position.lerp(destination, 1 - Math.pow(0.02, delta));
         controls.current.target.lerp(world, 1 - Math.pow(0.01, delta));
         controls.current.update();
@@ -472,6 +530,9 @@ function System(props: SceneProps) {
     <>
       <OrbitControls
         ref={controls}
+        onStart={() => {
+          userTouched.current = true;
+        }}
         enablePan={false}
         enableDamping
         dampingFactor={0.08}
@@ -500,9 +561,10 @@ function System(props: SceneProps) {
           return <Flow key={link.id} from={from} to={to} color={color} reducedMotion={reducedMotion} />;
         })}
 
-        {ordered.map((s) => (
+        {ordered.map((s, index) => (
           <Planet
             key={s.id}
+            index={index}
             sphere={s}
             position={positions.get(s.id)!}
             mode={mode}
@@ -517,7 +579,12 @@ function System(props: SceneProps) {
         ))}
 
         {mode === "move" ? (
-          <mesh rotation={[-Math.PI / 2, 0, 0]} onPointerMove={onPlaneMove} onPointerUp={endDrag} onPointerLeave={endDrag}>
+          <mesh
+            rotation={[-Math.PI / 2, 0, 0]}
+            onPointerMove={onPlaneMove}
+            onPointerUp={endDrag}
+            onPointerLeave={endDrag}
+          >
             <planeGeometry args={[60, 60]} />
             <meshBasicMaterial transparent opacity={0} depthWrite={false} />
           </mesh>
@@ -534,7 +601,7 @@ export default function SphereLifeScene(props: SceneProps) {
   return (
     <Canvas
       dpr={[1, 1.75]}
-      camera={{ position: [0, 4.2, 12.2], fov: 40, near: 0.1, far: 200 }}
+      camera={{ position: [0, 3.8, 9.6], fov: 40, near: 0.1, far: 200 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       onPointerMissed={() => {
         document.body.style.cursor = "";

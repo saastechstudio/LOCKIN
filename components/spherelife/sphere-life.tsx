@@ -5,6 +5,7 @@ import { useEffect, useState, useSyncExternalStore, useTransition } from "react"
 import { useRouter } from "next/navigation";
 import { Move3d, Orbit, SlidersHorizontal } from "lucide-react";
 
+import { CountUp } from "@/components/motion/count-up";
 import { cn } from "@/lib/utils";
 import { moveSphere } from "@/lib/actions/life-os";
 import { SphereEditor } from "./sphere-editor";
@@ -20,7 +21,7 @@ const Scene = dynamic(() => import("./scene"), {
 function CoreLoading() {
   return (
     <div className="flex h-full items-center justify-center">
-      <div className="size-40 animate-pulse rounded-full bg-[radial-gradient(circle,rgba(224, 75, 95,0.45),transparent_70%)]" />
+      <div className="size-40 animate-pulse rounded-full bg-[radial-gradient(circle,rgba(224,75,95,0.45),transparent_70%)]" />
     </div>
   );
 }
@@ -104,7 +105,7 @@ export function SphereLife({ spheres, links, score, tierLabel, balance, signals,
       {/* Lumière d'ambiance derrière le globe. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(224, 75, 95,0.22),transparent_60%)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_center,rgba(224,75,95,0.22),transparent_60%)]"
       />
 
       <div className="absolute inset-0">
@@ -139,7 +140,9 @@ export function SphereLife({ spheres, links, score, tierLabel, balance, signals,
         </div>
         <div className="text-right">
           <p className="text-[10px] font-semibold tracking-[0.35em] text-lk-stone-3 uppercase">LockIn Score</p>
-          <p className="font-display lk-text-glow mt-1 text-5xl text-lk-black tabular-nums sm:text-6xl">{score}</p>
+          <p className="font-display lk-text-glow mt-1 text-5xl text-lk-black tabular-nums sm:text-6xl">
+            <CountUp value={score} duration={1.8} />
+          </p>
           <p className="text-xs font-medium text-lk-gold">{tierLabel}</p>
         </div>
       </div>
@@ -156,17 +159,17 @@ export function SphereLife({ spheres, links, score, tierLabel, balance, signals,
         {signal ? (
           <p
             key={signal.id}
-            className="animate-fade-up flex max-w-md items-center gap-2.5 rounded-2xl border border-lk-line bg-lk-white/55 px-4 py-2.5 text-sm text-lk-black backdrop-blur-xl"
+            className="lk-rise flex max-w-md items-center gap-2.5 rounded-2xl border border-lk-line bg-lk-white/55 px-4 py-2.5 text-sm text-lk-black backdrop-blur-xl"
           >
             <span
               aria-hidden
               className={cn(
                 "size-2 shrink-0 rounded-full",
                 signal.tone === "critical" || signal.tone === "warning"
-                  ? "bg-lk-coral shadow-[0_0_10px_rgba(255, 107, 122,0.9)]"
+                  ? "bg-lk-coral shadow-[0_0_10px_rgba(255,107,122,0.9)]"
                   : signal.tone === "positive"
-                    ? "bg-lk-gold shadow-[0_0_10px_rgba(255, 233, 236,0.9)]"
-                    : "bg-lk-blue-soft shadow-[0_0_10px_rgba(224, 75, 95,0.9)]",
+                    ? "bg-lk-gold shadow-[0_0_10px_rgba(255,233,236,0.9)]"
+                    : "bg-lk-blue-soft shadow-[0_0_10px_rgba(224,75,95,0.9)]",
               )}
             />
             <span>

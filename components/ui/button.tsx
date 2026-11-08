@@ -11,7 +11,7 @@ const buttonVariants = cva(
       variant: {
         // CTA principal : rouge, survol plus clair + ombre diffuse + léger soulèvement.
         default:
-          "bg-lk-blue text-white hover:-translate-y-0.5 hover:bg-lk-blue-soft hover:shadow-focus active:translate-y-0",
+          "lk-shine bg-lk-blue text-white hover:-translate-y-0.5 hover:bg-lk-blue-soft hover:shadow-focus active:translate-y-0",
         destructive: "bg-destructive text-white hover:-translate-y-0.5 hover:shadow-md active:translate-y-0",
         outline:
           "border border-lk-line bg-lk-surface text-lk-black backdrop-blur-md hover:border-lk-stone-2/60 hover:bg-lk-mist hover:shadow-sm",

@@ -13,7 +13,7 @@ export default async function HabitudesPage() {
 
   return (
     <div className="mx-auto max-w-6xl space-y-8">
-      <header className="animate-fade-up flex flex-wrap items-end justify-between gap-4">
+      <header className="lk-rise flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="text-[10px] font-semibold tracking-[0.35em] text-lk-stone-3 uppercase">Life OS · Habitudes</p>
           <h1 className="font-display mt-2 text-3xl text-lk-black sm:text-4xl">Ce que tu répètes te construit</h1>
