@@ -24,6 +24,7 @@ export function Ring({
       <svg width={size} height={size} className="-rotate-90 overflow-visible" style={{ filter: `drop-shadow(0 0 6px ${color})` }} aria-hidden>
         <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke="rgba(255, 255, 255,0.08)" strokeWidth={stroke} />
         <circle
+          className="lk-ring"
           cx={size / 2}
           cy={size / 2}
           r={r}
@@ -33,7 +34,7 @@ export function Ring({
           strokeLinecap="round"
           strokeDasharray={c}
           strokeDashoffset={c * (1 - clamped / 100)}
-          style={{ transition: "stroke-dashoffset 1s cubic-bezier(0.22,1,0.36,1)" }}
+          style={{ "--ring-full": c, transition: "stroke-dashoffset 1s cubic-bezier(0.22,1,0.36,1)" } as React.CSSProperties}
         />
       </svg>
       <div className="absolute inset-0 flex items-center justify-center">{children}</div>

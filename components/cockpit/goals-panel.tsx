@@ -3,6 +3,7 @@ import { ArrowUpRight, Target } from "lucide-react";
 
 import { PACE_LABELS } from "@/lib/life-os/goals";
 import type { GoalView, SphereView } from "@/lib/life-os/snapshot";
+import { CountUp } from "@/components/motion/count-up";
 import { cn } from "@/lib/utils";
 import { Panel, PanelHeader, Ring } from "./ring";
 
@@ -36,15 +37,17 @@ export function GoalsPanel({ goals, spheres }: { goals: GoalView[]; spheres: Sph
           </span>
         </Link>
       ) : (
-        <ul className="mt-5 space-y-3">
+        <ul className="lk-stagger mt-5 space-y-3">
           {active.map((g) => (
             <li key={g.id}>
               <Link
                 href={`/dashboard/objectifs#goal-${g.id}`}
-                className="group flex items-center gap-4 rounded-2xl border border-transparent p-2 -m-2 transition-colors hover:border-lk-line hover:bg-lk-surface"
+                className="lk-press group flex items-center gap-4 rounded-2xl border border-transparent p-2 -m-2 transition-all duration-300 hover:translate-x-1 hover:border-lk-line hover:bg-lk-surface"
               >
                 <Ring value={g.progress} size={52} stroke={4} color={color(g.sphereId)}>
-                  <span className="text-xs font-medium text-lk-black tabular-nums">{g.progress}</span>
+                  <span className="text-xs font-medium text-lk-black tabular-nums">
+                    <CountUp value={g.progress} />
+                  </span>
                 </Ring>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-medium text-lk-black">{g.title}</p>

@@ -17,7 +17,7 @@ export function InsightsPanel({ insights }: { insights: Insight[] }) {
   return (
     <Panel>
       <PanelHeader eyebrow="Insights IA" title="Ce que je remarque" />
-      <ul className="mt-4 space-y-2">
+      <ul className="lk-stagger mt-4 space-y-2">
         {insights.map((insight) => {
           const { Icon, className } = STYLE[insight.tone];
           const body = (

@@ -47,7 +47,7 @@ export function HabitsToday({ habits, compact = false }: { habits: HabitView[]; 
           Sommeil, sport, lecture, méditation, travail, nutrition : active tes premières habitudes en un geste.
         </Link>
       ) : (
-        <ul className={cn("mt-5 grid gap-3", !compact && "sm:grid-cols-2")}>
+        <ul className={cn("lk-stagger mt-5 grid gap-3", !compact && "sm:grid-cols-2")}>
           {habits.map((h) => {
             const value = values[h.id] ?? 0;
             const met = value >= h.target;
@@ -57,13 +57,13 @@ export function HabitsToday({ habits, compact = false }: { habits: HabitView[]; 
               <li
                 key={h.id}
                 className={cn(
-                  "rounded-2xl border p-3 transition-all duration-300",
+                  "lk-press rounded-2xl border p-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/25",
                   met ? "border-lk-gold/40 bg-lk-gold/[0.07]" : "border-lk-line bg-lk-surface",
                 )}
               >
                 <div className="flex items-center gap-3">
                   <span className={cn("flex size-9 shrink-0 items-center justify-center rounded-xl", tone.bg, tone.text)}>
-                    {met ? <Check className="size-4" /> : <tone.Icon className="size-4" />}
+                    {met ? <Check key="done" className="lk-pop size-4" /> : <tone.Icon className="size-4" />}
                   </span>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm text-lk-black">{h.label}</p>

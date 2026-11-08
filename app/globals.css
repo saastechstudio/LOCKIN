@@ -254,6 +254,38 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  /*
+   * Aurore : deux halos rouges dérivent très lentement derrière toute
+   * l'interface. Fixes, sans interaction, éteints si l'utilisateur réduit
+   * les animations.
+   */
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    border-radius: 9999px;
+    filter: blur(90px);
+    pointer-events: none;
+    will-change: transform;
+  }
+  body::before {
+    width: 44rem;
+    height: 44rem;
+    top: -14rem;
+    right: -10rem;
+    background: rgba(224, 75, 95, 0.2);
+    animation: aurora-a 28s ease-in-out infinite alternate;
+  }
+  body::after {
+    width: 36rem;
+    height: 36rem;
+    bottom: -12rem;
+    left: -8rem;
+    background: rgba(179, 40, 59, 0.22);
+    animation: aurora-b 34s ease-in-out infinite alternate;
+  }
+
   /* Icônes lucide : trait fin et arrondi, cohérent avec les rayons doux. */
   svg.lucide {
     stroke-linecap: round;
@@ -372,7 +404,15 @@
    * Verre Life OS : fond crème à 4,5 %, flou, reflet interne d'un pixel en
    * haut, ombre profonde. .lk-glass-strong pour les panneaux au premier plan.
    */
+  /*
+   * Verre v2 : trois couches. Le fond dépoli (flou + saturation), un reflet
+   * interne en haut, et un projecteur qui suit le curseur (--mx / --my, posés
+   * par components/motion/glass-pointer.tsx) : la lumière glisse sous le doigt.
+   * isolation + z-index négatif : les pseudo-éléments restent sous le contenu.
+   */
   .lk-glass {
+    position: relative;
+    isolation: isolate;
     background:
       linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03) 52%, rgba(224, 75, 95, 0.07)),
       rgba(42, 15, 22, 0.35);
@@ -380,7 +420,76 @@
     box-shadow: var(--shadow-glass);
     backdrop-filter: blur(26px) saturate(170%);
     -webkit-backdrop-filter: blur(26px) saturate(170%);
+    transition:
+      border-color 0.4s var(--ease-premium),
+      box-shadow 0.4s var(--ease-premium),
+      transform 0.4s var(--ease-premium);
   }
+  .lk-glass::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 0%),
+      rgba(255, 255, 255, 0.13),
+      rgba(224, 75, 95, 0.08) 38%,
+      transparent 65%
+    );
+    transition: opacity 0.5s var(--ease-premium);
+  }
+  .lk-glass:hover::before {
+    opacity: 1;
+  }
+  .lk-glass:hover {
+    border-color: rgba(255, 255, 255, 0.26);
+  }
+
+  /* Carte cliquable : se soulève, le reflet s'intensifie, s'enfonce au clic. */
+  .lk-lift {
+    cursor: pointer;
+  }
+  .lk-lift:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      var(--shadow-glass),
+      0 18px 40px -18px rgba(224, 75, 95, 0.55);
+  }
+  .lk-lift:active {
+    transform: translateY(-1px) scale(0.99);
+    transition-duration: 0.12s;
+  }
+
+  /* Reflet qui balaie un bouton au survol. */
+  .lk-shine {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .lk-shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform 0.7s var(--ease-premium);
+  }
+  .lk-shine:hover::after {
+    transform: translateX(120%);
+  }
+
+  /* Retour tactile : tout élément pressable s'enfonce de 3 %. */
+  .lk-press {
+    transition: transform 0.15s var(--ease-premium);
+  }
+  .lk-press:active {
+    transform: scale(0.97);
+  }
+
   .lk-glass-strong {
     background: linear-gradient(180deg, rgba(42, 15, 22, 0.92), rgba(36, 13, 19, 0.88));
     border: 1px solid rgba(255, 255, 255, 0.12);

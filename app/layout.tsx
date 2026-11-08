@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { BrandedClerkProvider } from "@/components/clerk-provider";
+import { GlassPointer } from "@/components/motion/glass-pointer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {/* Life OS : un seul thème, sombre natif (le club garde son identité claire). */}
         <ThemeProvider attribute="class" forcedTheme="dark" disableTransitionOnChange>
           <BrandedClerkProvider>{children}</BrandedClerkProvider>
+          <GlassPointer />
         </ThemeProvider>
       </body>
     </html>

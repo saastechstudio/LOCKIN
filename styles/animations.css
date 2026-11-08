@@ -70,6 +70,159 @@
   animation: sphere-enter 0.9s var(--ease-premium) both;
 }
 
+/* Aurore de fond : dérive lente, amplitude large, aucune saccade. */
+@keyframes aurora-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-9rem, 7rem, 0) scale(1.18);
+  }
+}
+@keyframes aurora-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.1);
+  }
+  to {
+    transform: translate3d(10rem, -6rem, 0) scale(0.92);
+  }
+}
+
+/*
+ * Entrées : un élément « monte » avec un fondu, un léger flou et un
+ * ressort. --i (0, 1, 2…) échelonne une rangée : style={{ "--i": 3 }}.
+ */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.975);
+    filter: blur(8px);
+  }
+  60% {
+    filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+.lk-rise {
+  animation: rise 0.8s var(--ease-premium) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* Rangée dont les enfants montent l'un après l'autre : --base décale toute la rangée. */
+.lk-stagger > * {
+  animation: rise 0.8s var(--ease-premium) both;
+  animation-delay: calc((var(--base, 0) + var(--k, 0)) * 70ms);
+}
+.lk-stagger > :nth-child(2) {
+  --k: 1;
+}
+.lk-stagger > :nth-child(3) {
+  --k: 2;
+}
+.lk-stagger > :nth-child(4) {
+  --k: 3;
+}
+.lk-stagger > :nth-child(n + 5) {
+  --k: 4;
+}
+
+/* Changement de page : la nouvelle page se pose, l'ancienne ne bloque rien. */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+.lk-page {
+  animation: page-in 0.55s var(--ease-premium) both;
+}
+
+/* Remplissage : barres et anneaux se tracent depuis zéro. */
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes grow-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes ring-in {
+  from {
+    stroke-dashoffset: var(--ring-full);
+  }
+}
+.lk-grow-x {
+  transform-origin: left center;
+  animation: grow-x 1.1s var(--ease-premium) both;
+  animation-delay: calc(var(--i, 0) * 80ms + 250ms);
+}
+.lk-grow-y {
+  transform-origin: center bottom;
+  animation: grow-y 0.9s var(--ease-premium) both;
+  animation-delay: calc(var(--i, 0) * 70ms + 300ms);
+}
+.lk-ring {
+  animation: ring-in 1.4s var(--ease-premium) both;
+  animation-delay: 0.3s;
+}
+
+/* Réussite : le coche rebondit. */
+@keyframes pop {
+  0% {
+    transform: scale(0.6);
+  }
+  55% {
+    transform: scale(1.22);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.lk-pop {
+  animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Chargement : le verre respire, un reflet le traverse. */
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+.lk-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.lk-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, 0.1) 50%, transparent 80%);
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
 /* Halo qui respire derrière le CTA / le plan recommandé. */
 @keyframes soft-pulse {
   0%,
@@ -140,8 +293,21 @@
   }
   [data-reveal],
   [data-parallax],
-  .lk-sphere-enter {
+  .lk-sphere-enter,
+  .lk-rise,
+  .lk-stagger > *,
+  .lk-page,
+  .lk-grow-x,
+  .lk-grow-y,
+  .lk-ring,
+  .lk-pop,
+  body::before,
+  body::after {
     animation: none !important;
+  }
+  .lk-skeleton::after {
+    animation: none !important;
+    display: none;
   }
   .lk-draw :is(path, line, polyline, polygon, circle, rect, ellipse) {
     stroke-dasharray: none;

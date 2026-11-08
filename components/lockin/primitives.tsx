@@ -1,3 +1,4 @@
+import { CountUp } from "@/components/motion/count-up";
 import { cn } from "@/lib/utils";
 
 /** Le slogan Lockin — une seule source pour la landing, l'app et les écrans de progression. */
@@ -157,7 +158,9 @@ export function Stat({
   return (
     <div className={cn("lk-glass lk-edge rounded-2xl p-4", className)}>
       <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">{label}</p>
-      <p className="font-display mt-3 text-4xl text-lk-black tabular-nums">{value}</p>
+      <p className="font-display mt-3 text-4xl text-lk-black tabular-nums">
+        {typeof value === "number" ? <CountUp value={value} /> : value}
+      </p>
       {hint ? <p className="mt-2 text-xs text-lk-stone-3">{hint}</p> : null}
     </div>
   );

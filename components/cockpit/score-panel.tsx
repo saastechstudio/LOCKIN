@@ -1,5 +1,6 @@
 import { COMPONENT_LABELS, type ScoreComponents } from "@/lib/life-os/score";
 import { cn } from "@/lib/utils";
+import { CountUp } from "@/components/motion/count-up";
 import { Panel, PanelHeader } from "./ring";
 
 const WEEKDAY = new Intl.DateTimeFormat("fr-FR", { weekday: "narrow" });
@@ -26,7 +27,7 @@ export function ScorePanel({
         eyebrow="LockIn Score"
         title={
           <span className="flex items-baseline gap-2">
-            <span className="tabular-nums">{score}</span>
+            <CountUp value={score} className="tabular-nums" />
             {delta !== null ? (
               <span className={cn("text-sm", delta >= 0 ? "text-lk-gold" : "text-lk-coral")}>
                 {delta >= 0 ? "+" : ""}
@@ -38,7 +39,7 @@ export function ScorePanel({
       />
 
       <ul className="mt-5 space-y-3">
-        {(Object.keys(components) as (keyof ScoreComponents)[]).map((key) => {
+        {(Object.keys(components) as (keyof ScoreComponents)[]).map((key, index) => {
           const value = components[key];
           return (
             <li key={key}>
@@ -47,15 +48,15 @@ export function ScorePanel({
                   {COMPONENT_LABELS[key]}
                   {key === weakest ? " · levier" : ""}
                 </span>
-                <span className="text-lk-black tabular-nums">{value === null ? "—" : value}</span>
+                <span className="text-lk-black tabular-nums">{value === null ? "—" : <CountUp value={value} />}</span>
               </div>
               <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-lk-surface">
                 <div
                   className={cn(
-                    "h-full rounded-full transition-[width] duration-1000 ease-premium",
+                    "lk-grow-x h-full rounded-full",
                     key === weakest ? "bg-lk-coral" : "bg-lk-blue-soft",
                   )}
-                  style={{ width: `${value ?? 0}%`, boxShadow: "0 0 10px currentColor" }}
+                  style={{ width: `${value ?? 0}%`, boxShadow: "0 0 10px currentColor", "--i": index } as React.CSSProperties}
                 />
               </div>
             </li>
@@ -73,10 +74,10 @@ export function ScorePanel({
                 <div className="flex h-[72px] w-full items-end">
                   <div
                     className={cn(
-                      "w-full rounded-md transition-[height] duration-1000 ease-premium",
-                      today ? "bg-lk-gold shadow-[0_0_16px_rgba(255, 233, 236,0.6)]" : "bg-lk-blue-soft/60",
+                      "lk-grow-y w-full rounded-md",
+                      today ? "bg-lk-gold shadow-[0_0_16px_rgba(255,233,236,0.6)]" : "bg-lk-blue-soft/60",
                     )}
-                    style={{ height: `${Math.max(4, (d.score / max) * 100)}%` }}
+                    style={{ height: `${Math.max(4, (d.score / max) * 100)}%`, "--i": i } as React.CSSProperties}
                     title={`${d.score}`}
                   />
                 </div>

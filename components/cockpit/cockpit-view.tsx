@@ -30,7 +30,7 @@ export function CockpitView({
 }) {
   return (
     <div className="mx-auto max-w-7xl space-y-6">
-      <header className="animate-fade-up flex flex-wrap items-end justify-between gap-3">
+      <header className="lk-rise flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="text-xs tracking-[0.25em] text-lk-stone-3 uppercase">{DATE.format(s.today)}</p>
           <h1 className="font-display mt-2 text-3xl text-lk-black sm:text-4xl">
@@ -45,7 +45,7 @@ export function CockpitView({
         </p>
       </header>
 
-      <div className="animate-fade-up [animation-delay:80ms]">
+      <div className="lk-rise" style={{ "--i": 1 } as React.CSSProperties}>
         <SphereLife
           spheres={toUniverse(s.spheres)}
           links={s.links}
@@ -56,7 +56,7 @@ export function CockpitView({
         />
       </div>
 
-      <div className="animate-fade-up [animation-delay:140ms]">
+      <div className="lk-rise" style={{ "--i": 2 } as React.CSSProperties}>
         <CopilotBriefing
           stored={{ morning: s.briefings.morning, evening: s.briefings.evening }}
           authors={s.briefings.authors}
@@ -65,7 +65,7 @@ export function CockpitView({
         />
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="lk-stagger grid gap-6 lg:grid-cols-3" style={{ "--base": 3 } as React.CSSProperties}>
         <ScorePanel
           score={s.score.score}
           yesterday={s.yesterdayScore}
@@ -82,7 +82,7 @@ export function CockpitView({
         />
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-5">
+      <div className="lk-stagger grid gap-6 lg:grid-cols-5" style={{ "--base": 6 } as React.CSSProperties}>
         <div className="lg:col-span-3">
           <HabitsToday habits={s.habits} />
         </div>
@@ -91,7 +91,7 @@ export function CockpitView({
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="lk-stagger grid gap-6 lg:grid-cols-2" style={{ "--base": 8 } as React.CSSProperties}>
         <CalendarPanel today={s.today} items={s.calendar} habitsCount={s.habits.length} />
         {focusRow ? <DailyCheckin focus={focusRow} /> : null}
       </div>

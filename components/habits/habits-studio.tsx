@@ -42,7 +42,7 @@ export function HabitsStudio({
 
   return (
     <div className="space-y-8">
-      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="lk-stagger grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {CATEGORIES.map((category) => {
           const tone = habitTone(category);
           const presetIndex = HABIT_PRESETS.findIndex((p) => p.category === category);
@@ -52,7 +52,7 @@ export function HabitsStudio({
             <div
               key={category}
               className={cn(
-                "lk-glass group relative overflow-hidden rounded-3xl p-5 transition-all duration-300 hover:-translate-y-0.5",
+                "lk-glass lk-lift group relative overflow-hidden rounded-3xl p-5",
                 active && "lk-glow-gold",
               )}
             >
@@ -106,7 +106,7 @@ export function HabitsStudio({
             );
             setCustom(null);
           }}
-          className="lk-glass lk-glow-blue animate-fade-up flex flex-wrap items-end gap-3 rounded-3xl p-5"
+          className="lk-glass lk-glow-blue lk-rise flex flex-wrap items-end gap-3 rounded-3xl p-5"
         >
           <label className="min-w-48 flex-1 text-xs text-lk-stone-3">
             Habitude · {habitTone(custom.category).label}
