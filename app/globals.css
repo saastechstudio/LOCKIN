@@ -491,7 +491,7 @@
   }
 
   .lk-glass-strong {
-    background: linear-gradient(180deg, rgba(6,78,59, 0.92), rgba(36, 13, 19, 0.88));
+    background: linear-gradient(180deg, rgba(6,78,59, 0.92), rgba(5,61,48, 0.88));
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: var(--shadow-glass), var(--shadow-xl);
     backdrop-filter: blur(24px) saturate(150%);
