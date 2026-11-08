@@ -25,9 +25,9 @@ import type { UniverseLink, UniverseSphere } from "./types";
  * dans une sphère d'un clic.
  */
 
-const INK = new THREE.Color("#0f1826");
-const BLUE = new THREE.Color("#4A6FA5");
-const GOLD = new THREE.Color("#C9A86A");
+const INK = new THREE.Color("#12070a");
+const RED = new THREE.Color("#E04B5F");
+const WHITE = new THREE.Color("#FFE9EC");
 const SYSTEM_SPEED = 0.035;
 
 export type SceneProps = {
@@ -115,9 +115,9 @@ function Core({ score, reducedMotion }: { score: number; reducedMotion: boolean 
   const ringA = useRef<THREE.Mesh>(null);
   const ringB = useRef<THREE.Mesh>(null);
   const heart = useRef<THREE.Mesh>(null);
-  // Le score fait la lumière : bleu focus à bas régime, doré quand le membre est locked in.
+  // Le score fait la lumière : rouge à bas régime, blanc rosé quand le membre est locked in.
   const energy = score / 100;
-  const heartColor = useMemo(() => BLUE.clone().lerp(GOLD, Math.max(0, energy - 0.55) / 0.45), [energy]);
+  const heartColor = useMemo(() => RED.clone().lerp(WHITE, Math.max(0, energy - 0.55) / 0.45), [energy]);
   const glow = 0.6 + energy * 2.4;
 
   useFrame((state, delta) => {
@@ -151,15 +151,15 @@ function Core({ score, reducedMotion }: { score: number; reducedMotion: boolean 
           distortion={0.35}
           distortionScale={0.4}
           temporalDistortion={reducedMotion ? 0 : 0.12}
-          color="#dfe6f0"
-          attenuationColor="#4A6FA5"
+          color="#ffe4e8"
+          attenuationColor="#E04B5F"
           attenuationDistance={2.4}
         />
       </mesh>
 
       <mesh ref={lattice} scale={1.09}>
         <icosahedronGeometry args={[1, 3]} />
-        <meshBasicMaterial color={BLUE} wireframe transparent opacity={0.16} toneMapped={false} />
+        <meshBasicMaterial color={RED} wireframe transparent opacity={0.16} toneMapped={false} />
       </mesh>
       <mesh ref={ringA} rotation={[Math.PI / 2.4, 0, 0]}>
         <torusGeometry args={[1.32, 0.006, 8, 160]} />
@@ -167,7 +167,7 @@ function Core({ score, reducedMotion }: { score: number; reducedMotion: boolean 
       </mesh>
       <mesh ref={ringB} rotation={[0, Math.PI / 3, Math.PI / 5]}>
         <torusGeometry args={[1.48, 0.004, 8, 160]} />
-        <meshBasicMaterial color="#FAF9F7" toneMapped={false} transparent opacity={0.35} />
+        <meshBasicMaterial color="#FFFFFF" toneMapped={false} transparent opacity={0.35} />
       </mesh>
 
       <Halo radius={1.55} color={heartColor} intensity={0.35 + energy * 0.9} />
@@ -186,7 +186,7 @@ function OrbitDust({ reducedMotion }: { reducedMotion: boolean }) {
     const count = 1400;
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
-    const palette = [new THREE.Color("#FAF9F7"), BLUE, GOLD, new THREE.Color("#B8B3AE")];
+    const palette = [new THREE.Color("#FFFFFF"), RED, WHITE, new THREE.Color("#FF8A96")];
     // Générateur déterministe : même nuage à chaque rendu, pas d'aléatoire impur pendant le rendu.
     let seed = 7;
     const random = () => {
@@ -329,13 +329,13 @@ function Planet({
         <div
           className={`whitespace-nowrap rounded-full border px-2.5 py-1 text-[11px] font-medium backdrop-blur-md transition-all ${
             hovered
-              ? "border-white/30 bg-[#16223a]/90 text-[#FAF9F7]"
-              : "border-white/10 bg-[#0f1826]/60 text-[#B8B3AE]"
+              ? "border-white/30 bg-[#240d13]/90 text-[#FFFFFF]"
+              : "border-white/10 bg-[#12070a]/60 text-[#D9C9CB]"
           }`}
         >
           <span className="mr-1.5 inline-block size-1.5 rounded-full align-middle" style={{ background: sphere.color }} />
           {sphere.name}
-          <span className="ml-1.5 tabular-nums text-[#FAF9F7]">{sphere.score}</span>
+          <span className="ml-1.5 tabular-nums text-[#FFFFFF]">{sphere.score}</span>
         </div>
       </Html>
     </group>
@@ -495,7 +495,7 @@ function System(props: SceneProps) {
         {links.map((link) => {
           const from = positions.get(link.from);
           const to = positions.get(link.to);
-          const color = spheres.find((s) => s.id === link.from)?.color ?? "#4A6FA5";
+          const color = spheres.find((s) => s.id === link.from)?.color ?? "#E04B5F";
           if (!from || !to) return null;
           return <Flow key={link.id} from={from} to={to} color={color} reducedMotion={reducedMotion} />;
         })}
@@ -541,7 +541,7 @@ export default function SphereLifeScene(props: SceneProps) {
       }}
     >
       <ambientLight intensity={0.35} />
-      <directionalLight position={[6, 8, 4]} intensity={0.6} color="#FAF9F7" />
+      <directionalLight position={[6, 8, 4]} intensity={0.6} color="#FFFFFF" />
       <System {...props} />
       <EffectComposer multisampling={0}>
         <Bloom intensity={0.9} luminanceThreshold={0.35} luminanceSmoothing={0.35} mipmapBlur radius={0.7} />

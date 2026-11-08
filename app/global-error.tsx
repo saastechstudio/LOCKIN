@@ -30,15 +30,15 @@ export default function GlobalError({
           padding: "1.5rem",
           textAlign: "center",
           fontFamily: "ui-sans-serif, system-ui, sans-serif",
-          background: "#0F1826",
-          color: "#FAF9F7",
+          background: "#12070A",
+          color: "#FFFFFF",
         }}
       >
-        <AlertTriangle size={40} color="#D97A5A" />
+        <AlertTriangle size={40} color="#FF6B7A" />
         <h1 style={{ fontSize: "1.5rem", fontWeight: 600 }}>
           Lock In est momentanément indisponible
         </h1>
-        <p style={{ maxWidth: "24rem", color: "#B8B3AE", fontSize: "0.875rem" }}>
+        <p style={{ maxWidth: "24rem", color: "#D9C9CB", fontSize: "0.875rem" }}>
           Une erreur inattendue empêche le chargement de
           l&apos;application. Réessaie dans un instant.
         </p>
@@ -47,7 +47,7 @@ export default function GlobalError({
           style={{
             padding: "0.6rem 1.5rem",
             borderRadius: "9999px",
-            background: "#3E5C8A",
+            background: "#B3283B",
             color: "#ffffff",
             fontWeight: 600,
             fontSize: "0.875rem",

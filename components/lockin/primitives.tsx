@@ -142,7 +142,7 @@ export function PageHeader({
   );
 }
 
-/** Chiffre-clé : grande valeur tabulaire + libellé. */
+/** Chiffre-clé : grande valeur tabulaire + libellé, sur une carte de verre. */
 export function Stat({
   label,
   value,
@@ -155,7 +155,7 @@ export function Stat({
   className?: string;
 }) {
   return (
-    <div className={cn("border-t border-lk-line pt-4", className)}>
+    <div className={cn("lk-glass lk-edge rounded-2xl p-4", className)}>
       <p className="text-[11px] font-semibold tracking-[0.2em] text-lk-stone-3 uppercase">{label}</p>
       <p className="font-display mt-3 text-4xl text-lk-black tabular-nums">{value}</p>
       {hint ? <p className="mt-2 text-xs text-lk-stone-3">{hint}</p> : null}

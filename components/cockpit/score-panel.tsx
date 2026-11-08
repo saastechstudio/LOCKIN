@@ -74,7 +74,7 @@ export function ScorePanel({
                   <div
                     className={cn(
                       "w-full rounded-md transition-[height] duration-1000 ease-premium",
-                      today ? "bg-lk-gold shadow-[0_0_16px_rgba(201,168,106,0.6)]" : "bg-lk-blue-soft/60",
+                      today ? "bg-lk-gold shadow-[0_0_16px_rgba(255, 233, 236,0.6)]" : "bg-lk-blue-soft/60",
                     )}
                     style={{ height: `${Math.max(4, (d.score / max) * 100)}%` }}
                     title={`${d.score}`}

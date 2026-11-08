@@ -36,7 +36,7 @@ export function NavList({ onNavigate }: { onNavigate?: () => void }) {
                     {active ? (
                       <span
                         aria-hidden
-                        className="absolute top-1/2 -left-4 h-5 w-[3px] -translate-y-1/2 rounded-full bg-lk-blue-soft shadow-[0_0_12px_rgba(74,111,165,0.9)]"
+                        className="absolute top-1/2 -left-4 h-5 w-[3px] -translate-y-1/2 rounded-full bg-lk-blue-soft shadow-[0_0_12px_rgba(224, 75, 95,0.9)]"
                       />
                     ) : null}
                     <item.icon className={cn("size-4", active && "text-lk-blue-soft")} />
