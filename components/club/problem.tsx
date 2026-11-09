@@ -7,11 +7,11 @@ export function ClubProblem() {
       <div className="club-container grid gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-24">
         <div>
           <Reveal>
-            <p className="club-eyebrow text-club-bordeaux">Le constat</p>
+            <p className="club-eyebrow text-club-pierre-soft">Le constat</p>
           </Reveal>
           <Reveal blur delay={0.1} as="h2">
             <span className="club-display club-h2 mt-6 block text-balance">
-              On n&apos;avance pas <em className="text-club-bordeaux">seul</em>.
+              On n&apos;avance pas <em className="text-club-pierre-soft">seul</em>.
             </span>
           </Reveal>
         </div>
@@ -31,7 +31,7 @@ export function ClubProblem() {
             </p>
           </Reveal>
           <Reveal delay={0.3}>
-            <p className="club-display text-[1.6rem] text-club-bordeaux">
+            <p className="club-display text-[1.6rem] text-club-pierre-soft">
               Le Lockin Social Club n&apos;est pas un réseau de plus : c&apos;est la pièce, gardée fermée à ceux qui n&apos;y ont pas leur place.
             </p>
           </Reveal>

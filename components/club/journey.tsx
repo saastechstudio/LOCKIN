@@ -23,11 +23,11 @@ export function ClubJourney() {
     <section id="parcours" className="club-section">
       <div className="club-container">
         <Reveal>
-          <p className="club-eyebrow text-club-bordeaux">Le parcours</p>
+          <p className="club-eyebrow text-club-pierre-soft">Le parcours</p>
         </Reveal>
         <Reveal blur delay={0.1} as="h2">
           <span className="club-display club-h2 mt-6 block max-w-3xl text-balance">
-            Une seule porte : <em className="text-club-bordeaux">le Lockin Trip</em>.
+            Une seule porte : <em className="text-club-pierre-soft">le Lockin Trip</em>.
           </span>
         </Reveal>
 
@@ -36,7 +36,7 @@ export function ClubJourney() {
             <li key={s.n}>
               <Reveal delay={i * 0.12}>
                 <div className="border-t border-club-ink/80 pt-6">
-                  <span className="club-display text-[2.4rem] text-club-bordeaux">{s.n}</span>
+                  <span className="club-display text-[2.4rem] text-club-pierre-soft">{s.n}</span>
                   <h3 className="club-display mt-4 text-[1.5rem] leading-tight">{s.title}</h3>
                   <p className="mt-4 text-[15px] text-club-ink-soft">{s.text}</p>
                 </div>

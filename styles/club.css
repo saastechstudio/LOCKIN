@@ -9,18 +9,18 @@
 
 :root {
   --club-ivory: #f7f4ef;
-  --club-pierre: #d6c8b8;
-  --club-pierre-soft: #e8e0d6;
-  --club-sand: #ece8e2; /* sections beige texturées */
-  --club-concrete: #a9a39a;
-  --club-concrete-deep: #7c766d;
+  --club-pierre: #a7f3d0;
+  --club-pierre-soft: #d1fae5;
+  --club-sand: #064e3b; /* sections en vert plus profond, en alternance */
+  --club-concrete: #a7f3d0;
+  --club-concrete-deep: #a7f3d0;
   --club-bordeaux: #022C22;
   --club-bordeaux-light: #053D30;
   --club-bordeaux-deep: #022C22;
   --club-terracotta: #065f46;
-  --club-ink: #1d1d1d;
-  --club-ink-soft: #3a3633;
-  --club-muted: #66605a;
+  --club-ink: #ffffff;
+  --club-ink-soft: #d1fae5;
+  --club-muted: #a7f3d0;
   --club-night: #065f46; /* fond du hero : vert émeraude */
   --club-intro: #f2eadf; /* fond de l'intro, pour plus tard */
 
@@ -58,7 +58,7 @@
   font-weight: 400;
   line-height: 1.7;
   color: var(--club-ink);
-  background: var(--club-ivory);
+  background: var(--club-night);
   /* Le reste du site est sombre : le club garde ses contrôles clairs. */
   color-scheme: light;
   overflow-x: clip;

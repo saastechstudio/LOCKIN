@@ -9,7 +9,7 @@ const clubButton = cva(
     variants: {
       variant: {
         primary: "bg-club-bordeaux text-club-ivory hover:bg-club-bordeaux-light",
-        light: "bg-club-ivory text-club-ink hover:bg-club-pierre-soft",
+        light: "bg-club-ivory text-club-night hover:bg-club-pierre-soft",
         glass:
           "border border-club-ivory/35 bg-club-ivory/[0.06] text-club-ivory backdrop-blur-md hover:bg-club-ivory/[0.12]",
         outline: "border border-club-concrete text-club-ink hover:border-club-ink",
