@@ -17,11 +17,11 @@
   --club-bordeaux: #065F46;
   --club-bordeaux-light: #0F6B50;
   --club-bordeaux-deep: #064E3B;
-  --club-terracotta: #8b3a3a;
+  --club-terracotta: #065f46;
   --club-ink: #1d1d1d;
   --club-ink-soft: #3a3633;
   --club-muted: #66605a;
-  --club-night: #1a0c0f; /* fond du hero */
+  --club-night: #047857; /* fond du hero : vert émeraude */
   --club-intro: #f2eadf; /* fond de l'intro, pour plus tard */
 
   --club-ease: cubic-bezier(0.22, 1, 0.36, 1);
