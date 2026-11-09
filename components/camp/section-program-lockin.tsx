@@ -9,7 +9,7 @@ import { CAMP_PROGRAM_PARTS } from "@/lib/camp/data";
  */
 export function SectionProgramLockIn() {
   return (
-    <section id="programme-lockin" className="bg-camp-white px-6 py-20 sm:py-28">
+    <section id="programme-lockin" className="px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           index="03"

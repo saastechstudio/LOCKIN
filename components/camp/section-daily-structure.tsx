@@ -8,7 +8,7 @@ import { CAMP_DAILY_BLOCKS } from "@/lib/camp/data";
  */
 export function SectionDailyStructure() {
   return (
-    <section id="structure-quotidienne" className="bg-camp-white px-6 py-20 sm:py-28">
+    <section id="structure-quotidienne" className="px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           index="04"

@@ -10,7 +10,7 @@ const PILLARS = [
 /** Quatre mots forts en grille asymétrique, pas quatre icônes dans des cercles. */
 export function SectionWhy() {
   return (
-    <section id="pourquoi" className="bg-camp-white px-6 py-20 sm:py-28">
+    <section id="pourquoi" className="px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <SectionTitle index="07" eyebrow="La promesse" title="Pourquoi Lock-In ?" className="mb-12" />
 

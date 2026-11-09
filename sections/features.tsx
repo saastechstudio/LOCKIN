@@ -24,7 +24,7 @@ const PILLARS = [
 /** Les trois piliers Lock In. L'ancre #mouvement est la cible du lien du Hero. */
 export function Features() {
   return (
-    <section id="mouvement" className="scroll-mt-20 bg-lk-mist">
+    <section id="mouvement" className="scroll-mt-20 bg-black/25">
       <div className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-28">
         <Reveal className="max-w-xl">
           <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-blue-soft uppercase">

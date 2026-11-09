@@ -5,7 +5,7 @@ import { SLOGAN } from "@/components/lockin/primitives";
 
 export default function SignInPage() {
   return (
-    <div className="flex min-h-screen flex-col bg-lk-white">
+    <div className="flex min-h-screen flex-col">
       <header className="border-b border-lk-line">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center px-5 sm:px-8">
           <Logo size="sm" />

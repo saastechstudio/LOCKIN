@@ -9,7 +9,7 @@ import { SPORT_ACTIVITIES } from "@/lib/camp/data";
  */
 export function SectionActivities() {
   return (
-    <section id="activites" className="bg-camp-white px-6 py-20 sm:py-28">
+    <section id="activites" className="px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           index="05"

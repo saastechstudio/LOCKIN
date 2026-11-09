@@ -7,7 +7,7 @@ import { LogoMark } from "@/components/lockin/logo-mark";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
+    <div className="flex min-h-screen flex-col">
       <SiteHeader />
       <main className="mx-auto flex max-w-lg flex-1 flex-col items-center justify-center px-6 py-24 text-center">
         <LogoMark className="h-14" />
