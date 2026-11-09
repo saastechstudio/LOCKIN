@@ -39,7 +39,7 @@ export function ClubFit() {
               <ul className="mt-6 space-y-4 text-[15px] text-club-ink-soft">
                 {FOR.map((t) => (
                   <li key={t} className="flex gap-3">
-                    <span aria-hidden className="mt-[0.7em] h-px w-4 shrink-0 bg-club-bordeaux" />
+                    <span aria-hidden className="mt-[0.7em] h-px w-4 shrink-0 bg-club-pierre-soft" />
                     {t}
                   </li>
                 ))}
