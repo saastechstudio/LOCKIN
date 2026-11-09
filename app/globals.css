@@ -241,8 +241,11 @@
   }
 
   body {
-    /* Fond uni : le vert émeraude, sans dégradé ni halo. */
-    background: var(--background);
+    /* Fond vignette, relevé sur l'image de référence : le vert forêt au centre,
+       qui plonge vers le quasi-noir sur les bords. Fixe : il suit l'écran. */
+    background:
+      radial-gradient(ellipse closest-side at 50% 50%, #1e4820 0%, #153617 40%, #0b2210 70%, #030e06 100%) center / 100% 100% fixed,
+      #020804;
     color: var(--foreground);
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     text-rendering: optimizeLegibility;

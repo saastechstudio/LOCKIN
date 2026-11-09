@@ -61,7 +61,7 @@ const SAMPLE_PLANS: PricingPlan[] = [
 /** Référence vivante du design system : chaque élément est rendu par le vrai composant. */
 export default function DesignSystemPage() {
   return (
-    <div className="min-h-screen bg-lk-white text-lk-black">
+    <div className="min-h-screen text-lk-black">
       <header className="border-b border-lk-line">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
           <Logo size="sm" />

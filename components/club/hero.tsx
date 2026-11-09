@@ -27,7 +27,7 @@ export function ClubHero() {
       ref={ref}
       data-tone="dark"
       aria-labelledby="club-hero-title"
-      className="relative flex min-h-[100svh] items-center overflow-hidden bg-club-night pt-28 pb-16 text-club-ivory lg:pt-32"
+      className="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-16 text-club-ivory lg:pt-32"
     >
       <div className="club-container grid items-center gap-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12">
         <motion.div style={{ y: textY, opacity: textOpacity }}>

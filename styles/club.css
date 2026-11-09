@@ -11,7 +11,7 @@
   --club-ivory: #f7f4ef;
   --club-pierre: #b7e4b9;
   --club-pierre-soft: #d6efd7;
-  --club-sand: #153617; /* sections en vert plus profond, en alternance */
+  --club-sand: rgba(2, 8, 4, 0.3); /* sections plus sombres, en alternance, sur la vignette */
   --club-concrete: #b7e4b9;
   --club-concrete-deep: #b7e4b9;
   --club-bordeaux: #2d6a30;
@@ -58,7 +58,7 @@
   font-weight: 400;
   line-height: 1.7;
   color: var(--club-ink);
-  background: var(--club-night);
+  background: transparent; /* laisse voir la vignette du body */
   /* Le reste du site est sombre : le club garde ses contrôles clairs. */
   color-scheme: light;
   overflow-x: clip;
