@@ -20,8 +20,8 @@ export const metadata: Metadata = {
 };
 
 const PALETTE = [
-  { group: "Matière", name: "Vert émeraude (fond)", token: "lk-white", hex: "#047857", className: "bg-lk-white border border-lk-line" },
-  { group: "Matière", name: "Vert profond", token: "lk-mist", hex: "#065f46", className: "bg-lk-mist border border-lk-line" },
+  { group: "Matière", name: "Vert émeraude (fond)", token: "lk-white", hex: "#065f46", className: "bg-lk-white border border-lk-line" },
+  { group: "Matière", name: "Vert profond", token: "lk-mist", hex: "#064e3b", className: "bg-lk-mist border border-lk-line" },
   { group: "Matière", name: "Verre dépoli", token: "lk-glass", hex: "blanc 5 % + flou", className: "lk-glass" },
   { group: "Structure", name: "Texte secondaire", token: "lk-stone-3", hex: "#d1fae5", className: "bg-lk-stone-3" },
   { group: "Structure", name: "Texte désactivé", token: "lk-stone-2", hex: "#a7f3d0", className: "bg-lk-stone-2" },

@@ -30,10 +30,10 @@
   color-scheme: dark;
 
   /* ---- Matière : le vert nuit, en trois profondeurs ---- */
-  --lk-white: #047857; /* fond de page : vert émeraude */
-  --lk-mist: #065f46; /* surface de repos */
+  --lk-white: #065f46; /* fond de page : vert émeraude */
+  --lk-mist: #064e3b; /* surface de repos */
   --lk-surface: rgba(255, 255, 255, 0.05); /* verre dépoli des cartes */
-  --lk-panel: #064e3b; /* panneaux opaques : menus, dialogues */
+  --lk-panel: #053d30; /* panneaux opaques : menus, dialogues */
 
   /* ---- Structure : filets de verre et textes atténués ---- */
   --lk-line: rgba(255, 255, 255, 0.12);
