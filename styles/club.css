@@ -14,14 +14,14 @@
   --club-sand: #153617; /* sections en vert plus profond, en alternance */
   --club-concrete: #b7e4b9;
   --club-concrete-deep: #b7e4b9;
-  --club-bordeaux: #0b2210;
-  --club-bordeaux-light: #0f2d12;
-  --club-bordeaux-deep: #0b2210;
+  --club-bordeaux: #2d6a30;
+  --club-bordeaux-light: #3a7c3d;
+  --club-bordeaux-deep: #061308;
   --club-terracotta: #1e4820;
   --club-ink: #ffffff;
   --club-ink-soft: #d6efd7;
   --club-muted: #b7e4b9;
-  --club-night: #1e4820; /* fond du hero : vert émeraude */
+  --club-night: #0c220f; /* fond du hero : vert profond */
   --club-intro: #f2eadf; /* fond de l'intro, pour plus tard */
 
   --club-ease: cubic-bezier(0.22, 1, 0.36, 1);

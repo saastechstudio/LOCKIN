@@ -30,10 +30,10 @@
   color-scheme: dark;
 
   /* ---- Matière : le vert nuit, en trois profondeurs ---- */
-  --lk-white: #1e4820; /* fond de page : vert émeraude */
+  --lk-white: #0c220f; /* fond de page : vert profond */
   --lk-mist: #153617; /* surface de repos */
   --lk-surface: rgba(255, 255, 255, 0.05); /* verre dépoli des cartes */
-  --lk-panel: #0f2d12; /* panneaux opaques : menus, dialogues */
+  --lk-panel: #173a19; /* panneaux opaques : menus, dialogues */
 
   /* ---- Structure : filets de verre et textes atténués ---- */
   --lk-line: rgba(255, 255, 255, 0.12);
@@ -47,7 +47,7 @@
   --lk-ink-3: #b7e4b9;
 
   /* ---- Action : le rouge ---- */
-  --lk-blue: #0b2210; /* fond des boutons, états actifs : vert profond sur le fond émeraude */
+  --lk-blue: #2d6a30; /* fond des boutons, états actifs */
   --lk-blue-soft: #b7e4b9; /* survol, anneaux, lueurs */
 
   /* ---- Signaux ---- */

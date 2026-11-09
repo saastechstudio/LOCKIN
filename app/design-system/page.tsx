@@ -20,12 +20,12 @@ export const metadata: Metadata = {
 };
 
 const PALETTE = [
-  { group: "Matière", name: "Vert forêt (fond)", token: "lk-white", hex: "#1e4820", className: "bg-lk-white border border-lk-line" },
-  { group: "Matière", name: "Vert profond", token: "lk-mist", hex: "#153617", className: "bg-lk-mist border border-lk-line" },
+  { group: "Matière", name: "Vert profond (fond)", token: "lk-white", hex: "#0c220f", className: "bg-lk-white border border-lk-line" },
+  { group: "Matière", name: "Vert forêt", token: "lk-mist", hex: "#153617", className: "bg-lk-mist border border-lk-line" },
   { group: "Matière", name: "Verre dépoli", token: "lk-glass", hex: "blanc 5 % + flou", className: "lk-glass" },
   { group: "Structure", name: "Texte secondaire", token: "lk-stone-3", hex: "#d6efd7", className: "bg-lk-stone-3" },
   { group: "Structure", name: "Texte désactivé", token: "lk-stone-2", hex: "#b7e4b9", className: "bg-lk-stone-2" },
-  { group: "Action", name: "Vert profond d'action", token: "lk-blue", hex: "#0b2210", className: "bg-lk-blue" },
+  { group: "Action", name: "Vert d'action", token: "lk-blue", hex: "#2d6a30", className: "bg-lk-blue" },
   { group: "Action", name: "Vert lumière", token: "lk-blue-soft", hex: "#b7e4b9", className: "bg-lk-blue-soft" },
   { group: "Signal", name: "Alerte vert clair", token: "lk-coral", hex: "#eef9ee", className: "bg-lk-coral" },
   { group: "Récompense", name: "Blanc menthe", token: "lk-gold", hex: "#d6efd7", className: "bg-lk-gold" },
@@ -35,7 +35,7 @@ const PALETTE = [
 const RULES = [
   "Un seul code couleur : le émeraude et le blanc. Le vert nuit fait la matière, le blanc fait la lumière.",
   "Verre dépoli (.lk-glass) pour les panneaux, reflet d'un pixel en haut, ombre profonde.",
-  "L'émeraude agit (#0b2210, #b7e4b9 en lumière), le blanc menthe récompense, la menthe signale. Aucune autre teinte.",
+  "Le vert d'action (#2d6a30, #b7e4b9 en lumière), le blanc menthe récompense, la menthe signale. Aucune autre teinte.",
   "Lueurs (.lk-glow-*) seulement sur ce qui est actif : la session en cours, l'objectif ouvert, le score.",
   "Mouvement court et doux, éteint sous prefers-reduced-motion. La SphereLife s'arrête de tourner aussi.",
   "Anti-dopamine : « Respect » au lieu du like, pas de cœur, pas d'emoji, pas de compteur public.",
