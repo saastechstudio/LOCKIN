@@ -112,7 +112,7 @@ export function HabitsToday({ habits, compact = false }: { habits: HabitView[]; 
                     style={{
                       width: `${Math.min(100, (value / h.target) * 100)}%`,
                       background: met ? "var(--lk-gold)" : tone.hex,
-                      boxShadow: `0 0 10px ${met ? "rgba(209,250,229,0.8)" : tone.hex}`,
+                      boxShadow: `0 0 10px ${met ? "rgba(214,239,215,0.8)" : tone.hex}`,
                     }}
                   />
                 </div>

@@ -125,7 +125,7 @@ export function GoalComposer({
                 type="checkbox"
                 checked={withCopilot}
                 onChange={(e) => setWithCopilot(e.target.checked)}
-                className="size-4 accent-[#10b981]"
+                className="size-4 accent-[#4f9a53]"
               />
               Laisser le copilote poser la vision, les jalons et les tâches
             </label>

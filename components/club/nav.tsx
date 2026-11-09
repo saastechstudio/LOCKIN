@@ -46,7 +46,7 @@ export function ClubNav() {
         className={cn(
           "mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 rounded-[20px] border px-4 backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-700 ease-club sm:px-6",
           scrolled || open
-            ? "border-club-concrete/30 bg-club-night/85 shadow-[0_18px_50px_-30px_rgba(2,44,34,0.6)]"
+            ? "border-club-concrete/30 bg-club-night/85 shadow-[0_18px_50px_-30px_rgba(11,34,16,0.6)]"
             : "border-club-pierre/25 bg-club-pierre/20",
         )}
       >

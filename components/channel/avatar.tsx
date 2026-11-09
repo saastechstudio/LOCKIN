@@ -34,7 +34,7 @@ export function AvatarStack({ people, className }: { people: Person[]; className
           key={p.id}
           person={p}
           size="sm"
-          className={cn("absolute ring-2 ring-[#022c22]", i === 0 && "top-0 left-0", i === 1 && "right-0 bottom-0", i === 2 && "top-0 right-0 z-10")}
+          className={cn("absolute ring-2 ring-[#0b2210]", i === 0 && "top-0 left-0", i === 1 && "right-0 bottom-0", i === 2 && "top-0 right-0 z-10")}
         />
       ))}
     </span>

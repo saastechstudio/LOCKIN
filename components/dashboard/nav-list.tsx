@@ -52,7 +52,7 @@ export function NavList({ onNavigate }: { onNavigate?: () => void }) {
                           aria-hidden
                           layoutId={`${group}-bar`}
                           transition={SPRING}
-                          className="absolute top-1/2 -left-4 h-5 w-[3px] -translate-y-1/2 rounded-full bg-lk-blue-soft shadow-[0_0_12px_rgba(16,185,129,0.9)]"
+                          className="absolute top-1/2 -left-4 h-5 w-[3px] -translate-y-1/2 rounded-full bg-lk-blue-soft shadow-[0_0_12px_rgba(79,154,83,0.9)]"
                         />
                       </>
                     ) : null}

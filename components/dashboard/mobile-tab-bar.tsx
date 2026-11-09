@@ -41,7 +41,7 @@ export function MobileTabBar() {
             <tab.icon
               className={cn(
                 "relative size-[18px] transition-all duration-300",
-                active && "-translate-y-0.5 scale-110 text-lk-blue-soft drop-shadow-[0_0_8px_rgba(16,185,129,0.9)]",
+                active && "-translate-y-0.5 scale-110 text-lk-blue-soft drop-shadow-[0_0_8px_rgba(79,154,83,0.9)]",
               )}
             />
             <span className="relative">{tab.label}</span>

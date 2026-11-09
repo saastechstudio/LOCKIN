@@ -28,9 +28,9 @@ export function SphereFallback({
     <svg viewBox="0 0 800 600" className="size-full" role="img" aria-label="SphereLife, vue simplifiée">
       <defs>
         <radialGradient id="core-glow">
-          <stop offset="0%" stopColor="#d1fae5" stopOpacity={0.35 + score / 200} />
-          <stop offset="45%" stopColor="#10b981" stopOpacity={0.35 + score / 250} />
-          <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
+          <stop offset="0%" stopColor="#d6efd7" stopOpacity={0.35 + score / 200} />
+          <stop offset="45%" stopColor="#4f9a53" stopOpacity={0.35 + score / 250} />
+          <stop offset="100%" stopColor="#4f9a53" stopOpacity="0" />
         </radialGradient>
       </defs>
       {ordered.map((s, i) => (
@@ -61,7 +61,7 @@ export function SphereFallback({
         );
       })}
       <circle cx="400" cy="300" r="110" fill="url(#core-glow)" />
-      <circle cx="400" cy="300" r="46" fill="#064e3b" stroke="#FFFFFF" strokeOpacity="0.25" />
+      <circle cx="400" cy="300" r="46" fill="#153617" stroke="#FFFFFF" strokeOpacity="0.25" />
       {ordered.map((s) => {
         const p = pos.get(s.id)!;
         const r = 9 + s.level * 3 + s.progress / 20;
