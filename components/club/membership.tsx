@@ -15,11 +15,11 @@ export function ClubMembership() {
     <section id="adhesion" className="club-section">
       <div className="club-container">
         <Reveal>
-          <p className="club-eyebrow text-club-bordeaux">Adhésion</p>
+          <p className="club-eyebrow text-club-pierre-soft">Adhésion</p>
         </Reveal>
         <Reveal blur delay={0.1} as="h2">
           <span className="club-display club-h2 mt-6 block max-w-3xl text-balance">
-            Un an offert, <em className="text-club-bordeaux">puis {PRICE_LABEL} par an</em>.
+            Un an offert, <em className="text-club-pierre-soft">puis {PRICE_LABEL} par an</em>.
           </span>
         </Reveal>
 
@@ -50,7 +50,7 @@ export function ClubMembership() {
               <ul className="mt-6 space-y-3.5 text-[15px] text-club-ink-soft">
                 {INCLUDED.map((t) => (
                   <li key={t} className="flex gap-3">
-                    <span aria-hidden className="mt-[0.7em] h-px w-4 shrink-0 bg-club-bordeaux" />
+                    <span aria-hidden className="mt-[0.7em] h-px w-4 shrink-0 bg-club-pierre-soft" />
                     {t}
                   </li>
                 ))}

@@ -41,11 +41,11 @@ export function ClubFaq() {
       <div className="club-container grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
         <div>
           <Reveal>
-            <p className="club-eyebrow text-club-bordeaux">Questions</p>
+            <p className="club-eyebrow text-club-pierre-soft">Questions</p>
           </Reveal>
           <Reveal blur delay={0.1} as="h2">
             <span className="club-display club-h2 mt-6 block text-balance">
-              Ce qu&apos;on nous <em className="text-club-bordeaux">demande</em>.
+              Ce qu&apos;on nous <em className="text-club-pierre-soft">demande</em>.
             </span>
           </Reveal>
         </div>
@@ -68,7 +68,7 @@ export function ClubFaq() {
                       <span
                         aria-hidden
                         className={cn(
-                          "shrink-0 text-2xl leading-none text-club-bordeaux transition-transform duration-500 ease-club",
+                          "shrink-0 text-2xl leading-none text-club-pierre-soft transition-transform duration-500 ease-club",
                           isOpen && "rotate-45",
                         )}
                       >

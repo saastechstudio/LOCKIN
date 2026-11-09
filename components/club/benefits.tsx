@@ -38,17 +38,17 @@ export function ClubBenefits() {
     <section className="club-section club-grain bg-club-sand">
       <div className="club-container">
         <Reveal>
-          <p className="club-eyebrow text-club-bordeaux">Ce qui change</p>
+          <p className="club-eyebrow text-club-pierre-soft">Ce qui change</p>
         </Reveal>
         <Reveal blur delay={0.1} as="h2">
           <span className="club-display club-h2 mt-6 block max-w-3xl text-balance">
-            Un environnement qui <em className="text-club-bordeaux">tire vers le haut</em>.
+            Un environnement qui <em className="text-club-pierre-soft">tire vers le haut</em>.
           </span>
         </Reveal>
 
         <ul className="mt-16 grid gap-px overflow-hidden rounded-[22px] border border-club-concrete/40 bg-club-concrete/40 sm:grid-cols-2 lg:grid-cols-3">
           {BENEFITS.map((b, i) => (
-            <li key={b.title} className="bg-club-ivory p-8 lg:p-10">
+            <li key={b.title} className="bg-club-night p-8 lg:p-10">
               <Reveal delay={(i % 3) * 0.08}>
                 <span className="text-[11px] tracking-[0.26em] text-club-concrete-deep">0{i + 1}</span>
                 <h3 className="club-display mt-5 text-[1.55rem] leading-tight">{b.title}</h3>

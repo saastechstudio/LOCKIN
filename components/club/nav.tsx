@@ -46,7 +46,7 @@ export function ClubNav() {
         className={cn(
           "mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-4 rounded-[20px] border px-4 backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-700 ease-club sm:px-6",
           scrolled || open
-            ? "border-club-concrete/30 bg-club-ivory/85 shadow-[0_18px_50px_-30px_rgba(29,29,29,0.35)]"
+            ? "border-club-concrete/30 bg-club-night/85 shadow-[0_18px_50px_-30px_rgba(2,44,34,0.6)]"
             : "border-club-pierre/25 bg-club-pierre/20",
         )}
       >
@@ -55,7 +55,7 @@ export function ClubNav() {
           aria-label="Lockin Social Club, accueil"
           className={cn(
             "transition-colors duration-700 ease-club",
-            scrolled || open ? "text-club-bordeaux" : "text-club-ivory",
+            scrolled || open ? "text-club-pierre-soft" : "text-club-ivory",
           )}
         >
           <ClubLogo onLight={scrolled || open} />
@@ -97,7 +97,7 @@ export function ClubNav() {
             aria-controls="club-menu"
             className={cn(
               "flex size-11 items-center justify-center rounded-[12px] transition-colors duration-500 ease-club lg:hidden",
-              scrolled || open ? "text-club-ink hover:bg-club-pierre-soft" : "text-club-ivory hover:bg-club-ivory/10",
+              scrolled || open ? "text-club-ink hover:bg-club-ivory/10" : "text-club-ivory hover:bg-club-ivory/10",
             )}
           >
             <span className="sr-only">{open ? "Fermer le menu" : "Ouvrir le menu"}</span>
@@ -127,7 +127,7 @@ export function ClubNav() {
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, y: -8 }}
             transition={{ duration: 0.5, ease: EASE }}
-            className="mx-auto mt-2 max-w-[1280px] rounded-[20px] border border-club-concrete/30 bg-club-ivory/95 p-6 backdrop-blur-xl lg:hidden"
+            className="mx-auto mt-2 max-w-[1280px] rounded-[20px] border border-club-concrete/30 bg-club-night/95 p-6 backdrop-blur-xl lg:hidden"
           >
             <ul className="flex flex-col">
               {LINKS.map((link) => (
