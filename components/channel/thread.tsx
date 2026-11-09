@@ -298,7 +298,7 @@ export function Thread({
         <div ref={scroller} onScroll={onScroll} className="h-full overflow-y-auto px-3 py-4 sm:px-5" role="log" aria-live="polite" aria-label="Messages">
           {rows.length === 0 ? (
             <div className="flex h-full flex-col items-center justify-center text-center">
-              <span className="animate-float flex size-14 items-center justify-center rounded-2xl bg-lk-blue/25 text-lk-blue-soft shadow-[0_0_40px_rgba(16,185,129,0.45)]">
+              <span className="animate-float flex size-14 items-center justify-center rounded-2xl bg-lk-blue/25 text-lk-blue-soft shadow-[0_0_40px_rgba(79,154,83,0.45)]">
                 <Sparkles className="size-6" />
               </span>
               <p className="font-display mt-4 text-lg text-lk-black">Commence l&apos;échange</p>
@@ -440,7 +440,7 @@ export function Thread({
                 onClick={() => send("text")}
                 disabled={!body.trim() || isSending}
                 aria-label="Envoyer"
-                animate={body.trim() ? { scale: 1, boxShadow: "0 0 22px rgba(16,185,129,0.55)" } : { scale: 0.92, boxShadow: "0 0 0px rgba(16,185,129,0)" }}
+                animate={body.trim() ? { scale: 1, boxShadow: "0 0 22px rgba(79,154,83,0.55)" } : { scale: 0.92, boxShadow: "0 0 0px rgba(79,154,83,0)" }}
                 whileTap={{ scale: 0.8, rotate: -12 }}
                 transition={{ type: "spring", stiffness: 500, damping: 24 }}
                 className="lk-shine flex size-10 shrink-0 items-center justify-center rounded-xl bg-lk-blue text-white hover:bg-lk-blue-soft disabled:opacity-30"
@@ -519,7 +519,7 @@ function Bubble({
               "px-3.5 py-2",
               message.deleted && "italic opacity-60",
               mine
-                ? "bg-lk-blue text-white shadow-[0_6px_20px_-8px_rgba(16,185,129,0.7)]"
+                ? "bg-lk-blue text-white shadow-[0_6px_20px_-8px_rgba(79,154,83,0.7)]"
                 : "lk-glass text-lk-black",
               mine ? (first ? "rounded-t-[20px]" : "rounded-t-[8px]") : first ? "rounded-t-[20px]" : "rounded-t-[8px]",
               mine ? (last ? "rounded-bl-[20px] rounded-br-[6px]" : "rounded-b-[8px]") : last ? "rounded-br-[20px] rounded-bl-[6px]" : "rounded-b-[8px]",
@@ -613,7 +613,7 @@ function Bubble({
                 onClick={() => onReact(r.emoji)}
                 className={cn(
                   "lk-press lk-pop flex items-center gap-1 rounded-full border px-1.5 py-0.5 text-xs backdrop-blur-md transition-colors",
-                  r.mine ? "border-lk-blue-soft bg-lk-blue/40 text-white" : "border-lk-line bg-[#064e3b]/80 text-lk-black",
+                  r.mine ? "border-lk-blue-soft bg-lk-blue/40 text-white" : "border-lk-line bg-[#153617]/80 text-lk-black",
                 )}
               >
                 {r.emoji} <span className="tabular-nums">{r.count}</span>

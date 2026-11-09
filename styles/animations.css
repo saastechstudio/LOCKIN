@@ -203,10 +203,10 @@
 /* Message entrant : un halo rouge qui s'éteint en 1,6 s. */
 @keyframes fresh-glow {
   0% {
-    box-shadow: 0 0 0 0 rgba(16,185,129, 0.7), 0 0 28px rgba(16,185,129, 0.55);
+    box-shadow: 0 0 0 0 rgba(79,154,83, 0.7), 0 0 28px rgba(79,154,83, 0.55);
   }
   100% {
-    box-shadow: 0 0 0 10px rgba(16,185,129, 0), 0 0 0 rgba(16,185,129, 0);
+    box-shadow: 0 0 0 10px rgba(79,154,83, 0), 0 0 0 rgba(79,154,83, 0);
   }
 }
 .lk-fresh-glow {
@@ -233,7 +233,7 @@
   border-radius: 9999px;
   filter: blur(80px);
   pointer-events: none;
-  background: radial-gradient(circle, rgba(16,185,129, 0.16), transparent 70%);
+  background: radial-gradient(circle, rgba(79,154,83, 0.16), transparent 70%);
   animation: aurora-drift 18s ease-in-out infinite;
 }
 .lk-aurora::before {

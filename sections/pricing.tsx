@@ -21,7 +21,7 @@ export type PricingPlan = {
 
 /**
  * Grille de tarifs : 3 plans. Le plan recommandé porte l'accent émeraude
- * (#047857) ; les autres restent sobres. Les plans sont passés en props :
+ * (#2d6a30) ; les autres restent sobres. Les plans sont passés en props :
  * le composant ne contient aucun prix en dur.
  */
 export function Pricing({

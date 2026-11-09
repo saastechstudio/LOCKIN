@@ -29,9 +29,9 @@ export function ScorePeek({ className }: { className?: string }) {
     <Frame label="LockIn Score" className={cn("lg:pl-16", className)}>
       <div className="flex flex-1 flex-col items-center justify-center gap-5 sm:flex-row sm:gap-4 lg:flex-col">
         <div className="relative size-24 shrink-0 sm:size-28">
-          <svg viewBox="0 0 100 100" className="size-full -rotate-90 drop-shadow-[0_0_14px_rgba(167,243,208,0.55)]">
+          <svg viewBox="0 0 100 100" className="size-full -rotate-90 drop-shadow-[0_0_14px_rgba(183,228,185,0.55)]">
             <circle cx="50" cy="50" r={r} fill="none" stroke="rgba(255,255,255,0.14)" strokeWidth="8" />
-            <circle cx="50" cy="50" r={r} fill="none" stroke="#ecfdf5" strokeWidth="8" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * 0.22} />
+            <circle cx="50" cy="50" r={r} fill="none" stroke="#eef9ee" strokeWidth="8" strokeLinecap="round" strokeDasharray={c} strokeDashoffset={c * 0.22} />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
             <span className="font-display text-3xl leading-none tabular-nums sm:text-4xl">78</span>
@@ -66,7 +66,7 @@ export function ChannelPeek({ className }: { className?: string }) {
       </div>
       <div className="flex flex-1 flex-col justify-end gap-1.5 text-[13px] leading-snug">
         <p className="max-w-[82%] self-start rounded-2xl rounded-bl-md border border-lk-line bg-white/10 px-3 py-2">Objectif : 3 séances et 2h de deep work par jour.</p>
-        <p className="max-w-[82%] self-end rounded-2xl rounded-br-md bg-lk-blue px-3 py-2 shadow-[0_6px_20px_-8px_rgba(2,44,34,0.8)]">Deal. On se tient responsables 💪</p>
+        <p className="max-w-[82%] self-end rounded-2xl rounded-br-md bg-lk-blue px-3 py-2 shadow-[0_6px_20px_-8px_rgba(11,34,16,0.8)]">Deal. On se tient responsables 💪</p>
         <p className="max-w-[88%] self-start rounded-2xl rounded-bl-md border border-lk-gold/50 bg-white/10 px-3 py-2">
           <span className="mb-0.5 block text-[9px] font-semibold tracking-[0.2em] text-lk-gold uppercase">Check-in</span>3 séances cette semaine, 9 h de focus.
         </p>
