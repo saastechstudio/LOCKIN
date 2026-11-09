@@ -5,7 +5,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 
 import { JOIN_HREF, LOCKIN_TRIP_HREF, PRICE_LABEL } from "@/lib/club/membership";
 import { ClubButton } from "./button";
-import { PhotoFrame } from "./photo-frame";
+import { ChannelPeek, HabitsPeek, ScorePeek } from "./feature-peek";
 import { Reveal } from "./reveal";
 
 const BADGES = ["Cercle fermé", "Accès par numéro de membre", "Membres du Lockin Trip"];
@@ -27,15 +27,8 @@ export function ClubHero() {
       ref={ref}
       data-tone="dark"
       aria-labelledby="club-hero-title"
-      className="club-grain relative flex min-h-[100svh] items-center overflow-hidden bg-club-night pt-28 pb-16 text-club-ivory lg:pt-32"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-club-night pt-28 pb-16 text-club-ivory lg:pt-32"
     >
-      {/* Faisceau de lumière bordeaux, très diffus. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-1/3 left-1/2 -z-10 h-[120%] w-[140%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(6,95,70,0.55)_0%,rgba(4,78,56,0.25)_35%,transparent_65%)]"
-      />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-club-night" />
-
       <div className="club-container grid items-center gap-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12">
         <motion.div style={{ y: textY, opacity: textOpacity }}>
           <Reveal immediate className="flex flex-wrap gap-2">
@@ -95,34 +88,21 @@ export function ClubHero() {
           </Reveal>
         </motion.div>
 
-        {/* Collage : trois cadres à des profondeurs différentes. */}
+        {/* Collage : trois extraits du produit à des profondeurs différentes. */}
         <div className="relative mx-auto h-[440px] w-full max-w-[520px] sm:h-[540px] lg:h-[620px]">
           <motion.div style={{ y: yBack }} className="absolute top-0 right-0 h-[62%] w-[58%]">
             <Reveal immediate delay={0.3} className="h-full">
-              <PhotoFrame
-                alt="Un lieu du club"
-                placeholder="Lieu réel du club : béton, pierre, lumière du soir."
-                captionTop
-                className="h-full border border-club-ivory/10"
-              />
+              <ScorePeek className="border border-club-ivory/10" />
             </Reveal>
           </motion.div>
           <motion.div style={{ y: yMid }} className="absolute top-[22%] left-0 h-[58%] w-[52%]">
             <Reveal immediate delay={0.45} className="h-full">
-              <PhotoFrame
-                alt="Des membres en conversation"
-                placeholder="Membres réels, échange autour d'une table."
-                className="h-full border border-club-ivory/10 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.7)]"
-              />
+              <ChannelPeek className="border border-club-ivory/10 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.7)]" />
             </Reveal>
           </motion.div>
           <motion.div style={{ y: yFront }} className="absolute right-[8%] bottom-0 h-[34%] w-[40%]">
             <Reveal immediate delay={0.6} className="h-full">
-              <PhotoFrame
-                alt="Un détail d'événement du club"
-                placeholder="Détail d'un événement."
-                className="h-full border border-club-ivory/10 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.7)]"
-              />
+              <HabitsPeek className="border border-club-ivory/10 shadow-[0_40px_80px_-40px_rgba(0,0,0,0.7)]" />
             </Reveal>
           </motion.div>
         </div>

@@ -248,7 +248,7 @@ export function Thread({
   const KindIcon = meta.kind === "room" ? Hash : meta.kind === "pact" ? Handshake : meta.kind === "group" ? Users : null;
 
   return (
-    <div className="lk-aurora relative isolate flex h-full min-h-0 flex-col overflow-hidden">
+    <div className="relative isolate flex h-full min-h-0 flex-col overflow-hidden">
       <header className="flex items-center gap-3 border-b border-lk-line px-4 py-3 sm:px-5">
         <Link href="/dashboard/messages" aria-label="Retour aux conversations" className="lk-press -ml-1 rounded-xl p-2 text-lk-stone-3 hover:bg-lk-surface hover:text-lk-black md:hidden">
           <ArrowLeft className="size-5" />

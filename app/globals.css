@@ -30,28 +30,28 @@
   color-scheme: dark;
 
   /* ---- Matière : le vert nuit, en trois profondeurs ---- */
-  --lk-white: #022c22; /* fond de page : vert nuit */
+  --lk-white: #065f46; /* fond de page : vert émeraude */
   --lk-mist: #064e3b; /* surface de repos */
   --lk-surface: rgba(255, 255, 255, 0.05); /* verre dépoli des cartes */
   --lk-panel: #053d30; /* panneaux opaques : menus, dialogues */
 
   /* ---- Structure : filets de verre et textes atténués ---- */
   --lk-line: rgba(255, 255, 255, 0.12);
-  --lk-stone-2: #7fbfa5; /* texte désactivé */
-  --lk-stone-3: #c9f0de; /* texte secondaire */
+  --lk-stone-2: #a7f3d0; /* texte désactivé */
+  --lk-stone-3: #d1fae5; /* texte secondaire */
 
   /* ---- Lumière : le blanc ---- */
   --lk-black: #ffffff; /* texte principal (le nom historique désigne « l'encre du texte ») */
   --lk-ink-1: #ffffff;
-  --lk-ink-2: #c9f0de;
-  --lk-ink-3: #7fbfa5;
+  --lk-ink-2: #d1fae5;
+  --lk-ink-3: #a7f3d0;
 
   /* ---- Action : le rouge ---- */
-  --lk-blue: #047857; /* fond des boutons, états actifs */
-  --lk-blue-soft: #10b981; /* survol, anneaux, lueurs */
+  --lk-blue: #022c22; /* fond des boutons, états actifs : vert profond sur le fond émeraude */
+  --lk-blue-soft: #a7f3d0; /* survol, anneaux, lueurs */
 
   /* ---- Signaux ---- */
-  --lk-coral: #34d399; /* alertes, retards */
+  --lk-coral: #ecfdf5; /* alertes, retards */
   --lk-gold: #d1fae5; /* récompense : score, séries, réussites (blanc menthe) */
   /*
    * « teal » = le mouvement (écran actif, journée en cours). Nom conservé
@@ -241,49 +241,12 @@
   }
 
   body {
-    /* Lumière d'ambiance : trois halos fixes, très diffus, sur l'encre. */
-    background:
-      radial-gradient(60rem 40rem at 85% -10%, rgba(16,185,129, 0.24), transparent 60%),
-      radial-gradient(50rem 36rem at -10% 110%, rgba(4,120,87, 0.22), transparent 60%),
-      radial-gradient(40rem 30rem at 50% 45%, rgba(255, 255, 255, 0.035), transparent 70%),
-      var(--background);
-    background-attachment: fixed;
+    /* Fond uni : le vert émeraude, sans dégradé ni halo. */
+    background: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-  }
-
-  /*
-   * Aurore : deux halos rouges dérivent très lentement derrière toute
-   * l'interface. Fixes, sans interaction, éteints si l'utilisateur réduit
-   * les animations.
-   */
-  body::before,
-  body::after {
-    content: "";
-    position: fixed;
-    z-index: -1;
-    border-radius: 9999px;
-    filter: blur(90px);
-    pointer-events: none;
-    will-change: transform;
-  }
-  body::before {
-    width: 44rem;
-    height: 44rem;
-    top: -14rem;
-    right: -10rem;
-    background: rgba(16,185,129, 0.2);
-    animation: aurora-a 28s ease-in-out infinite alternate;
-  }
-  body::after {
-    width: 36rem;
-    height: 36rem;
-    bottom: -12rem;
-    left: -8rem;
-    background: rgba(4,120,87, 0.22);
-    animation: aurora-b 34s ease-in-out infinite alternate;
   }
 
   /* Icônes lucide : trait fin et arrondi, cohérent avec les rayons doux. */
@@ -415,8 +378,8 @@
     isolation: isolate;
     background:
       linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03) 52%, rgba(16,185,129, 0.07)),
-      rgba(6,78,59, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+      rgba(2,44,34, 0.30);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: var(--shadow-glass);
     backdrop-filter: blur(26px) saturate(170%);
     -webkit-backdrop-filter: blur(26px) saturate(170%);

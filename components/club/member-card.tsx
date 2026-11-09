@@ -35,7 +35,7 @@ export function ClubMemberCard() {
   const shown = name.trim();
 
   return (
-    <section data-tone="dark" className="club-section club-grain bg-club-night text-club-ivory">
+    <section data-tone="dark" className="club-section bg-club-night text-club-ivory">
       <div className="club-container grid items-center gap-16 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <Reveal>
