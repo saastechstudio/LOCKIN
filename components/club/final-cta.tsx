@@ -17,7 +17,7 @@ const LEGAL = [
 export function ClubFinalCta() {
   return (
     <>
-      <section data-tone="dark" className="club-grain flex min-h-[80svh] items-center bg-club-night text-club-ivory">
+      <section data-tone="dark" className="flex min-h-[80svh] items-center bg-club-night text-club-ivory">
         <div className="club-container py-28 text-center">
           <Reveal blur as="h2">
             <span className="club-display club-h1 mx-auto block max-w-4xl text-balance">

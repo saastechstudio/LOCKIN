@@ -27,15 +27,8 @@ export function ClubHero() {
       ref={ref}
       data-tone="dark"
       aria-labelledby="club-hero-title"
-      className="club-grain relative flex min-h-[100svh] items-center overflow-hidden bg-club-night pt-28 pb-16 text-club-ivory lg:pt-32"
+      className="relative flex min-h-[100svh] items-center overflow-hidden bg-club-night pt-28 pb-16 text-club-ivory lg:pt-32"
     >
-      {/* Faisceau de lumière bordeaux, très diffus. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -top-1/3 left-1/2 -z-10 h-[120%] w-[140%] -translate-x-1/2 bg-[radial-gradient(ellipse_at_center,rgba(6,95,70,0.55)_0%,rgba(4,78,56,0.25)_35%,transparent_65%)]"
-      />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-40 bg-gradient-to-b from-transparent to-club-night" />
-
       <div className="club-container grid items-center gap-16 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12">
         <motion.div style={{ y: textY, opacity: textOpacity }}>
           <Reveal immediate className="flex flex-wrap gap-2">

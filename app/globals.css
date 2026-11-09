@@ -241,49 +241,12 @@
   }
 
   body {
-    /* Lumière d'ambiance : trois halos fixes, très diffus, sur l'encre. */
-    background:
-      radial-gradient(60rem 40rem at 85% -10%, rgba(110,231,183, 0.38), transparent 60%),
-      radial-gradient(50rem 36rem at -10% 110%, rgba(2,44,34, 0.45), transparent 60%),
-      radial-gradient(40rem 30rem at 50% 45%, rgba(255, 255, 255, 0.035), transparent 70%),
-      var(--background);
-    background-attachment: fixed;
+    /* Fond uni : le vert émeraude, sans dégradé ni halo. */
+    background: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-  }
-
-  /*
-   * Aurore : deux halos rouges dérivent très lentement derrière toute
-   * l'interface. Fixes, sans interaction, éteints si l'utilisateur réduit
-   * les animations.
-   */
-  body::before,
-  body::after {
-    content: "";
-    position: fixed;
-    z-index: -1;
-    border-radius: 9999px;
-    filter: blur(90px);
-    pointer-events: none;
-    will-change: transform;
-  }
-  body::before {
-    width: 44rem;
-    height: 44rem;
-    top: -14rem;
-    right: -10rem;
-    background: rgba(16,185,129, 0.2);
-    animation: aurora-a 28s ease-in-out infinite alternate;
-  }
-  body::after {
-    width: 36rem;
-    height: 36rem;
-    bottom: -12rem;
-    left: -8rem;
-    background: rgba(4,120,87, 0.22);
-    animation: aurora-b 34s ease-in-out infinite alternate;
   }
 
   /* Icônes lucide : trait fin et arrondi, cohérent avec les rayons doux. */
