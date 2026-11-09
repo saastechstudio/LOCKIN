@@ -21,7 +21,7 @@ export function Testimonials({
   title?: string;
 }) {
   return (
-    <section className="bg-lk-mist">
+    <section className="bg-black/25">
       <div className="mx-auto w-full max-w-6xl px-5 py-24 sm:px-8 sm:py-28">
         <Reveal className="max-w-xl">
           <p className="text-[11px] font-semibold tracking-[0.25em] text-lk-blue-soft uppercase">

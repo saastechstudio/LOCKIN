@@ -9,7 +9,7 @@ import { CAMP_INCLUDED_ITEMS, CAMP_PROGRAM_BLOCKS, SPORT_ACTIVITIES } from "@/li
  */
 export function SectionIncluded() {
   return (
-    <section id="inclus" className="bg-camp-white px-6 py-20 sm:py-28">
+    <section id="inclus" className="px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           index="01"

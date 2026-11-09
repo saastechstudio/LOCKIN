@@ -8,7 +8,7 @@ import { EXCURSIONS, FUN_ACTIVITIES } from "@/lib/camp/data";
  */
 export function SectionExcursionFun() {
   return (
-    <section id="excursion-fun" className="bg-camp-white px-6 py-20 sm:py-28">
+    <section id="excursion-fun" className="px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           index="06"

@@ -8,7 +8,7 @@ type SectionSessionsProps = {
 
 export function SectionSessions({ sessions }: SectionSessionsProps) {
   return (
-    <section id="sessions" className="bg-camp-white px-6 py-20 sm:py-28">
+    <section id="sessions" className="px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           index="08"

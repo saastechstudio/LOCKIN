@@ -7,7 +7,7 @@ import { CAMP_DAY_STRUCTURE } from "@/lib/camp/data";
  */
 export function SectionProgram() {
   return (
-    <section id="programme" className="bg-camp-white px-6 py-20 sm:py-28">
+    <section id="programme" className="px-6 py-20 sm:py-28">
       <div className="mx-auto max-w-5xl">
         <SectionTitle
           index="02"

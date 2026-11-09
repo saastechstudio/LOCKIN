@@ -17,7 +17,7 @@ export function Hero() {
   const days = sessionDurationDays(new Date(session1.startDate), new Date(session1.endDate));
 
   return (
-    <section className="bg-camp-white px-6 pt-20 pb-16 sm:pt-28 sm:pb-24">
+    <section className="px-6 pt-20 pb-16 sm:pt-28 sm:pb-24">
       <div className="mx-auto flex max-w-5xl flex-col gap-10">
         <Logo size="sm" />
 
